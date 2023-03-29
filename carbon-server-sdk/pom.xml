@@ -13,19 +13,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>carbon-client-spring-boot-starter</artifactId>
-  <name>Carbon Client Spring Boot Starter</name>
-  <description>将SDK封装为 Spring Boot Starter 方便其他系统使用</description>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.zhibaocloud.carbon</groupId>
-      <artifactId>carbon-client-sdk</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-  </dependencies>
+  <artifactId>carbon-server-sdk</artifactId>
+  <name>Carbon Server SDK</name>
+  <description>服务端SDK，接收通过投保通道推送的保单数据</description>
 
 </project>

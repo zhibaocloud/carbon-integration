@@ -11,7 +11,7 @@
 
   <groupId>com.zhibaocloud.carbon</groupId>
   <artifactId>carbon-integration</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Carbon Integration</name>
   <description>和智保云投保通道进行数据集成的SDK工具包以及演示程序</description>
@@ -31,6 +31,7 @@
     <module>carbon-client-spring-boot-cli</module>
     <module>carbon-mock-server</module>
     <module>carbon-coverage</module>
+    <module>carbon-server-sdk</module>
   </modules>
 
   <properties>
@@ -142,11 +143,6 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
-        <artifactId>carbon-client-openapi</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.zhibaocloud.carbon</groupId>
         <artifactId>carbon-client-spring-boot-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -218,7 +214,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.7</version>
+          <version>0.8.8</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

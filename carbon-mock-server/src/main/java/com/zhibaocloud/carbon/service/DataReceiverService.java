@@ -5,16 +5,16 @@
 package com.zhibaocloud.carbon.service;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhbiaocloud.carbon.crypto.AesCrypto;
 import com.zhbiaocloud.carbon.crypto.Crypto;
+import com.zhbiaocloud.carbon.crypto.CryptoAlg;
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
 import com.zhbiaocloud.carbon.model.EncryptedRequest;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhibaocloud.carbon.domain.Agreement;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +35,12 @@ public class DataReceiverService {
     String salt = agreement.getSalt();
 
     CryptoConfiguration config = new CryptoConfiguration();
-    config.setEncryptAlg("AES");
+    config.setEncryptAlg(CryptoAlg.AES);
     config.setSignAlg("SHA1");
-    config.setEncryptSecret(secret);
+    config.setSecret(secret);
     config.setSignSalt(salt);
 
-    Crypto crypto = new Crypto(config);
+    Crypto crypto = new AesCrypto(config);
     String payload = crypto.decrypt(request.getPayload());
     Policy policy = mapper.readValue(payload, Policy.class);
 
