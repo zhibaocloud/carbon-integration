@@ -8,30 +8,22 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 交费间隔、交费频率
+ * 主附险性质代码
  *
  * @author jun
  */
 @Getter
 @RequiredArgsConstructor
-public enum PayIntv implements EncodedValue {
+public enum MainRiskFlag implements EncodedValue {
 
   /**
-   * 同一次性交清，交费年期为1年交
+   * 仅支持一个主险
    */
-  SINGLE("01", "趸交"),
+  MAIN("1", "主险"),
 
-  MONTHLY("02", "月交"),
+  ADDITIONAL("2", "附加险"),
 
-  QUARTERLY("03", "季交"),
-
-  HALF_YEARLY("04", "半年交"),
-
-  YEARLY("05", "年交"),
-
-  IRREGULAR("06", "不定期交费"),
-
-  OTHER("99", "其他");
+  UNRELATED("3", "不区分");
 
   /**
    * 存储在数据库中的码值

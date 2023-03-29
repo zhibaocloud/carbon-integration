@@ -4,6 +4,7 @@
 
 package com.zhbiaocloud.carbon.model;
 
+import com.zhbiaocloud.carbon.model.type.MainRiskFlag;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -29,6 +30,9 @@ public class Risk {
   @NotBlank
   @Schema(title = "险种名称", requiredMode = RequiredMode.REQUIRED)
   private String riskName;
+
+  @Schema(title = "主附险性质", description = "“双主险”基本采用年金险/两全险+万能险的组合，需要将万能险标记为附加险", requiredMode = RequiredMode.REQUIRED)
+  private MainRiskFlag flag;
 
   @Schema(title = "保险计划编码")
   private String planCode;
