@@ -9,9 +9,11 @@ import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -107,6 +109,26 @@ public class Policy {
   @Schema(title = "回访失败原因", description = "只有在有回访成功标识为false时才会使用次字段")
   private String rtnCallFailedReason;
 
+  @NotNull
   @Schema(title = "保单状态")
   private PolicyStatus status;
+
+  @NotNull
+  @Schema(title = "代理人信息", requiredMode = RequiredMode.REQUIRED)
+  private Agent agent;
+
+  @NotNull
+  @Schema(title = "投保人信息", requiredMode = RequiredMode.REQUIRED)
+  private Applicant applicant;
+
+  @NotEmpty
+  @Schema(title = "险种信息", requiredMode = RequiredMode.REQUIRED)
+  private List<Risk> risks;
+
+  @NotEmpty
+  @Schema(title = "被保人信息", requiredMode = RequiredMode.REQUIRED)
+  private List<Insured> insureds;
+
+  @Schema(title = "受益人信息", description = "如果没有受益人信息，表示法定受益人")
+  private List<Beneficiary> bnfs;
 }
