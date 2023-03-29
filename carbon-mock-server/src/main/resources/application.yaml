@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: carbon-server
+  jpa:
+    open-in-view: true
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

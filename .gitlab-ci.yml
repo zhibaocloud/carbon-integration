@@ -1,0 +1,32 @@
+stages:
+  - test
+  - build
+  - package
+  - deploy
+  - cleanup
+
+server unit test:
+  image: maven:3-alpine
+  variables:
+    TZ: 'Asia/Shanghai'
+  stage: test
+  needs: [ ]
+  script:
+    - mvn clean verify -B -s maven-settings.xml
+    - mvn sonar:sonar -B -s maven-settings.xml -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST_URL -Dproject.settings=./sonar-project.properties
+    - cat carbon-coverage/target/site/jacoco-aggregate/index.html
+  coverage: "/Total.*?([0-9]{1,3})%/"
+  artifacts:
+    paths:
+      - carbon-coverage/target/site/jacoco-aggregate
+    reports:
+      junit:
+        - "**/target/surefire-reports/TEST-*.xml"
+        - "**/target/failsafe-reports/TEST-*.xml"
+
+server build:
+  image: maven:3-alpine
+  stage: build
+  needs: [ ]
+  script:
+    - mvn clean package -DskipTests=true -s maven-settings.xml
