@@ -33,6 +33,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * 使用 Apache HttpClient 实现的智保云投保通道客户端
+ *
+ * @author jun
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class CarbonClientImpl implements CarbonClient {

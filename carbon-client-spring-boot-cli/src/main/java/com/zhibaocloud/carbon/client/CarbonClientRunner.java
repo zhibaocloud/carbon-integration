@@ -27,8 +27,8 @@ public class CarbonClientRunner implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws IOException {
-    String secret = "";
     String appId = UUID.randomUUID().toString();
+    String secret = "";
     String salt = "";
     ClientOption option = new ClientOption();
 
