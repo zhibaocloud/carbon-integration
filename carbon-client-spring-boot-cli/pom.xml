@@ -17,6 +17,10 @@
   <name>Carbon Client Sample Application</name>
   <description>客户端数据推送示例应用程序</description>
 
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>

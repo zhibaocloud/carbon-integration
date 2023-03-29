@@ -2,10 +2,16 @@ server:
   port: 8080
 
 spring:
-  application:
-    name: carbon-server
+  application.name: carbon-mock-server
+  h2.console.enabled: true
+  datasource:
+    url: jdbc:h2:mem:carbon-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
   jpa:
     open-in-view: true
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
 
 springdoc:
   api-docs:

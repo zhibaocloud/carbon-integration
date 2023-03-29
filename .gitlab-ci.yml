@@ -3,7 +3,7 @@ stages:
   - build
   - package
   - deploy
-  - cleanup
+  - release
 
 server unit test:
   image: maven:3.9-eclipse-temurin-17
@@ -30,3 +30,28 @@ server build:
   needs: [ ]
   script:
     - mvn clean package -DskipTests=true -s maven-settings.xml
+
+deploy:
+  stage: deploy
+  needs: [ ]
+  script:
+    - mvn clean deploy -DskipTests=true -B -s maven-settings.xml
+  only:
+    - main
+
+release:
+  stage: release
+  needs: [ ]
+  before_script:
+    - mkdir ~/.ssh
+    - cp $DEPLOY_PRIVATE_KEY ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H gitlab.wisefin.tech > ~/.ssh/known_hosts
+    - git config user.email "ci@wisefin.tech"
+    - git config user.name "Gitlab CI"
+    - git checkout -B "$CI_COMMIT_REF_NAME"
+  when: manual
+  only:
+    - main
+  script:
+    - mvn release:prepare release:perform -DskipTests=true -DscmCommentPrefix="[skip ci]" -B -s maven-settings.xml
+

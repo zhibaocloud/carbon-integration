@@ -17,6 +17,10 @@
   <name>Carbon Mock Server</name>
   <description>Mock 服务，担当数据推送的接收方，验证数据的有效性，以及演示会如何接收推送数据</description>
 
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -28,8 +32,8 @@
       <artifactId>carbon-sdk</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
