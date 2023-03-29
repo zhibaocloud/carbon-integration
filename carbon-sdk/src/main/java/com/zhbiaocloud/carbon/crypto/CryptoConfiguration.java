@@ -24,7 +24,7 @@ public class CryptoConfiguration {
   /**
    * AES的加密模式，与合作方协商后确定
    */
-  private String aesMode = "AES/CBC/PKCS5Padding";
+  private String encryptionMode = "AES/CBC/PKCS5Padding";
 
   /**
    * 使用CBC时的需要额外提供IV向量

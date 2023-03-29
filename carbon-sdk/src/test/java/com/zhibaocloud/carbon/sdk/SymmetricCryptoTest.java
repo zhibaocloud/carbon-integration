@@ -6,19 +6,22 @@ package com.zhibaocloud.carbon.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.zhbiaocloud.carbon.crypto.AesCrypto;
+import com.zhbiaocloud.carbon.crypto.CryptoAlg;
+import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
 import org.junit.jupiter.api.Test;
 
-class AesCryptoTest {
+class SymmetricCryptoTest {
+
+  private final CryptoFactory factory = new CryptoFactory();
 
   @Test
   void aesCBCTest() {
     CryptoConfiguration config = new CryptoConfiguration();
     config.setSecret("g9wuZX5rQKqin9qA");
     config.setAesIv("dyRnJ6bVxWTdHd64");
-    Crypto crypto = new AesCrypto(config);
+    Crypto crypto = factory.create(config);
 
     String origin = "hello world";
     String cipher = crypto.encrypt(origin);
@@ -30,8 +33,22 @@ class AesCryptoTest {
   void aesECBTest() {
     CryptoConfiguration config = new CryptoConfiguration();
     config.setSecret("g9wuZX5rQKqin9qA");
-    config.setAesMode("AES/ECB/PKCS5Padding");
-    Crypto crypto = new AesCrypto(config);
+    config.setEncryptionMode("AES/ECB/PKCS5Padding");
+    Crypto crypto = factory.create(config);
+
+    String origin = "hello world";
+    String cipher = crypto.encrypt(origin);
+    String plain = crypto.decrypt(cipher);
+    assertThat(plain).isEqualTo(origin);
+  }
+
+  @Test
+  void sm4ECBTest() {
+    CryptoConfiguration config = new CryptoConfiguration();
+    config.setEncryptAlg(CryptoAlg.SM4);
+    config.setEncryptionMode("SM4/ECB/PKCS5Padding");
+    config.setSecret("g9wuZX5rQKqin9qA");
+    Crypto crypto = factory.create(config);
 
     String origin = "hello world";
     String cipher = crypto.encrypt(origin);
