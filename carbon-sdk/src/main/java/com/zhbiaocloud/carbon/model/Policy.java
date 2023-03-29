@@ -4,7 +4,12 @@
 
 package com.zhbiaocloud.carbon.model;
 
+import com.zhbiaocloud.carbon.model.type.PayIntv;
+import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -18,7 +23,8 @@ import lombok.Data;
 @Schema(title = "承保保单数据模型")
 public class Policy {
 
-  @Schema(title = "保单号", description = "保单唯一标识符，会用于去重判断")
+  @NotBlank
+  @Schema(title = "保单号", description = "保单唯一标识符，会用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
 
   @Schema(title = "投保单号")
@@ -51,18 +57,56 @@ public class Policy {
   @Schema(title = "中介机构名称", description = "一般指中介机构在保险公司销管系统中的机构名称")
   private String agentComName;
 
-  @Schema(title = "保费", description = "首期合同保费")
+  @NotBlank
+  @Schema(title = "产品编码", description = "有些保险产品趸交、期交的险种编码不同，在这里需要使用固定的产品编码", requiredMode = RequiredMode.REQUIRED)
+  private String productNo;
+
+  @NotBlank
+  @Schema(title = "产品名称", description = "主险产品名称，需要和在条款中使用的名称保持一致", requiredMode = RequiredMode.REQUIRED)
+  private String productName;
+
+  @NotNull
+  @Schema(title = "保费", description = "首期合同保费", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal premium;
 
-  @Schema(title = "保额", description = "首期合同保额")
+  @NotNull
+  @Schema(title = "保额", description = "首期合同保额", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal amount;
 
-  @Schema(title = "投保时间")
+  @Schema(title = "电子保单下载地址")
+  private String ePolicyUrl;
+
+  @Schema(title = "交费间隔", description = "同交费频率")
+  private PayIntv payIntv;
+
+  @NotNull
+  @Schema(title = "投保时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime applyTime;
 
-  @Schema(title = "首期交费时间", description = "同支付时间")
+  @NotNull
+  @Schema(title = "首期交费时间", description = "同支付时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime payTime;
 
-  @Schema(title = "签单时间", description = "同承保时间")
+  @NotNull
+  @Schema(title = "签单时间", description = "同承保时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime signTime;
+
+  @NotNull
+  @Schema(title = "生效时间", requiredMode = RequiredMode.REQUIRED)
+  private LocalDateTime effectiveTime;
+
+  @Schema(title = "失效时间", description = "保终身时不需要传递")
+  private LocalDateTime expirationTime;
+
+  @Schema(title = "回访时间", description = "一般指回访成功日期")
+  private LocalDateTime rtnCallTime;
+
+  @Schema(title = "回访成功标识", description = "只有在有回访时间时才会判断回访成功标识")
+  private Boolean rtnCallSuccess;
+
+  @Schema(title = "回访失败原因", description = "只有在有回访成功标识为false时才会使用次字段")
+  private String rtnCallFailedReason;
+
+  @Schema(title = "保单状态")
+  private PolicyStatus status;
 }

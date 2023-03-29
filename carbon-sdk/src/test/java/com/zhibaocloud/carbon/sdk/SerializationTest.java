@@ -5,9 +5,12 @@
 package com.zhibaocloud.carbon.sdk;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.model.Policy;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -70,5 +73,18 @@ class SerializationTest {
 
     String json = mapper.writeValueAsString(source);
     assertThat(json).isEqualTo("{\"zero\":0}");
+  }
+
+  @Test
+  void testEnvironment() throws IOException {
+    CarbonMapperFactory factory = new CarbonMapperFactory();
+    ObjectMapper prodMapper = factory.create(true);
+    ObjectMapper devMapper = factory.create(false);
+
+    Policy prodPolicy = prodMapper.readValue("{\"a\":1}", Policy.class);
+    assertThat(prodPolicy).isNotNull();
+
+    assertThatThrownBy(() -> devMapper.readValue("{\"a\":1}", Policy.class))
+        .isInstanceOf(UnrecognizedPropertyException.class);
   }
 }
