@@ -60,7 +60,7 @@ public class Agreement {
   /**
    * 加解密盐
    */
-  @Column(name = "secret")
+  @Column(name = "salt")
   private String salt;
 
   /**

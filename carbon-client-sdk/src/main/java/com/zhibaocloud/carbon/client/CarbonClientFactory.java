@@ -28,14 +28,6 @@ public class CarbonClientFactory {
    */
   private final CloseableHttpClient client;
 
-  public CarbonClientFactory(CloseableHttpClient client) {
-    ObjectMapper m = new ObjectMapper();
-    m.registerModule(new JavaTimeModule());
-
-    this.mapper = m;
-    this.client = client;
-  }
-
   /**
    * 为每一个中介公司推送创建一个客户端。其他配置为系统级配置，可以进行复用
    *

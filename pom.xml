@@ -27,7 +27,6 @@
   <modules>
     <module>carbon-sdk</module>
     <module>carbon-client-sdk</module>
-    <module>carbon-client-openapi</module>
     <module>carbon-client-spring-boot-starter</module>
     <module>carbon-client-spring-boot-cli</module>
     <module>carbon-mock-server</module>
