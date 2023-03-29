@@ -6,7 +6,7 @@ stages:
   - cleanup
 
 server unit test:
-  image: maven:3-alpine
+  image: maven:3.9-eclipse-temurin-17
   variables:
     TZ: 'Asia/Shanghai'
   stage: test
@@ -25,7 +25,7 @@ server unit test:
         - "**/target/failsafe-reports/TEST-*.xml"
 
 server build:
-  image: maven:3-alpine
+  image: maven:3.9-eclipse-temurin-17
   stage: build
   needs: [ ]
   script:

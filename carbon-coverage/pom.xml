@@ -15,4 +15,58 @@
 
   <artifactId>carbon-coverage</artifactId>
   <name>Carbon Test Coverage</name>
+  <description>测试覆盖率报告</description>
+
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-sdk</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-client-sdk</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-client-openapi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-client-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-client-spring-boot-cli</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-mock-server</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

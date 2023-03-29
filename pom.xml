@@ -126,6 +126,11 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
+        <artifactId>carbon-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud.carbon</groupId>
         <artifactId>carbon-sdk</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -146,7 +151,12 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
-        <artifactId>carbon-client-sample-app</artifactId>
+        <artifactId>carbon-client-spring-boot-cli</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud.carbon</groupId>
+        <artifactId>carbon-mock-server</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -236,5 +246,39 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
