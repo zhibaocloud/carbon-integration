@@ -7,6 +7,7 @@ package com.zhbiaocloud.carbon;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -44,7 +45,7 @@ public class CarbonMapperFactory {
         .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
         // 开发、测试环境则进行报错。识别未知字段，可以及时发现问题
         // 生产环境，则忽略未知字段
-        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, !isProd)
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, !isProd)
         .build()
         .registerModule(
             new JavaTimeModule()
