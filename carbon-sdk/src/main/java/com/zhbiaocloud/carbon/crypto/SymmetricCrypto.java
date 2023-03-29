@@ -11,26 +11,26 @@ import javax.crypto.spec.SecretKeySpec;
 import lombok.SneakyThrows;
 
 /**
- * 使用AES对通信数据加解密
+ * 使用 对称加密 对通信数据加解密
  *
  * @author jun
  */
-public class AesCrypto implements Crypto {
+class SymmetricCrypto implements Crypto {
 
   private final Cipher encryptCipher;
 
   private final Cipher decryptCipher;
 
   @SneakyThrows
-  public AesCrypto(CryptoConfiguration configuration) {
-    byte[] secret = configuration.getSecret().getBytes();
-    SecretKeySpec keySpec = new SecretKeySpec(secret, "AES");
+  SymmetricCrypto(CryptoConfiguration config) {
+    byte[] secret = config.getSecret().getBytes();
+    SecretKeySpec keySpec = new SecretKeySpec(secret, config.getEncryptAlg().name());
 
-    encryptCipher = Cipher.getInstance(configuration.getAesMode());
-    decryptCipher = Cipher.getInstance(configuration.getAesMode());
+    encryptCipher = Cipher.getInstance(config.getEncryptionMode(), "BC");
+    decryptCipher = Cipher.getInstance(config.getEncryptionMode(), "BC");
 
     // 使用 CBC 时可以启用 IV
-    String iv = configuration.getAesIv();
+    String iv = config.getAesIv();
     if (iv != null) {
       IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes());
       encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);

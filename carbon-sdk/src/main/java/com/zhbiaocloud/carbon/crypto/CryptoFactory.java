@@ -4,6 +4,9 @@
 
 package com.zhbiaocloud.carbon.crypto;
 
+import java.security.Security;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 /**
  * 加密工厂，根据配置返回不同的加解密工具
  *
@@ -11,11 +14,11 @@ package com.zhbiaocloud.carbon.crypto;
  */
 public class CryptoFactory {
 
-  public static Crypto create(CryptoConfiguration config) {
-    CryptoAlg alg = config.getEncryptAlg();
-    return switch (alg) {
-      case AES -> new AesCrypto(config);
-      case SM4 -> new Sm4Crypto(config);
-    };
+  static {
+    Security.addProvider(new BouncyCastleProvider());
+  }
+
+  public Crypto create(CryptoConfiguration config) {
+    return new SymmetricCrypto(config);
   }
 }

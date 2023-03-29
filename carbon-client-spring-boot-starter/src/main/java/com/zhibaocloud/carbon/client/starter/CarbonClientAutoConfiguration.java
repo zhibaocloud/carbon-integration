@@ -6,6 +6,7 @@ package com.zhibaocloud.carbon.client.starter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.client.CarbonClientFactory;
 import java.util.Arrays;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -23,7 +24,6 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class CarbonClientAutoConfiguration {
 
-
   @Bean
   @ConditionalOnMissingBean(CloseableHttpClient.class)
   public CloseableHttpClient httpClient() {
@@ -37,5 +37,10 @@ public class CarbonClientAutoConfiguration {
     boolean isProd = Arrays.asList(profiles).contains("production");
     ObjectMapper mapper = factory.create(isProd);
     return new CarbonClientFactory(mapper, httpClient);
+  }
+
+  @Bean
+  public CryptoFactory factory() {
+    return new CryptoFactory();
   }
 }

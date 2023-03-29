@@ -6,10 +6,10 @@ package com.zhibaocloud.carbon.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhbiaocloud.carbon.crypto.AesCrypto;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoAlg;
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
+import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.model.EncryptedRequest;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhibaocloud.carbon.domain.Agreement;
@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 public class DataReceiverService {
 
   private final ApplicationEventPublisher publisher;
+
+  private final CryptoFactory factory;
 
   private final ObjectMapper mapper;
 
@@ -40,7 +42,7 @@ public class DataReceiverService {
     config.setSecret(secret);
     config.setSignSalt(salt);
 
-    Crypto crypto = new AesCrypto(config);
+    Crypto crypto = factory.create(config);
     String payload = crypto.decrypt(request.getPayload());
     Policy policy = mapper.readValue(payload, Policy.class);
 

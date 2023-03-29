@@ -31,6 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "数据推送接口")
 public class DataReceiverController {
 
+  @PostMapping("/v2/callbacks/verify")
+  @Operation(operationId = "verifyEncryption", summary = "加密验证", description = "用于验证加密方式是否正确")
+  public ResponseEntity<String> verify() {
+    return ResponseEntity.ok("ok");
+  }
+
   @PostMapping("/v2/callbacks/a/{id}/{type}")
   @Operation(operationId = "publishByAgreement", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
   @ResponseStatus(HttpStatus.OK)
