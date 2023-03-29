@@ -4,23 +4,26 @@
 
 package com.zhbiaocloud.carbon.crypto;
 
-import lombok.RequiredArgsConstructor;
-
 /**
  * 加解密方法
  *
  * @author jun
  */
-@RequiredArgsConstructor
-public class Crypto {
+public interface Crypto {
 
-  private final CryptoConfiguration config;
+  /**
+   * 对输入内容进行加密
+   *
+   * @param plain 明文
+   * @return 密文
+   */
+  String encrypt(String plain);
 
-  public String encrypt(String content) {
-    return content;
-  }
-
-  public String decrypt(String cipher) {
-    return cipher;
-  }
+  /**
+   * 对收到的内容进行解密
+   *
+   * @param cipher 密文
+   * @return 明文
+   */
+  String decrypt(String cipher);
 }
