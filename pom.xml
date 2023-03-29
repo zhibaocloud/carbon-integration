@@ -17,6 +17,13 @@
   <description>和智保云投保通道进行数据集成的SDK工具包以及演示程序</description>
   <url>https://zhibaocloud.com</url>
 
+  <scm>
+    <url>https://gitlab.wisefin.tech/carbon/carbon-integration</url>
+    <connection>scm:git:git://gitlab.wisefin.tech/carbon/carbon-integration.git</connection>
+    <developerConnection>scm:git:ssh://git@gitlab.wisefin.tech/carbon/carbon-integration.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <modules>
     <module>carbon-sdk</module>
     <module>carbon-client-sdk</module>

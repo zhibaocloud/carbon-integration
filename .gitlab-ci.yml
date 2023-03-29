@@ -1,12 +1,12 @@
 stages:
   - test
   - build
-  - package
   - deploy
   - release
 
+image: maven:3.9.0-eclipse-temurin-17-alpine
+
 server unit test:
-  image: maven:3.9-eclipse-temurin-17
   variables:
     TZ: 'Asia/Shanghai'
   stage: test
@@ -25,7 +25,6 @@ server unit test:
         - "**/target/failsafe-reports/TEST-*.xml"
 
 server build:
-  image: maven:3.9-eclipse-temurin-17
   stage: build
   needs: [ ]
   script:
@@ -45,7 +44,7 @@ release:
   before_script:
     - mkdir ~/.ssh
     - cp $DEPLOY_PRIVATE_KEY ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H gitlab.wisefin.tech > ~/.ssh/known_hosts
+    - echo $KNOWN_HOSTS > ~/.ssh/known_hosts
     - git config user.email "ci@wisefin.tech"
     - git config user.name "Gitlab CI"
     - git checkout -B "$CI_COMMIT_REF_NAME"
