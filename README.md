@@ -14,3 +14,10 @@
 ## Mock Server
 
 用于本地调试，同时提供 OpenAPI 接口供调用方查询使用。用于演示服务端是如何收到，并处理数据的。
+
+## TODO
+
+1. 同时提供JDK8版本兼容的SDK
+2. 将SDK包发布至 Maven Central Repository
+3. 支持使用国密算法作为应用层加密
+4. 使用非对成加密进行数据签名

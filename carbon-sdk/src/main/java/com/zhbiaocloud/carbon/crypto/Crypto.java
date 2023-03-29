@@ -6,8 +6,14 @@ package com.zhbiaocloud.carbon.crypto;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 加解密方法
+ *
+ * @author jun
+ */
 @RequiredArgsConstructor
 public class Crypto {
+
   private final CryptoConfiguration config;
 
   public String encrypt(String content) {
