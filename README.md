@@ -1,14 +1,27 @@
-# 智保云投保通道 SDK
+# 智保云互联互通 SDK
 
-## 什么是`投保通道`
+## `互联互通项目`是什么
 
-投保通道项目是 智保云-保司事业部
-为满足 [保险中介机构信息化工作监管办法](http://www.gov.cn/zhengce/zhengceku/2021-01/13/content_5579627.htm)
-中要求的 `通过技术手段实现与合作保险公司的系统互通、业务互联、数据对接。` 而开发的 SaaS 化投保系统。
+互联互通项目是 [智保云](https://zhibaocloud.com) 为满足 [保险中介机构信息化工作监管办法](http://www.gov.cn/zhengce/zhengceku/2021-01/13/content_5579627.htm)
+中要求的 `通过技术手段实现与合作保险公司的系统互通、业务互联、数据对接` 而开发的 SaaS 化对接系统。
 
-项目代号: `Carbon`, 对外的产品名称: 投保通道
+项目代号: `Carbon`
 
 ## 如何使用
+
+```bash
+# 编译并安装到本地仓库
+mvn clean install
+
+# 启动后端 Mock 服务用于接收推送数据
+# 当收到推送数据后会在控制台打印显示
+mvn spring-boot:run -pl carbon-mock-server
+
+# 启动 Client 项目向 Mock 服务发送数据
+mvn spring-boot:run -pl carbon-client-cli
+```
+
+## 使用条件
 
 1. 项目的 JDK 版本最低为 17, Maven 版本最低为 3.8.1
 2. 使用 Spring Boot 3.0 作为演示项目
