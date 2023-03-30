@@ -4,9 +4,10 @@
 
 package com.zhbiaocloud.carbon.model;
 
+import com.zhbiaocloud.carbon.Version;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 加密后的报文响应
@@ -14,7 +15,6 @@ import lombok.Data;
  * @author jun
  */
 @Data
-@AllArgsConstructor
 public class EncryptedResponse {
 
   /**
@@ -25,4 +25,6 @@ public class EncryptedResponse {
   private String sign;
 
   private String payload;
+
+  private Version version = Version.CURRENT;
 }

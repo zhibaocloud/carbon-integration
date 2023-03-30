@@ -108,7 +108,11 @@ public class CarbonClientImpl implements CarbonClient {
 
   private EncryptedRequest createRequest(CarbonRequest<?> request) throws IOException {
     String payload = mapper.writeValueAsString(request);
-    return new EncryptedRequest(UUID.randomUUID(), sign(payload), encrypt(payload));
+    EncryptedRequest message = new EncryptedRequest();
+    message.setRequestId(UUID.randomUUID());
+    message.setSign(sign(payload));
+    message.setPayload(encrypt(payload));
+    return message;
   }
 
   @Override
