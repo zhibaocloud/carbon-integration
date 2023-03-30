@@ -23,6 +23,8 @@
   </parent>
 
   <artifactId>carbon-server-spring-boot-starter</artifactId>
+  <name>Carbon Server SDK as Spring Boot Starter</name>
+  <description>用于构建服务端开发SDK</description>
 
   <dependencies>
     <dependency>

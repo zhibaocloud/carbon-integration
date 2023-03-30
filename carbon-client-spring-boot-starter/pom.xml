@@ -23,7 +23,7 @@
   </parent>
 
   <artifactId>carbon-client-spring-boot-starter</artifactId>
-  <name>Carbon Client Spring Boot Starter</name>
+  <name>Carbon Client SDK as Spring Boot Starter</name>
   <description>将SDK封装为 Spring Boot Starter 方便其他系统使用</description>
 
   <dependencies>
