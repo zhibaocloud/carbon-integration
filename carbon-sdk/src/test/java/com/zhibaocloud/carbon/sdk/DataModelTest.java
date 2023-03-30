@@ -26,6 +26,7 @@ import com.zhbiaocloud.carbon.model.type.MarriageType;
 import com.zhbiaocloud.carbon.model.type.NationType;
 import com.zhbiaocloud.carbon.model.type.NationalityType;
 import com.zhbiaocloud.carbon.model.type.PayIntv;
+import com.zhbiaocloud.carbon.model.type.PayType;
 import com.zhbiaocloud.carbon.model.type.PaymentPeriod;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import com.zhbiaocloud.carbon.model.type.RelationType;
@@ -44,6 +45,8 @@ class DataModelTest {
   void testEnumTools() {
     GenderType gender = EnumUtils.fromValue(GenderType.class, "1");
     assertThat(gender).isEqualTo(GenderType.MALE);
+    GenderType unknown = EnumUtils.fromValue(GenderType.class, "99");
+    assertThat(unknown).isNull();
 
     NationType nation = EnumUtils.fromValue(NationType.class, "CHN");
     assertThat(nation).isEqualTo(NationType.CHN);
@@ -154,6 +157,8 @@ class DataModelTest {
     policy.setAmount(new BigDecimal(100_000));
     policy.setEPolicyUrl("https://xxxx.com/xxxx/xxxx/xxxx.pdf");
     policy.setPayIntv(PayIntv.YEARLY);
+    policy.setPayType(PayType.BANK_CARD);
+
     policy.setStatus(PolicyStatus.VALID);
 
     policy.setSignTime(LocalDateTime.of(2023, 3, 29, 0, 0, 0));

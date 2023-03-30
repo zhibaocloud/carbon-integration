@@ -37,10 +37,8 @@ public class DataReceiverService {
     String salt = agreement.getSalt();
 
     CryptoConfiguration config = new CryptoConfiguration();
-    config.setEncryptAlg(CryptoAlg.AES);
-    config.setSignAlg("SHA1");
     config.setSecret(secret);
-    config.setSignSalt(salt);
+    config.setDigestSalt(salt);
 
     Crypto crypto = factory.create(config);
     String payload = crypto.decrypt(request.getPayload());

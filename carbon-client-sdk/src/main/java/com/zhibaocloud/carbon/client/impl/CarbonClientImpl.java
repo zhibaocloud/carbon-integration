@@ -5,24 +5,25 @@
 package com.zhibaocloud.carbon.client.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhbiaocloud.carbon.crypto.Crypto;
+import com.zhbiaocloud.carbon.crypto.CryptoFactory;
+import com.zhbiaocloud.carbon.model.EncryptedRequest;
+import com.zhbiaocloud.carbon.model.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
-import com.zhibaocloud.carbon.client.MessageException;
 import com.zhibaocloud.carbon.client.CarbonClient;
 import com.zhibaocloud.carbon.client.ClientMode;
 import com.zhibaocloud.carbon.client.ClientOption;
+import com.zhibaocloud.carbon.client.MessageException;
 import com.zhibaocloud.carbon.client.SignatureMissMatchException;
 import com.zhibaocloud.carbon.client.model.CarbonRequest;
-import com.zhbiaocloud.carbon.model.EncryptedRequest;
-import com.zhbiaocloud.carbon.model.EncryptedResponse;
 import com.zhibaocloud.carbon.client.model.CarbonResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.StatusLine;
@@ -39,7 +40,6 @@ import org.apache.http.util.EntityUtils;
  * @author jun
  */
 @Slf4j
-@RequiredArgsConstructor
 public class CarbonClientImpl implements CarbonClient {
 
   private final ClientOption option;
@@ -48,28 +48,26 @@ public class CarbonClientImpl implements CarbonClient {
 
   private final CloseableHttpClient client;
 
+  private final Crypto crypto;
+
+  public CarbonClientImpl(
+      ClientOption option,
+      ObjectMapper mapper,
+      CloseableHttpClient client,
+      CryptoFactory factory
+  ) {
+    this.option = option;
+    this.mapper = mapper;
+    this.client = client;
+    this.crypto = factory.create(option.getCrypto());
+  }
+
   @SneakyThrows
   private URI buildTargetUri(CarbonRequest<?> request) {
     ClientMode mode = option.getMode();
     return new URIBuilder(option.getEndpoint())
         .setPathSegments("v2", "callbacks", mode.getValue(), option.getAppId(), request.getType())
         .build();
-  }
-
-  @SneakyThrows
-  private String sign(String payload) {
-    MessageDigest sha1 = MessageDigest.getInstance(option.getSignAlg());
-    byte[] raw = (payload + option.getSalt()).getBytes();
-    byte[] sign = sha1.digest(raw);
-    return Base64.getEncoder().encodeToString(sign);
-  }
-
-  private String encrypt(String payload) {
-    return payload;
-  }
-
-  private String decrypt(String payload) {
-    return payload;
   }
 
   private void send(CarbonRequest<?> request) throws IOException {
@@ -96,9 +94,9 @@ public class CarbonClientImpl implements CarbonClient {
 
   private CarbonResponse parseResponse(String rawResponse) throws IOException {
     EncryptedResponse response = mapper.readValue(rawResponse, EncryptedResponse.class);
-    String payload = decrypt(response.getPayload());
+    String payload = crypto.decrypt(response.getPayload());
 
-    String expectedSign = sign(payload);
+    String expectedSign = crypto.digest(payload);
     String actualSign = response.getSign();
     if (!expectedSign.equals(actualSign)) {
       throw new SignatureMissMatchException(expectedSign, actualSign);
@@ -110,8 +108,8 @@ public class CarbonClientImpl implements CarbonClient {
     String payload = mapper.writeValueAsString(request);
     EncryptedRequest message = new EncryptedRequest();
     message.setRequestId(UUID.randomUUID());
-    message.setSign(sign(payload));
-    message.setPayload(encrypt(payload));
+    message.setSign(crypto.digest(payload));
+    message.setPayload(crypto.encrypt(payload));
     return message;
   }
 

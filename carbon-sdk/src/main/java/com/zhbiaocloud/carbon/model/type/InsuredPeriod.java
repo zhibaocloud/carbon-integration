@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 保险期间
@@ -15,12 +16,20 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class InsuredPeriod {
 
+  /**
+   * 保终身
+   */
+  public static final InsuredPeriod LIFE_LONG = new InsuredPeriod("O");
+  /**
+   * 无关保险期间
+   */
+  public static final InsuredPeriod NONE = new InsuredPeriod("N");
   private int value = 0;
-
-  private InsuredPeriodUnit unit;
+  private InsuredPeriodUnit unit = InsuredPeriodUnit.Y;
 
   @JsonCreator
   public InsuredPeriod(String period) {
@@ -38,12 +47,6 @@ public class InsuredPeriod {
   public static InsuredPeriod of(String period) {
     return new InsuredPeriod(period);
   }
-
-  // 保终身
-  public static final InsuredPeriod LIFE_LONG = new InsuredPeriod("O");
-
-  // 无关保险期间
-  public static final InsuredPeriod NONE = new InsuredPeriod("N");
 
   @JsonValue
   @Override

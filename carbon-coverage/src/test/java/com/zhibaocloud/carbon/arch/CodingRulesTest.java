@@ -31,13 +31,11 @@ import java.util.logging.Logger;
 public class CodingRulesTest {
 
   @ArchTest
-  private final ArchRule no_access_to_standard_streams = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
-
+  static final ArchRule no_classes_should_access_standard_streams_or_throw_generic_exceptions =
+      CompositeArchRule.of(NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS)
+          .and(NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS);
   @ArchTest
-  private void no_access_to_standard_streams_as_method(JavaClasses classes) {
-    noClasses().should(ACCESS_STANDARD_STREAMS).check(classes);
-  }
-
+  private final ArchRule no_access_to_standard_streams = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
   @ArchTest
   private final ArchRule no_generic_exceptions = NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS;
 
@@ -59,7 +57,7 @@ public class CodingRulesTest {
   private final ArchRule no_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
 
   @ArchTest
-  static final ArchRule no_classes_should_access_standard_streams_or_throw_generic_exceptions =
-      CompositeArchRule.of(NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS)
-          .and(NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS);
+  private void no_access_to_standard_streams_as_method(JavaClasses classes) {
+    noClasses().should(ACCESS_STANDARD_STREAMS).check(classes);
+  }
 }

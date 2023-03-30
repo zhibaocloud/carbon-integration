@@ -5,7 +5,7 @@
 package com.zhibaocloud.carbon.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,12 +29,17 @@ public class CarbonClientFactory {
   private final CloseableHttpClient client;
 
   /**
+   * 加解密算法工具
+   */
+  private final CryptoFactory factory;
+
+  /**
    * 为每一个中介公司推送创建一个客户端。其他配置为系统级配置，可以进行复用
    *
    * @param option 中介公司相关配置
    * @return 客户端
    */
   public CarbonClient create(ClientOption option) {
-    return new CarbonClientImpl(option, mapper, client);
+    return new CarbonClientImpl(option, mapper, client, factory);
   }
 }

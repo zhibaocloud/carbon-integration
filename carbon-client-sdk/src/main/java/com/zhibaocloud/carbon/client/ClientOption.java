@@ -4,6 +4,7 @@
 
 package com.zhibaocloud.carbon.client;
 
+import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
 import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,14 +29,9 @@ public class ClientOption {
   private String appId;
 
   /**
-   * 应用密钥，对称加密
+   * 对称加密配置
    */
-  private String secret;
-
-  /**
-   * 对成加密算法
-   */
-  private String encryptAlg = "AES";
+  private CryptoConfiguration crypto = new CryptoConfiguration();
 
   /**
    * 签名摘要时使用的加盐，避免相同数据的签名摘要相同
@@ -45,7 +41,7 @@ public class ClientOption {
   /**
    * 签名算法
    */
-  private String signAlg = "HmacSHA256";
+  private String signAlg = "SHA256";
 
   /**
    * 接入方式

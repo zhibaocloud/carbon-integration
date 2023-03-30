@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum NationType implements EncodedValue{
+public enum NationType implements EncodedValue {
   /**
    * 国籍
    */

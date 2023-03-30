@@ -18,24 +18,32 @@ import lombok.Data;
 @Data
 public class Version {
 
+  public static final Version CURRENT = new Version();
   /**
    * 主版本，如有不兼容更新会增加版本号
    */
   private int major = 0;
-
   /**
    * 新功能版本，兼容MAJOR
    */
   private int minor = 1;
-
   /**
    * 问题修正版本
    */
   private int patch = 0;
 
-  public static final Version CURRENT = new Version();
-
   private Version() {
+  }
+
+  @JsonCreator
+  public Version(String version) {
+    String[] parts = version.split("\\.");
+    if (parts.length != 3) {
+      throw new IllegalArgumentException("无效的版本号: " + version);
+    }
+    this.major = Integer.parseInt(parts[0]);
+    this.minor = Integer.parseInt(parts[1]);
+    this.patch = Integer.parseInt(parts[2]);
   }
 
   public boolean isCompatible(Version version) {
@@ -49,17 +57,6 @@ public class Version {
     }
 
     return false;
-  }
-
-  @JsonCreator
-  public Version(String version) {
-    String[] parts = version.split("\\.");
-    if (parts.length != 3) {
-      throw new IllegalArgumentException("无效的版本号: " + version);
-    }
-    this.major = Integer.parseInt(parts[0]);
-    this.minor = Integer.parseInt(parts[1]);
-    this.patch = Integer.parseInt(parts[2]);
   }
 
   @JsonValue
