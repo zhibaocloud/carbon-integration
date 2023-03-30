@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum CryptoMode {
+public enum SymmetricCrypto {
 
   /**
    * 对称加密算法

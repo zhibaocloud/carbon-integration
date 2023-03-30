@@ -23,7 +23,7 @@
   </parent>
 
   <artifactId>carbon-coverage</artifactId>
-  <name>Carbon Test Coverage</name>
+  <name>Carbon Test Coverage Report</name>
   <description>测试覆盖率报告</description>
 
   <properties>
@@ -33,7 +33,7 @@
   <dependencies>
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>
-      <artifactId>carbon-sdk</artifactId>
+      <artifactId>carbon-exchange</artifactId>
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>

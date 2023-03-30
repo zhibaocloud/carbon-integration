@@ -22,9 +22,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>carbon-sdk</artifactId>
-  <name>Carbon Integration SDK</name>
-  <description>智保云投保通道开发 SDK。定义数据模型，以及交互所支持的加解密方式</description>
+  <artifactId>carbon-exchange</artifactId>
+  <name>Carbon Message Exchange</name>
+  <description>智保云投保通道开发 SDK。定义数据模型以及数据交互所支持的加解密方法</description>
 
   <dependencies>
     <dependency>

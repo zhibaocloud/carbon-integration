@@ -23,7 +23,7 @@
   </parent>
 
   <artifactId>carbon-demo-secret</artifactId>
-  <name>Carbon Demo Secret</name>
+  <name>Carbon Demo Shared Secret</name>
   <description>工具模块，确保客户端和服务端使用相同的密钥</description>
 
   <properties>
@@ -33,7 +33,7 @@
   <dependencies>
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>
-      <artifactId>carbon-sdk</artifactId>
+      <artifactId>carbon-exchange</artifactId>
       <scope>provided</scope>
     </dependency>
   </dependencies>

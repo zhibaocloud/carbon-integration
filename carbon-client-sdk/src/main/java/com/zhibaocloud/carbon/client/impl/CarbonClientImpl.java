@@ -14,9 +14,9 @@
 package com.zhibaocloud.carbon.client.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhbiaocloud.carbon.CarbonChannel;
 import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.MessageException;
+import com.zhbiaocloud.carbon.crypto.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
