@@ -19,6 +19,6 @@ public class CryptoFactory {
   }
 
   public Crypto create(CryptoConfiguration config) {
-    return new SymmetricCrypto(config);
+    return new CarbonCrypto(config);
   }
 }

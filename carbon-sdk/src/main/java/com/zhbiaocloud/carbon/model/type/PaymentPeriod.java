@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 交费期间
@@ -15,11 +16,15 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class PaymentPeriod {
 
+  /**
+   * 趸交
+   */
+  public static final PaymentPeriod SINGLE = new PaymentPeriod("S");
   private int value = 0;
-
   private PaymentPeriodUnit unit;
 
   public PaymentPeriod(String period) {
@@ -31,8 +36,6 @@ public class PaymentPeriod {
       this.value = Integer.parseInt(period.substring(0, period.length() - 1));
     }
   }
-
-  public static final PaymentPeriod SINGLE = new PaymentPeriod("S");
 
   @JsonCreator
   public static PaymentPeriod of(String period) {

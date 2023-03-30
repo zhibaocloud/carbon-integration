@@ -13,7 +13,8 @@ import com.zhbiaocloud.carbon.model.type.EncodedValue;
  */
 public class EnumUtils {
 
-  private EnumUtils() { }
+  private EnumUtils() {
+  }
 
   public static <T extends Enum<T> & EncodedValue> T fromValue(Class<T> enumType, String value) {
     for (T enumValue : enumType.getEnumConstants()) {

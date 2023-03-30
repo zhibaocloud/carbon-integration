@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
  * @author jun
  */
 @Configuration
-public class CarbonClientAutoConfiguration {
+public class CarbonClientConfiguration {
 
   @Bean
   @ConditionalOnMissingBean(CloseableHttpClient.class)
@@ -31,16 +31,20 @@ public class CarbonClientAutoConfiguration {
   }
 
   @Bean
-  public CarbonClientFactory factory(CloseableHttpClient httpClient, Environment environment) {
+  public CryptoFactory factory() {
+    return new CryptoFactory();
+  }
+
+  @Bean
+  public CarbonClientFactory factory(
+      CloseableHttpClient httpClient,
+      Environment environment,
+      CryptoFactory crypto
+  ) {
     CarbonMapperFactory factory = new CarbonMapperFactory();
     String[] profiles = environment.getActiveProfiles();
     boolean isProd = Arrays.asList(profiles).contains("production");
     ObjectMapper mapper = factory.create(isProd);
-    return new CarbonClientFactory(mapper, httpClient);
-  }
-
-  @Bean
-  public CryptoFactory factory() {
-    return new CryptoFactory();
+    return new CarbonClientFactory(mapper, httpClient, crypto);
   }
 }

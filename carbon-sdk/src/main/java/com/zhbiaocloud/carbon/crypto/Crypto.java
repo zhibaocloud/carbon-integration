@@ -26,4 +26,12 @@ public interface Crypto {
    * @return 明文
    */
   String decrypt(String cipher);
+
+  /**
+   * 进行信息摘要计算
+   *
+   * @param payload 待计算的内容
+   * @return 摘要
+   */
+  String digest(String payload);
 }

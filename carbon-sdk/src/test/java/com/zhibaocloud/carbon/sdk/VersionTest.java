@@ -5,6 +5,7 @@
 package com.zhibaocloud.carbon.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,5 +52,7 @@ class VersionTest {
     Version oldPatchVersion = new Version("0.1.0");
     assertThat(newPatchVersion.isCompatible(oldPatchVersion)).isTrue();
     assertThat(oldPatchVersion.isCompatible(newPatchVersion)).isTrue();
+
+    assertThatThrownBy(() -> new Version("0.1")).isInstanceOf(IllegalArgumentException.class);
   }
 }

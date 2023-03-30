@@ -7,7 +7,6 @@ package com.zhbiaocloud.carbon.model;
 import com.zhbiaocloud.carbon.Version;
 import java.util.UUID;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 加密后的报文响应

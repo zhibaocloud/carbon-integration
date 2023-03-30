@@ -5,6 +5,7 @@
 package com.zhbiaocloud.carbon.model;
 
 import com.zhbiaocloud.carbon.model.type.PayIntv;
+import com.zhbiaocloud.carbon.model.type.PayType;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -80,6 +81,9 @@ public class Policy {
 
   @Schema(title = "交费间隔", description = "同交费频率")
   private PayIntv payIntv;
+
+  @Schema(title = "支付方式")
+  private PayType payType;
 
   @NotNull
   @Schema(title = "投保时间", requiredMode = RequiredMode.REQUIRED)
