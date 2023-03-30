@@ -13,8 +13,15 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>carbon-server-sdk</artifactId>
-  <name>Carbon Server SDK</name>
-  <description>服务端SDK，接收通过投保通道推送的保单数据</description>
+  <artifactId>carbon-demo-secret</artifactId>
+  <name>Carbon Demo Secret</name>
+  <description>工具模块，确保客户端和服务端使用相同的密钥</description>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-sdk</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>

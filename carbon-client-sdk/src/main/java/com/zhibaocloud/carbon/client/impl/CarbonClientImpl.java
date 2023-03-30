@@ -5,8 +5,8 @@
 package com.zhibaocloud.carbon.client.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhbiaocloud.carbon.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
-import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.model.EncryptedRequest;
 import com.zhbiaocloud.carbon.model.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
@@ -15,15 +15,11 @@ import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhibaocloud.carbon.client.CarbonClient;
 import com.zhibaocloud.carbon.client.ClientMode;
 import com.zhibaocloud.carbon.client.ClientOption;
-import com.zhibaocloud.carbon.client.MessageException;
-import com.zhibaocloud.carbon.client.SignatureMissMatchException;
-import com.zhibaocloud.carbon.client.model.CarbonRequest;
-import com.zhibaocloud.carbon.client.model.CarbonResponse;
+import com.zhbiaocloud.carbon.MessageException;
+import com.zhbiaocloud.carbon.CarbonRequest;
+import com.zhbiaocloud.carbon.CarbonResponse;
 import java.io.IOException;
 import java.net.URI;
-import java.security.MessageDigest;
-import java.util.Base64;
-import java.util.UUID;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.StatusLine;
@@ -48,83 +44,66 @@ public class CarbonClientImpl implements CarbonClient {
 
   private final CloseableHttpClient client;
 
-  private final Crypto crypto;
+  private final CarbonChannel channel;
 
   public CarbonClientImpl(
-      ClientOption option,
       ObjectMapper mapper,
       CloseableHttpClient client,
-      CryptoFactory factory
+      Crypto crypto,
+      ClientOption option
   ) {
     this.option = option;
     this.mapper = mapper;
     this.client = client;
-    this.crypto = factory.create(option.getCrypto());
+    this.channel = new CarbonChannel(mapper, crypto);
   }
 
   @SneakyThrows
-  private URI buildTargetUri(CarbonRequest<?> request) {
+  private URI buildTargetUri(String type) {
     ClientMode mode = option.getMode();
     return new URIBuilder(option.getEndpoint())
-        .setPathSegments("v2", "callbacks", mode.getValue(), option.getAppId(), request.getType())
+        .setPathSegments("v2", "callbacks", mode.getValue(), option.getAppId(), type)
         .build();
   }
 
-  private void send(CarbonRequest<?> request) throws IOException {
-    EncryptedRequest encryptedRequest = createRequest(request);
+  private void send(String type, Object request) throws IOException {
+    EncryptedRequest encryptedRequest = channel.encodeRequest(request);
 
-    URI target = buildTargetUri(request);
+    URI target = buildTargetUri(type);
     HttpPost post = new HttpPost(target);
     String body = mapper.writeValueAsString(encryptedRequest);
+    post.setHeader("Content-Type", "application/json;charset=utf-8");
     post.setEntity(new StringEntity(body, "UTF-8"));
 
     try (CloseableHttpResponse response = client.execute(post)) {
       StatusLine sl = response.getStatusLine();
       String encryptedResponse = EntityUtils.toString(response.getEntity());
-      if (sl.getStatusCode() != 200) {
+      int statusCode = sl.getStatusCode();
+      if (statusCode >= 200 && statusCode < 300) {
+        EncryptedResponse result = mapper.readValue(encryptedResponse, EncryptedResponse.class);
+        CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
+        if (!res.isSuccess()) {
+          throw new MessageException(res.getMessage());
+        }
+      } else {
         log.error("request failed: {}, response: {}", sl, encryptedResponse);
         throw new IOException("request failed: " + sl);
       }
-      CarbonResponse res = parseResponse(encryptedResponse);
-      if (!res.isSuccess()) {
-        throw new MessageException(res.getMessage());
-      }
     }
-  }
-
-  private CarbonResponse parseResponse(String rawResponse) throws IOException {
-    EncryptedResponse response = mapper.readValue(rawResponse, EncryptedResponse.class);
-    String payload = crypto.decrypt(response.getPayload());
-
-    String expectedSign = crypto.digest(payload);
-    String actualSign = response.getSign();
-    if (!expectedSign.equals(actualSign)) {
-      throw new SignatureMissMatchException(expectedSign, actualSign);
-    }
-    return mapper.readValue(payload, CarbonResponse.class);
-  }
-
-  private EncryptedRequest createRequest(CarbonRequest<?> request) throws IOException {
-    String payload = mapper.writeValueAsString(request);
-    EncryptedRequest message = new EncryptedRequest();
-    message.setRequestId(UUID.randomUUID());
-    message.setSign(crypto.digest(payload));
-    message.setPayload(crypto.encrypt(payload));
-    return message;
   }
 
   @Override
   public void publish(Policy policy) throws IOException {
-    send(new CarbonRequest<>("underwrite", policy));
+    send("underwrite", policy);
   }
 
   @Override
   public void publish(Receipt receipt) throws IOException {
-    send(new CarbonRequest<>("receipt", receipt));
+    send("receipt", receipt);
   }
 
   @Override
   public void publish(RtnCall rtnCall) throws IOException {
-    send(new CarbonRequest<>("rtnCall", rtnCall));
+    send("rtncall", rtnCall);
   }
 }

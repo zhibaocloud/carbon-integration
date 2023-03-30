@@ -29,14 +29,14 @@ class CarbonCrypto implements Crypto {
   @SneakyThrows
   CarbonCrypto(CryptoConfiguration config) {
     byte[] secret = config.getSecret().getBytes();
-    SecretKeySpec keySpec = new SecretKeySpec(secret, config.getEncryptMode().getCategory());
+    CryptoMode mode = config.getEncryptMode();
+    SecretKeySpec keySpec = new SecretKeySpec(secret, mode.getAlgorithm());
 
-    encryptCipher = Cipher.getInstance(config.getEncryptMode().getAlgorithm());
-    decryptCipher = Cipher.getInstance(config.getEncryptMode().getAlgorithm());
+    encryptCipher = Cipher.getInstance(mode.getTransformation());
+    decryptCipher = Cipher.getInstance(mode.getTransformation());
 
-    // 使用 CBC 时可以启用 IV
-    String iv = config.getIv();
-    if (iv != null) {
+    if (mode.isIvRequired()) {
+      String iv = config.getIv();
       IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes());
       encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
       decryptCipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);

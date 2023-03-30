@@ -31,7 +31,8 @@
     <module>carbon-client-spring-boot-cli</module>
     <module>carbon-mock-server</module>
     <module>carbon-coverage</module>
-    <module>carbon-server-sdk</module>
+    <module>carbon-demo-secret</module>
+    <module>carbon-server-spring-boot-starter</module>
   </modules>
 
   <properties>
@@ -164,7 +165,17 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
+        <artifactId>carbon-server-spring-boot-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud.carbon</groupId>
         <artifactId>carbon-mock-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud.carbon</groupId>
+        <artifactId>carbon-demo-secret</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "saas_agreements")
-public class SaasAgreement {
+public class SaaSAgreement {
 
   @Id
   private UUID id = UUID.randomUUID();

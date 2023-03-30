@@ -4,10 +4,13 @@
 
 package com.zhibaocloud.carbon.domain;
 
+import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
+import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,27 +48,8 @@ public class Agreement {
   @Column(name = "supplier")
   private String supplier;
 
-  /**
-   * 加密算法
-   */
-  @Column(name = "encrypt_alg")
-  private String encryptAlg;
-
-  /**
-   * 加解密Key
-   */
-  @Column(name = "secret")
-  private String secret;
-
-  /**
-   * 加解密盐
-   */
-  @Column(name = "salt")
-  private String salt;
-
-  /**
-   * 散列摘要算法
-   */
-  @Column(name = "hash_alg")
-  private String hashAlg;
+  @Transient
+  public CryptoConfiguration getConfig() {
+    return DemoConfiguration.crypto();
+  }
 }

@@ -11,6 +11,7 @@ import com.zhibaocloud.carbon.client.CarbonClientFactory;
 import java.util.Arrays;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,26 +26,31 @@ import org.springframework.core.env.Environment;
 public class CarbonClientConfiguration {
 
   @Bean
+  @ConditionalOnClass(CloseableHttpClient.class)
   @ConditionalOnMissingBean(CloseableHttpClient.class)
   public CloseableHttpClient httpClient() {
     return HttpClients.createDefault();
   }
 
   @Bean
-  public CryptoFactory factory() {
+  public CryptoFactory cryptoFactory() {
     return new CryptoFactory();
   }
 
   @Bean
-  public CarbonClientFactory factory(
-      CloseableHttpClient httpClient,
-      Environment environment,
-      CryptoFactory crypto
-  ) {
-    CarbonMapperFactory factory = new CarbonMapperFactory();
+  public CarbonMapperFactory mapperFactory(Environment environment) {
     String[] profiles = environment.getActiveProfiles();
     boolean isProd = Arrays.asList(profiles).contains("production");
-    ObjectMapper mapper = factory.create(isProd);
+    return new CarbonMapperFactory(isProd);
+  }
+
+  @Bean
+  public CarbonClientFactory clientFactory(
+      CloseableHttpClient httpClient,
+      CryptoFactory crypto,
+      CarbonMapperFactory factory
+  ) {
+    ObjectMapper mapper = factory.create();
     return new CarbonClientFactory(mapper, httpClient, crypto);
   }
 }

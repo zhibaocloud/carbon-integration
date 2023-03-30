@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 class VersionTest {
 
-  private final CarbonMapperFactory factory = new CarbonMapperFactory();
+  private final CarbonMapperFactory factory = new CarbonMapperFactory(false);
 
   @Test
   void testVersionMatch() throws JsonProcessingException {

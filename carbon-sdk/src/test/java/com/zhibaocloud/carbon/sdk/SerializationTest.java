@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class SerializationTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory().create();
+  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
 
   /**
    * 测试序列化的为JSON时字段的顺序。需要保证按照字母顺序进行输出，否则计算签名时会出现问题。
@@ -82,9 +82,10 @@ class SerializationTest {
 
   @Test
   void testEnvironment() throws IOException {
-    CarbonMapperFactory factory = new CarbonMapperFactory();
-    ObjectMapper prodMapper = factory.create(true);
-    ObjectMapper devMapper = factory.create(false);
+    CarbonMapperFactory prodFactory = new CarbonMapperFactory(true);
+    CarbonMapperFactory devFactory = new CarbonMapperFactory(false);
+    ObjectMapper prodMapper = prodFactory.create();
+    ObjectMapper devMapper = devFactory.create();
 
     Policy prodPolicy = prodMapper.readValue("{\"a\":1}", Policy.class);
     assertThat(prodPolicy).isNotNull();

@@ -2,7 +2,7 @@
  * Copyright (c) 2018-2023. 成都市维斯凡科技有限公司 All rights reserved.
  */
 
-package com.zhibaocloud.carbon.client;
+package com.zhbiaocloud.carbon;
 
 /**
  * 与智保云投保通道的业务异常
