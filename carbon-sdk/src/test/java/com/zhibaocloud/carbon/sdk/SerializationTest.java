@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.model.Policy;
-import com.zhbiaocloud.carbon.model.Risk;
+import com.zhbiaocloud.carbon.model.common.Risk;
 import com.zhbiaocloud.carbon.model.type.InsuredPeriod;
 import com.zhbiaocloud.carbon.model.type.InsuredPeriodUnit;
 import com.zhbiaocloud.carbon.model.type.PaymentPeriod;

@@ -7,6 +7,11 @@ package com.zhbiaocloud.carbon.model;
 import com.zhbiaocloud.carbon.model.type.PayIntv;
 import com.zhbiaocloud.carbon.model.type.PayType;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
+import com.zhbiaocloud.carbon.model.common.Agent;
+import com.zhbiaocloud.carbon.model.common.Applicant;
+import com.zhbiaocloud.carbon.model.common.Beneficiary;
+import com.zhbiaocloud.carbon.model.common.Insured;
+import com.zhbiaocloud.carbon.model.common.Risk;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.validation.constraints.NotBlank;
@@ -103,6 +108,12 @@ public class Policy {
 
   @Schema(title = "失效时间", description = "保终身时不需要传递")
   private LocalDateTime expirationTime;
+
+  @Schema(title = "回执签收时间", description = "客户（投保人）签收时间")
+  private LocalDateTime receiptSignTime;
+
+  @Schema(title = "回执录入时间", description = "回执回销日期，或保险公司收到回执日期")
+  private LocalDateTime receiptEnteredTime;
 
   @Schema(title = "回访时间", description = "一般指回访成功日期")
   private LocalDateTime rtnCallTime;

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.Version;
-import com.zhbiaocloud.carbon.model.EncryptedRequest;
+import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 

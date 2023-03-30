@@ -17,6 +17,10 @@
   <name>Carbon Demo Secret</name>
   <description>工具模块，确保客户端和服务端使用相同的密钥</description>
 
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>

@@ -28,7 +28,7 @@
     <module>carbon-sdk</module>
     <module>carbon-client-sdk</module>
     <module>carbon-client-spring-boot-starter</module>
-    <module>carbon-client-spring-boot-cli</module>
+    <module>carbon-client-cli</module>
     <module>carbon-mock-server</module>
     <module>carbon-coverage</module>
     <module>carbon-demo-secret</module>
@@ -84,11 +84,6 @@
         <version>${bc.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.bouncycastle</groupId>
-        <artifactId>bcpkix-jdk15on</artifactId>
-        <version>${bc.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         <version>${springdoc.version}</version>
@@ -120,28 +115,13 @@
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.jaxrs</groupId>
-        <artifactId>jackson-jaxrs-json-provider</artifactId>
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jsr310</artifactId>
         <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>javax.annotation</groupId>
-        <artifactId>javax.annotation-api</artifactId>
-        <version>${javax.annotation.version}</version>
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
@@ -160,7 +140,7 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
-        <artifactId>carbon-client-spring-boot-cli</artifactId>
+        <artifactId>carbon-client-cli</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -179,10 +159,9 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-        <scope>test</scope>
+        <groupId>com.github.jsonzou</groupId>
+        <artifactId>jmockdata</artifactId>
+        <version>4.3.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

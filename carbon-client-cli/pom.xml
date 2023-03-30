@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>carbon-client-spring-boot-cli</artifactId>
+  <artifactId>carbon-client-cli</artifactId>
   <name>Carbon Client Sample Application</name>
   <description>客户端数据推送示例应用程序</description>
 
@@ -30,7 +30,6 @@
     <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
-      <version>4.3.0</version>
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>
