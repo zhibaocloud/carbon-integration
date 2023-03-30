@@ -11,26 +11,34 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhbiaocloud.carbon;
+package com.zhbiaocloud.carbon.crypto;
 
-import com.zhbiaocloud.carbon.model.type.EncodedValue;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
- * 枚举工具类，用于兼容不同系统之间的类型转换
+ * 摘要算法
  *
  * @author jun
  */
-public class EnumUtils {
+@Getter
+@RequiredArgsConstructor
+public enum HashAlg {
 
-  private EnumUtils() {
-  }
+  /**
+   * 数据摘要，用于校验数据完整性
+   */
+  SHA256("SHA-256"),
 
-  public static <T extends Enum<T> & EncodedValue> T fromValue(Class<T> enumType, String value) {
-    for (T enumValue : enumType.getEnumConstants()) {
-      if (enumValue.getValue().equals(value)) {
-        return enumValue;
-      }
-    }
-    return null;
-  }
+  SHA512("SHA-512"),
+
+  MD5("MD5"),
+
+  SM3("SM3"),
+
+  SHA3("SHA3-256"),
+
+  SHA3_512("SHA3-512");
+
+  private final String alg;
 }

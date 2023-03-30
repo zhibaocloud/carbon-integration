@@ -33,7 +33,7 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>
-      <artifactId>carbon-sdk</artifactId>
+      <artifactId>carbon-exchange</artifactId>
     </dependency>
   </dependencies>
 </project>

@@ -14,8 +14,8 @@
 package com.zhibaocloud.carbon.demo;
 
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
-import com.zhbiaocloud.carbon.crypto.CryptoMode;
 import com.zhbiaocloud.carbon.crypto.HashAlg;
+import com.zhbiaocloud.carbon.crypto.SymmetricCrypto;
 import java.util.UUID;
 
 /**
@@ -34,7 +34,7 @@ public class DemoConfiguration {
 
   public static CryptoConfiguration crypto() {
     CryptoConfiguration demo = new CryptoConfiguration();
-    demo.setEncryptMode(CryptoMode.AES_CBC_PKCS5PADDING);
+    demo.setSymmetricAlg(SymmetricCrypto.AES_CBC_PKCS5PADDING);
     demo.setSecret("4XgD98eGyMDejLvA");
     demo.setIv("ER2gveZeqYYfj6j8");
     demo.setDigestAlg(HashAlg.SHA256);

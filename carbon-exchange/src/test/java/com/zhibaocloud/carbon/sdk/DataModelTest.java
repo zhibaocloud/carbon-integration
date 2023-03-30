@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.EnumUtils;
+import com.zhbiaocloud.carbon.model.EnumUtils;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.common.Agent;
 import com.zhbiaocloud.carbon.model.common.Applicant;

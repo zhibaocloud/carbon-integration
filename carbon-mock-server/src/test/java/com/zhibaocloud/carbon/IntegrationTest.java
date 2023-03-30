@@ -19,9 +19,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.CarbonChannel;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
+import com.zhbiaocloud.carbon.crypto.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;

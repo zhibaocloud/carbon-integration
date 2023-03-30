@@ -19,9 +19,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+/**
+ * 服务端，支持数据推送
+ *
+ * @author jun
+ */
 @Configuration
 public class CarbonServerConfiguration {
-  
+
   @Bean
   public CarbonMapperFactory mapperFactory(Environment environment) {
     String[] profiles = environment.getActiveProfiles();

@@ -11,21 +11,26 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhbiaocloud.carbon.crypto;
+package com.zhbiaocloud.carbon.model;
+
+import com.zhbiaocloud.carbon.model.type.EncodedValue;
 
 /**
- * 加密算法
+ * 枚举工具类，用于兼容不同系统之间的类型转换
  *
  * @author jun
  */
-public enum CryptoAlg {
-  /**
-   * 使用 AES 进行加解密，默认128位
-   */
-  AES,
+public class EnumUtils {
 
-  /**
-   * 使用国密进行加解密
-   */
-  SM4
+  private EnumUtils() {
+  }
+
+  public static <T extends Enum<T> & EncodedValue> T fromValue(Class<T> enumType, String value) {
+    for (T enumValue : enumType.getEnumConstants()) {
+      if (enumValue.getValue().equals(value)) {
+        return enumValue;
+      }
+    }
+    return null;
+  }
 }

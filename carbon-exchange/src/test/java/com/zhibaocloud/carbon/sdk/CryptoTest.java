@@ -15,19 +15,20 @@ package com.zhibaocloud.carbon.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.CarbonChannel;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
+import com.zhbiaocloud.carbon.crypto.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
-import com.zhbiaocloud.carbon.crypto.CryptoMode;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
+import com.zhbiaocloud.carbon.crypto.HashAlg;
+import com.zhbiaocloud.carbon.crypto.SymmetricCrypto;
 import com.zhbiaocloud.carbon.model.Policy;
+import java.io.IOException;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -37,9 +38,9 @@ class CryptoTest {
 
   @Test
   void testSymmetricCrypto() {
-    for (CryptoMode mode : CryptoMode.values()) {
+    for (SymmetricCrypto mode : SymmetricCrypto.values()) {
       CryptoConfiguration config = new CryptoConfiguration();
-      config.setEncryptMode(mode);
+      config.setSymmetricAlg(mode);
       config.setSecret("g9wuZX5rQKqin9qA");
       config.setIv("dyRnJ6bVxWTdHd64");
 
@@ -59,7 +60,22 @@ class CryptoTest {
   }
 
   @Test
-  void testChannel() throws JsonProcessingException {
+  void testHash() {
+    for (HashAlg alg : HashAlg.values()) {
+      CryptoConfiguration config = new CryptoConfiguration();
+      config.setDigestAlg(alg);
+      config.setSecret("g9wuZX5rQKqin9qA");
+      config.setIv("dyRnJ6bVxWTdHd64");
+      config.setDigestSalt("dyRnJ6bVxWTdHd64");
+      Crypto crypto = factory.create(config);
+      String hash = crypto.digest("hello world");
+      System.out.println(alg.getAlg() + ": " + hash);
+      assertThat(hash).isNotNull();
+    }
+  }
+
+  @Test
+  void testChannel() throws IOException {
     CryptoConfiguration config = new CryptoConfiguration();
     config.setSecret("g9wuZX5rQKqin9qA");
     config.setIv("dyRnJ6bVxWTdHd64");

@@ -38,13 +38,13 @@ class CarbonCrypto implements Crypto {
   @SneakyThrows
   CarbonCrypto(CryptoConfiguration config) {
     byte[] secret = config.getSecret().getBytes();
-    CryptoMode mode = config.getEncryptMode();
-    SecretKeySpec keySpec = new SecretKeySpec(secret, mode.getAlgorithm());
+    SymmetricCrypto symAlg = config.getSymmetricAlg();
+    SecretKeySpec keySpec = new SecretKeySpec(secret, symAlg.getAlgorithm());
 
-    encryptCipher = Cipher.getInstance(mode.getTransformation());
-    decryptCipher = Cipher.getInstance(mode.getTransformation());
+    encryptCipher = Cipher.getInstance(symAlg.getTransformation());
+    decryptCipher = Cipher.getInstance(symAlg.getTransformation());
 
-    if (mode.isIvRequired()) {
+    if (symAlg.isIvRequired()) {
       String iv = config.getIv();
       IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes());
       encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
@@ -54,7 +54,7 @@ class CarbonCrypto implements Crypto {
       decryptCipher.init(Cipher.DECRYPT_MODE, keySpec);
     }
 
-    digester = MessageDigest.getInstance(config.getDigestAlg().name());
+    digester = MessageDigest.getInstance(config.getDigestAlg().getAlg());
     salt = config.getDigestSalt();
   }
 

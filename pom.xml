@@ -34,7 +34,7 @@
   </scm>
 
   <modules>
-    <module>carbon-sdk</module>
+    <module>carbon-exchange</module>
     <module>carbon-client-sdk</module>
     <module>carbon-client-spring-boot-starter</module>
     <module>carbon-client-cli</module>
@@ -128,7 +128,7 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud.carbon</groupId>
-        <artifactId>carbon-sdk</artifactId>
+        <artifactId>carbon-exchange</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
