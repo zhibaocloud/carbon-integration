@@ -32,9 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DataReceiverController {
 
   @PostMapping("/v2/callbacks/verify")
-  @Operation(operationId = "verifyEncryption", summary = "加密验证", description = "用于验证加密方式是否正确")
-  public ResponseEntity<String> verify() {
-    return ResponseEntity.ok("ok");
+  @Operation(operationId = "verifyEncryption", summary = "加密验证", description = "用于验证加密方式是否正确，以及客户端、服务端接口是否兼容")
+  public ResponseEntity<EncryptedResponse> verify(@Valid @RequestBody EncryptedRequest request) {
+    EncryptedResponse response = new EncryptedResponse();
+    response.setRequestId(request.getRequestId());
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping("/v2/callbacks/a/{id}/{type}")
@@ -46,11 +48,8 @@ public class DataReceiverController {
       @PathVariable(name = "type") String type,
       @Valid @RequestBody EncryptedRequest request
   ) {
-    EncryptedResponse response = new EncryptedResponse(
-        request.getRequestId(),
-        "",
-        ""
-    );
+    EncryptedResponse response = new EncryptedResponse();
+    response.setRequestId(request.getRequestId());
     return ResponseEntity.ok(response);
   }
 
@@ -63,11 +62,8 @@ public class DataReceiverController {
       @PathVariable(name = "type") String type,
       @Valid @RequestBody EncryptedRequest request
   ) {
-    EncryptedResponse response = new EncryptedResponse(
-        request.getRequestId(),
-        "",
-        ""
-    );
+    EncryptedResponse response = new EncryptedResponse();
+    response.setRequestId(request.getRequestId());
     return ResponseEntity.ok(response);
   }
 }

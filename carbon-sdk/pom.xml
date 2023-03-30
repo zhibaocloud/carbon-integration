@@ -24,8 +24,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcprov-jdk15on</artifactId>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
     </dependency>
     <dependency>
       <groupId>jakarta.validation</groupId>
@@ -40,8 +40,8 @@
       <artifactId>jackson-datatype-jsr310</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.swagger.core.v3</groupId>
-      <artifactId>swagger-annotations</artifactId>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>

@@ -4,17 +4,18 @@
 
 package com.zhbiaocloud.carbon.model;
 
+import com.zhbiaocloud.carbon.Version;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 加密后的报文请求
  *
  * @author jun
  */
-@Getter
-@AllArgsConstructor
+@Data
 public class EncryptedRequest {
 
   /**
@@ -25,4 +26,6 @@ public class EncryptedRequest {
   private String sign;
 
   private String payload;
+
+  private Version version = Version.CURRENT;
 }
