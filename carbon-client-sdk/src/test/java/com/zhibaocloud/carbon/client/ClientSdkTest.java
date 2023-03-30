@@ -15,9 +15,11 @@ package com.zhibaocloud.carbon.client;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.CarbonChannel;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
@@ -25,27 +27,22 @@ import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
+import com.zhbiaocloud.carbon.model.Receipt;
+import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class ClientSdkTest {
 
   private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
-
-  private String loadResource(String name) throws IOException {
-    try (InputStream stream = ClientSdkTest.class.getClassLoader().getResourceAsStream(name)) {
-      return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-    }
-  }
 
   private CloseableHttpClient mockHttpClient(String payload, int statusCode) throws IOException {
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
@@ -80,7 +77,10 @@ class ClientSdkTest {
 
     CloseableHttpClient httpClient = mockHttpClient(payload, 200);
     CarbonClient client = new CarbonClientImpl(mapper, httpClient, crypto, option);
-    Policy policy = new Policy();
-    client.publish(policy);
+    client.publish(JMockData.mock(Policy.class));
+    client.publish(JMockData.mock(Receipt.class));
+    client.publish(JMockData.mock(RtnCall.class));
+
+    Mockito.verify(httpClient, times(3)).execute(any());
   }
 }

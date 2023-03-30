@@ -16,8 +16,8 @@ package com.zhibaocloud.carbon.service;
 import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import com.zhibaocloud.carbon.domain.Agreement;
 import com.zhibaocloud.carbon.repository.AgreementRepository;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
  *
  * @author jun
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SeedService implements ApplicationListener<ApplicationStartedEvent> {
@@ -36,9 +37,11 @@ public class SeedService implements ApplicationListener<ApplicationStartedEvent>
   @Override
   public void onApplicationEvent(ApplicationStartedEvent event) {
     Agreement agreement = new Agreement();
-    agreement.setId(UUID.fromString(DemoConfiguration.appId()));
+    agreement.setId(DemoConfiguration.appId());
     agreement.setSupplier("XXXX保险公司");
     agreement.setAgency("XXXX保险代理");
     repo.saveAndFlush(agreement);
+
+    log.info("Seed data imported.");
   }
 }

@@ -13,22 +13,22 @@
 
 package com.zhbiaocloud.carbon.model;
 
-import com.zhbiaocloud.carbon.model.type.PayIntv;
-import com.zhbiaocloud.carbon.model.type.PayType;
-import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import com.zhbiaocloud.carbon.model.common.Agent;
 import com.zhbiaocloud.carbon.model.common.Applicant;
 import com.zhbiaocloud.carbon.model.common.Beneficiary;
 import com.zhbiaocloud.carbon.model.common.Insured;
 import com.zhbiaocloud.carbon.model.common.Risk;
+import com.zhbiaocloud.carbon.model.type.PayIntv;
+import com.zhbiaocloud.carbon.model.type.PayType;
+import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**

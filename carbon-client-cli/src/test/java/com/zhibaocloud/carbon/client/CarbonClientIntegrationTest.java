@@ -13,15 +13,26 @@
 
 package com.zhibaocloud.carbon.client;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.util.MockUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
 @SpringBootTest
 @Import(MockHttpConfiguration.class)
 class CarbonClientIntegrationTest {
 
+  @Autowired
+  private ApplicationContext ctx;
+
   @Test
   void loadContext() {
+    CloseableHttpClient httpClient = ctx.getBean(CloseableHttpClient.class);
+    assertThat(MockUtil.isMock(httpClient)).isTrue();
   }
 }

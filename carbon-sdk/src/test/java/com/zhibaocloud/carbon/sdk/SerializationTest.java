@@ -16,6 +16,7 @@ package com.zhibaocloud.carbon.sdk;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
@@ -154,5 +155,24 @@ class SerializationTest {
     assertThat(single.getUnit()).isEqualTo(PaymentPeriodUnit.S);
 
     assertThat(single).hasToString("S");
+  }
+
+  /**
+   * 时间格式精度损失
+   */
+  @Test
+  void testDateTimeSerialization() throws IOException {
+    LocalDateTime timestamp = LocalDateTime.of(2023, 3, 30, 23, 59, 59, 999);
+
+    Policy policy = new Policy();
+    policy.setPayTime(timestamp);
+
+    String json = mapper.writeValueAsString(policy);
+    Policy restored = mapper.readValue(json, Policy.class);
+    LocalDateTime restoredTime = restored.getPayTime();
+
+    assertThat(restoredTime)
+        .isEqualTo(LocalDateTime.of(2023, 3, 30, 23, 59, 59, 0))
+        .isNotEqualTo(timestamp);
   }
 }
