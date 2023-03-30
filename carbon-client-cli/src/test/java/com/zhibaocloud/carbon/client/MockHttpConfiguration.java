@@ -14,7 +14,7 @@ import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
-import com.zhbiaocloud.carbon.model.EncryptedResponse;
+import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import java.io.IOException;
 import java.net.URI;

@@ -1,0 +1,69 @@
+/*
+ * Copyright (c) 2018-2023. 成都市维斯凡科技有限公司 All rights reserved.
+ */
+
+package com.zhibaocloud.carbon;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jsonzou.jmockdata.JMockData;
+import com.zhbiaocloud.carbon.CarbonChannel;
+import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.CarbonResponse;
+import com.zhbiaocloud.carbon.crypto.Crypto;
+import com.zhbiaocloud.carbon.crypto.CryptoFactory;
+import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
+import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
+import com.zhbiaocloud.carbon.model.Policy;
+import com.zhbiaocloud.carbon.model.Receipt;
+import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhibaocloud.carbon.demo.DemoConfiguration;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+@AutoConfigureMockMvc
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+    classes = CarbonMockServerApplication.class
+)
+class IntegrationTest {
+
+  @Autowired
+  private MockMvc mvc;
+
+  @Test
+  void testSyncApi() throws Exception {
+    runDataSync("underwrite", JMockData.mock(Policy.class));
+    runDataSync("receipt", JMockData.mock(Receipt.class));
+    runDataSync("rtncall", JMockData.mock(RtnCall.class));
+  }
+
+  private void runDataSync(String type, Object request) throws Exception {
+    ObjectMapper mapper = new CarbonMapperFactory(false).create();
+    Crypto crypto = new CryptoFactory().create(DemoConfiguration.crypto());
+
+    String appId = DemoConfiguration.appId();
+    CarbonChannel channel = new CarbonChannel(mapper, crypto);
+
+    EncryptedRequest encryptedRequest = channel.encodeRequest(request);
+    String payload = mapper.writeValueAsString(encryptedRequest);
+
+    MvcResult result = mvc.perform(post("/v2/callbacks/a/" + appId + "/" + type)
+            .content(payload)
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andReturn();
+    String responseBody = result.getResponse().getContentAsString();
+    EncryptedResponse wrapper = mapper.readValue(responseBody, EncryptedResponse.class);
+    CarbonResponse response = channel.decodeResponse(wrapper, CarbonResponse.class);
+    assertThat(response.isSuccess()).isTrue();
+  }
+}

@@ -6,8 +6,8 @@ package com.zhbiaocloud.carbon;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.crypto.Crypto;
-import com.zhbiaocloud.carbon.model.EncryptedRequest;
-import com.zhbiaocloud.carbon.model.EncryptedResponse;
+import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
+import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

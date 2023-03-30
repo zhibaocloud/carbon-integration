@@ -4,8 +4,8 @@
 
 package com.zhibaocloud.carbon.controller;
 
-import com.zhbiaocloud.carbon.model.EncryptedRequest;
-import com.zhbiaocloud.carbon.model.EncryptedResponse;
+import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
+import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhibaocloud.carbon.domain.Agreement;
 import com.zhibaocloud.carbon.domain.SaaSAgreement;
 import com.zhibaocloud.carbon.service.DataReceiverService;

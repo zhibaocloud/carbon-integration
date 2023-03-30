@@ -2,22 +2,22 @@
  * Copyright (c) 2018-2023. 成都市维斯凡科技有限公司 All rights reserved.
  */
 
-package com.zhbiaocloud.carbon.model;
+package com.zhbiaocloud.carbon.crypto;
 
 import com.zhbiaocloud.carbon.Version;
 import java.util.UUID;
 import lombok.Data;
 
 /**
- * 加密后的报文请求
+ * 加密后的报文响应
  *
  * @author jun
  */
 @Data
-public class EncryptedRequest {
+public class EncryptedResponse {
 
   /**
-   * 用于对每个请求进行唯一标识。该标识会在响应报文中回复
+   * 发送请求时的requestId，原样返回
    */
   private UUID requestId;
 

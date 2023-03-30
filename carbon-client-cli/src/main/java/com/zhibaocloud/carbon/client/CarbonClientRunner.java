@@ -6,6 +6,8 @@ package com.zhibaocloud.carbon.client;
 
 import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.model.Policy;
+import com.zhbiaocloud.carbon.model.Receipt;
+import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import java.io.IOException;
 import java.net.URI;
@@ -36,5 +38,11 @@ public class CarbonClientRunner implements ApplicationRunner {
     CarbonClient client = factory.create(option);
     Policy policy = JMockData.mock(Policy.class);
     client.publish(policy);
+
+    Receipt receipt = JMockData.mock(Receipt.class);
+    client.publish(receipt);
+
+    RtnCall rtnCall = JMockData.mock(RtnCall.class);
+    client.publish(rtnCall);
   }
 }
