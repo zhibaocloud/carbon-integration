@@ -29,22 +29,12 @@ public class ClientOption {
   private String appId;
 
   /**
-   * 对称加密配置
-   */
-  private CryptoConfiguration crypto = new CryptoConfiguration();
-
-  /**
-   * 签名摘要时使用的加盐，避免相同数据的签名摘要相同
-   */
-  private String salt;
-
-  /**
-   * 签名算法
-   */
-  private String signAlg = "SHA256";
-
-  /**
    * 接入方式
    */
   private ClientMode mode = ClientMode.AGREEMENT;
+
+  /**
+   * 对称加密配置
+   */
+  private CryptoConfiguration crypto = new CryptoConfiguration();
 }

@@ -19,7 +19,7 @@ public class CryptoConfiguration {
   /**
    * 加密算法，与合作方协商后确定
    */
-  private CryptoMode encryptMode = CryptoMode.AES_CBC_PKCS5Padding;
+  private CryptoMode encryptMode = CryptoMode.AES_CBC_PKCS5PADDING;
 
   /**
    * 使用CBC时的需要额外提供IV向量
@@ -44,7 +44,7 @@ public class CryptoConfiguration {
   private HashAlg digestAlg = HashAlg.SHA256;
 
   /**
-   * 散列加盐，避免Hash碰撞
+   * 摘要时使用的加盐，避免相同数据的签名摘要相同，避免Hash碰撞
    */
   private String digestSalt;
 }

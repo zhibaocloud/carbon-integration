@@ -9,8 +9,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhbiaocloud.carbon.CarbonChannel;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.CarbonResponse;
+import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
+import com.zhbiaocloud.carbon.model.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import java.io.IOException;
@@ -27,7 +31,7 @@ import org.junit.jupiter.api.Test;
 
 class ClientSdkTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory().create();
+  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
 
   private String loadResource(String name) throws IOException {
     try (InputStream stream = ClientSdkTest.class.getClassLoader().getResourceAsStream(name)) {
@@ -35,16 +39,14 @@ class ClientSdkTest {
     }
   }
 
-  @SneakyThrows
-  private CloseableHttpClient mockResponse(String resource) {
+  private CloseableHttpClient mockHttpClient(String payload, int statusCode) throws IOException {
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
     CloseableHttpResponse response = mock(CloseableHttpResponse.class);
     StatusLine sl = mock(StatusLine.class);
-    String content = loadResource(resource);
     when(httpClient.execute(any())).thenReturn(response);
-    when(sl.getStatusCode()).thenReturn(200);
+    when(sl.getStatusCode()).thenReturn(statusCode);
     when(response.getStatusLine()).thenReturn(sl);
-    when(response.getEntity()).thenReturn(new StringEntity(content, "UTF-8"));
+    when(response.getEntity()).thenReturn(new StringEntity(payload, "UTF-8"));
     return httpClient;
   }
 
@@ -55,12 +57,22 @@ class ClientSdkTest {
     option.setAppId(UUID.randomUUID().toString());
     option.getCrypto().setSecret("wD2Neym2V3ZfpWzR");
     option.getCrypto().setIv("GzZz3LBzALvC6s9i");
-    option.setSalt("dZJjh7bMU57zVtSc");
+    option.getCrypto().setDigestSalt("dZJjh7bMU57zVtSc");
 
     CryptoFactory factory = new CryptoFactory();
-    CloseableHttpClient httpClient = mockResponse("encrypted-policy-sync-response.json");
-    CarbonClient client = new CarbonClientImpl(option, mapper, httpClient, factory);
+    Crypto crypto = factory.create(option.getCrypto());
+    CarbonChannel channel = new CarbonChannel(mapper, crypto);
+
+    CarbonResponse message = new CarbonResponse();
+    message.setSuccess(true);
+    message.setMessage("OK");
+
+    EncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
+    String payload = mapper.writeValueAsString(encryptedResponse);
+
+    CloseableHttpClient httpClient = mockHttpClient(payload, 200);
+    CarbonClient client = new CarbonClientImpl(mapper, httpClient, crypto, option);
     Policy policy = new Policy();
-//    client.publish(policy);
+    client.publish(policy);
   }
 }

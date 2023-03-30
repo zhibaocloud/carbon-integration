@@ -5,6 +5,7 @@
 package com.zhibaocloud.carbon.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,7 @@ public class CarbonClientFactory {
    * @return 客户端
    */
   public CarbonClient create(ClientOption option) {
-    return new CarbonClientImpl(option, mapper, client, factory);
+    Crypto crypto = factory.create(option.getCrypto());
+    return new CarbonClientImpl(mapper, client, crypto, option);
   }
 }

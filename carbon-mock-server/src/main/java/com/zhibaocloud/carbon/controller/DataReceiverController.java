@@ -7,13 +7,15 @@ package com.zhibaocloud.carbon.controller;
 import com.zhbiaocloud.carbon.model.EncryptedRequest;
 import com.zhbiaocloud.carbon.model.EncryptedResponse;
 import com.zhibaocloud.carbon.domain.Agreement;
-import com.zhibaocloud.carbon.domain.SaasAgreement;
+import com.zhibaocloud.carbon.domain.SaaSAgreement;
+import com.zhibaocloud.carbon.service.DataReceiverService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jun
  */
 @RestController
+@RequiredArgsConstructor
 @Tag(name = "数据推送接口")
 public class DataReceiverController {
+
+  private final DataReceiverService svc;
 
   @PostMapping("/v2/callbacks/verify")
   @Operation(operationId = "verifyEncryption", summary = "加密验证", description = "用于验证加密方式是否正确，以及客户端、服务端接口是否兼容")
@@ -48,8 +53,7 @@ public class DataReceiverController {
       @PathVariable(name = "type") String type,
       @Valid @RequestBody EncryptedRequest request
   ) {
-    EncryptedResponse response = new EncryptedResponse();
-    response.setRequestId(request.getRequestId());
+    EncryptedResponse response = svc.process(agreement, request, type);
     return ResponseEntity.ok(response);
   }
 
@@ -58,12 +62,11 @@ public class DataReceiverController {
   @ResponseStatus(HttpStatus.OK)
   @Parameter(in = ParameterIn.PATH, name = "id", schema = @Schema(type = "string", format = "uuid"))
   public ResponseEntity<EncryptedResponse> onBatchCallback(
-      @Parameter(hidden = true) @PathVariable("id") SaasAgreement saas,
+      @Parameter(hidden = true) @PathVariable("id") SaaSAgreement saas,
       @PathVariable(name = "type") String type,
       @Valid @RequestBody EncryptedRequest request
   ) {
-    EncryptedResponse response = new EncryptedResponse();
-    response.setRequestId(request.getRequestId());
+    EncryptedResponse response = svc.process(saas, request, type);
     return ResponseEntity.ok(response);
   }
 }

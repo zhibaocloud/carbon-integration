@@ -19,19 +19,25 @@ public enum CryptoMode {
   /**
    * 对称加密算法
    */
-  AES_CBC_PKCS5Padding("AES/CBC/PKCS5Padding", "AES"),
+  AES_CBC_PKCS5PADDING("AES", "CBC", "PKCS5Padding"),
 
-  AES_ECB_PKCS5Padding("AES/ECB/PKCS5Padding", "AES"),
+  AES_ECB_PKCS5PADDING("AES", "ECB", "PKCS5Padding"),
 
-  SM4_ECB_PKCS5Padding("SM4/ECB/PKCS5Padding", "SM4"),
+  SM4_ECB_PKCS5PADDING("SM4", "ECB", "PKCS5Padding"),
 
-  SM4_ECB_NoPadding("SM4/ECB/NoPadding", "SM4"),
-
-  SM4_CBC_PKCS5Padding("SM4/CBC/PKCS5Padding", "SM4"),
-
-  SM4_CBC_NoPadding("SM4/CBC/NoPadding", "SM4");
+  SM4_CBC_PKCS5PADDING("SM4", "CBC", "PKCS5Padding");
 
   private final String algorithm;
+  
+  private final String mode;
 
-  private final String category;
+  private final String padding;
+
+  public boolean isIvRequired() {
+    return "CBC".equals(this.mode);
+  }
+
+  public String getTransformation() {
+    return algorithm + "/" + mode + "/" + padding;
+  }
 }

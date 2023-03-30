@@ -39,7 +39,7 @@ import org.junit.jupiter.api.Test;
 
 class DataModelTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory().create();
+  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
 
   @Test
   void testEnumTools() {

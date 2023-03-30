@@ -15,7 +15,8 @@
 
   <artifactId>carbon-mock-server</artifactId>
   <name>Carbon Mock Server</name>
-  <description>Mock 服务，担当数据推送的接收方，验证数据的有效性，以及演示会如何接收推送数据</description>
+  <description>Mock 服务，担当数据推送的接收方，验证数据的有效性，以及演示会如何接收推送数据
+  </description>
 
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
@@ -30,6 +31,10 @@
     <dependency>
       <groupId>com.zhibaocloud.carbon</groupId>
       <artifactId>carbon-sdk</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-demo-secret</artifactId>
     </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
@@ -51,6 +56,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud.carbon</groupId>
+      <artifactId>carbon-server-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>

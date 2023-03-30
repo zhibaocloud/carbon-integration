@@ -4,11 +4,12 @@
 
 package com.zhibaocloud.carbon.client;
 
+import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.model.Policy;
-import com.zhbiaocloud.carbon.model.Receipt;
-import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import java.io.IOException;
-import java.util.UUID;
+import java.net.URI;
+import java.net.URISyntaxException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -26,16 +27,14 @@ public class CarbonClientRunner implements ApplicationRunner {
   private final CarbonClientFactory factory;
 
   @Override
-  public void run(ApplicationArguments args) throws IOException {
-    String appId = UUID.randomUUID().toString();
-    String secret = "";
-    String salt = "";
+  public void run(ApplicationArguments args) throws IOException, URISyntaxException {
     ClientOption option = new ClientOption();
+    option.setEndpoint(new URI("http://localhost:8080"));
+    option.setAppId(DemoConfiguration.appId());
+    option.setCrypto(DemoConfiguration.crypto());
 
     CarbonClient client = factory.create(option);
-
-    client.publish(new Policy());
-    client.publish(new Receipt());
-    client.publish(new RtnCall());
+    Policy policy = JMockData.mock(Policy.class);
+    client.publish(policy);
   }
 }

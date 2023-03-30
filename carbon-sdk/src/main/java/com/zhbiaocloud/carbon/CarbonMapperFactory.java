@@ -23,23 +23,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 与服务端通信的时的序列化规则
  *
  * @author jun
  */
+@RequiredArgsConstructor
 public class CarbonMapperFactory {
 
   private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
   private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
   private static final DateTimeFormatter DATETIME_PTN = ofPattern("yyyy-MM-dd HH:mm:ss");
 
-  public ObjectMapper create() {
-    return create(false);
-  }
+  private final boolean isProd;
 
-  public ObjectMapper create(boolean isProd) {
+  public ObjectMapper create() {
     return JsonMapper.builder()
         .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)
         .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
@@ -50,10 +50,12 @@ public class CarbonMapperFactory {
         .registerModule(
             new JavaTimeModule()
                 .addSerializer(LocalDate.class, new LocalDateSerializer(DATE_PTN))
-                .addSerializer(LocalTime.class, new LocalTimeSerializer(TIME_PTN))
-                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DATETIME_PTN))
                 .addDeserializer(LocalDate.class, new LocalDateDeserializer(DATE_PTN))
+
+                .addSerializer(LocalTime.class, new LocalTimeSerializer(TIME_PTN))
                 .addDeserializer(LocalTime.class, new LocalTimeDeserializer(TIME_PTN))
+
+                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DATETIME_PTN))
                 .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATETIME_PTN))
         )
         .setSerializationInclusion(Include.NON_NULL)
