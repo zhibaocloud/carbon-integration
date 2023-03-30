@@ -61,19 +61,20 @@ public class DataReceiverService {
     CarbonChannel channel = new CarbonChannel(mapper, crypto);
 
     switch (type) {
-      case "underwrite" -> {
+      case "underwrite":
         Policy policy = channel.decodeRequest(request, Policy.class);
         publisher.publishEvent(policy);
-      }
-      case "receipt" -> {
+        break;
+      case "receipt":
         Receipt receipt = channel.decodeRequest(request, Receipt.class);
         publisher.publishEvent(receipt);
-      }
-      case "rtncall" -> {
+        break;
+      case "rtncall":
         RtnCall rtnCall = channel.decodeRequest(request, RtnCall.class);
         publisher.publishEvent(rtnCall);
-      }
-      default -> throw new IllegalArgumentException("不支持的类型：" + type);
+        break;
+      default:
+        throw new IllegalArgumentException("不支持的类型：" + type);
     }
     CarbonResponse response = new CarbonResponse();
     response.setSuccess(true);

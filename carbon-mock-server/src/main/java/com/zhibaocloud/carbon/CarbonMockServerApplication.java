@@ -16,6 +16,11 @@ package com.zhibaocloud.carbon;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Mock 服务，用于接收数据推送
+ *
+ * @author jun
+ */
 @SpringBootApplication
 public class CarbonMockServerApplication {
 

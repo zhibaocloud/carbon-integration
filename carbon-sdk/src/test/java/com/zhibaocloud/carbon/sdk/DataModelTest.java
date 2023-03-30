@@ -18,11 +18,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.EnumUtils;
+import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.common.Agent;
 import com.zhbiaocloud.carbon.model.common.Applicant;
 import com.zhbiaocloud.carbon.model.common.Beneficiary;
 import com.zhbiaocloud.carbon.model.common.Insured;
-import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.common.Risk;
 import com.zhbiaocloud.carbon.model.type.BnfGrade;
 import com.zhbiaocloud.carbon.model.type.BnfType;
@@ -43,7 +43,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 class DataModelTest {
@@ -181,9 +181,9 @@ class DataModelTest {
 
     policy.setAgent(this.createAgent());
     policy.setApplicant(this.createAppnt());
-    policy.setInsureds(List.of(this.createInsured()));
-    policy.setRisks(List.of(this.createRisk()));
-    policy.setBnfs(List.of(this.createBnf()));
+    policy.setInsureds(Collections.singletonList(this.createInsured()));
+    policy.setRisks(Collections.singletonList(this.createRisk()));
+    policy.setBnfs(Collections.singletonList(this.createBnf()));
     return policy;
   }
 

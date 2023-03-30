@@ -15,12 +15,12 @@ package com.zhibaocloud.carbon.domain;
 
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.demo.DemoConfiguration;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,9 +35,12 @@ import lombok.Setter;
 @Table(name = "agreements")
 public class Agreement {
 
+  /**
+   * Spring Boot 3, Hibernate 6 中可以直接使用 UUID 作为主键，不再需要 Converter
+   */
   @Id
   @Column(name = "id")
-  private UUID id = UUID.randomUUID();
+  private String id = UUID.randomUUID().toString();
 
   /**
    * 合作协议名称

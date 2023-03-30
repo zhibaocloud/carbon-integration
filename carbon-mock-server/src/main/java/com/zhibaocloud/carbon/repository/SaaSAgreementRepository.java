@@ -14,7 +14,6 @@
 package com.zhibaocloud.carbon.repository;
 
 import com.zhibaocloud.carbon.domain.SaaSAgreement;
-import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +23,6 @@ import org.springframework.stereotype.Repository;
  * @author jun
  */
 @Repository
-public interface SaaSAgreementRepository extends JpaRepository<SaaSAgreement, UUID> {
+public interface SaaSAgreementRepository extends JpaRepository<SaaSAgreement, String> {
 
 }
