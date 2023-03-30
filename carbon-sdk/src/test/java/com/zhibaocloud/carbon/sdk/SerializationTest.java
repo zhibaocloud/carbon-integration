@@ -11,6 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.model.Policy;
+import com.zhbiaocloud.carbon.model.Risk;
+import com.zhbiaocloud.carbon.model.type.InsuredPeriod;
+import com.zhbiaocloud.carbon.model.type.InsuredPeriodUnit;
+import com.zhbiaocloud.carbon.model.type.PaymentPeriod;
+import com.zhbiaocloud.carbon.model.type.PaymentPeriodUnit;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -86,5 +91,58 @@ class SerializationTest {
 
     assertThatThrownBy(() -> devMapper.readValue("{\"a\":1}", Policy.class))
         .isInstanceOf(UnrecognizedPropertyException.class);
+  }
+
+  @Test
+  void testInsuredPeriod() throws IOException {
+    InsuredPeriod period = new InsuredPeriod("1Y");
+    assertThat(period.getValue()).isEqualTo(1);
+    assertThat(period.getUnit()).isEqualTo(InsuredPeriodUnit.Y);
+    assertThat(period).hasToString("1Y");
+
+    InsuredPeriod newPeriod = new InsuredPeriod(1, InsuredPeriodUnit.Y);
+    assertThat(newPeriod).isEqualTo(period);
+
+    InsuredPeriod period1 = InsuredPeriod.of("N");
+    assertThat(period1.getValue()).isZero();
+    assertThat(period1.getUnit()).isEqualTo(InsuredPeriodUnit.N);
+    assertThat(period1).hasToString("N");
+
+    InsuredPeriod period2 = InsuredPeriod.of("O");
+    assertThat(period2.getValue()).isEqualTo(106);
+    assertThat(period2.getUnit()).isEqualTo(InsuredPeriodUnit.O);
+
+    InsuredPeriod ip = InsuredPeriod.of("10Y");
+    Risk source = new Risk();
+    source.setInsuredPeriod(ip);
+
+    String json = mapper.writeValueAsString(source);
+    assertThat(json).isEqualTo("{\"insuredPeriod\":\"10Y\"}");
+    InsuredPeriod restored = mapper.readValue(json, Risk.class).getInsuredPeriod();
+    assertThat(ip).isEqualTo(restored);
+    assertThat(restored.getValue()).isEqualTo(10);
+  }
+
+  @Test
+  void testPaymentPeriod() throws IOException {
+    PaymentPeriod period = PaymentPeriod.of("1Y");
+    assertThat(period.getValue()).isEqualTo(1);
+    assertThat(period.getUnit()).isEqualTo(PaymentPeriodUnit.Y);
+    assertThat(period).hasToString("1Y");
+
+    PaymentPeriod newPeriod = new PaymentPeriod(1, PaymentPeriodUnit.Y);
+    assertThat(newPeriod).isEqualTo(period);
+
+    Risk risk = new Risk();
+    risk.setPaymentPeriod(period);
+    String json = mapper.writeValueAsString(risk);
+    assertThat(json).isEqualTo("{\"paymentPeriod\":\"1Y\"}");
+    PaymentPeriod restored = mapper.readValue(json, Risk.class).getPaymentPeriod();
+    assertThat(period).isEqualTo(restored);
+
+    PaymentPeriod single = PaymentPeriod.SINGLE;
+    assertThat(single.getUnit()).isEqualTo(PaymentPeriodUnit.S);
+
+    assertThat(single).hasToString("S");
   }
 }

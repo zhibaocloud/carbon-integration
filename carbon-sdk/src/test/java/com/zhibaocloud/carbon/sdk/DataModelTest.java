@@ -20,11 +20,13 @@ import com.zhbiaocloud.carbon.model.type.BnfType;
 import com.zhbiaocloud.carbon.model.type.DegreeType;
 import com.zhbiaocloud.carbon.model.type.GenderType;
 import com.zhbiaocloud.carbon.model.type.IdType;
+import com.zhbiaocloud.carbon.model.type.InsuredPeriod;
 import com.zhbiaocloud.carbon.model.type.MainRiskFlag;
 import com.zhbiaocloud.carbon.model.type.MarriageType;
 import com.zhbiaocloud.carbon.model.type.NationType;
 import com.zhbiaocloud.carbon.model.type.NationalityType;
 import com.zhbiaocloud.carbon.model.type.PayIntv;
+import com.zhbiaocloud.carbon.model.type.PaymentPeriod;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import com.zhbiaocloud.carbon.model.type.RelationType;
 import java.io.IOException;
@@ -96,7 +98,8 @@ class DataModelTest {
     risk.setPayTime(LocalDateTime.of(2023, 3, 29, 0, 0, 0));
     risk.setEffectiveTime(LocalDateTime.of(2023, 3, 30, 0, 0, 0));
     risk.setExpirationTime(LocalDateTime.of(2033, 3, 29, 23, 59, 59));
-
+    risk.setPaymentPeriod(PaymentPeriod.of("5Y"));
+    risk.setInsuredPeriod(InsuredPeriod.LIFE_LONG);
     return risk;
   }
 
