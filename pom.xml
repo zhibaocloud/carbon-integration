@@ -62,7 +62,6 @@
     <bc.version>1.70</bc.version>
     <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
     <checkstyle.latest.version>9.2</checkstyle.latest.version>
-    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/carbon-coverage/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 
   <distributionManagement>
