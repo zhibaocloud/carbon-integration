@@ -17,7 +17,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.zhibaocloud.carbon</groupId>
+    <groupId>com.zhibaocloud</groupId>
     <artifactId>carbon-integration</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
@@ -38,11 +38,11 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.zhibaocloud.carbon</groupId>
+      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-exchange</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.zhibaocloud.carbon</groupId>
+      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-demo-secret</artifactId>
     </dependency>
     <dependency>
@@ -67,7 +67,7 @@
       <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.zhibaocloud.carbon</groupId>
+      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-server-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
