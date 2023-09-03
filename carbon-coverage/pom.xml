@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.zhibaocloud</groupId>
     <artifactId>carbon-integration</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
   </parent>
 
   <artifactId>carbon-coverage</artifactId>
