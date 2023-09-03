@@ -14,6 +14,7 @@
 package com.zhbiaocloud.carbon.crypto;
 
 import com.zhbiaocloud.carbon.Version;
+import com.zhbiaocloud.carbon.model.MessageType;
 import java.util.UUID;
 import lombok.Data;
 
@@ -25,6 +26,8 @@ import lombok.Data;
 @Data
 public class EncryptedRequest {
 
+  private Version version = Version.CURRENT;
+
   /**
    * 用于对每个请求进行唯一标识。该标识会在响应报文中回复
    */
@@ -34,5 +37,5 @@ public class EncryptedRequest {
 
   private String payload;
 
-  private Version version = Version.CURRENT;
+  private MessageType type;
 }

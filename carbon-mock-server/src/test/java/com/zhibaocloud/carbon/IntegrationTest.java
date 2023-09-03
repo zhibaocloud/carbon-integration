@@ -26,9 +26,11 @@ import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
+import com.zhbiaocloud.carbon.model.MessageType;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhbiaocloud.carbon.model.StatusChanged;
 import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,22 +52,23 @@ class IntegrationTest {
 
   @Test
   void testSyncApi() throws Exception {
-    runDataSync("underwrite", JMockData.mock(Policy.class));
-    runDataSync("receipt", JMockData.mock(Receipt.class));
-    runDataSync("rtncall", JMockData.mock(RtnCall.class));
+    runDataSync(MessageType.UNDERWRITE, JMockData.mock(Policy.class));
+    runDataSync(MessageType.RECEIPT, JMockData.mock(Receipt.class));
+    runDataSync(MessageType.RTN_CALL, JMockData.mock(RtnCall.class));
+    runDataSync(MessageType.STATUS, JMockData.mock(StatusChanged.class));
   }
 
-  private void runDataSync(String type, Object request) throws Exception {
+  private void runDataSync(MessageType type, Object request) throws Exception {
     ObjectMapper mapper = new CarbonMapperFactory(false).create();
     Crypto crypto = new CryptoFactory().create(DemoConfiguration.crypto());
 
     String appId = DemoConfiguration.appId();
     CarbonChannel channel = new CarbonChannel(mapper, crypto);
 
-    EncryptedRequest encryptedRequest = channel.encodeRequest(request);
+    EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
     String payload = mapper.writeValueAsString(encryptedRequest);
 
-    MvcResult result = mvc.perform(post("/v2/callbacks/a/" + appId + "/" + type)
+    MvcResult result = mvc.perform(post("/v2/callbacks/a/" + appId)
             .content(payload)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())

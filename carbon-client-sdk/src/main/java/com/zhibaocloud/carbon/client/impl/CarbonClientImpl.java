@@ -20,12 +20,12 @@ import com.zhbiaocloud.carbon.crypto.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
+import com.zhbiaocloud.carbon.model.MessageType;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhbiaocloud.carbon.model.StatusChanged;
 import com.zhibaocloud.carbon.client.CarbonClient;
-import com.zhibaocloud.carbon.client.ClientMode;
 import com.zhibaocloud.carbon.client.ClientOption;
 import java.io.IOException;
 import java.net.URI;
@@ -68,17 +68,14 @@ public class CarbonClientImpl implements CarbonClient {
   }
 
   @SneakyThrows
-  private URI buildTargetUri(String type) {
-    ClientMode mode = option.getMode();
-    return new URIBuilder(option.getEndpoint())
-        .setPathSegments("v2", "callbacks", mode.getValue(), option.getAppId(), type)
-        .build();
+  private URI buildTargetUri() {
+    return new URIBuilder(option.getEndpoint()).build();
   }
 
-  private void send(String type, Object request) throws IOException {
-    EncryptedRequest encryptedRequest = channel.encodeRequest(request);
+  private void send(MessageType type, Object request) throws IOException {
+    EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
 
-    URI target = buildTargetUri(type);
+    URI target = buildTargetUri();
     HttpPost post = new HttpPost(target);
     String body = mapper.writeValueAsString(encryptedRequest);
     post.setHeader("Content-Type", "application/json;charset=utf-8");
@@ -103,21 +100,21 @@ public class CarbonClientImpl implements CarbonClient {
 
   @Override
   public void publish(Policy policy) throws IOException {
-    send("underwrite", policy);
+    send(MessageType.UNDERWRITE, policy);
   }
 
   @Override
   public void publish(Receipt receipt) throws IOException {
-    send("receipt", receipt);
+    send(MessageType.RECEIPT, receipt);
   }
 
   @Override
   public void publish(RtnCall rtnCall) throws IOException {
-    send("rtncall", rtnCall);
+    send(MessageType.RTN_CALL, rtnCall);
   }
 
   @Override
   public void publish(StatusChanged status) throws IOException {
-    send("status", status);
+    send(MessageType.STATUS, status);
   }
 }

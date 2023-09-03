@@ -26,8 +26,8 @@ import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhbiaocloud.carbon.model.StatusChanged;
 import com.zhibaocloud.carbon.domain.Agreement;
-import com.zhibaocloud.carbon.domain.SaaSAgreement;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -55,35 +55,32 @@ public class DataReceiverService {
     this.factory = factory;
   }
 
-  public EncryptedResponse process(Agreement agreement, EncryptedRequest request, String type) {
+  public EncryptedResponse process(Agreement agreement, EncryptedRequest request) {
     CryptoConfiguration config = agreement.getConfig();
     Crypto crypto = factory.create(config);
     CarbonChannel channel = new CarbonChannel(mapper, crypto);
 
-    switch (type) {
-      case "underwrite":
+    switch (request.getType()) {
+      case UNDERWRITE:
         Policy policy = channel.decodeRequest(request, Policy.class);
         publisher.publishEvent(policy);
         break;
-      case "receipt":
+      case RECEIPT:
         Receipt receipt = channel.decodeRequest(request, Receipt.class);
         publisher.publishEvent(receipt);
         break;
-      case "rtncall":
+      case RTN_CALL:
         RtnCall rtnCall = channel.decodeRequest(request, RtnCall.class);
         publisher.publishEvent(rtnCall);
         break;
-      default:
-        throw new IllegalArgumentException("不支持的类型：" + type);
+      case STATUS:
+        StatusChanged status = channel.decodeRequest(request, StatusChanged.class);
+        publisher.publishEvent(status);
+        break;
     }
     CarbonResponse response = new CarbonResponse();
     response.setSuccess(true);
     response.setMessage("OK");
     return channel.encodeResponse(request.getRequestId(), response);
-  }
-
-  public EncryptedResponse process(SaaSAgreement saas, EncryptedRequest request, String type) {
-    // TODO:
-    throw new UnsupportedOperationException("暂不支持");
   }
 }

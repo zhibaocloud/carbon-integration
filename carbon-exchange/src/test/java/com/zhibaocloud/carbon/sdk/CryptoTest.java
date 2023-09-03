@@ -27,6 +27,7 @@ import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhbiaocloud.carbon.crypto.HashAlg;
 import com.zhbiaocloud.carbon.crypto.SymmetricCrypto;
+import com.zhbiaocloud.carbon.model.MessageType;
 import com.zhbiaocloud.carbon.model.Policy;
 import java.io.IOException;
 import java.util.UUID;
@@ -84,7 +85,7 @@ class CryptoTest {
     CarbonChannel channel = new CarbonChannel(mapper, crypto);
 
     Policy originPolicy = JMockData.mock(Policy.class);
-    EncryptedRequest req = channel.encodeRequest(originPolicy);
+    EncryptedRequest req = channel.encodeRequest(MessageType.UNDERWRITE, originPolicy);
     Policy decryptedPolicy = channel.decodeRequest(req, Policy.class);
 
     // 因为 LocalDateTime 带有毫秒，但是在序列化的时候只携带了秒。序列化后会有精度损失

@@ -11,25 +11,22 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.domain;
+package com.zhbiaocloud.carbon.model;
 
-import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.zhbiaocloud.carbon.model.type.EncodedValue;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Entity
-@Table(name = "saas_agreements")
-public class SaaSAgreement {
+@Getter
+@RequiredArgsConstructor
+public enum MessageType implements EncodedValue {
 
-  @Id
-  @Column(name = "id")
-  private String id = UUID.randomUUID().toString();
+  UNDERWRITE("underwrite", "承保保单数据"),
+  RECEIPT("receipt", "回执数据"),
+  RTN_CALL("rtnCall", "回访数据"),
+  STATUS("status", "保单状态变化数据");
 
-  /**
-   * 合作协议名称
-   */
-  @Column(name = "title")
-  private String title;
+  private final String value;
+
+  private final String description;
 }
