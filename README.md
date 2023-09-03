@@ -45,8 +45,8 @@ mvn spring-boot:run -pl carbon-client-cli
 
 ## TODO
 
-1. 将SDK包发布至 Maven Central Repository
+1. ~~将SDK包发布至 Maven Central Repository~~
 2. 增加摘要的签名（非对称加密），用于保证数据的真实性
-3. 支持服务端SDK。用于向外推送数据（推送至中介客户自建系统）
+3. 支持服务端SDK。用于接收推送数据（推送至中介客户自建系统，需要在自建系统中引入该SDK）
 4. 将国密作为可选项拆分为独立的模块，避免引入国密相关的依赖后导致和现有系统之间的冲突
-5. 支持使用 RestTemplate 作为 HTTP 客户端
+5. 兼容支持使用 RestTemplate 作为 HTTP 客户端
