@@ -14,13 +14,14 @@
 package com.zhibaocloud.carbon.client;
 
 import com.github.jsonzou.jmockdata.JMockData;
+import com.zhbiaocloud.carbon.CarbonOption;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhbiaocloud.carbon.model.StatusChanged;
+import com.zhibaocloud.carbon.client.starter.CarbonClientProperties;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -38,22 +39,45 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CarbonClientApplication implements ApplicationRunner {
 
+  private final CarbonClient client;
+
   private final CarbonClientFactory factory;
 
-  private static final String ENDPOINT = "http://localhost:8080/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0";
+  private final CarbonClientProperties config;
 
-  @Override
-  public void run(ApplicationArguments args) throws IOException, URISyntaxException {
-    ClientOption option = new ClientOption();
-    option.setEndpoint(new URI(ENDPOINT));
-    option.setCrypto(DemoConfiguration.crypto());
-
-    CarbonClient client = factory.create(option);
-
+  /**
+   * 单用户模式，根据配置文件创建 SDK 对象
+   */
+  private void runClient() throws IOException {
     client.publish(JMockData.mock(Policy.class));
     client.publish(JMockData.mock(Receipt.class));
     client.publish(JMockData.mock(RtnCall.class));
     client.publish(JMockData.mock(StatusChanged.class));
+  }
+
+  /**
+   * 多租户模式，根据租户标识符创建不同的 SDK 对象。
+   */
+  private void runInSaaS() throws IOException {
+    // 模拟租户标识符
+    String tenant = UUID.randomUUID().toString();
+    CarbonOption option = new CarbonOption();
+    option.setEndpoint(config.getEndpoint());
+    option.setCrypto(config.getCrypto());
+    option.setTenant(tenant);
+    // 根据租户配置返回不同的 CarbonClient。 可配置内容包括: 是否脱敏，加解密方式，密钥等
+    CarbonClient c = factory.create(option);
+
+    c.publish(JMockData.mock(Policy.class));
+    c.publish(JMockData.mock(Receipt.class));
+    c.publish(JMockData.mock(RtnCall.class));
+    c.publish(JMockData.mock(StatusChanged.class));
+  }
+
+  @Override
+  public void run(ApplicationArguments args) throws IOException {
+    runClient();
+    runInSaaS();
   }
 
   public static void main(String[] args) {

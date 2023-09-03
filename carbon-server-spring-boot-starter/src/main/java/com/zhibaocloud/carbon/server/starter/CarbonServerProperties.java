@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
+ * Copyright (c) 2018-2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
  * Carbon Integration SDK is licensed under Mulan PSL v2.
  *
  * You can use this software according to the terms and conditions of the Mulan PSL v2.
@@ -11,39 +11,28 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.client;
+package com.zhibaocloud.carbon.server.starter;
+
 
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
-import java.net.URI;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * 用于指定和智保云数据平台的连接参数
- *
- * @author jun
- */
 @Getter
 @Setter
-public class ClientOption {
+@NoArgsConstructor
+@ConfigurationProperties(prefix = "carbon.server")
+public class CarbonServerProperties {
 
   /**
-   * 服务地址，用于区分测试环境、预发布环境和生产环境
+   * 是否启用 Server Bean 注入
    */
-  private URI endpoint;
+  private Boolean enabled = true;
 
   /**
-   * 租户标识符
-   */
-  private String tenant;
-
-  /**
-   * 是否对数据进行脱敏处理
-   */
-  private Boolean desensitize;
-
-  /**
-   * 对称加密配置
+   * 加解密配置信息
    */
   private CryptoConfiguration crypto = new CryptoConfiguration();
 }

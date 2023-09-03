@@ -11,18 +11,20 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.repository;
+package com.zhibaocloud.carbon;
 
-import com.zhibaocloud.carbon.domain.Agreement;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 代理协议Repo
+ * Mock 服务，用于接收数据推送
  *
  * @author jun
  */
-@Repository
-public interface AgreementRepository extends JpaRepository<Agreement, String> {
+@SpringBootApplication
+public class CarbonServerApplication {
 
+  public static void main(String[] args) {
+    SpringApplication.run(CarbonServerApplication.class, args);
+  }
 }

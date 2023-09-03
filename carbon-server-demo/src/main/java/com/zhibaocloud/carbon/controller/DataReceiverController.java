@@ -15,25 +15,20 @@ package com.zhibaocloud.carbon.controller;
 
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
-import com.zhibaocloud.carbon.domain.Agreement;
-import com.zhibaocloud.carbon.service.DataReceiverService;
+import com.zhibaocloud.carbon.server.sdk.CarbonMessageProcessor;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用于接收外部数据推送
+ * 用于接收数据推送
  *
  * @author jun
  */
@@ -42,32 +37,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "数据推送接口")
 public class DataReceiverController {
 
-  private final DataReceiverService svc;
-
-  @PostMapping("/v2/callbacks/verify")
-  @Operation(operationId = "verify", summary = "加密验证", description = "用于验证加密方式是否正确，以及客户端、服务端接口是否兼容")
-  public ResponseEntity<EncryptedResponse> verify(@Valid @RequestBody EncryptedRequest request) {
-    EncryptedResponse response = new EncryptedResponse();
-    response.setRequestId(request.getRequestId());
-    return ResponseEntity.ok(response);
-  }
+  private final CarbonMessageProcessor processor;
 
   /**
    * 由接入方实现该接口，并将该接口地址告知智保云，用于接收保险公司推送的保单数据
    *
-   * @param agreement 用于区分不同的接入方式，并获取对应的加密配置
-   * @param request   推送数据内容
+   * @param request 推送数据内容
    * @return 返回处理结果
    */
-  @PostMapping("/v2/callbacks/a/{id}")
+  @PostMapping("/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0")
   @Operation(operationId = "receive", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
   @ResponseStatus(HttpStatus.OK)
-  @Parameter(in = ParameterIn.PATH, name = "id", schema = @Schema(type = "string", format = "uuid"))
-  public ResponseEntity<EncryptedResponse> onAgreementCallback(
-      @Parameter(hidden = true) @PathVariable("id") Agreement agreement,
-      @Valid @RequestBody EncryptedRequest request
-  ) {
-    EncryptedResponse response = svc.process(agreement, request);
+  public ResponseEntity<EncryptedResponse> onCallback(@RequestBody EncryptedRequest request) {
+    EncryptedResponse response = processor.process(request);
     return ResponseEntity.ok(response);
   }
 }

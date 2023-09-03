@@ -20,10 +20,12 @@ import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
-import com.zhbiaocloud.carbon.crypto.CarbonChannel;
+import com.zhbiaocloud.carbon.CarbonOption;
+import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
+import com.zhibaocloud.carbon.client.starter.CarbonClientProperties;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -39,17 +41,17 @@ import org.springframework.context.annotation.Bean;
 public class MockHttpConfiguration {
 
   @Bean
-  public CloseableHttpClient httpClient() throws IOException, URISyntaxException {
-    ClientOption option = new ClientOption();
-    option.setEndpoint(new URI("http://localhost:8080"));
-    option.setCrypto(DemoConfiguration.crypto());
+  public CloseableHttpClient httpClient(CarbonClientProperties config) throws IOException {
+    CarbonOption option = new CarbonOption();
+    option.setEndpoint(config.getEndpoint());
+    option.setCrypto(config.getCrypto());
 
     CarbonMapperFactory mapperFactory = new CarbonMapperFactory(false);
     ObjectMapper mapper = mapperFactory.create();
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
-    CarbonChannel channel = new CarbonChannel(mapper, crypto);
+    CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonResponse message = new CarbonResponse();
     message.setSuccess(true);

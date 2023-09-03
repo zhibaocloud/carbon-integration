@@ -20,8 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.CarbonOption;
 import com.zhbiaocloud.carbon.CarbonResponse;
-import com.zhbiaocloud.carbon.crypto.CarbonChannel;
+import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
@@ -31,6 +32,7 @@ import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhbiaocloud.carbon.model.StatusChanged;
+import com.zhibaocloud.carbon.server.starter.CarbonServerProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -42,12 +44,15 @@ import org.springframework.test.web.servlet.MvcResult;
 @AutoConfigureMockMvc
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-    classes = CarbonMockServerApplication.class
+    classes = CarbonServerApplication.class
 )
 class IntegrationTest {
 
   @Autowired
   private MockMvc mvc;
+
+  @Autowired
+  private CarbonServerProperties config;
 
   @Test
   void testSyncApi() throws Exception {
@@ -59,15 +64,16 @@ class IntegrationTest {
 
   private void runDataSync(MessageType type, Object request) throws Exception {
     ObjectMapper mapper = new CarbonMapperFactory(false).create();
-    Crypto crypto = new CryptoFactory().create(DemoConfiguration.crypto());
+    Crypto crypto = new CryptoFactory().create(config.getCrypto());
 
-    String appId = DemoConfiguration.appId();
-    CarbonChannel channel = new CarbonChannel(mapper, crypto);
+    CarbonOption option = new CarbonOption();
+    option.setCrypto(config.getCrypto());
+    CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
     String payload = mapper.writeValueAsString(encryptedRequest);
 
-    MvcResult result = mvc.perform(post("/v2/callbacks/a/" + appId)
+    MvcResult result = mvc.perform(post("/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0")
             .content(payload)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())

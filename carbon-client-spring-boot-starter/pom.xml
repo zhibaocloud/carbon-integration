@@ -29,6 +29,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-client-sdk</artifactId>
     </dependency>

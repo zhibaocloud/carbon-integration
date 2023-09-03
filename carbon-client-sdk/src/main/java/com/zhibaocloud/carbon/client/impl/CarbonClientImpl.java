@@ -16,7 +16,7 @@ package com.zhibaocloud.carbon.client.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.MessageException;
-import com.zhbiaocloud.carbon.crypto.CarbonChannel;
+import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
@@ -26,15 +26,13 @@ import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
 import com.zhbiaocloud.carbon.model.StatusChanged;
 import com.zhibaocloud.carbon.client.CarbonClient;
-import com.zhibaocloud.carbon.client.ClientOption;
+import com.zhbiaocloud.carbon.CarbonOption;
 import java.io.IOException;
 import java.net.URI;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -47,35 +45,30 @@ import org.apache.http.util.EntityUtils;
 @Slf4j
 public class CarbonClientImpl implements CarbonClient {
 
-  private final ClientOption option;
+  private final CarbonOption option;
 
   private final ObjectMapper mapper;
 
   private final CloseableHttpClient client;
 
-  private final CarbonChannel channel;
+  private final CarbonDataChannel channel;
 
   public CarbonClientImpl(
       ObjectMapper mapper,
       CloseableHttpClient client,
       Crypto crypto,
-      ClientOption option
+      CarbonOption option
   ) {
     this.option = option;
     this.mapper = mapper;
     this.client = client;
-    this.channel = new CarbonChannel(mapper, crypto);
-  }
-
-  @SneakyThrows
-  private URI buildTargetUri() {
-    return new URIBuilder(option.getEndpoint()).build();
+    this.channel = new CarbonDataChannel(mapper, crypto, option);
   }
 
   private void send(MessageType type, Object request) throws IOException {
     EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
 
-    URI target = buildTargetUri();
+    URI target = option.getEndpoint();
     HttpPost post = new HttpPost(target);
     String body = mapper.writeValueAsString(encryptedRequest);
     post.setHeader("Content-Type", "application/json;charset=utf-8");

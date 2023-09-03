@@ -1,5 +1,4 @@
-server:
-  port: 8080
+server.port: 8080
 
 spring:
   application.name: carbon-mock-server
@@ -20,3 +19,11 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
+
+carbon.server:
+  enabled: true
+  tenant: 1ce8f6f5-4c92-4d9b-a1fb-57971ab9ea6c
+  crypto:
+    secret: 4XgD98eGyMDejLvA
+    iv: ER2gveZeqYYfj6j8
+    salt: LXqF4UX4CiAa9mpm
