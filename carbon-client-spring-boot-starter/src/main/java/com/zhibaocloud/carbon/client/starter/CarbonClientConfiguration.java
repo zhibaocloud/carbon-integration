@@ -15,13 +15,20 @@ package com.zhibaocloud.carbon.client.starter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.CarbonOption;
+import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.client.CarbonClient;
 import com.zhibaocloud.carbon.client.CarbonClientFactory;
+import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import java.util.Arrays;
+import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -32,7 +39,11 @@ import org.springframework.core.env.Environment;
  * @author jun
  */
 @Configuration
+@RequiredArgsConstructor
+@EnableConfigurationProperties(CarbonClientProperties.class)
 public class CarbonClientConfiguration {
+
+  private final CarbonClientProperties config;
 
   @Bean
   @ConditionalOnClass(CloseableHttpClient.class)
@@ -61,5 +72,15 @@ public class CarbonClientConfiguration {
   ) {
     ObjectMapper mapper = factory.create();
     return new CarbonClientFactory(httpClient, mapper, crypto);
+  }
+
+  @Bean
+  @ConditionalOnProperty(prefix = "carbon.client", name = "enabled", havingValue = "true")
+  public CarbonClient create(CarbonClientFactory factory) {
+    CarbonOption option = new CarbonOption();
+    option.setEndpoint(config.getEndpoint());
+    option.setTenant(config.getTenant());
+    option.setCrypto(config.getCrypto());
+    return factory.create(option);
   }
 }

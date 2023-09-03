@@ -13,7 +13,9 @@
 
 package com.zhbiaocloud.carbon;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 响应报文
@@ -21,6 +23,8 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarbonResponse {
 
   /**

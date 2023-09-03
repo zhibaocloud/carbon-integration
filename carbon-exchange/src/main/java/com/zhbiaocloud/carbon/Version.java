@@ -35,7 +35,7 @@ public class Version {
   /**
    * 新功能版本，兼容MAJOR
    */
-  private int minor = 1;
+  private int minor = 3;
   /**
    * 问题修正版本
    */
@@ -61,11 +61,7 @@ public class Version {
       return false;
     }
     // 小版本，有兼容新功能
-    if (minor >= version.minor) {
-      return true;
-    }
-
-    return false;
+    return minor >= version.minor;
   }
 
   @JsonValue

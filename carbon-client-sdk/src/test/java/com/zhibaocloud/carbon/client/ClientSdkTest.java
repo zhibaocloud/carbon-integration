@@ -22,7 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
-import com.zhbiaocloud.carbon.crypto.CarbonChannel;
+import com.zhbiaocloud.carbon.CarbonOption;
+import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
@@ -58,15 +59,15 @@ class ClientSdkTest {
 
   @Test
   void testMessageSend() throws Exception {
-    ClientOption option = new ClientOption();
+    CarbonOption option = new CarbonOption();
     option.setEndpoint(new URI("http://localhost:8080"));
     option.getCrypto().setSecret("wD2Neym2V3ZfpWzR");
     option.getCrypto().setIv("GzZz3LBzALvC6s9i");
-    option.getCrypto().setDigestSalt("dZJjh7bMU57zVtSc");
+    option.getCrypto().setSalt("dZJjh7bMU57zVtSc");
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
-    CarbonChannel channel = new CarbonChannel(mapper, crypto);
+    CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonResponse message = new CarbonResponse();
     message.setSuccess(true);

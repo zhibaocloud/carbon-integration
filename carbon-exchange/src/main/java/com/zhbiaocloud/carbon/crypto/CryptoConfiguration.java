@@ -49,5 +49,5 @@ public class CryptoConfiguration {
   /**
    * 摘要时使用的加盐，避免相同数据的签名摘要相同，避免Hash碰撞
    */
-  private String digestSalt;
+  private String salt;
 }

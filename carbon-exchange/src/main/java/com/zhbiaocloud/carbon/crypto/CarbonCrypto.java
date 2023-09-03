@@ -55,7 +55,7 @@ class CarbonCrypto implements Crypto {
     }
 
     digester = MessageDigest.getInstance(config.getDigestAlg().getAlg());
-    salt = config.getDigestSalt();
+    salt = config.getSalt();
   }
 
   @SneakyThrows

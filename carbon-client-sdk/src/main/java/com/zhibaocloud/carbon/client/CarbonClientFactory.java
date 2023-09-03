@@ -14,6 +14,7 @@
 package com.zhibaocloud.carbon.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhbiaocloud.carbon.CarbonOption;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
@@ -35,6 +36,7 @@ public class CarbonClientFactory {
 
   /**
    * 序列化规则，有可能序列化的方式和应用程序默认的不一致，可以单独进行定义
+   * TODO: 根据是否需要脱敏，使用不同的 mapper
    */
   private final ObjectMapper mapper;
 
@@ -49,7 +51,7 @@ public class CarbonClientFactory {
    * @param option 中介公司相关配置
    * @return 客户端
    */
-  public CarbonClient create(ClientOption option) {
+  public CarbonClient create(CarbonOption option) {
     Crypto crypto = factory.create(option.getCrypto());
     return new CarbonClientImpl(mapper, client, crypto, option);
   }

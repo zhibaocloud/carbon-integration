@@ -11,42 +11,38 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhbiaocloud.carbon.crypto;
+package com.zhibaocloud.carbon.client.starter;
 
-import com.zhbiaocloud.carbon.Version;
-import java.util.UUID;
-import lombok.Data;
+import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
+import java.net.URI;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * 加密后的报文响应
- *
- * @author jun
- */
-@Data
-public class EncryptedResponse {
+@Getter
+@Setter
+@NoArgsConstructor
+@ConfigurationProperties(prefix = "carbon.client")
+public class CarbonClientProperties {
 
   /**
-   * SDK 版本，用于判断兼容性
+   * 是否启用 Client 注入
    */
-  private Version version = Version.CURRENT;
+  private Boolean enabled = true;
 
   /**
-   * 发送请求时的requestId，原样返回
+   * 数据推送地址
    */
-  private UUID requestId;
+  private URI endpoint;
 
   /**
-   * 签名，用于校验报文的完整性
-   */
-  private String sign;
-
-  /**
-   * 租户标识符
+   * 租户信息
    */
   private String tenant;
 
   /**
-   * 加密报文信息
+   * 加解密配置信息
    */
-  private String payload;
+  private CryptoConfiguration crypto = new CryptoConfiguration();
 }

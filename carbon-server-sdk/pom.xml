@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.zhibaocloud</groupId>
     <artifactId>carbon-integration</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -27,6 +27,11 @@
   <name>Carbon Server SDK</name>
 
   <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

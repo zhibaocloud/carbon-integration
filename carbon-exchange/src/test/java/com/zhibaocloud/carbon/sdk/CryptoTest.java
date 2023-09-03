@@ -17,9 +17,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
+import com.zhbiaocloud.carbon.CarbonOption;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
-import com.zhbiaocloud.carbon.crypto.CarbonChannel;
+import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoConfiguration;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
@@ -67,7 +68,7 @@ class CryptoTest {
       config.setDigestAlg(alg);
       config.setSecret("g9wuZX5rQKqin9qA");
       config.setIv("dyRnJ6bVxWTdHd64");
-      config.setDigestSalt("dyRnJ6bVxWTdHd64");
+      config.setSalt("dyRnJ6bVxWTdHd64");
       Crypto crypto = factory.create(config);
       String hash = crypto.digest("hello world");
       System.out.println(alg.getAlg() + ": " + hash);
@@ -81,8 +82,9 @@ class CryptoTest {
     config.setSecret("g9wuZX5rQKqin9qA");
     config.setIv("dyRnJ6bVxWTdHd64");
     Crypto crypto = factory.create(config);
+    CarbonOption option = new CarbonOption();
     ObjectMapper mapper = new CarbonMapperFactory(false).create();
-    CarbonChannel channel = new CarbonChannel(mapper, crypto);
+    CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     Policy originPolicy = JMockData.mock(Policy.class);
     EncryptedRequest req = channel.encodeRequest(MessageType.UNDERWRITE, originPolicy);

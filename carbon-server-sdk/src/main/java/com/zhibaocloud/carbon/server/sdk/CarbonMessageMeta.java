@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
+ * Copyright (c) 2018-2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
  * Carbon Integration SDK is licensed under Mulan PSL v2.
  *
  * You can use this software according to the terms and conditions of the Mulan PSL v2.
@@ -11,20 +11,20 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon;
+package com.zhibaocloud.carbon.server.sdk;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.zhbiaocloud.carbon.model.MessageType;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-/**
- * Mock 服务，用于接收数据推送
- *
- * @author jun
- */
-@SpringBootApplication
-public class CarbonMockServerApplication {
+@Getter
+@AllArgsConstructor
+public class CarbonMessageMeta {
 
-  public static void main(String[] args) {
-    SpringApplication.run(CarbonMockServerApplication.class, args);
-  }
+  private UUID requestId;
+
+  private MessageType type;
+
+  private String tenant;
 }
