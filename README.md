@@ -18,12 +18,12 @@
 # 编译并安装到本地仓库
 mvn clean install
 
-# 启动后端 Mock 服务用于接收推送数据
+# 启动后端 Demo 服务用于接收推送数据
 # 当收到推送数据后会在控制台打印显示
-mvn spring-boot:run -pl carbon-mock-server
+mvn spring-boot:run -pl carbon-server-demo
 
 # 启动 Client 项目向 Mock 服务发送数据
-mvn spring-boot:run -pl carbon-client-cli
+mvn spring-boot:run -pl carbon-client-demo
 ```
 
 ## 如何使用
@@ -45,4 +45,12 @@ mvn spring-boot:run -pl carbon-client-cli
    > * 对称加密: AES, SM4
    > * 信息摘要: SHA-256, SHA-512, SHA3-256, SHA3-512, MD5, SM3
    > * 非对称加密: RSA, SM2
+4. 每个组件的作用都是什么
+   1. 数据交换模块 `carbon-exchange`
+      * 通过 Java POJO 的方式定义了两个系统之间的数据交换格式
+      * 约定数据序列化、反序列化的方式 (jackson)
+      * 约定数据加解密的方式 (AES, RSA, SM4, SM2)
+   2. 数据推送方使用 `carbon-client-sdk` 和 `carbon-client-spring-boot-starter`
+   3. 数据接收方使用 `carbon-server-sdk` 和 `carbon-server-spring-boot-starter`
+
 

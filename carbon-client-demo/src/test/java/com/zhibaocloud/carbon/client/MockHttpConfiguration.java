@@ -15,54 +15,37 @@ package com.zhibaocloud.carbon.client;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
 import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.crypto.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
-import com.zhbiaocloud.carbon.model.Policy;
-import com.zhbiaocloud.carbon.model.Receipt;
-import com.zhbiaocloud.carbon.model.RtnCall;
-import com.zhbiaocloud.carbon.model.StatusChanged;
-import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.UUID;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 
-class ClientSdkTest {
+@TestConfiguration
+public class MockHttpConfiguration {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
-
-  private CloseableHttpClient mockHttpClient(String payload, int statusCode) throws IOException {
-    CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
-    CloseableHttpResponse response = mock(CloseableHttpResponse.class);
-    StatusLine sl = mock(StatusLine.class);
-    when(httpClient.execute(any())).thenReturn(response);
-    when(sl.getStatusCode()).thenReturn(statusCode);
-    when(response.getStatusLine()).thenReturn(sl);
-    when(response.getEntity()).thenReturn(new StringEntity(payload, "UTF-8"));
-    return httpClient;
-  }
-
-  @Test
-  void testMessageSend() throws Exception {
+  @Bean
+  public CloseableHttpClient httpClient() throws IOException, URISyntaxException {
     ClientOption option = new ClientOption();
     option.setEndpoint(new URI("http://localhost:8080"));
-    option.getCrypto().setSecret("wD2Neym2V3ZfpWzR");
-    option.getCrypto().setIv("GzZz3LBzALvC6s9i");
-    option.getCrypto().setDigestSalt("dZJjh7bMU57zVtSc");
+    option.setCrypto(DemoConfiguration.crypto());
+
+    CarbonMapperFactory mapperFactory = new CarbonMapperFactory(false);
+    ObjectMapper mapper = mapperFactory.create();
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
@@ -75,13 +58,13 @@ class ClientSdkTest {
     EncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
     String payload = mapper.writeValueAsString(encryptedResponse);
 
-    CloseableHttpClient httpClient = mockHttpClient(payload, 200);
-    CarbonClient client = new CarbonClientImpl(mapper, httpClient, crypto, option);
-    client.publish(JMockData.mock(Policy.class));
-    client.publish(JMockData.mock(Receipt.class));
-    client.publish(JMockData.mock(RtnCall.class));
-    client.publish(JMockData.mock(StatusChanged.class));
-
-    Mockito.verify(httpClient, times(4)).execute(any());
+    CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
+    CloseableHttpResponse response = mock(CloseableHttpResponse.class);
+    StatusLine sl = mock(StatusLine.class);
+    when(httpClient.execute(any())).thenReturn(response);
+    when(sl.getStatusCode()).thenReturn(200);
+    when(response.getStatusLine()).thenReturn(sl);
+    when(response.getEntity()).thenReturn(new StringEntity(payload, "UTF-8"));
+    return httpClient;
   }
 }

@@ -33,9 +33,9 @@ public class ClientOption {
   private URI endpoint;
 
   /**
-   * 应用ID，每个中介公司对接时都会分配一个唯一的ID
+   * 是否对数据进行脱敏处理
    */
-  private String appId;
+  private Boolean desensitize;
 
   /**
    * 对称加密配置

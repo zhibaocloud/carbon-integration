@@ -13,6 +13,9 @@
 
 package com.zhbiaocloud.carbon.model.common;
 
+import com.github.annotation.IDCardDesensitize;
+import com.github.annotation.PhoneDesensitize;
+import com.github.annotation.StringDesensitize;
 import com.zhbiaocloud.carbon.model.type.BnfGrade;
 import com.zhbiaocloud.carbon.model.type.BnfType;
 import com.zhbiaocloud.carbon.model.type.DegreeType;
@@ -62,6 +65,7 @@ public class Beneficiary {
   @Schema(title = "受益人证件类型")
   private IdType idType;
 
+  @IDCardDesensitize
   @Schema(title = "受益人证件号码")
   private String idNo;
 
@@ -71,6 +75,7 @@ public class Beneficiary {
   @Schema(title = "受益人证件有效期截止日期")
   private LocalDate idValidEnd;
 
+  @PhoneDesensitize
   @Schema(title = "受益人手机号码")
   private String mobile;
 
@@ -92,9 +97,11 @@ public class Beneficiary {
   @Schema(title = "受益人职业名称")
   private String occupationName;
 
+  @StringDesensitize
   @Schema(title = "受益人户籍注册地址")
   private String rgtAddress;
 
+  @StringDesensitize
   @Schema(title = "受益人联系地址")
   private String postalAddress;
 

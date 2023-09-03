@@ -23,19 +23,18 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-client-spring-boot-starter</artifactId>
-  <name>Carbon Client SDK as Spring Boot Starter</name>
-  <description>将SDK封装为 Spring Boot Starter 方便其他系统使用</description>
+  <artifactId>carbon-server-sdk</artifactId>
+  <name>Carbon Server SDK</name>
 
   <dependencies>
     <dependency>
-      <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-client-sdk</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <scope>provided</scope>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-exchange</artifactId>
     </dependency>
   </dependencies>
 </project>
