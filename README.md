@@ -1,4 +1,4 @@
-# 智保云数据平台 SDK [![codecov](https://codecov.io/gh/zhibaocloud/carbon-integration/graph/badge.svg?token=M45BAZQJP7)](https://codecov.io/gh/zhibaocloud/carbon-integration)
+# 智保云数据平台 SDK [![Java CI with Maven](https://github.com/zhibaocloud/carbon-integration/actions/workflows/ci.yaml/badge.svg)](https://github.com/zhibaocloud/carbon-integration/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/zhibaocloud/carbon-integration/graph/badge.svg?token=M45BAZQJP7)](https://codecov.io/gh/zhibaocloud/carbon-integration) 
 
 ## 数据平台项目是什么
 

@@ -26,6 +26,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./carbon-coverage/target/site/jacoco-aggregate/jacoco.xml
           flags: unittests
-          verbose: true
 
 
