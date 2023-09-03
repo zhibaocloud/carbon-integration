@@ -26,6 +26,9 @@ import lombok.Data;
 @Data
 public class EncryptedRequest {
 
+  /**
+   * SDK 版本，用于判断兼容性
+   */
   private Version version = Version.CURRENT;
 
   /**
@@ -33,9 +36,23 @@ public class EncryptedRequest {
    */
   private UUID requestId;
 
+  /**
+   * 签名，用于校验报文的完整性
+   */
   private String sign;
 
+  /**
+   * 租户标识符
+   */
+  private String tenant;
+
+  /**
+   * 加密报文信息
+   */
   private String payload;
 
+  /**
+   * 加密数据类型，用于反序列化时识别数据类型
+   */
   private MessageType type;
 }

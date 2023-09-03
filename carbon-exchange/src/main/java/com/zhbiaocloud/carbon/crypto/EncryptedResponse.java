@@ -26,13 +26,27 @@ import lombok.Data;
 public class EncryptedResponse {
 
   /**
+   * SDK 版本，用于判断兼容性
+   */
+  private Version version = Version.CURRENT;
+
+  /**
    * 发送请求时的requestId，原样返回
    */
   private UUID requestId;
 
+  /**
+   * 签名，用于校验报文的完整性
+   */
   private String sign;
 
-  private String payload;
+  /**
+   * 租户标识符
+   */
+  private String tenant;
 
-  private Version version = Version.CURRENT;
+  /**
+   * 加密报文信息
+   */
+  private String payload;
 }

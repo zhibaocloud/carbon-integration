@@ -33,6 +33,11 @@ public class ClientOption {
   private URI endpoint;
 
   /**
+   * 租户标识符
+   */
+  private String tenant;
+
+  /**
    * 是否对数据进行脱敏处理
    */
   private Boolean desensitize;
