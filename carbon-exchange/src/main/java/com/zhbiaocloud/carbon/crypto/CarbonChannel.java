@@ -15,6 +15,7 @@ package com.zhbiaocloud.carbon.crypto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.SignatureMissMatchException;
+import com.zhbiaocloud.carbon.model.MessageType;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -32,9 +33,10 @@ public class CarbonChannel {
   private final Crypto crypto;
 
   @SneakyThrows
-  public EncryptedRequest encodeRequest(Object request) {
+  public EncryptedRequest encodeRequest(MessageType type, Object request) {
     String payload = mapper.writeValueAsString(request);
     EncryptedRequest message = new EncryptedRequest();
+    message.setType(type);
     message.setRequestId(UUID.randomUUID());
     message.setSign(crypto.digest(payload));
     message.setPayload(crypto.encrypt(payload));

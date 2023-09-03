@@ -27,9 +27,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -41,37 +38,30 @@ import lombok.Data;
 @Schema(title = "受益人信息")
 public class Beneficiary {
 
-  @NotNull
   @Schema(title = "与受益人关系", requiredMode = RequiredMode.REQUIRED)
   private RelationType relationToInsured;
 
-  @NotNull
   @Schema(title = "受益人类型", requiredMode = RequiredMode.REQUIRED)
   private BnfType bnfType;
 
-  @NotNull
   @Schema(title = "受益顺序", requiredMode = RequiredMode.REQUIRED)
   private BnfGrade bnfGrade;
 
   @Schema(title = "受益比例", description = "使用百分比表示，同一顺位受益人的收益比例之和为100%", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal bnfRatio;
-  @NotBlank
+
   @Schema(title = "受益人姓名")
   private String name;
 
-  @NotNull
   @Schema(title = "受益人性别")
   private GenderType gender;
 
-  @NotNull
   @Schema(title = "受益人出生日期")
   private LocalDate birthdate;
 
-  @NotNull
   @Schema(title = "受益人证件类型")
   private IdType idType;
 
-  @NotNull
   @Schema(title = "受益人证件号码")
   private String idNo;
 
@@ -84,7 +74,6 @@ public class Beneficiary {
   @Schema(title = "受益人手机号码")
   private String mobile;
 
-  @Email
   @Schema(title = "受益人电子邮箱")
   private String email;
 

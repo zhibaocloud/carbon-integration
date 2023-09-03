@@ -11,25 +11,29 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.domain;
+package com.zhbiaocloud.carbon.model.type;
 
-import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Entity
-@Table(name = "saas_agreements")
-public class SaaSAgreement {
+@Getter
+@RequiredArgsConstructor
+public enum TerminationReason implements EncodedValue {
 
-  @Id
-  @Column(name = "id")
-  private String id = UUID.randomUUID().toString();
+  MA("01","满期终止"),
+  DT("02", "理赔终止"),
+  SU("03", "退保终止"),
+  TD("04", "转换"),
+  TC("05", "公司解约"),
+  DC("06", "拒保终止"),
+  TO("07", "保单迁出"),
+  CF("08", "犹豫期退保"),
+  WD("09", "当日撤单");
 
   /**
-   * 合作协议名称
+   * 存储在数据库中的码值
    */
-  @Column(name = "title")
-  private String title;
+  private final String value;
+
+  private final String description;
 }

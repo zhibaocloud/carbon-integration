@@ -29,6 +29,7 @@ import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhbiaocloud.carbon.model.StatusChanged;
 import com.zhibaocloud.carbon.client.impl.CarbonClientImpl;
 import java.io.IOException;
 import java.net.URI;
@@ -80,7 +81,8 @@ class ClientSdkTest {
     client.publish(JMockData.mock(Policy.class));
     client.publish(JMockData.mock(Receipt.class));
     client.publish(JMockData.mock(RtnCall.class));
+    client.publish(JMockData.mock(StatusChanged.class));
 
-    Mockito.verify(httpClient, times(3)).execute(any());
+    Mockito.verify(httpClient, times(4)).execute(any());
   }
 }

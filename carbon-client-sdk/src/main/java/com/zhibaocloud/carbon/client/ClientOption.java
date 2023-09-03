@@ -38,11 +38,6 @@ public class ClientOption {
   private String appId;
 
   /**
-   * 接入方式
-   */
-  private ClientMode mode = ClientMode.AGREEMENT;
-
-  /**
    * 对称加密配置
    */
   private CryptoConfiguration crypto = new CryptoConfiguration();

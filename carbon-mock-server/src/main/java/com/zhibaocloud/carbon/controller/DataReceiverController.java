@@ -16,7 +16,6 @@ package com.zhibaocloud.carbon.controller;
 import com.zhbiaocloud.carbon.crypto.EncryptedRequest;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhibaocloud.carbon.domain.Agreement;
-import com.zhibaocloud.carbon.domain.SaaSAgreement;
 import com.zhibaocloud.carbon.service.DataReceiverService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,29 +52,15 @@ public class DataReceiverController {
     return ResponseEntity.ok(response);
   }
 
-  @PostMapping("/v2/callbacks/a/{id}/{type}")
+  @PostMapping("/v2/callbacks/a/{id}")
   @Operation(operationId = "publishByAgreement", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
   @ResponseStatus(HttpStatus.OK)
   @Parameter(in = ParameterIn.PATH, name = "id", schema = @Schema(type = "string", format = "uuid"))
   public ResponseEntity<EncryptedResponse> onAgreementCallback(
       @Parameter(hidden = true) @PathVariable("id") Agreement agreement,
-      @PathVariable(name = "type") String type,
       @Valid @RequestBody EncryptedRequest request
   ) {
-    EncryptedResponse response = svc.process(agreement, request, type);
-    return ResponseEntity.ok(response);
-  }
-
-  @PostMapping("/v2/callbacks/b/{id}/{type}")
-  @Operation(operationId = "publishByTenants", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
-  @ResponseStatus(HttpStatus.OK)
-  @Parameter(in = ParameterIn.PATH, name = "id", schema = @Schema(type = "string", format = "uuid"))
-  public ResponseEntity<EncryptedResponse> onBatchCallback(
-      @Parameter(hidden = true) @PathVariable("id") SaaSAgreement saas,
-      @PathVariable(name = "type") String type,
-      @Valid @RequestBody EncryptedRequest request
-  ) {
-    EncryptedResponse response = svc.process(saas, request, type);
+    EncryptedResponse response = svc.process(agreement, request);
     return ResponseEntity.ok(response);
   }
 }

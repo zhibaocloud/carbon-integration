@@ -26,9 +26,6 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -40,7 +37,6 @@ import lombok.Data;
 @Schema(title = "承保保单数据模型")
 public class Policy {
 
-  @NotBlank
   @Schema(title = "保单号", description = "保单唯一标识符，会用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
 
@@ -74,19 +70,15 @@ public class Policy {
   @Schema(title = "中介机构名称", description = "一般指中介机构在保险公司销管系统中的机构名称")
   private String agentComName;
 
-  @NotBlank
   @Schema(title = "产品编码", description = "有些保险产品趸交、期交的险种编码不同，在这里需要使用固定的产品编码", requiredMode = RequiredMode.REQUIRED)
   private String productNo;
 
-  @NotBlank
   @Schema(title = "产品名称", description = "主险产品名称，需要和在条款中使用的名称保持一致", requiredMode = RequiredMode.REQUIRED)
   private String productName;
 
-  @NotNull
   @Schema(title = "保费", description = "首期合同保费", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal premium;
 
-  @NotNull
   @Schema(title = "保额", description = "首期合同保额", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal amount;
 
@@ -99,19 +91,15 @@ public class Policy {
   @Schema(title = "支付方式")
   private PayType payType;
 
-  @NotNull
   @Schema(title = "投保时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime applyTime;
 
-  @NotNull
   @Schema(title = "首期交费时间", description = "同支付时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime payTime;
 
-  @NotNull
   @Schema(title = "签单时间", description = "同承保时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime signTime;
 
-  @NotNull
   @Schema(title = "生效时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime effectiveTime;
 
@@ -133,23 +121,18 @@ public class Policy {
   @Schema(title = "回访失败原因", description = "只有在有回访成功标识为false时才会使用次字段")
   private String rtnCallFailedReason;
 
-  @NotNull
   @Schema(title = "保单状态")
   private PolicyStatus status;
 
-  @NotNull
   @Schema(title = "代理人信息", requiredMode = RequiredMode.REQUIRED)
   private Agent agent;
 
-  @NotNull
   @Schema(title = "投保人信息", requiredMode = RequiredMode.REQUIRED)
   private Applicant applicant;
 
-  @NotEmpty
   @Schema(title = "险种信息", requiredMode = RequiredMode.REQUIRED)
   private List<Risk> risks;
 
-  @NotEmpty
   @Schema(title = "被保人信息", requiredMode = RequiredMode.REQUIRED)
   private List<Insured> insureds;
 

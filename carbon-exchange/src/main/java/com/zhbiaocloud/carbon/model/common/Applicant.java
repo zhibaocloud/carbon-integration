@@ -24,9 +24,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -38,23 +35,18 @@ import lombok.Data;
 @Schema(title = "投保人信息")
 public class Applicant {
 
-  @NotBlank
   @Schema(title = "投保人姓名", requiredMode = RequiredMode.REQUIRED)
   private String name;
 
-  @NotNull
   @Schema(title = "投保人性别", requiredMode = RequiredMode.REQUIRED)
   private GenderType gender;
 
-  @NotNull
   @Schema(title = "投保人出生日期", requiredMode = RequiredMode.REQUIRED)
   private LocalDate birthdate;
 
-  @NotNull
   @Schema(title = "投保人证件类型", requiredMode = RequiredMode.REQUIRED)
   private IdType idType;
 
-  @NotNull
   @Schema(title = "投保人证件号码", requiredMode = RequiredMode.REQUIRED)
   private String idNo;
 
@@ -67,7 +59,6 @@ public class Applicant {
   @Schema(title = "投保人手机号码")
   private String mobile;
 
-  @Email
   @Schema(title = "投保人电子邮箱")
   private String email;
 

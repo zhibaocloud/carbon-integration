@@ -11,29 +11,22 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.client;
+package com.zhbiaocloud.carbon.model;
 
-import lombok.AllArgsConstructor;
+import com.zhbiaocloud.carbon.model.type.EncodedValue;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-/**
- * 接入方式
- *
- * @author jun
- */
 @Getter
-@AllArgsConstructor
-public enum ClientMode {
+@RequiredArgsConstructor
+public enum MessageType implements EncodedValue {
 
-  /**
-   * 以"协议"为单位进行对接 即：一次只能接入一家中介公司、保险公司
-   */
-  AGREEMENT("a"),
-
-  /**
-   * 批量接入，一次性接入所有的中介公司
-   */
-  BATCH("b");
+  UNDERWRITE("underwrite", "承保保单数据"),
+  RECEIPT("receipt", "回执数据"),
+  RTN_CALL("rtnCall", "回访数据"),
+  STATUS("status", "保单状态变化数据");
 
   private final String value;
+
+  private final String description;
 }
