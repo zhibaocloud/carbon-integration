@@ -23,9 +23,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-exchange</artifactId>
-  <name>Carbon Message Exchange</name>
-  <description>智保云投保通道开发 SDK。定义数据模型以及数据交互所支持的加解密方法</description>
+  <artifactId>carbon-server-sdk</artifactId>
 
   <dependencies>
     <dependency>
@@ -34,35 +32,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.swagger.core.v3</groupId>
-      <artifactId>swagger-annotations</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcprov-jdk18on</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.github.jsonzou</groupId>
-      <artifactId>jmockdata</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-exchange</artifactId>
     </dependency>
   </dependencies>
 </project>
