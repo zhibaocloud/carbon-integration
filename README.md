@@ -18,12 +18,12 @@
 # 编译并安装到本地仓库
 mvn clean install
 
-# 启动后端 Mock 服务用于接收推送数据
+# 启动后端 Demo 服务用于接收推送数据
 # 当收到推送数据后会在控制台打印显示
-mvn spring-boot:run -pl carbon-mock-server
+mvn spring-boot:run -pl carbon-server-demo
 
 # 启动 Client 项目向 Mock 服务发送数据
-mvn spring-boot:run -pl carbon-client-cli
+mvn spring-boot:run -pl carbon-client-demo
 ```
 
 ## 如何使用

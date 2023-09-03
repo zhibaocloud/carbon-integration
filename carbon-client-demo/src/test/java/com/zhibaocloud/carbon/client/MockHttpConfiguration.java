@@ -24,7 +24,6 @@ import com.zhbiaocloud.carbon.crypto.CarbonChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
-import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;

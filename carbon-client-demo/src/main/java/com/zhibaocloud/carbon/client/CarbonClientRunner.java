@@ -17,7 +17,6 @@ import com.github.jsonzou.jmockdata.JMockData;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
-import com.zhibaocloud.carbon.demo.DemoConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,8 +39,8 @@ public class CarbonClientRunner implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) throws IOException, URISyntaxException {
     ClientOption option = new ClientOption();
-    option.setEndpoint(new URI("http://localhost:8080"));
-    option.setAppId(DemoConfiguration.appId());
+    String appId = DemoConfiguration.appId();
+    option.setEndpoint(new URI("http://localhost:8080/v2/callbacks/a/" + appId));
     option.setCrypto(DemoConfiguration.crypto());
 
     CarbonClient client = factory.create(option);
