@@ -1,12 +1,12 @@
-# 智保云互联互通 SDK
+# 智保云数据平台 SDK [![codecov](https://codecov.io/gh/zhibaocloud/carbon-integration/graph/badge.svg?token=M45BAZQJP7)](https://codecov.io/gh/zhibaocloud/carbon-integration)
 
-## 互联互通项目是什么
+## 数据平台项目是什么
 
-互联互通项目是 [智保云](https://zhibaocloud.com) 为满足 [保险中介机构信息化工作监管办法](http://www.gov.cn/zhengce/zhengceku/2021-01/13/content_5579627.htm)
+该项目是 [智保云](https://zhibaocloud.com) 为满足 [保险中介机构信息化工作监管办法](http://www.gov.cn/zhengce/zhengceku/2021-01/13/content_5579627.htm)
 中要求的 `通过技术手段实现与合作保险公司的系统互通、业务互联、数据对接` 而开发的 SaaS 化对接系统。 
 通过 SDK 的方式将业务逻辑、加解密方式进行封装，减少线上联调、以及减少文档工作。
 
-项目代号: `Carbon`, 在一些 Java 类之前会出现 `Carbon` 前缀，用于区分其他通用类型。
+项目代号: `Carbon`, 因此在一些内部 Java 类之前会出现 `Carbon` 前缀，用于区分其他通用类型。
 
 ## 如何启动
 
