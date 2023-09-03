@@ -16,6 +16,7 @@ package com.zhibaocloud.carbon.client;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhbiaocloud.carbon.model.StatusChanged;
 import java.io.IOException;
 
 /**
@@ -48,4 +49,12 @@ public interface CarbonClient {
    * @throws IOException 数据通信、转换失败
    */
   void publish(RtnCall rtnCall) throws IOException;
+
+  /**
+   * 保单状态变化数据推送
+   *
+   * @param status 保单状态变化数据
+   * @throws IOException 数据通信、转换失败
+   */
+  void publish(StatusChanged status) throws IOException;
 }

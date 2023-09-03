@@ -23,6 +23,7 @@ import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhbiaocloud.carbon.model.Policy;
 import com.zhbiaocloud.carbon.model.Receipt;
 import com.zhbiaocloud.carbon.model.RtnCall;
+import com.zhbiaocloud.carbon.model.StatusChanged;
 import com.zhibaocloud.carbon.client.CarbonClient;
 import com.zhibaocloud.carbon.client.ClientMode;
 import com.zhibaocloud.carbon.client.ClientOption;
@@ -113,5 +114,10 @@ public class CarbonClientImpl implements CarbonClient {
   @Override
   public void publish(RtnCall rtnCall) throws IOException {
     send("rtncall", rtnCall);
+  }
+
+  @Override
+  public void publish(StatusChanged status) throws IOException {
+    send("status", status);
   }
 }
