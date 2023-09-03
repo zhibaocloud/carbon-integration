@@ -38,6 +38,11 @@ public class ClientOption {
   private String appId;
 
   /**
+   * 是否对数据进行脱敏处理
+   */
+  private Boolean desensitize;
+
+  /**
    * 对称加密配置
    */
   private CryptoConfiguration crypto = new CryptoConfiguration();

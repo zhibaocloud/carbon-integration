@@ -142,6 +142,11 @@
         <version>${jackson.version}</version>
       </dependency>
       <dependency>
+        <groupId>io.github.ealenxie</groupId>
+        <artifactId>jackson-desensitize</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
         <groupId>com.zhibaocloud</groupId>
         <artifactId>carbon-exchange</artifactId>
         <version>${project.version}</version>
