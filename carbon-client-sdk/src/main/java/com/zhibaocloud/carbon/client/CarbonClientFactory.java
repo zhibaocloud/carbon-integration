@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
- * 构建与智保云投保通道推送数据的SDK。 其中 CloseableHttpClient 有连接池的实现，通过外部次构造函数传入，以便复用。
+ * 构建与智保云数据平台推送数据的SDK。 其中 CloseableHttpClient 有连接池的实现，通过外部次构造函数传入，以便复用。
  *
  * @author jun
  */
@@ -29,7 +29,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 public class CarbonClientFactory {
 
   /**
-   * 与智保云投保通道的HTTP通信客户端
+   * 与智保云数据平台的HTTP通信客户端
    */
   private final CloseableHttpClient client;
 
