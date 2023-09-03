@@ -75,7 +75,9 @@ public enum IdType implements EncodedValue {
   ENTRY_CARD("556", "入籍证书"),
   EXIT_CARD("557", "出籍证书"),
   REENTRY_CARD("558", "复籍证书"),
-  OTHER("990", "其他");
+  OTHER("990", "其他"),
+  // 港澳台居民居住证
+  GAT_RESIDENCE_CARD("1000", "港澳台居民居住证");
 
   /**
    * 存储在数据库中的码值
