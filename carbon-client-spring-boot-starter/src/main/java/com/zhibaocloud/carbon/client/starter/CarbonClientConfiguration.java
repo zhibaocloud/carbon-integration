@@ -60,6 +60,6 @@ public class CarbonClientConfiguration {
       CarbonMapperFactory factory
   ) {
     ObjectMapper mapper = factory.create();
-    return new CarbonClientFactory(mapper, httpClient, crypto);
+    return new CarbonClientFactory(httpClient, mapper, crypto);
   }
 }

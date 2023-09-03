@@ -28,10 +28,6 @@ public class DemoConfiguration {
   private DemoConfiguration() {
   }
 
-  public static String appId() {
-    return UUID.fromString("fd3c35de-ca5f-4442-87aa-17edc67f93d0").toString();
-  }
-
   public static CryptoConfiguration crypto() {
     CryptoConfiguration demo = new CryptoConfiguration();
     demo.setSymmetricAlg(SymmetricCrypto.AES_CBC_PKCS5PADDING);

@@ -29,14 +29,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 public class CarbonClientFactory {
 
   /**
-   * 序列化规则，有可能序列化的方式和应用程序默认的不一致，可以单独进行定义
-   */
-  private final ObjectMapper mapper;
-
-  /**
    * 与智保云投保通道的HTTP通信客户端
    */
   private final CloseableHttpClient client;
+
+  /**
+   * 序列化规则，有可能序列化的方式和应用程序默认的不一致，可以单独进行定义
+   */
+  private final ObjectMapper mapper;
 
   /**
    * 加解密算法工具
