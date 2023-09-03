@@ -21,8 +21,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -37,11 +35,9 @@ public class Risk {
   @Schema(title = "主附险性质", description = "“双主险”基本采用年金险/两全险+万能险的组合，需要将万能险标记为附加险", requiredMode = RequiredMode.REQUIRED)
   private MainRiskFlag flag;
 
-  @NotBlank
   @Schema(title = "险种编码", requiredMode = RequiredMode.REQUIRED)
   private String riskCode;
 
-  @NotBlank
   @Schema(title = "险种名称", requiredMode = RequiredMode.REQUIRED)
   private String riskName;
 
@@ -51,11 +47,9 @@ public class Risk {
   @Schema(title = "保险计划名称")
   private String planName;
 
-  @NotNull
   @Schema(title = "保费", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal premium;
 
-  @NotNull
   @Schema(title = "保额", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal amount;
 

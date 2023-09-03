@@ -16,15 +16,12 @@ package com.zhbiaocloud.carbon.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Schema(title = "回访数据")
 public class RtnCall {
 
-  @NotBlank
   @Schema(title = "保单号", description = "保单唯一标识符，会用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
 
@@ -46,11 +43,9 @@ public class RtnCall {
   @Schema(title = "管理机构名称", description = "保险公司分公司管理机构、或接单机构名称")
   private String manageComName;
 
-  @NotNull
   @Schema(title = "回访时间", description = "一般指回访成功日期", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime rtnCallTime;
 
-  @NotNull
   @Schema(title = "回访成功标识", description = "只有在有回访时间时才会判断回访成功标识", requiredMode = RequiredMode.REQUIRED)
   private Boolean rtnCallSuccess;
 

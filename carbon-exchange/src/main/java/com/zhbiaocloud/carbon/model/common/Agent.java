@@ -15,7 +15,6 @@ package com.zhbiaocloud.carbon.model.common;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -27,11 +26,9 @@ import lombok.Data;
 @Schema(title = "代理人信息")
 public class Agent {
 
-  @NotBlank
   @Schema(title = "代理人姓名", requiredMode = RequiredMode.REQUIRED)
   private String name;
 
-  @NotBlank
   @Schema(title = "代理人编码", description = "一般指指代理人在保险公司销管系统中的经代工号", requiredMode = RequiredMode.REQUIRED)
   private String code;
 
