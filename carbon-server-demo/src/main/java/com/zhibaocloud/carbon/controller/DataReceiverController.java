@@ -18,7 +18,6 @@ import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhibaocloud.carbon.server.sdk.CarbonMessageProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

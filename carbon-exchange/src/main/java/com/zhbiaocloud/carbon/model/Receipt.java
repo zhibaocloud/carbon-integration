@@ -13,6 +13,7 @@
 
 package com.zhbiaocloud.carbon.model;
 
+import com.zhbiaocloud.carbon.model.type.CompanyType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
@@ -27,7 +28,10 @@ import lombok.Data;
 @Schema(title = "回执数据")
 public class Receipt {
 
-  @Schema(title = "保单号", description = "保单唯一标识符，会用于去重判断", requiredMode = RequiredMode.REQUIRED)
+  @Schema(title = "保险公司", description = "保险公司编码/名称", requiredMode = RequiredMode.REQUIRED)
+  private CompanyType company;
+
+  @Schema(title = "保单号", description = "保单唯一标识符，可用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
 
   @Schema(title = "投保单号")

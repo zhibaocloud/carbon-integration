@@ -18,6 +18,7 @@ import com.zhbiaocloud.carbon.model.common.Applicant;
 import com.zhbiaocloud.carbon.model.common.Beneficiary;
 import com.zhbiaocloud.carbon.model.common.Insured;
 import com.zhbiaocloud.carbon.model.common.Risk;
+import com.zhbiaocloud.carbon.model.type.CompanyType;
 import com.zhbiaocloud.carbon.model.type.PayIntv;
 import com.zhbiaocloud.carbon.model.type.PayType;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
@@ -37,7 +38,10 @@ import lombok.Data;
 @Schema(title = "承保保单数据模型")
 public class Policy {
 
-  @Schema(title = "保单号", description = "保单唯一标识符，会用于去重判断", requiredMode = RequiredMode.REQUIRED)
+  @Schema(title = "保险公司", description = "保险公司编码/名称", requiredMode = RequiredMode.REQUIRED)
+  private CompanyType company;
+
+  @Schema(title = "保单号", description = "保单唯一标识符，可用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
 
   @Schema(title = "投保单号")
