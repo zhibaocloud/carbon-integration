@@ -24,6 +24,7 @@
   </parent>
 
   <artifactId>carbon-server-sdk</artifactId>
+  <name>Carbon Server SDK</name>
 
   <dependencies>
     <dependency>

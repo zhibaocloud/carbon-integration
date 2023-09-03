@@ -42,7 +42,6 @@ public class MockHttpConfiguration {
   public CloseableHttpClient httpClient() throws IOException, URISyntaxException {
     ClientOption option = new ClientOption();
     option.setEndpoint(new URI("http://localhost:8080"));
-    option.setAppId(DemoConfiguration.appId());
     option.setCrypto(DemoConfiguration.crypto());
 
     CarbonMapperFactory mapperFactory = new CarbonMapperFactory(false);

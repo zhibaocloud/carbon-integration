@@ -60,7 +60,6 @@ class ClientSdkTest {
   void testMessageSend() throws Exception {
     ClientOption option = new ClientOption();
     option.setEndpoint(new URI("http://localhost:8080"));
-    option.setAppId(UUID.randomUUID().toString());
     option.getCrypto().setSecret("wD2Neym2V3ZfpWzR");
     option.getCrypto().setIv("GzZz3LBzALvC6s9i");
     option.getCrypto().setDigestSalt("dZJjh7bMU57zVtSc");
