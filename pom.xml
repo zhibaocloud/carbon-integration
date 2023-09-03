@@ -23,7 +23,7 @@
   <version>0.1.0</version>
   <packaging>pom</packaging>
   <name>Carbon Integration</name>
-  <description>和智保云投保通道进行数据集成的SDK工具包以及演示程序</description>
+  <description>和智保云数据平台进行集成的SDK工具包以及演示程序</description>
   <url>https://zhibaocloud.com</url>
 
   <scm>
