@@ -31,12 +31,12 @@ public class OpenApiConfiguration {
   @Bean
   public OpenAPI openApi() {
     return new OpenAPI()
-        .info(new Info().title("智保云 - 投保通道数据推送 Mock 接口")
+        .info(new Info().title("智保云 - 数据平台数据推送 Mock 接口")
             .contact(new Contact()
                 .name("Wisefin")
                 .url("https://zhibaocloud.com")
                 .email("connect@wisefin.tech"))
-            .description("投保通道数据推送API")
+            .description("数据平台数据推送API")
             .version("v0.0.1")
             .license(new License().name("智保云").url("https://zhibaocloud.com")));
   }

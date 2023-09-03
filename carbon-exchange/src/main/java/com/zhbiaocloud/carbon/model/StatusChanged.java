@@ -16,7 +16,7 @@ package com.zhbiaocloud.carbon.model;
 import com.zhbiaocloud.carbon.model.type.PolicyStatus;
 import com.zhbiaocloud.carbon.model.type.TerminationReason;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
@@ -26,14 +26,14 @@ public class StatusChanged {
   @Schema(title = "保单状态", description = "保单状态变化后的状态")
   private PolicyStatus status;
 
-  @Schema(title = "保单中止日期")
-  private LocalDate suspendDate;
+  @Schema(title = "保单中止时间")
+  private LocalDateTime suspendTime;
 
-  @Schema(title = "保单效力回复日期")
-  private LocalDate recoverDate;
+  @Schema(title = "保单效力恢复时间")
+  private LocalDateTime recoverTime;
 
-  @Schema(title = "保单终止日期")
-  private LocalDate terminationDate;
+  @Schema(title = "保单终止时间")
+  private LocalDateTime terminationTime;
 
   @Schema(title = "保单终止原因")
   private TerminationReason terminationReason;

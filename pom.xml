@@ -20,7 +20,7 @@
 
   <groupId>com.zhibaocloud</groupId>
   <artifactId>carbon-integration</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <packaging>pom</packaging>
   <name>Carbon Integration</name>
   <description>和智保云数据平台进行集成的SDK工具包以及演示程序</description>

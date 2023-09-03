@@ -40,7 +40,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 
 /**
- * 使用 Apache HttpClient 实现的智保云投保通道客户端
+ * 使用 Apache HttpClient 实现的智保云数据平台客户端
  *
  * @author jun
  */

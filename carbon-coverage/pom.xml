@@ -19,12 +19,13 @@
   <parent>
     <groupId>com.zhibaocloud</groupId>
     <artifactId>carbon-integration</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>carbon-coverage</artifactId>
   <name>Carbon Test Coverage Report</name>
+  <packaging>pom</packaging>
   <description>测试覆盖率报告</description>
 
   <properties>

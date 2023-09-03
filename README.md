@@ -28,9 +28,49 @@ mvn spring-boot:run -pl carbon-client-demo
 
 ## 如何使用
 
-## Mock Server
+### 数据推送方
 
-用于本地调试，同时提供 OpenAPI 接口供调用方查询使用。用于演示服务端是如何收到，并处理数据的。
+使用 `carbon-client-sdk` 项目中的 `CarbonClient` 类进行数据推送。如推送方使用的是 spring-boot 构建，可以引入 `carbon-client-spring-boot-starter` 简化配置。
+
+```xml
+<dependency>
+   <groupId>com.zhibaocloud</groupId>
+   <artifactId>carbon-client-sdk</artifactId>
+   <version>0.2.0</version>
+</dependency>
+<dependency>
+   <groupId>com.zhibaocloud</groupId>
+   <artifactId>carbon-client-spring-boot-starter</artifactId>
+   <version>0.2.0</version>
+</dependency>
+```
+
+示例项目参考 `carbon-client-demo`。是一个命令行程序，随机创建数据并进行推送
+
+### 数据接收方
+
+使用 `carbon-server-sdk` 项目中的 `MessageListener` 监听数据。如接收方使用的是 spring-boot 构建，可以引入 `carbon-server-spring-boot-starter` 简化配置。
+
+```xml
+<dependency>
+   <groupId>com.zhibaocloud</groupId>
+   <artifactId>carbon-server-sdk</artifactId>
+   <version>0.2.0</version>
+</dependency>
+<dependency>
+   <groupId>com.zhibaocloud</groupId>
+   <artifactId>carbon-server-spring-boot-starter</artifactId>
+   <version>0.2.0</version>
+</dependency>
+```
+
+### 数据格式
+
+数据交换格式定义在 `carbon-exchange` 项目中
+
+* 通过 Java POJO 的方式定义了两个系统之间的数据交换格式
+* 约定数据序列化、反序列化的方式 (jackson)
+* 约定数据加解密的方式 (AES, RSA, SM4, SM2)
 
 ## FAQ
 
@@ -45,12 +85,5 @@ mvn spring-boot:run -pl carbon-client-demo
    > * 对称加密: AES, SM4
    > * 信息摘要: SHA-256, SHA-512, SHA3-256, SHA3-512, MD5, SM3
    > * 非对称加密: RSA, SM2
-4. 每个组件的作用都是什么
-   1. 数据交换模块 `carbon-exchange`
-      * 通过 Java POJO 的方式定义了两个系统之间的数据交换格式
-      * 约定数据序列化、反序列化的方式 (jackson)
-      * 约定数据加解密的方式 (AES, RSA, SM4, SM2)
-   2. 数据推送方使用 `carbon-client-sdk` 和 `carbon-client-spring-boot-starter`
-   3. 数据接收方使用 `carbon-server-sdk` 和 `carbon-server-spring-boot-starter`
 
 

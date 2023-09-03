@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 /**
- * 用于配置与智保云投保通道通信的客户端
+ * 用于配置与智保云数据平台通信的客户端
  *
  * @author jun
  */
@@ -60,6 +60,6 @@ public class CarbonClientConfiguration {
       CarbonMapperFactory factory
   ) {
     ObjectMapper mapper = factory.create();
-    return new CarbonClientFactory(mapper, httpClient, crypto);
+    return new CarbonClientFactory(httpClient, mapper, crypto);
   }
 }

@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 用于指定和智保云投保通道的连接参数
+ * 用于指定和智保云数据平台的连接参数
  *
  * @author jun
  */

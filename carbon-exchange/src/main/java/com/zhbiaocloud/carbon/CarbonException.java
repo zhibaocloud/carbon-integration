@@ -14,7 +14,7 @@
 package com.zhbiaocloud.carbon;
 
 /**
- * 与智保云投保通道的业务异常
+ * 与智保云数据平台的业务异常
  *
  * @author jun
  */
