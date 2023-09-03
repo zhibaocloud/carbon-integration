@@ -24,7 +24,7 @@
   </parent>
 
   <artifactId>carbon-client-demo</artifactId>
-  <name>Carbon Client Sample Application</name>
+  <name>Carbon Client Demo Application</name>
   <description>客户端数据推送示例应用程序</description>
 
   <properties>

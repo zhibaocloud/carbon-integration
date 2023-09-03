@@ -24,9 +24,8 @@
   </parent>
 
   <artifactId>carbon-server-demo</artifactId>
-  <name>Carbon Demo Server</name>
-  <description>Demo 服务，担当数据推送的接收方，验证数据的有效性，以及演示会如何接收推送数据
-  </description>
+  <name>Carbon Server Demo Application</name>
+  <description>Demo 服务，担当数据推送的接收方，验证数据的有效性，以及演示会如何接收推送数据</description>
 
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>

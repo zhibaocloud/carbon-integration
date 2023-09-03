@@ -25,6 +25,7 @@
 
   <artifactId>carbon-coverage</artifactId>
   <name>Carbon Test Coverage Report</name>
+  <packaging>pom</packaging>
   <description>测试覆盖率报告</description>
 
   <properties>
