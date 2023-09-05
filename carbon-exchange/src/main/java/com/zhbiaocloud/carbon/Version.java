@@ -39,7 +39,7 @@ public class Version {
   /**
    * 问题修正版本
    */
-  private int patch = 0;
+  private int patch = 1;
 
   private Version() {
   }
