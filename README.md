@@ -36,12 +36,12 @@ mvn spring-boot:run -pl carbon-client-demo
 <dependency>
    <groupId>com.zhibaocloud</groupId>
    <artifactId>carbon-client-sdk</artifactId>
-   <version>0.3.0</version>
+   <version>0.3.1</version>
 </dependency>
 <dependency>
    <groupId>com.zhibaocloud</groupId>
    <artifactId>carbon-client-spring-boot-starter</artifactId>
-   <version>0.3.0</version>
+   <version>0.3.1</version>
 </dependency>
 ```
 
@@ -55,12 +55,12 @@ mvn spring-boot:run -pl carbon-client-demo
 <dependency>
    <groupId>com.zhibaocloud</groupId>
    <artifactId>carbon-server-sdk</artifactId>
-   <version>0.3.0</version>
+   <version>0.3.1</version>
 </dependency>
 <dependency>
    <groupId>com.zhibaocloud</groupId>
    <artifactId>carbon-server-spring-boot-starter</artifactId>
-   <version>0.3.0</version>
+   <version>0.3.1</version>
 </dependency>
 ```
 

@@ -20,7 +20,7 @@
 
   <groupId>com.zhibaocloud</groupId>
   <artifactId>carbon-integration</artifactId>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
   <packaging>pom</packaging>
   <name>Carbon Integration</name>
   <description>和智保云数据平台进行集成的SDK工具包以及演示程序</description>
@@ -54,11 +54,10 @@
     <module>carbon-exchange</module>
     <module>carbon-client-sdk</module>
     <module>carbon-client-spring-boot-starter</module>
+    <module>carbon-client-demo</module>
     <module>carbon-server-sdk</module>
     <module>carbon-server-spring-boot-starter</module>
-
     <module>carbon-server-demo</module>
-    <module>carbon-client-demo</module>
     <module>carbon-coverage</module>
   </modules>
 
@@ -78,6 +77,7 @@
     <spring-boot.version>2.7.14</spring-boot.version>
     <springdoc.version>1.6.15</springdoc.version>
     <bc.version>1.74</bc.version>
+    <commons-codec.version>1.15</commons-codec.version>
     <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
     <checkstyle.latest.version>9.2</checkstyle.latest.version>
   </properties>
@@ -101,6 +101,11 @@
         <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
       </dependency>
       <dependency>
         <groupId>org.bouncycastle</groupId>
