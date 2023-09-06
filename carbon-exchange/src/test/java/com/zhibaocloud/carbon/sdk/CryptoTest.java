@@ -17,8 +17,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.CarbonOption;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
+import com.zhbiaocloud.carbon.CarbonOption;
 import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;

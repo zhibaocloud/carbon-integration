@@ -41,6 +41,9 @@ import lombok.Data;
 @Schema(title = "受益人信息")
 public class Beneficiary {
 
+  @Schema(title = "被保人编号", description = "用于关联被保人")
+  private String insuredNo;
+
   @Schema(title = "与受益人关系", requiredMode = RequiredMode.REQUIRED)
   private RelationType relationToInsured;
 

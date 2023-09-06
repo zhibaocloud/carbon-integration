@@ -20,7 +20,7 @@
 
   <groupId>com.zhibaocloud</groupId>
   <artifactId>carbon-integration</artifactId>
-  <version>0.3.1</version>
+  <version>0.4.0</version>
   <packaging>pom</packaging>
   <name>Carbon Integration</name>
   <description>和智保云数据平台进行集成的SDK工具包以及演示程序</description>
@@ -72,7 +72,6 @@
     <junit.version>4.13.2</junit.version>
     <lombok.version>1.18.26</lombok.version>
     <jackson.version>2.13.5</jackson.version>
-    <javax.annotation.version>1.3.2</javax.annotation.version>
     <swagger.version>2.2.8</swagger.version>
     <spring-boot.version>2.7.14</spring-boot.version>
     <springdoc.version>1.6.15</springdoc.version>
