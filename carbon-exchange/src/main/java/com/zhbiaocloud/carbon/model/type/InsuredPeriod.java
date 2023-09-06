@@ -20,43 +20,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 保险期间
- *
- * <table>
- *   <thead>
+ * <table border="1">
+ *   <caption>保险期间</caption>
+ *   <tr>
  *     <td>编码</td>
  *     <td>说明</td>
- *   </thead>
- *   <tbody>
- *     <tr>
- *       <td>nY</td>
- *       <td>n在这里代表数字。例如 3Y 表示：保3年</td>
- *     </tr>
- *     <tr>
- *       <td>nA</td>
- *       <td>n在这里代表数字。例如 80A 表示：保至80岁</td>
- *     </tr>
- *     <tr>
- *       <td>nD</td>
- *       <td>n在这里代表数字。例如 10D 表示：保10天</td>
- *     </tr>
- *     <tr>
- *       <td>nM</td>
- *       <td>n在这里代表数字。例如 5M 表示：保5月</td>
- *     </tr>
- *     <tr>
- *       <td>nW</td>
- *       <td>n在这里代表数字。例如 1W 表示：保1周</td>
- *     </tr>
- *     <tr>
- *       <td>O</td>
- *       <td>保终身，如转换为数字则是106</td>
- *     </tr>
- *     <tr>
- *       <td>N</td>
- *       <td>无关</td>
- *     </tr>
- *   </tbody>
+ *   </tr>
+ *   <tr>
+ *     <td>nY</td>
+ *     <td>n在这里代表数字。例如 3Y 表示：保3年</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nA</td>
+ *     <td>n在这里代表数字。例如 80A 表示：保至80岁</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nD</td>
+ *     <td>n在这里代表数字。例如 10D 表示：保10天</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nM</td>
+ *     <td>n在这里代表数字。例如 5M 表示：保5月</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nW</td>
+ *     <td>n在这里代表数字。例如 1W 表示：保1周</td>
+ *   </tr>
+ *   <tr>
+ *     <td>O</td>
+ *     <td>保终身，如转换为数字则是106</td>
+ *   </tr>
+ *   <tr>
+ *     <td>N</td>
+ *     <td>无关</td>
+ *   </tr>
  * </table>
  * <p>
  * 保险期间单位参看 {@link InsuredPeriodUnit}
