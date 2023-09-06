@@ -19,19 +19,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.intg.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.intg.CarbonOption;
-import com.zhbiaocloud.carbon.intg.CarbonResponse;
-import com.zhbiaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhbiaocloud.carbon.intg.crypto.Crypto;
-import com.zhbiaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedRequest;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
-import com.zhbiaocloud.carbon.intg.CarbonMessageType;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonReceipt;
-import com.zhbiaocloud.carbon.intg.model.CarbonRtnCall;
-import com.zhbiaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.CarbonMessageType;
+import com.zhibaocloud.carbon.intg.CarbonOption;
+import com.zhibaocloud.carbon.intg.CarbonResponse;
+import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
+import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
+import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
+import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import com.zhibaocloud.carbon.intg.server.starter.CarbonServerProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +70,7 @@ class IntegrationTest {
     option.setCrypto(config.getCrypto());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
-    EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
+    CarbonEncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
     String payload = mapper.writeValueAsString(encryptedRequest);
 
     MvcResult result = mvc.perform(post("/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0")
@@ -79,7 +79,7 @@ class IntegrationTest {
         .andExpect(status().isOk())
         .andReturn();
     String responseBody = result.getResponse().getContentAsString();
-    EncryptedResponse wrapper = mapper.readValue(responseBody, EncryptedResponse.class);
+    CarbonEncryptedResponse wrapper = mapper.readValue(responseBody, CarbonEncryptedResponse.class);
     CarbonResponse response = channel.decodeResponse(wrapper, CarbonResponse.class);
     assertThat(response.isSuccess()).isTrue();
   }

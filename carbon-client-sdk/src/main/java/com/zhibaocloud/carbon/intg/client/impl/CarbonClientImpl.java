@@ -14,19 +14,19 @@
 package com.zhibaocloud.carbon.intg.client.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhbiaocloud.carbon.intg.CarbonOption;
-import com.zhbiaocloud.carbon.intg.CarbonResponse;
-import com.zhbiaocloud.carbon.intg.CarbonMessageException;
-import com.zhbiaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhbiaocloud.carbon.intg.crypto.Crypto;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedRequest;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
-import com.zhbiaocloud.carbon.intg.CarbonMessageType;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonReceipt;
-import com.zhbiaocloud.carbon.intg.model.CarbonRtnCall;
-import com.zhbiaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.CarbonMessageException;
+import com.zhibaocloud.carbon.intg.CarbonMessageType;
+import com.zhibaocloud.carbon.intg.CarbonOption;
+import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.CarbonClient;
+import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
+import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
+import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
+import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 import java.net.URI;
 import lombok.extern.slf4j.Slf4j;
@@ -70,7 +70,7 @@ public class CarbonClientImpl implements CarbonClient {
       log.debug("request: {}", mapper.writeValueAsString(request));
     }
 
-    EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
+    CarbonEncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
 
     URI target = option.getEndpoint();
     HttpPost post = new HttpPost(target);
@@ -85,7 +85,7 @@ public class CarbonClientImpl implements CarbonClient {
 
       int statusCode = sl.getStatusCode();
       if (statusCode >= 200 && statusCode < 300) {
-        EncryptedResponse result = mapper.readValue(encryptedResponse, EncryptedResponse.class);
+        CarbonEncryptedResponse result = mapper.readValue(encryptedResponse, CarbonEncryptedResponse.class);
         CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
         if (log.isDebugEnabled()) {
           log.debug("response: {}", mapper.writeValueAsString(res));

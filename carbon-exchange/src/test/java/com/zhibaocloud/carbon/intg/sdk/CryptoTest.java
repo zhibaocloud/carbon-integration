@@ -17,19 +17,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.intg.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.intg.CarbonOption;
-import com.zhbiaocloud.carbon.intg.CarbonResponse;
-import com.zhbiaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhbiaocloud.carbon.intg.crypto.Crypto;
-import com.zhbiaocloud.carbon.intg.crypto.CryptoConfiguration;
-import com.zhbiaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedRequest;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
-import com.zhbiaocloud.carbon.intg.crypto.HashAlg;
-import com.zhbiaocloud.carbon.intg.crypto.SymmetricCrypto;
-import com.zhbiaocloud.carbon.intg.CarbonMessageType;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.CarbonMessageType;
+import com.zhibaocloud.carbon.intg.CarbonOption;
+import com.zhibaocloud.carbon.intg.CarbonResponse;
+import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
+import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
+import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.crypto.HashAlg;
+import com.zhibaocloud.carbon.intg.crypto.SymmetricCrypto;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import java.io.IOException;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -87,7 +87,7 @@ class CryptoTest {
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonPolicy originPolicy = JMockData.mock(CarbonPolicy.class);
-    EncryptedRequest req = channel.encodeRequest(CarbonMessageType.UNDERWRITE, originPolicy);
+    CarbonEncryptedRequest req = channel.encodeRequest(CarbonMessageType.UNDERWRITE, originPolicy);
     CarbonPolicy decryptedPolicy = channel.decodeRequest(req, CarbonPolicy.class);
 
     // 因为 LocalDateTime 带有毫秒，但是在序列化的时候只携带了秒。序列化后会有精度损失
@@ -96,7 +96,7 @@ class CryptoTest {
     assertThat(decryptedPolicyJson).isEqualTo(originPolicyJson);
 
     CarbonResponse originResponse = JMockData.mock(CarbonResponse.class);
-    EncryptedResponse res = channel.encodeResponse(UUID.randomUUID(), originResponse);
+    CarbonEncryptedResponse res = channel.encodeResponse(UUID.randomUUID(), originResponse);
     CarbonResponse decryptedResponse = channel.decodeResponse(res, CarbonResponse.class);
     String originResponseJson = mapper.writeValueAsString(originResponse);
     String decryptedResponseJson = mapper.writeValueAsString(decryptedResponse);

@@ -13,10 +13,10 @@
 
 package com.zhibaocloud.carbon.intg.server.sdk;
 
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonReceipt;
-import com.zhbiaocloud.carbon.intg.model.CarbonRtnCall;
-import com.zhbiaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
+import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
+import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 
 public interface CarbonMessageListener {

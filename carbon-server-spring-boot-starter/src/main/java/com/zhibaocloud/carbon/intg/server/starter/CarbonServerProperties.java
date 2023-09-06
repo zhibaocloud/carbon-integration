@@ -14,7 +14,7 @@
 package com.zhibaocloud.carbon.intg.server.starter;
 
 
-import com.zhbiaocloud.carbon.intg.crypto.CryptoConfiguration;
+import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

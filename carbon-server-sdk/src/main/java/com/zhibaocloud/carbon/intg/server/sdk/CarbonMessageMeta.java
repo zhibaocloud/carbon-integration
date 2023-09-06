@@ -13,7 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.server.sdk;
 
-import com.zhbiaocloud.carbon.intg.CarbonMessageType;
+import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
