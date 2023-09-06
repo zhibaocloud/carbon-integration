@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.zhibaocloud.carbon.client.starter.CarbonClientConfiguration
+com.zhibaocloud.carbon.intg.client.starter.CarbonClientConfiguration
