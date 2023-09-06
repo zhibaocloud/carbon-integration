@@ -66,21 +66,30 @@ public class CarbonClientImpl implements CarbonClient {
   }
 
   private void send(MessageType type, Object request) throws IOException {
+    if (log.isDebugEnabled()) {
+      log.debug("request: {}", mapper.writeValueAsString(request));
+    }
+
     EncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
 
     URI target = option.getEndpoint();
     HttpPost post = new HttpPost(target);
     String body = mapper.writeValueAsString(encryptedRequest);
+
     post.setHeader("Content-Type", "application/json;charset=utf-8");
     post.setEntity(new StringEntity(body, "UTF-8"));
 
     try (CloseableHttpResponse response = client.execute(post)) {
       StatusLine sl = response.getStatusLine();
       String encryptedResponse = EntityUtils.toString(response.getEntity());
+
       int statusCode = sl.getStatusCode();
       if (statusCode >= 200 && statusCode < 300) {
         EncryptedResponse result = mapper.readValue(encryptedResponse, EncryptedResponse.class);
         CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
+        if (log.isDebugEnabled()) {
+          log.debug("response: {}", mapper.writeValueAsString(res));
+        }
         if (!res.isSuccess()) {
           throw new MessageException(res.getMessage());
         }
