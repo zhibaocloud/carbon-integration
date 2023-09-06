@@ -25,6 +25,8 @@ public interface CarbonMessageListener {
    * 处理收到的承保数据
    *
    * @param event 承保数据
+   * @param meta 数据的元数据，包括租户标识等
+   * @throws IOException 通信失败
    */
   void on(Policy event, CarbonMessageMeta meta) throws IOException;
 
@@ -32,6 +34,8 @@ public interface CarbonMessageListener {
    * 处理收到的回执数据
    *
    * @param event 回执数据
+   * @param meta 数据的元数据，包括租户标识等
+   * @throws IOException 通信失败
    */
   void on(Receipt event, CarbonMessageMeta meta) throws IOException;
 
@@ -39,6 +43,8 @@ public interface CarbonMessageListener {
    * 处理收到的回访数据
    *
    * @param event 回访数据
+   * @param meta 数据的元数据，包括租户标识等
+   * @throws IOException 通信失败
    */
   void on(RtnCall event, CarbonMessageMeta meta) throws IOException;
 
@@ -46,6 +52,8 @@ public interface CarbonMessageListener {
    * 处理收到的保单状态变化数据
    *
    * @param status 保单状态变化数据
+   * @param meta 数据的元数据，包括租户标识等
+   * @throws IOException 通信失败
    */
   void on(StatusChanged status, CarbonMessageMeta meta) throws IOException;
 }

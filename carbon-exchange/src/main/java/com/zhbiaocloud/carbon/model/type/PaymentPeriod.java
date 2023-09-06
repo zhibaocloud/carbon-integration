@@ -20,34 +20,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 交费期间
- * <table>
- *   <thead>
+ * <table border="1">
+ *   <caption>交费期间</caption>
+ *   <tr>
  *     <td>编码</td>
  *     <td>说明</td>
- *   </thead>
- *   <tbody>
- *     <tr>
- *       <td>S</td>
- *       <td>趸交。如读取数值，返回1</td>
- *     </tr>
- *     <tr>
- *       <td>nY</td>
- *       <td>n在这里代表数字。例如 10Y 表示：交10年</td>
- *     </tr>
- *     <tr>
- *       <td>nM</td>
- *       <td>n在这里代表数字。例如 3M 表示：交3月</td>
- *     </tr>
- *     <tr>
- *       <td>nD</td>
- *       <td>n在这里代表数字。例如 5D 表示：交10天</td>
- *     </tr>
- *     <tr>
- *       <td>nA</td>
- *       <td>n在这里代表数字。例如 80A 表示：交至80岁</td>
- *     </tr>
- *   </tbody>
+ *   </tr>
+ *   <tr>
+ *     <td>S</td>
+ *     <td>趸交。如读取数值，返回1</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nY</td>
+ *     <td>n在这里代表数字。例如 10Y 表示：交10年</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nM</td>
+ *     <td>n在这里代表数字。例如 3M 表示：交3月</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nD</td>
+ *     <td>n在这里代表数字。例如 5D 表示：交10天</td>
+ *   </tr>
+ *   <tr>
+ *     <td>nA</td>
+ *     <td>n在这里代表数字。例如 80A 表示：交至80岁</td>
+ *   </tr>
  * </table>
  *
  * 交费期间单位，参看 {@link PaymentPeriodUnit}
