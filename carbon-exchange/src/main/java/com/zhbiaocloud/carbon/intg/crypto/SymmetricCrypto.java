@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
+ * Copyright (c) 2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
  * Carbon Integration SDK is licensed under Mulan PSL v2.
  *
  * You can use this software according to the terms and conditions of the Mulan PSL v2.
