@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.zhibaocloud</groupId>
     <artifactId>carbon-integration</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 

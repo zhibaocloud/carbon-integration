@@ -21,6 +21,36 @@ import lombok.NoArgsConstructor;
 
 /**
  * 交费期间
+ * <table>
+ *   <thead>
+ *     <th>编码</th>
+ *     <th>说明</th>
+ *   </thead>
+ *   <tbody>
+ *     <tr>
+ *       <td>S</td>
+ *       <td>趸交。如读取数值，返回1</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nY</td>
+ *       <td>n在这里代表数字。例如 10Y 表示：交10年</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nM</td>
+ *       <td>n在这里代表数字。例如 3M 表示：交3月</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nD</td>
+ *       <td>n在这里代表数字。例如 5D 表示：交10天</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nA</td>
+ *       <td>n在这里代表数字。例如 80A 表示：交至80岁</td>
+ *     </tr>
+ *   </tbody>
+ * </table>
+ *
+ * 交费期间单位，参看 {@link PaymentPeriodUnit}
  *
  * @author jun
  */

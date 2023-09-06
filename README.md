@@ -33,16 +33,18 @@ mvn spring-boot:run -pl carbon-client-demo
 使用 `carbon-client-sdk` 项目中的 `CarbonClient` 类进行数据推送。如推送方使用的是 spring-boot 构建，可以引入 `carbon-client-spring-boot-starter` 简化配置。
 
 ```xml
-<dependency>
-   <groupId>com.zhibaocloud</groupId>
-   <artifactId>carbon-client-sdk</artifactId>
-   <version>0.3.1</version>
-</dependency>
-<dependency>
-   <groupId>com.zhibaocloud</groupId>
-   <artifactId>carbon-client-spring-boot-starter</artifactId>
-   <version>0.3.1</version>
-</dependency>
+<dependencies>
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-client-sdk</artifactId>
+      <version>0.4.1</version>
+   </dependency>
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-client-spring-boot-starter</artifactId>
+      <version>0.4.1</version>
+   </dependency>
+</dependencies>
 ```
 
 示例项目参考 `carbon-client-demo`。是一个命令行程序，随机创建数据并进行推送
@@ -52,16 +54,18 @@ mvn spring-boot:run -pl carbon-client-demo
 使用 `carbon-server-sdk` 项目中的 `MessageListener` 监听数据。如接收方使用的是 spring-boot 构建，可以引入 `carbon-server-spring-boot-starter` 简化配置。
 
 ```xml
-<dependency>
-   <groupId>com.zhibaocloud</groupId>
-   <artifactId>carbon-server-sdk</artifactId>
-   <version>0.3.1</version>
-</dependency>
-<dependency>
-   <groupId>com.zhibaocloud</groupId>
-   <artifactId>carbon-server-spring-boot-starter</artifactId>
-   <version>0.3.1</version>
-</dependency>
+<dependencies>
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-server-sdk</artifactId>
+      <version>0.4.1</version>
+   </dependency>
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-server-spring-boot-starter</artifactId>
+      <version>0.4.1</version>
+   </dependency>
+</dependencies>
 ```
 
 ### 数据格式
