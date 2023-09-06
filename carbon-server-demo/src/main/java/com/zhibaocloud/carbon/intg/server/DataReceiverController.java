@@ -13,8 +13,8 @@
 
 package com.zhibaocloud.carbon.intg.server;
 
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedRequest;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,8 +47,8 @@ public class DataReceiverController {
   @PostMapping("/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0")
   @Operation(operationId = "receive", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<EncryptedResponse> onCallback(@RequestBody EncryptedRequest request) {
-    EncryptedResponse response = processor.process(request);
+  public ResponseEntity<CarbonEncryptedResponse> onCallback(@RequestBody CarbonEncryptedRequest request) {
+    CarbonEncryptedResponse response = processor.process(request);
     return ResponseEntity.ok(response);
   }
 }

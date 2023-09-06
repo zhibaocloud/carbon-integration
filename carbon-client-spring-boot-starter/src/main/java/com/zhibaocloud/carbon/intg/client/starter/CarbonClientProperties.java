@@ -13,7 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.client.starter;
 
-import com.zhbiaocloud.carbon.intg.crypto.CryptoConfiguration;
+import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import java.net.URI;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

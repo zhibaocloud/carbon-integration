@@ -14,12 +14,12 @@
 package com.zhibaocloud.carbon.intg.client;
 
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.intg.CarbonOption;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonReceipt;
-import com.zhbiaocloud.carbon.intg.model.CarbonRtnCall;
-import com.zhbiaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
+import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
+import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

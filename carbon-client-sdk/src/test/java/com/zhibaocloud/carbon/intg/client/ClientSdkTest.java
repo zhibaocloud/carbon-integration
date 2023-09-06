@@ -20,18 +20,18 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhbiaocloud.carbon.intg.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.intg.CarbonOption;
-import com.zhbiaocloud.carbon.intg.CarbonResponse;
-import com.zhbiaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhbiaocloud.carbon.intg.crypto.Crypto;
-import com.zhbiaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonReceipt;
-import com.zhbiaocloud.carbon.intg.model.CarbonRtnCall;
-import com.zhbiaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.CarbonOption;
+import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
+import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
+import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
+import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 import java.net.URI;
 import java.util.UUID;
@@ -73,7 +73,7 @@ class ClientSdkTest {
     message.setSuccess(true);
     message.setMessage("OK");
 
-    EncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
+    CarbonEncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
     String payload = mapper.writeValueAsString(encryptedResponse);
 
     CloseableHttpClient httpClient = mockHttpClient(payload, 200);

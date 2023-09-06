@@ -18,13 +18,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.zhbiaocloud.carbon.intg.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonRisk;
-import com.zhbiaocloud.carbon.intg.types.InsuredPeriod;
-import com.zhbiaocloud.carbon.intg.types.InsuredPeriodUnit;
-import com.zhbiaocloud.carbon.intg.types.PaymentPeriod;
-import com.zhbiaocloud.carbon.intg.types.PaymentPeriodUnit;
+import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonRisk;
+import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
+import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriodUnit;
+import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
+import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriodUnit;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -105,53 +105,53 @@ class SerializationTest {
 
   @Test
   void testInsuredPeriod() throws IOException {
-    InsuredPeriod period = new InsuredPeriod("1Y");
+    CarbonInsuredPeriod period = new CarbonInsuredPeriod("1Y");
     assertThat(period.getValue()).isEqualTo(1);
-    assertThat(period.getUnit()).isEqualTo(InsuredPeriodUnit.Y);
+    assertThat(period.getUnit()).isEqualTo(CarbonInsuredPeriodUnit.Y);
     assertThat(period).hasToString("1Y");
 
-    InsuredPeriod newPeriod = new InsuredPeriod(1, InsuredPeriodUnit.Y);
+    CarbonInsuredPeriod newPeriod = new CarbonInsuredPeriod(1, CarbonInsuredPeriodUnit.Y);
     assertThat(newPeriod).isEqualTo(period);
 
-    InsuredPeriod period1 = InsuredPeriod.of("N");
+    CarbonInsuredPeriod period1 = CarbonInsuredPeriod.of("N");
     assertThat(period1.getValue()).isZero();
-    assertThat(period1.getUnit()).isEqualTo(InsuredPeriodUnit.N);
+    assertThat(period1.getUnit()).isEqualTo(CarbonInsuredPeriodUnit.N);
     assertThat(period1).hasToString("N");
 
-    InsuredPeriod period2 = InsuredPeriod.of("O");
+    CarbonInsuredPeriod period2 = CarbonInsuredPeriod.of("O");
     assertThat(period2.getValue()).isEqualTo(106);
-    assertThat(period2.getUnit()).isEqualTo(InsuredPeriodUnit.O);
+    assertThat(period2.getUnit()).isEqualTo(CarbonInsuredPeriodUnit.O);
 
-    InsuredPeriod ip = InsuredPeriod.of("10Y");
+    CarbonInsuredPeriod ip = CarbonInsuredPeriod.of("10Y");
     CarbonRisk source = new CarbonRisk();
     source.setInsuredPeriod(ip);
 
     String json = mapper.writeValueAsString(source);
     assertThat(json).isEqualTo("{\"insuredPeriod\":\"10Y\"}");
-    InsuredPeriod restored = mapper.readValue(json, CarbonRisk.class).getInsuredPeriod();
+    CarbonInsuredPeriod restored = mapper.readValue(json, CarbonRisk.class).getInsuredPeriod();
     assertThat(ip).isEqualTo(restored);
     assertThat(restored.getValue()).isEqualTo(10);
   }
 
   @Test
   void testPaymentPeriod() throws IOException {
-    PaymentPeriod period = PaymentPeriod.of("1Y");
+    CarbonPaymentPeriod period = CarbonPaymentPeriod.of("1Y");
     assertThat(period.getValue()).isEqualTo(1);
-    assertThat(period.getUnit()).isEqualTo(PaymentPeriodUnit.Y);
+    assertThat(period.getUnit()).isEqualTo(CarbonPaymentPeriodUnit.Y);
     assertThat(period).hasToString("1Y");
 
-    PaymentPeriod newPeriod = new PaymentPeriod(1, PaymentPeriodUnit.Y);
+    CarbonPaymentPeriod newPeriod = new CarbonPaymentPeriod(1, CarbonPaymentPeriodUnit.Y);
     assertThat(newPeriod).isEqualTo(period);
 
     CarbonRisk risk = new CarbonRisk();
     risk.setPaymentPeriod(period);
     String json = mapper.writeValueAsString(risk);
     assertThat(json).isEqualTo("{\"paymentPeriod\":\"1Y\"}");
-    PaymentPeriod restored = mapper.readValue(json, CarbonRisk.class).getPaymentPeriod();
+    CarbonPaymentPeriod restored = mapper.readValue(json, CarbonRisk.class).getPaymentPeriod();
     assertThat(period).isEqualTo(restored);
 
-    PaymentPeriod single = PaymentPeriod.SINGLE;
-    assertThat(single.getUnit()).isEqualTo(PaymentPeriodUnit.S);
+    CarbonPaymentPeriod single = CarbonPaymentPeriod.SINGLE;
+    assertThat(single.getUnit()).isEqualTo(CarbonPaymentPeriodUnit.S);
 
     assertThat(single).hasToString("S");
   }

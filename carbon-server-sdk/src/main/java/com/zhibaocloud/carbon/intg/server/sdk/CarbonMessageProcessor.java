@@ -13,14 +13,14 @@
 
 package com.zhibaocloud.carbon.intg.server.sdk;
 
-import com.zhbiaocloud.carbon.intg.CarbonResponse;
-import com.zhbiaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedRequest;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
-import com.zhbiaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhbiaocloud.carbon.intg.model.CarbonReceipt;
-import com.zhbiaocloud.carbon.intg.model.CarbonRtnCall;
-import com.zhbiaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.CarbonResponse;
+import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
+import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
+import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class CarbonMessageProcessor {
 
   private final CarbonMessageListener listener;
 
-  public EncryptedResponse process(EncryptedRequest request) {
+  public CarbonEncryptedResponse process(CarbonEncryptedRequest request) {
     try {
       handle(request);
       return channel.encodeResponse(
@@ -49,7 +49,7 @@ public class CarbonMessageProcessor {
     }
   }
 
-  private void handle(EncryptedRequest request) throws IOException {
+  private void handle(CarbonEncryptedRequest request) throws IOException {
     CarbonMessageMeta meta = new CarbonMessageMeta(
         request.getRequestId(),
         request.getType(),

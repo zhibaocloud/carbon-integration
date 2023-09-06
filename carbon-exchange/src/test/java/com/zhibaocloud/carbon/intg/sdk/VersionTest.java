@@ -18,9 +18,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhbiaocloud.carbon.intg.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.intg.CarbonVersion;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedRequest;
+import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.CarbonVersion;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -32,16 +32,16 @@ class VersionTest {
   void testVersionMatch() throws JsonProcessingException {
     ObjectMapper mapper = factory.create();
     UUID requestId = UUID.fromString("4d1ec672-f1ed-4988-99d7-3228b4ebfeaa");
-    EncryptedRequest request = new EncryptedRequest();
+    CarbonEncryptedRequest request = new CarbonEncryptedRequest();
     request.setRequestId(requestId);
 
     String content = mapper.writeValueAsString(request);
 
     assertThat(content).isEqualTo(
-        "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.0.0\"}");
+        "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.1.0\"}");
 
     CarbonVersion current = CarbonVersion.CURRENT;
-    EncryptedRequest restored = mapper.readValue(content, EncryptedRequest.class);
+    CarbonEncryptedRequest restored = mapper.readValue(content, CarbonEncryptedRequest.class);
     assertThat(restored.getVersion()).isEqualTo(current);
   }
 

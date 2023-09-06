@@ -18,14 +18,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhbiaocloud.carbon.intg.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.intg.CarbonOption;
-import com.zhbiaocloud.carbon.intg.CarbonResponse;
-import com.zhbiaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhbiaocloud.carbon.intg.crypto.Crypto;
-import com.zhbiaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhbiaocloud.carbon.intg.crypto.EncryptedResponse;
+import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.CarbonOption;
+import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
+import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import java.io.IOException;
 import java.util.UUID;
 import org.apache.http.StatusLine;
@@ -55,7 +55,7 @@ public class MockHttpConfiguration {
     message.setSuccess(true);
     message.setMessage("OK");
 
-    EncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
+    CarbonEncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
     String payload = mapper.writeValueAsString(encryptedResponse);
 
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
