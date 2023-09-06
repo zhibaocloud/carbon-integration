@@ -13,8 +13,6 @@
 
 package com.zhbiaocloud.carbon.model;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zhbiaocloud.carbon.model.common.Agent;
 import com.zhbiaocloud.carbon.model.common.Applicant;
 import com.zhbiaocloud.carbon.model.common.Beneficiary;
