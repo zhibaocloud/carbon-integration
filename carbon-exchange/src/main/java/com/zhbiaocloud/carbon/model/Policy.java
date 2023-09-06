@@ -13,6 +13,8 @@
 
 package com.zhbiaocloud.carbon.model;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zhbiaocloud.carbon.model.common.Agent;
 import com.zhbiaocloud.carbon.model.common.Applicant;
 import com.zhbiaocloud.carbon.model.common.Beneficiary;
@@ -27,6 +29,7 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import lombok.Data;
 
 /**
@@ -127,6 +130,9 @@ public class Policy {
 
   @Schema(title = "保单状态")
   private PolicyStatus status;
+
+  @Schema(title = "扩展字段", description = "在投保时传递额外的参数，数据推送时会将这些扩展参数原样返回")
+  private Map<String, String> ext;
 
   @Schema(title = "代理人信息", requiredMode = RequiredMode.REQUIRED)
   private Agent agent;

@@ -73,7 +73,7 @@
     <lombok.version>1.18.26</lombok.version>
     <jackson.version>2.13.5</jackson.version>
     <swagger.version>2.2.8</swagger.version>
-    <spring-boot.version>2.7.14</spring-boot.version>
+    <spring-boot.version>2.7.15</spring-boot.version>
     <springdoc.version>1.6.15</springdoc.version>
     <bc.version>1.74</bc.version>
     <commons-codec.version>1.15</commons-codec.version>
