@@ -22,6 +22,31 @@ import lombok.NoArgsConstructor;
 /**
  * 保险期间
  *
+ * <table>
+ *   <thead>
+ *     <th>编码</th>
+ *     <th>说明</th>
+ *   </thead>
+ *   <tbody>
+ *     <tr>
+ *       <td>nY</td>
+ *       <td>n在这里代表数字。例如 3Y 表示：保3年</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nA</td>
+ *       <td>n在这里代表数字。例如 80A 表示：保至80岁</td>
+ *     </tr>
+ *     <tr>
+ *       <td>O</td>
+ *       <td>保终身，如转换为数字则是106</td>
+ *     </tr>
+ *     <tr>
+ *       <td>N</td>
+ *       <td>无关</td>
+ *     </tr>
+ *   </tbody>
+ * </table>
+ *
  * @author jun
  */
 @Data
