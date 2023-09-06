@@ -37,6 +37,18 @@ import lombok.NoArgsConstructor;
  *       <td>n在这里代表数字。例如 80A 表示：保至80岁</td>
  *     </tr>
  *     <tr>
+ *       <td>nD</td>
+ *       <td>n在这里代表数字。例如 10D 表示：保10天</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nM</td>
+ *       <td>n在这里代表数字。例如 5M 表示：保5月</td>
+ *     </tr>
+ *     <tr>
+ *       <td>nW</td>
+ *       <td>n在这里代表数字。例如 1W 表示：保1周</td>
+ *     </tr>
+ *     <tr>
  *       <td>O</td>
  *       <td>保终身，如转换为数字则是106</td>
  *     </tr>
@@ -46,6 +58,8 @@ import lombok.NoArgsConstructor;
  *     </tr>
  *   </tbody>
  * </table>
+ * <p>
+ * 保险期间单位参看 {@link InsuredPeriodUnit}
  *
  * @author jun
  */
