@@ -134,12 +134,12 @@ public class Policy {
   @Schema(title = "投保人信息", requiredMode = RequiredMode.REQUIRED)
   private Applicant applicant;
 
-  @Schema(title = "险种信息", requiredMode = RequiredMode.REQUIRED)
-  private List<Risk> risks;
-
   @Schema(title = "被保人信息", requiredMode = RequiredMode.REQUIRED)
   private List<Insured> insureds;
 
   @Schema(title = "受益人信息", description = "如果没有受益人信息，表示法定受益人")
   private List<Beneficiary> bnfs;
+
+  @Schema(title = "险种信息", requiredMode = RequiredMode.REQUIRED)
+  private List<Risk> risks;
 }

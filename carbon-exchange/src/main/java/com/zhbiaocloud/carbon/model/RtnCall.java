@@ -35,18 +35,6 @@ public class RtnCall {
   @Schema(title = "印刷号")
   private String prtNo;
 
-  @Schema(title = "中介机构编码", description = "一般指中介机构在保险公司销管系统中的编码")
-  private String agentCom;
-
-  @Schema(title = "中介机构名称", description = "一般指中介机构在保险公司销管系统中的机构名称")
-  private String agentComName;
-
-  @Schema(title = "管理机构", description = "保险公司分公司管理机构、或接单机构编码")
-  private String manageCom;
-
-  @Schema(title = "管理机构名称", description = "保险公司分公司管理机构、或接单机构名称")
-  private String manageComName;
-
   @Schema(title = "回访时间", description = "一般指回访成功日期", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime rtnCallTime;
 

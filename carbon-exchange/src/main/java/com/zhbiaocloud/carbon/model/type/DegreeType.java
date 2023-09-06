@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum DegreeType {
+public enum DegreeType implements EncodedValue {
 
   /**
    * 学历类型

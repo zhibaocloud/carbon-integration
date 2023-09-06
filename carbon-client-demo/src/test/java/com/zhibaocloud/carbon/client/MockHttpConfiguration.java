@@ -19,16 +19,14 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhbiaocloud.carbon.CarbonMapperFactory;
-import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.CarbonOption;
+import com.zhbiaocloud.carbon.CarbonResponse;
 import com.zhbiaocloud.carbon.crypto.CarbonDataChannel;
 import com.zhbiaocloud.carbon.crypto.Crypto;
 import com.zhbiaocloud.carbon.crypto.CryptoFactory;
 import com.zhbiaocloud.carbon.crypto.EncryptedResponse;
 import com.zhibaocloud.carbon.client.starter.CarbonClientProperties;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.UUID;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;

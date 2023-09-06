@@ -40,6 +40,9 @@ import lombok.Data;
 @Schema(title = "被保人信息")
 public class Insured {
 
+  @Schema(title = "被保人编号", description = "在多被保人数据中用于标识和险种的关系")
+  private String insuredNo;
+
   @Schema(title = "与投保人关系", requiredMode = RequiredMode.REQUIRED)
   private RelationType relationToApplicant;
 

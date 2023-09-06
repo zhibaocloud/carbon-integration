@@ -32,6 +32,9 @@ import lombok.Data;
 @Schema(title = "承保险种信息")
 public class Risk {
 
+  @Schema(title = "被保人编号", description = "在多被保人数据中用于标识和被保人的关系")
+  private String insuredNo;
+
   @Schema(title = "主附险性质", description = "“双主险”基本采用年金险/两全险+万能险的组合，需要将万能险标记为附加险", requiredMode = RequiredMode.REQUIRED)
   private MainRiskFlag flag;
 
@@ -50,7 +53,7 @@ public class Risk {
   @Schema(title = "保费", requiredMode = RequiredMode.REQUIRED)
   private BigDecimal premium;
 
-  @Schema(title = "保额", requiredMode = RequiredMode.REQUIRED)
+  @Schema(title = "保额")
   private BigDecimal amount;
 
   @Schema(title = "交费时间")
