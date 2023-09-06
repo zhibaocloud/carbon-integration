@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
  *
  * <table>
  *   <thead>
- *     <th>编码</th>
- *     <th>说明</th>
+ *     <td>编码</td>
+ *     <td>说明</td>
  *   </thead>
  *   <tbody>
  *     <tr>
