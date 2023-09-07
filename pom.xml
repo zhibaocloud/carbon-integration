@@ -20,7 +20,7 @@
 
   <groupId>com.zhibaocloud</groupId>
   <artifactId>carbon-integration</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <packaging>pom</packaging>
   <name>Carbon Integration</name>
   <description>和智保云数据平台进行集成的SDK工具包以及演示程序</description>
@@ -79,11 +79,6 @@
     <commons-codec.version>1.15</commons-codec.version>
     <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
     <checkstyle.latest.version>9.2</checkstyle.latest.version>
-
-    <origSourceDir>${project.basedir}/src/main/java</origSourceDir>
-    <sourceDir>${origSourceDir}</sourceDir>
-    <delombokedSourceDir>${project.build.directory}/delombok</delombokedSourceDir>
-    <sourceDirectory>${sourceDir}</sourceDirectory>
   </properties>
 
   <distributionManagement>
@@ -312,44 +307,8 @@
   <profiles>
     <profile>
       <id>release</id>
-      <properties>
-        <sourceDir>${delombokedSourceDir}</sourceDir>
-      </properties>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok-maven-plugin</artifactId>
-            <version>1.18.20.0</version>
-            <executions>
-              <execution>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>delombok</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <encoding>UTF-8</encoding>
-              <sourceDirectory>${origSourceDir}</sourceDirectory>
-              <outputDirectory>${delombokedSourceDir}</outputDirectory>
-              <addOutputDirectory>false</addOutputDirectory>
-              <formatPreferences>
-                <javaLangAsFQN>skip</javaLangAsFQN>
-                <generateDelombokComment>skip</generateDelombokComment>
-                <indent>2</indent>
-                <suppressWarnings>skip</suppressWarnings>
-              </formatPreferences>
-              <verbose>true</verbose>
-            </configuration>
-            <dependencies>
-              <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-              </dependency>
-            </dependencies>
-          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
@@ -373,48 +332,39 @@
                   <goal>jar</goal>
                 </goals>
               </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.13</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
               <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
                 <configuration>
-                  <sourcepath>${delombokedSourceDir}</sourcepath>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
                 </configuration>
               </execution>
             </executions>
-            <configuration>
-              <quiet>true</quiet>
-              <failOnWarnings>true</failOnWarnings>
-            </configuration>
           </plugin>
-<!--          <plugin>-->
-<!--            <groupId>org.sonatype.plugins</groupId>-->
-<!--            <artifactId>nexus-staging-maven-plugin</artifactId>-->
-<!--            <version>1.6.13</version>-->
-<!--            <extensions>true</extensions>-->
-<!--            <configuration>-->
-<!--              <serverId>ossrh</serverId>-->
-<!--              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
-<!--              <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
-<!--            </configuration>-->
-<!--          </plugin>-->
-<!--          <plugin>-->
-<!--            <groupId>org.apache.maven.plugins</groupId>-->
-<!--            <artifactId>maven-gpg-plugin</artifactId>-->
-<!--            <version>1.5</version>-->
-<!--            <executions>-->
-<!--              <execution>-->
-<!--                <id>sign-artifacts</id>-->
-<!--                <phase>verify</phase>-->
-<!--                <goals>-->
-<!--                  <goal>sign</goal>-->
-<!--                </goals>-->
-<!--                <configuration>-->
-<!--                  <gpgArguments>-->
-<!--                    <arg>&#45;&#45;pinentry-mode</arg>-->
-<!--                    <arg>loopback</arg>-->
-<!--                  </gpgArguments>-->
-<!--                </configuration>-->
-<!--              </execution>-->
-<!--            </executions>-->
-<!--          </plugin>-->
         </plugins>
       </build>
     </profile>
