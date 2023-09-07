@@ -79,6 +79,11 @@
     <commons-codec.version>1.15</commons-codec.version>
     <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
     <checkstyle.latest.version>9.2</checkstyle.latest.version>
+
+    <origSourceDir>${project.basedir}/src/main/java</origSourceDir>
+    <sourceDir>${origSourceDir}</sourceDir>
+    <delombokedSourceDir>${project.build.directory}/delombok</delombokedSourceDir>
+    <sourceDirectory>${sourceDir}</sourceDirectory>
   </properties>
 
   <distributionManagement>
@@ -307,6 +312,9 @@
   <profiles>
     <profile>
       <id>release</id>
+      <properties>
+        <sourceDir>${delombokedSourceDir}</sourceDir>
+      </properties>
       <build>
         <plugins>
           <plugin>
@@ -323,8 +331,8 @@
             </executions>
             <configuration>
               <encoding>UTF-8</encoding>
-              <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-              <outputDirectory>${project.build.directory}/delombok</outputDirectory>
+              <sourceDirectory>${origSourceDir}</sourceDirectory>
+              <outputDirectory>${delombokedSourceDir}</outputDirectory>
               <addOutputDirectory>false</addOutputDirectory>
               <formatPreferences>
                 <javaLangAsFQN>skip</javaLangAsFQN>
@@ -367,7 +375,7 @@
               </execution>
               <execution>
                 <configuration>
-                  <sourcepath>${project.build.directory}/delombok</sourcepath>
+                  <sourcepath>${delombokedSourceDir}</sourcepath>
                 </configuration>
               </execution>
             </executions>
@@ -376,37 +384,37 @@
               <failOnWarnings>true</failOnWarnings>
             </configuration>
           </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.13</version>
-            <extensions>true</extensions>
-            <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-              <autoReleaseAfterClose>true</autoReleaseAfterClose>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.5</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-                <configuration>
-                  <gpgArguments>
-                    <arg>--pinentry-mode</arg>
-                    <arg>loopback</arg>
-                  </gpgArguments>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
+<!--          <plugin>-->
+<!--            <groupId>org.sonatype.plugins</groupId>-->
+<!--            <artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--            <version>1.6.13</version>-->
+<!--            <extensions>true</extensions>-->
+<!--            <configuration>-->
+<!--              <serverId>ossrh</serverId>-->
+<!--              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
+<!--              <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--            </configuration>-->
+<!--          </plugin>-->
+<!--          <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-gpg-plugin</artifactId>-->
+<!--            <version>1.5</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>sign-artifacts</id>-->
+<!--                <phase>verify</phase>-->
+<!--                <goals>-->
+<!--                  <goal>sign</goal>-->
+<!--                </goals>-->
+<!--                <configuration>-->
+<!--                  <gpgArguments>-->
+<!--                    <arg>&#45;&#45;pinentry-mode</arg>-->
+<!--                    <arg>loopback</arg>-->
+<!--                  </gpgArguments>-->
+<!--                </configuration>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
         </plugins>
       </build>
     </profile>
