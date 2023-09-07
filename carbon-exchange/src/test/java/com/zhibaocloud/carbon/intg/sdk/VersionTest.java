@@ -38,7 +38,7 @@ class VersionTest {
     String content = mapper.writeValueAsString(request);
 
     assertThat(content).isEqualTo(
-        "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.1.0\"}");
+        "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.1.1\"}");
 
     CarbonVersion current = CarbonVersion.CURRENT;
     CarbonEncryptedRequest restored = mapper.readValue(content, CarbonEncryptedRequest.class);
