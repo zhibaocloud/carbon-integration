@@ -26,7 +26,7 @@ import lombok.Data;
  */
 @Data
 @Schema(title = "回执数据")
-public class CarbonReceipt {
+public class CarbonReceipt implements CarbonIdentifier {
 
   @Schema(title = "保险公司", description = "保险公司编码/名称", requiredMode = RequiredMode.REQUIRED)
   private CarbonCompanyType company;

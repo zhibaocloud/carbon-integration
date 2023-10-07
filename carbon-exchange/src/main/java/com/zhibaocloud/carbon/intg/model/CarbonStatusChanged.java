@@ -23,13 +23,16 @@ import lombok.Data;
 
 @Data
 @Schema(title = "保单状态变化")
-public class CarbonStatusChanged {
+public class CarbonStatusChanged implements CarbonIdentifier {
 
   @Schema(title = "保险公司", description = "保险公司编码/名称", requiredMode = RequiredMode.REQUIRED)
   private CarbonCompanyType company;
 
   @Schema(title = "保单号", description = "保单唯一标识符，可用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
+
+  @Schema(title = "投保单号")
+  private String proposalNo;
 
   @Schema(title = "保单状态", description = "保单状态变化后的状态")
   private CarbonPolicyStatus status;
