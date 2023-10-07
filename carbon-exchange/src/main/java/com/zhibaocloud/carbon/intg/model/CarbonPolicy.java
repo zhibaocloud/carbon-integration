@@ -32,7 +32,7 @@ import lombok.Data;
  */
 @Data
 @Schema(title = "承保保单数据模型")
-public class CarbonPolicy {
+public class CarbonPolicy implements CarbonIdentifier {
 
   @Schema(title = "保险公司", description = "保险公司编码/名称", requiredMode = RequiredMode.REQUIRED)
   private CarbonCompanyType company;
