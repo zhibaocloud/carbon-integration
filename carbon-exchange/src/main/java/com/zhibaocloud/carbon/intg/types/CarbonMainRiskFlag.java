@@ -26,12 +26,18 @@ import lombok.RequiredArgsConstructor;
 public enum CarbonMainRiskFlag implements EncodedValue {
 
   /**
-   * 仅支持一个主险
+   * 主险
    */
   MAIN("1", "主险"),
 
+  /**
+   * 附加险
+   */
   ADDITIONAL("2", "附加险"),
 
+  /**
+   * 不区分
+   */
   UNRELATED("3", "不区分");
 
   /**
@@ -39,5 +45,8 @@ public enum CarbonMainRiskFlag implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

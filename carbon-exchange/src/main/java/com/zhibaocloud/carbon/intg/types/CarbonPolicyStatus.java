@@ -26,16 +26,24 @@ import lombok.RequiredArgsConstructor;
 public enum CarbonPolicyStatus implements EncodedValue {
 
   /**
-   * 默认承保保单的状态都是有效的
+   * 有效
    */
   VALID("01", "有效"),
-
+  /**
+   * 中止
+   */
   SUSPENDED("02", "中止"),
-
+  /**
+   * 终止
+   */
   TERMINATED("03", "终止"),
-
+  /**
+   * 未生效
+   */
   INEFFECTIVE("04", "未生效"),
-
+  /**
+   * 其他
+   */
   OTHER("99", "其他");
 
   /**
@@ -43,5 +51,8 @@ public enum CarbonPolicyStatus implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

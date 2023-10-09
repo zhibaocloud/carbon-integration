@@ -35,6 +35,13 @@ public class CarbonDataChannel {
 
   private final CarbonOption option;
 
+  /**
+   * 封装链路请求。HTTP 是作为传输层使用
+   *
+   * @param type    数据类型
+   * @param request 报文详情
+   * @return 在链路上传输报文
+   */
   @SneakyThrows
   public CarbonEncryptedRequest encodeRequest(CarbonMessageType type, Object request) {
     String payload = mapper.writeValueAsString(request);
@@ -47,6 +54,13 @@ public class CarbonDataChannel {
     return message;
   }
 
+  /**
+   * 封装链路响应，用于通知发送方该数据是否已被正常消费
+   *
+   * @param requestId 请求ID
+   * @param response  相应内容
+   * @return 在链路上传输报文
+   */
   @SneakyThrows
   public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response) {
     String payload = mapper.writeValueAsString(response);
@@ -58,6 +72,12 @@ public class CarbonDataChannel {
     return message;
   }
 
+  /**
+   * 校验数据有效性，是否被篡改等
+   *
+   * @param payload    报文内容
+   * @param actualSign 摘要
+   */
   private void verify(String payload, String actualSign) {
     String expectedSign = crypto.digest(payload);
     if (!expectedSign.equals(actualSign)) {
@@ -65,6 +85,14 @@ public class CarbonDataChannel {
     }
   }
 
+  /**
+   * 解密收到的推送数据
+   *
+   * @param request 服务端收到的推送数据
+   * @param clz     需要解析的数据类型
+   * @param <T>     数据类型
+   * @return 解析后的数据
+   */
   @SneakyThrows
   public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) {
     String payload = crypto.decrypt(request.getPayload());
@@ -72,6 +100,14 @@ public class CarbonDataChannel {
     return mapper.readValue(payload, clz);
   }
 
+  /**
+   * 解密收到的响应数据
+   *
+   * @param response 推送方收到接收方的返回内容
+   * @param clz      需要解析的数据类型
+   * @param <T>      数据类型
+   * @return 解析后的数据
+   */
   @SneakyThrows
   public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) {
     String payload = crypto.decrypt(response.getPayload());

@@ -26,9 +26,13 @@ import lombok.RequiredArgsConstructor;
 public enum CarbonGenderType implements EncodedValue {
 
   /**
-   * 性别代码
+   * 男性
    */
   MALE("1", "男性"),
+
+  /**
+   * 女性
+   */
   FEMALE("2", "女性");
 
   /**
@@ -36,5 +40,8 @@ public enum CarbonGenderType implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

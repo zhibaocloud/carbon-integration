@@ -85,7 +85,8 @@ public class CarbonClientImpl implements CarbonClient {
 
       int statusCode = sl.getStatusCode();
       if (statusCode >= 200 && statusCode < 300) {
-        CarbonEncryptedResponse result = mapper.readValue(encryptedResponse, CarbonEncryptedResponse.class);
+        CarbonEncryptedResponse result = mapper.readValue(encryptedResponse,
+            CarbonEncryptedResponse.class);
         CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
         if (log.isDebugEnabled()) {
           log.debug("response: {}", mapper.writeValueAsString(res));

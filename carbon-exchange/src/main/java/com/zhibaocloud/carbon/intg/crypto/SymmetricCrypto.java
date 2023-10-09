@@ -26,18 +26,27 @@ import lombok.RequiredArgsConstructor;
 public enum SymmetricCrypto {
 
   /**
-   * 对称加密算法
+   * AES 算法，CBC 模式，PKCS5Padding 填充
    */
   AES_CBC_PKCS5PADDING("AES", "CBC", "PKCS5Padding"),
 
+  /**
+   * AES 算法，ECB 模式，PKCS5Padding 填充
+   */
   AES_ECB_PKCS5PADDING("AES", "ECB", "PKCS5Padding"),
 
+  /**
+   * SM4 算法，ECB 模式，PKCS5Padding 填充
+   */
   SM4_ECB_PKCS5PADDING("SM4", "ECB", "PKCS5Padding"),
 
+  /**
+   * SM4 算法，CBC 模式，PKCS5Padding 填充
+   */
   SM4_CBC_PKCS5PADDING("SM4", "CBC", "PKCS5Padding");
 
   private final String algorithm;
-  
+
   private final String mode;
 
   private final String padding;

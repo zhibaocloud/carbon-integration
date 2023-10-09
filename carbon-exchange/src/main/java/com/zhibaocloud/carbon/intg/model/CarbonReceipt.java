@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 回执数据推送
+ * 推送/接收回执数据模型
  *
  * @author jun
  */
@@ -28,21 +28,39 @@ import lombok.Data;
 @Schema(title = "回执数据")
 public class CarbonReceipt implements CarbonIdentifier {
 
+  /**
+   * 保险公司
+   */
   @Schema(title = "保险公司", description = "保险公司编码/名称", requiredMode = RequiredMode.REQUIRED)
   private CarbonCompanyType company;
 
+  /**
+   * 保单号
+   */
   @Schema(title = "保单号", description = "保单唯一标识符，可用于去重判断", requiredMode = RequiredMode.REQUIRED)
   private String policyNo;
 
+  /**
+   * 投保单号
+   */
   @Schema(title = "投保单号")
   private String proposalNo;
 
+  /**
+   * 印刷号
+   */
   @Schema(title = "印刷号")
   private String prtNo;
 
+  /**
+   * 回执签收时间
+   */
   @Schema(title = "回执签收时间", description = "客户（投保人）签收时间", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime receiptSignTime;
 
+  /**
+   * 回执录入时间
+   */
   @Schema(title = "回执录入时间", description = "回执回销日期，或保险公司收到回执日期", requiredMode = RequiredMode.REQUIRED)
   private LocalDateTime receiptEnteredTime;
 

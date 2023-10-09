@@ -47,7 +47,7 @@ import lombok.NoArgsConstructor;
  *     <td>n在这里代表数字。例如 80A 表示：交至80岁</td>
  *   </tr>
  * </table>
- *
+ * <p>
  * 交费期间单位，参看 {@link CarbonPaymentPeriodUnit}
  *
  * @author jun
@@ -64,6 +64,11 @@ public class CarbonPaymentPeriod {
   private int value = 0;
   private CarbonPaymentPeriodUnit unit;
 
+  /**
+   * 创建交费期间
+   *
+   * @param period 交费期间
+   */
   public CarbonPaymentPeriod(String period) {
     if ("S".equals(period)) {
       this.unit = CarbonPaymentPeriodUnit.S;
@@ -74,11 +79,22 @@ public class CarbonPaymentPeriod {
     }
   }
 
+  /**
+   * 创建交费期间
+   *
+   * @param period 交费期间格式化字符串
+   * @return 交费期间
+   */
   @JsonCreator
   public static CarbonPaymentPeriod of(String period) {
     return new CarbonPaymentPeriod(period);
   }
 
+  /**
+   * 序列化为 JSON 时的格式
+   *
+   * @return 序列化结果
+   */
   @JsonValue
   @Override
   public String toString() {

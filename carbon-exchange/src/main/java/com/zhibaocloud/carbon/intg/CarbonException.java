@@ -20,11 +20,12 @@ package com.zhibaocloud.carbon.intg;
  */
 public class CarbonException extends RuntimeException {
 
+  /**
+   * SDK 内部异常
+   *
+   * @param message 异常原因
+   */
   public CarbonException(String message) {
     super(message);
-  }
-
-  public CarbonException(String message, Throwable cause) {
-    super(message, cause);
   }
 }

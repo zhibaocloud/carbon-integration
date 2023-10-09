@@ -1,13 +1,14 @@
-# 智保云数据平台 SDK 
+# 智保云数据平台 SDK
 
-[![Java CI with Maven](https://github.com/zhibaocloud/carbon-integration/actions/workflows/ci.yaml/badge.svg)](https://github.com/zhibaocloud/carbon-integration/actions/workflows/ci.yaml) 
-[![codecov](https://codecov.io/gh/zhibaocloud/carbon-integration/graph/badge.svg?token=M45BAZQJP7)](https://codecov.io/gh/zhibaocloud/carbon-integration) 
+[![Java CI with Maven](https://github.com/zhibaocloud/carbon-integration/actions/workflows/ci.yaml/badge.svg)](https://github.com/zhibaocloud/carbon-integration/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/zhibaocloud/carbon-integration/graph/badge.svg?token=M45BAZQJP7)](https://codecov.io/gh/zhibaocloud/carbon-integration)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.zhibaocloud/carbon-integration/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.zhibaocloud/carbon-integration)
 
 ## 数据平台项目是什么
 
-该项目是 [智保云](https://zhibaocloud.com) 为满足 [保险中介机构信息化工作监管办法](http://www.gov.cn/zhengce/zhengceku/2021-01/13/content_5579627.htm)
-中要求的 `通过技术手段实现与合作保险公司的系统互通、业务互联、数据对接` 而开发的 SaaS 化对接系统。 
+该项目是 [智保云](https://zhibaocloud.com)
+为满足 [保险中介机构信息化工作监管办法](http://www.gov.cn/zhengce/zhengceku/2021-01/13/content_5579627.htm)
+中要求的 `通过技术手段实现与合作保险公司的系统互通、业务互联、数据对接` 而开发的 SaaS 化对接系统。
 通过 SDK 的方式将业务逻辑、加解密方式进行封装，减少线上联调、以及减少文档工作。
 
 项目代号: `Carbon`, 在一些 Java 内部实现类有 `Carbon` 前缀，用于区分其他通用类型。
@@ -30,7 +31,8 @@ mvn spring-boot:run -pl carbon-client-demo
 
 ### 数据推送方
 
-使用 `carbon-client-sdk` 项目中的 `CarbonClient` 类进行数据推送。如推送方使用的是 spring-boot 构建，可以引入 `carbon-client-spring-boot-starter` 简化配置。
+使用 `carbon-client-sdk` 项目中的 `CarbonClient` 类进行数据推送。如推送方使用的是 spring-boot
+构建，可以引入 `carbon-client-spring-boot-starter` 简化配置。
 
 ```xml
 <dependencies>
@@ -51,7 +53,8 @@ mvn spring-boot:run -pl carbon-client-demo
 
 ### 数据接收方
 
-使用 `carbon-server-sdk` 项目中的 `MessageListener` 监听数据。如接收方使用的是 spring-boot 构建，可以引入 `carbon-server-spring-boot-starter` 简化配置。
+使用 `carbon-server-sdk` 项目中的 `MessageListener` 监听数据。如接收方使用的是 spring-boot
+构建，可以引入 `carbon-server-spring-boot-starter` 简化配置。
 
 ```xml
 <dependencies>
@@ -84,8 +87,10 @@ mvn spring-boot:run -pl carbon-client-demo
 
 2. 在交互过程中各种加密方法都是用来做什么的
    > * 对称加密: 用于加密报文中的数据，保证数据的机密性、不被外部窃听。看到的数据为密文
-   > * 信息摘要: 用于保证数据的完整性，防止数据被篡改或损坏。（一般对称加密是按block加密，丢掉几个block仍然可以解密只是内容会不正确。而信息摘要是对整个数据进行摘要，可以发现这种篡改）
-   > * 非对称加密: 用于保证数据的真实性、防止数据被伪造。（在非对称加密中：私钥加密只能公钥解密，公钥加密只能私钥解密。因此只要私钥未被泄漏，接收方如果能通过公钥解密数据就可以确认是私钥持有者发送的）
+   > * 信息摘要:
+       用于保证数据的完整性，防止数据被篡改或损坏。（一般对称加密是按block加密，丢掉几个block仍然可以解密只是内容会不正确。而信息摘要是对整个数据进行摘要，可以发现这种篡改）
+   > * 非对称加密:
+       用于保证数据的真实性、防止数据被伪造。（在非对称加密中：私钥加密只能公钥解密，公钥加密只能私钥解密。因此只要私钥未被泄漏，接收方如果能通过公钥解密数据就可以确认是私钥持有者发送的）
 
 3. 支持的加密算法 (如使用国密，需要额外引入BC包)
    > * 对称加密: AES, SM4

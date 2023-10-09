@@ -17,13 +17,33 @@ import com.zhibaocloud.carbon.intg.types.EncodedValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 数据推送类型
+ *
+ * @author jun
+ */
 @Getter
 @RequiredArgsConstructor
 public enum CarbonMessageType implements EncodedValue {
 
+  /**
+   * 承保保单数据
+   */
   UNDERWRITE("underwrite", "承保保单数据"),
+
+  /**
+   * 回执数据
+   */
   RECEIPT("receipt", "回执数据"),
+
+  /**
+   * 回访数据
+   */
   RTN_CALL("rtnCall", "回访数据"),
+
+  /**
+   * 保单状态变化数据
+   */
   STATUS("status", "保单状态变化数据");
 
   private final String value;

@@ -12,8 +12,8 @@
   ~ See the Mulan PSL v2 for more details.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -22,7 +22,6 @@
     <version>1.2.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-
   <artifactId>carbon-client-sdk</artifactId>
   <name>Carbon Client SDK</name>
   <description>供客户端（数据推送端）使用的SDK，封装了和服务器端交互的约定细节</description>

@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 摘要算法
+ * 数据摘要，用于校验数据完整性
  *
  * @author jun
  */
@@ -26,18 +26,33 @@ import lombok.RequiredArgsConstructor;
 public enum HashAlg {
 
   /**
-   * 数据摘要，用于校验数据完整性
+   * SHA-256 算法
    */
   SHA256("SHA-256"),
 
+  /**
+   * SHA-512 算法
+   */
   SHA512("SHA-512"),
 
+  /**
+   * MD5 算法
+   */
   MD5("MD5"),
 
+  /**
+   * SM3 算法
+   */
   SM3("SM3"),
 
+  /**
+   * SHA3-256 算法
+   */
   SHA3("SHA3-256"),
 
+  /**
+   * SHA3-512 算法
+   */
   SHA3_512("SHA3-512");
 
   private final String alg;
