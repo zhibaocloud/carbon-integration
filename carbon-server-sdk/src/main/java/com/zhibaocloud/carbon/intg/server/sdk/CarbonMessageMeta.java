@@ -18,6 +18,11 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * 元数据信息，用于标记数据的来源，接收方(租户)等
+ *
+ * @author jun
+ */
 @Getter
 @AllArgsConstructor
 public class CarbonMessageMeta {
