@@ -42,24 +42,52 @@ public class ConsoleMessageListener implements CarbonMessageListener {
     this.mapper.enable(SerializationFeature.INDENT_OUTPUT);
   }
 
+  /**
+   * 处理收到的承保数据
+   *
+   * @param event 承保数据
+   * @param meta  数据的元数据，包括租户标识等
+   * @throws IOException 数据解析处理失败
+   */
   @Override
   public void on(CarbonPolicy event, CarbonMessageMeta meta) throws IOException {
     String json = mapper.writeValueAsString(event);
     log.info("received policy: {}", json);
   }
 
+  /**
+   * 处理收到的回执数据
+   *
+   * @param event 回执数据
+   * @param meta  数据的元数据，包括租户标识等
+   * @throws IOException 数据解析处理失败
+   */
   @Override
   public void on(CarbonReceipt event, CarbonMessageMeta meta) throws IOException {
     String json = mapper.writeValueAsString(event);
     log.info("received receipt: {}", json);
   }
 
+  /**
+   * 处理收到的回访数据
+   *
+   * @param event 回访数据
+   * @param meta  数据的元数据，包括租户标识等
+   * @throws IOException 数据解析处理失败
+   */
   @Override
   public void on(CarbonRtnCall event, CarbonMessageMeta meta) throws IOException {
     String json = mapper.writeValueAsString(event);
     log.info("received return call: {}", json);
   }
 
+  /**
+   * 处理收到的保单状态变化数据
+   *
+   * @param event 保单状态变化数据
+   * @param meta  数据的元数据，包括租户标识等
+   * @throws IOException 数据解析处理失败
+   */
   @Override
   public void on(CarbonStatusChanged event, CarbonMessageMeta meta) throws IOException {
     String json = mapper.writeValueAsString(event);
