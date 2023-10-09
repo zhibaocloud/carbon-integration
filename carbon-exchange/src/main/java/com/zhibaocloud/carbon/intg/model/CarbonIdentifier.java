@@ -13,6 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.model;
 
+/**
+ * 推送数据通用字段，用于去重复，或者将多个报文数据合并至同一张保单
+ *
+ * @author jun
+ */
 public interface CarbonIdentifier {
 
   /**

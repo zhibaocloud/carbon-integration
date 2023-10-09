@@ -24,14 +24,26 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum CarbonPaymentPeriodUnit {
+
   /**
-   * 交费期间
+   * 交费年数
    */
   Y("交费年数"),
+  /**
+   * 交费月数
+   */
   M("交费月数"),
+  /**
+   * 交费天数
+   */
   D("交费天数"),
+  /**
+   * 交至年龄数
+   */
   A("交至年龄数"),
-  // 一次性交清
+  /**
+   * 趸交
+   */
   S("趸交");
 
   private final String description;

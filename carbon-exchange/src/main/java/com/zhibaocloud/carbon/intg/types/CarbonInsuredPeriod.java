@@ -76,6 +76,11 @@ public class CarbonInsuredPeriod {
   private int value = 0;
   private CarbonInsuredPeriodUnit unit = CarbonInsuredPeriodUnit.Y;
 
+  /**
+   * 创建保险期间
+   *
+   * @param period 保险期间格式化字符串
+   */
   @JsonCreator
   public CarbonInsuredPeriod(String period) {
     if ("N".equals(period)) {
@@ -89,10 +94,21 @@ public class CarbonInsuredPeriod {
     }
   }
 
+  /**
+   * 创建保险期间
+   *
+   * @param period 保险期间格式化字符串
+   * @return 保险期间
+   */
   public static CarbonInsuredPeriod of(String period) {
     return new CarbonInsuredPeriod(period);
   }
 
+  /**
+   * 序列化为 JSON 时的格式
+   *
+   * @return 序列化结果
+   */
   @JsonValue
   @Override
   public String toString() {

@@ -18,7 +18,8 @@ import lombok.Setter;
 
 /**
  * 使用 AES 加密时使用 AES 支持的key长度可以是 128, 192, 256 等 但是在jdk1.8中如需支持 128 位以上的加密需要安装
- * <a href="https://www.baeldung.com/jce-enable-unlimited-strength">JCE Unlimited Strength Policy</a>
+ * <a href="https://www.baeldung.com/jce-enable-unlimited-strength">JCE Unlimited Strength
+ * Policy</a>
  *
  * @author jun
  */

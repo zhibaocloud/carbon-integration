@@ -24,10 +24,15 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum CarbonSocialSecurityFlag implements EncodedValue {
+
   /**
-   * Y,是 N,否
+   * 有社保
    */
   YES("Y", "是"),
+
+  /**
+   * 无社保
+   */
   NO("N", "否");
 
   /**
@@ -35,5 +40,8 @@ public enum CarbonSocialSecurityFlag implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

@@ -27,12 +27,24 @@ import lombok.SneakyThrows;
  */
 class CarbonCrypto implements Crypto {
 
+  /**
+   * 对称加密加密器
+   */
   private final Cipher encryptCipher;
 
+  /**
+   * 对称加密解密器
+   */
   private final Cipher decryptCipher;
 
+  /**
+   * 摘要计算
+   */
   private final MessageDigest digester;
 
+  /**
+   * 盐值
+   */
   private final String salt;
 
   @SneakyThrows
@@ -58,6 +70,12 @@ class CarbonCrypto implements Crypto {
     salt = config.getSalt();
   }
 
+  /**
+   * 对明文数据进行加密
+   *
+   * @param plain 明文
+   * @return 密文
+   */
   @SneakyThrows
   @Override
   public String encrypt(String plain) {
@@ -66,6 +84,12 @@ class CarbonCrypto implements Crypto {
     return Base64.getEncoder().encodeToString(cipher);
   }
 
+  /**
+   * 对密文数据进行解密
+   *
+   * @param cipher 密文
+   * @return 明文
+   */
   @SneakyThrows
   @Override
   public String decrypt(String cipher) {
@@ -73,6 +97,12 @@ class CarbonCrypto implements Crypto {
     return new String(decryptCipher.doFinal(raw));
   }
 
+  /**
+   * 对数据进行摘要计算，验证数据是否损坏
+   *
+   * @param payload 待计算的内容
+   * @return hash 值
+   */
   @Override
   public String digest(String payload) {
     byte[] raw = (payload + this.salt).getBytes();

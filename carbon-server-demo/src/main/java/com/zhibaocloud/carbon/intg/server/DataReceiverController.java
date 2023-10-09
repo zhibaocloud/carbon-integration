@@ -47,7 +47,8 @@ public class DataReceiverController {
   @PostMapping("/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0")
   @Operation(operationId = "receive", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<CarbonEncryptedResponse> onCallback(@RequestBody CarbonEncryptedRequest request) {
+  public ResponseEntity<CarbonEncryptedResponse> onCallback(
+      @RequestBody CarbonEncryptedRequest request) {
     CarbonEncryptedResponse response = processor.process(request);
     return ResponseEntity.ok(response);
   }

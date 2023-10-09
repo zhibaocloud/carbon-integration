@@ -26,12 +26,24 @@ import lombok.RequiredArgsConstructor;
 public enum CarbonMarriageType implements EncodedValue {
 
   /**
-   * 婚姻状况代码
+   * 未婚
    */
   UNMARRIED("10", "未婚"),
+  /**
+   * 已婚
+   */
   MARRIED("20", "已婚"),
+  /**
+   * 丧偶
+   */
   WIDOWED("30", "丧偶"),
+  /**
+   * 离婚
+   */
   DIVORCED("40", "离婚"),
+  /**
+   * 未说明的婚姻状况
+   */
   OTHER("90", "未说明的婚姻状况");
 
   /**
@@ -39,5 +51,8 @@ public enum CarbonMarriageType implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

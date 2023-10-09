@@ -13,8 +13,8 @@
   ~ See the Mulan PSL v2 for more details.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -22,33 +22,62 @@
   <artifactId>carbon-integration</artifactId>
   <version>1.2.0</version>
   <packaging>pom</packaging>
+
   <name>Carbon Integration</name>
   <description>和智保云数据平台进行集成的SDK工具包以及演示程序</description>
+
   <url>https://zhibaocloud.com</url>
-
-  <scm>
-    <url>https://github.com/zhibaocloud/carbon-integration</url>
-    <connection>scm:git:git://github.com/zhibaocloud/carbon-integration.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/zhibaocloud/carbon-integration.git
-    </developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-
-  <developers>
-    <developer>
-      <name>zhibaocloud</name>
-      <email>conntect@wisefin.tech</email>
-      <organization>zhibaocloud</organization>
-      <organizationUrl>https://www.zhibaocloud.com</organizationUrl>
-    </developer>
-  </developers>
-
   <licenses>
     <license>
       <name>木兰宽松许可证，第2版</name>
       <url>https://license.coscl.org.cn/MulanPSL2</url>
     </license>
   </licenses>
+  <developers>
+    <developer>
+      <email>conntect@wisefin.tech</email>
+      <name>zhibaocloud</name>
+      <organization>zhibaocloud</organization>
+      <organizationUrl>https://www.zhibaocloud.com</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/zhibaocloud/carbon-integration.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/zhibaocloud/carbon-integration.git
+    </developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/zhibaocloud/carbon-integration</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <properties>
+    <bc.version>1.74</bc.version>
+    <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
+    <checkstyle.latest.version>9.2</checkstyle.latest.version>
+    <commons-codec.version>1.15</commons-codec.version>
+    <httpclient.version>4.5.14</httpclient.version>
+    <jackson.version>2.13.5</jackson.version>
+    <java.version>8</java.version>
+    <junit.version>4.13.2</junit.version>
+    <lombok.version>1.18.26</lombok.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <project.build.java.source>${java.version}</project.build.java.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring-boot.version>2.7.16</spring-boot.version>
+    <springdoc.version>1.6.15</springdoc.version>
+    <swagger.version>2.2.8</swagger.version>
+  </properties>
 
   <modules>
     <module>carbon-exchange</module>
@@ -61,45 +90,128 @@
     <module>carbon-coverage</module>
   </modules>
 
-  <properties>
-    <java.version>8</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    <project.build.java.source>${java.version}</project.build.java.source>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <httpclient.version>4.5.14</httpclient.version>
-    <junit.version>4.13.2</junit.version>
-    <lombok.version>1.18.26</lombok.version>
-    <jackson.version>2.13.5</jackson.version>
-    <swagger.version>2.2.8</swagger.version>
-    <spring-boot.version>2.7.16</spring-boot.version>
-    <springdoc.version>1.6.15</springdoc.version>
-    <bc.version>1.74</bc.version>
-    <commons-codec.version>1.15</commons-codec.version>
-    <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
-    <checkstyle.latest.version>9.2</checkstyle.latest.version>
-  </properties>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.openapitools</groupId>
+          <artifactId>openapi-generator-maven-plugin</artifactId>
+          <version>6.3.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.5.0</version>
+          <configuration>
+            <locale>zh_CN</locale>
+            <nohelp>true</nohelp>
+            <show>private</show>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>io.github.git-commit-id</groupId>
+          <artifactId>git-commit-id-maven-plugin</artifactId>
+          <version>4.9.9</version>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <configuration>
+            <excludes>
+              <exclude>
+                <artifactId>lombok</artifactId>
+                <groupId>org.projectlombok</groupId>
+              </exclude>
+            </excludes>
+            <layers>
+              <enabled>true</enabled>
+            </layers>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+                <goal>build-info</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.8</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${checkstyle-maven-plugin.version}</version>
+          <configuration>
+            <configLocation>checkstyle.xml</configLocation>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.latest.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <id>prepare-agent</id>
+          </execution>
+          <execution>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <id>checkstyle</id>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${spring-boot.version}</version>
-        <type>pom</type>
         <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
@@ -194,119 +306,8 @@
     </dependencies>
   </dependencyManagement>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.openapitools</groupId>
-          <artifactId>openapi-generator-maven-plugin</artifactId>
-          <version>6.3.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>3.3.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.5.0</version>
-        </plugin>
-        <plugin>
-          <groupId>io.github.git-commit-id</groupId>
-          <artifactId>git-commit-id-maven-plugin</artifactId>
-          <version>4.9.9</version>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${spring-boot.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>repackage</goal>
-                <goal>build-info</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <layers>
-              <enabled>true</enabled>
-            </layers>
-            <excludes>
-              <exclude>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-              </exclude>
-            </excludes>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>${checkstyle-maven-plugin.version}</version>
-          <configuration>
-            <configLocation>checkstyle.xml</configLocation>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>com.puppycrawl.tools</groupId>
-              <artifactId>checkstyle</artifactId>
-              <version>${checkstyle.latest.version}</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
-    <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report-aggregate</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>checkstyle</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
   <profiles>
     <profile>
-      <id>release</id>
       <build>
         <plugins>
           <plugin>
@@ -314,10 +315,10 @@
             <artifactId>maven-source-plugin</artifactId>
             <executions>
               <execution>
-                <id>attach-sources</id>
                 <goals>
                   <goal>jar-no-fork</goal>
                 </goals>
+                <id>attach-sources</id>
               </execution>
             </executions>
           </plugin>
@@ -326,11 +327,11 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <executions>
               <execution>
-                <id>attach-sources</id>
-                <phase>verify</phase>
                 <goals>
                   <goal>jar</goal>
                 </goals>
+                <id>attach-sources</id>
+                <phase>verify</phase>
               </execution>
             </executions>
           </plugin>
@@ -340,9 +341,9 @@
             <version>1.6.13</version>
             <extensions>true</extensions>
             <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <serverId>ossrh</serverId>
             </configuration>
           </plugin>
           <plugin>
@@ -351,22 +352,23 @@
             <version>1.5</version>
             <executions>
               <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
                 <configuration>
                   <gpgArguments>
                     <arg>--pinentry-mode</arg>
                     <arg>loopback</arg>
                   </gpgArguments>
                 </configuration>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
               </execution>
             </executions>
           </plugin>
         </plugins>
       </build>
+      <id>release</id>
     </profile>
   </profiles>
 </project>

@@ -26,15 +26,36 @@ import lombok.RequiredArgsConstructor;
 public enum CarbonInsuredPeriodUnit {
 
   /**
-   * 保险期间的单位
+   * 保险年数
    */
   Y("保险年数"),
+  /**
+   * 保险月数
+   */
   M("保险月数"),
+  /**
+   * 保险周数
+   */
   W("保险周数"),
+  /**
+   * 保险天数
+   */
   D("保险天数"),
+  /**
+   * 保至年龄数
+   */
   A("保至年龄数"),
+  /**
+   * 终身
+   */
   O("终身"),
+  /**
+   * 无关
+   */
   N("无关");
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

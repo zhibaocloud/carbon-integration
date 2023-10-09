@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 受益人类型
+ * 受益人顺位
  *
  * @author jun
  */
@@ -25,19 +25,39 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum CarbonBnfGrade implements EncodedValue {
   /**
-   * 受益人类型
+   * 第一受益人
    */
   GRADE_1("1", "第一受益人"),
+
+  /**
+   * 第二受益人
+   */
   GRADE_2("2", "第二受益人"),
+
+  /**
+   * 第三受益人
+   */
   GRADE_3("3", "第三受益人"),
+
+  /**
+   * 第四受益人
+   */
   GRADE_4("4", "第四受益人"),
+
+  /**
+   * 第五受益人
+   */
   GRADE_5("5", "第五受益人");
+
 
   /**
    * 存储在数据库中的码值
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 
 }

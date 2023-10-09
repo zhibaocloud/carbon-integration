@@ -45,6 +45,10 @@ public class CarbonClientApplication implements ApplicationRunner {
 
   private final CarbonClientProperties config;
 
+  public static void main(String[] args) {
+    SpringApplication.run(CarbonClientApplication.class, args);
+  }
+
   /**
    * 单用户模式，根据配置文件创建 SDK 对象
    */
@@ -78,9 +82,5 @@ public class CarbonClientApplication implements ApplicationRunner {
   public void run(ApplicationArguments args) throws IOException {
     runClient();
     runInSaaS();
-  }
-
-  public static void main(String[] args) {
-    SpringApplication.run(CarbonClientApplication.class, args);
   }
 }

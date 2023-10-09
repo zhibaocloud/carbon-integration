@@ -16,18 +16,50 @@ package com.zhibaocloud.carbon.intg.types;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 保单终止原因
+ *
+ * @author jun
+ */
 @Getter
 @RequiredArgsConstructor
 public enum CarbonTerminationReason implements EncodedValue {
 
-  MA("01","满期终止"),
+  /**
+   * 满期终止
+   */
+  MA("01", "满期终止"),
+  /**
+   * 理赔终止
+   */
   DT("02", "理赔终止"),
+  /**
+   * 退保终止
+   */
   SU("03", "退保终止"),
+  /**
+   * 转换
+   */
   TD("04", "转换"),
+  /**
+   * 公司解约
+   */
   TC("05", "公司解约"),
+  /**
+   * 拒保终止
+   */
   DC("06", "拒保终止"),
+  /**
+   * 保单迁出
+   */
   TO("07", "保单迁出"),
+  /**
+   * 犹豫期退保
+   */
   CF("08", "犹豫期退保"),
+  /**
+   * 当日撤单
+   */
   WD("09", "当日撤单");
 
   /**
@@ -35,5 +67,8 @@ public enum CarbonTerminationReason implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

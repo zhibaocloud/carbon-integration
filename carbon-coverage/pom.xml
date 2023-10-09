@@ -12,8 +12,8 @@
   ~ See the Mulan PSL v2 for more details.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -22,7 +22,6 @@
     <version>1.2.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-
   <artifactId>carbon-coverage</artifactId>
   <name>Carbon Test Coverage Report</name>
   <description>测试覆盖率报告</description>
@@ -30,6 +29,23 @@
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+        <groupId>org.jacoco</groupId>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencies>
     <dependency>
@@ -63,26 +79,8 @@
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit-junit5</artifactId>
-      <version>1.1.0</version>
       <scope>test</scope>
+      <version>1.1.0</version>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>report-aggregate</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>report-aggregate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>

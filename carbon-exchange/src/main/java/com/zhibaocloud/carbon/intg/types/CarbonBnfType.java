@@ -26,11 +26,20 @@ import lombok.RequiredArgsConstructor;
 public enum CarbonBnfType implements EncodedValue {
 
   /**
-   * 受益人类型
+   * 身故受益人
    */
   DEATH_BENEFICIARY("1", "身故受益人"),
+  /**
+   * 生存受益人
+   */
   SURVIVAL_BENEFICIARY("2", "生存受益人"),
+  /**
+   * 红利受益人
+   */
   BONUS_BENEFICIARY("3", "红利受益人（财）"),
+  /**
+   * 未知
+   */
   UNKNOWN("4", "未知");
 
   /**
@@ -38,5 +47,8 @@ public enum CarbonBnfType implements EncodedValue {
    */
   private final String value;
 
+  /**
+   * 码表文字描述
+   */
   private final String description;
 }

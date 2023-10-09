@@ -11,11 +11,20 @@
   ~ See the Mulan PSL v2 for more details.
   -->
 
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <mirrors>
+    <mirror>
+      <id>aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Aliyun Maven Mirrors</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+  </mirrors>
+
   <servers>
     <server>
-      <id>gitlab-maven</id>
       <configuration>
         <httpHeaders>
           <property>
@@ -24,15 +33,7 @@
           </property>
         </httpHeaders>
       </configuration>
+      <id>gitlab-maven</id>
     </server>
   </servers>
-  
-  <mirrors>
-    <mirror>
-      <id>aliyun</id>
-      <name>Aliyun Maven Mirrors</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-      <mirrorOf>central</mirrorOf>
-    </mirror>
-  </mirrors>
 </settings>
