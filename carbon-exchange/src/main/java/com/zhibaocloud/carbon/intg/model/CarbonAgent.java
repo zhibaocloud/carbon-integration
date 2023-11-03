@@ -16,6 +16,7 @@ package com.zhibaocloud.carbon.intg.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 代理人信息
@@ -23,6 +24,7 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
 @Schema(title = "代理人信息")
 public class CarbonAgent {
 

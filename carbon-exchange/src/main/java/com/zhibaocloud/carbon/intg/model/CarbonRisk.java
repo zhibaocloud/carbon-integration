@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 险种信息
@@ -29,6 +30,7 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
 @Schema(title = "承保险种信息")
 public class CarbonRisk {
 
