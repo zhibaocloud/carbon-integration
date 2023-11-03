@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 推送/接收承保保单数据模型
@@ -31,6 +32,7 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
 @Schema(title = "承保保单数据模型")
 public class CarbonPolicy implements CarbonIdentifier {
 

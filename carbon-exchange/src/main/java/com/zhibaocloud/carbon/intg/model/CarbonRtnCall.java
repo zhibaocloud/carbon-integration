@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 推送/接收回访数据模型
@@ -25,6 +26,7 @@ import lombok.Data;
  * @author jun
  */
 @Data
+@NoArgsConstructor
 @Schema(title = "回访数据")
 public class CarbonRtnCall implements CarbonIdentifier {
 
