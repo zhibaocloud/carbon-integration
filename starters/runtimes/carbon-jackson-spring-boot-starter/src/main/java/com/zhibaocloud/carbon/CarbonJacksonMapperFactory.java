@@ -42,7 +42,7 @@ import lombok.RequiredArgsConstructor;
  * @author jun
  */
 @RequiredArgsConstructor
-public class DefaultCarbonMapperFactory implements CarbonMapperFactory {
+public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
 
   private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
   private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
