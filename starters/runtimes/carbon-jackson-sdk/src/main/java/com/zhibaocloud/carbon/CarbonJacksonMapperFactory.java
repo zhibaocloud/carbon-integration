@@ -30,6 +30,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
+import com.zhibaocloud.carbon.modules.CarbonInsuredPeriodModule;
+import com.zhibaocloud.carbon.modules.CarbonPaymentPeriodModule;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -58,7 +60,7 @@ public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
         // 生产环境，则忽略未知字段
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, !isProd)
         .build()
-        .registerModule(
+        .registerModules(
             new JavaTimeModule()
                 .addSerializer(LocalDate.class, new LocalDateSerializer(DATE_PTN))
                 .addDeserializer(LocalDate.class, new LocalDateDeserializer(DATE_PTN))
@@ -67,7 +69,11 @@ public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
                 .addDeserializer(LocalTime.class, new LocalTimeDeserializer(TIME_PTN))
 
                 .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DATETIME_PTN))
-                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATETIME_PTN))
+                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATETIME_PTN)),
+
+            new CarbonInsuredPeriodModule(),
+//            new CarbonVersionModule(),
+            new CarbonPaymentPeriodModule()
         )
         .setSerializationInclusion(Include.NON_NULL)
         .setSerializationInclusion(Include.NON_EMPTY);

@@ -13,8 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -85,7 +83,6 @@ public class CarbonPaymentPeriod {
    * @param period 交费期间格式化字符串
    * @return 交费期间
    */
-  @JsonCreator
   public static CarbonPaymentPeriod of(String period) {
     return new CarbonPaymentPeriod(period);
   }
@@ -95,7 +92,6 @@ public class CarbonPaymentPeriod {
    *
    * @return 序列化结果
    */
-  @JsonValue
   @Override
   public String toString() {
     if (unit == CarbonPaymentPeriodUnit.S) {
