@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.github.jsonzou.jmockdata.JMockData;
+import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -27,7 +28,6 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -63,7 +63,7 @@ class IntegrationTest {
   }
 
   private void runDataSync(CarbonMessageType type, Object request) throws Exception {
-    CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
+    CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
     Crypto crypto = new CryptoFactory().create(config.getCrypto());
 
     CarbonOption option = new CarbonOption();

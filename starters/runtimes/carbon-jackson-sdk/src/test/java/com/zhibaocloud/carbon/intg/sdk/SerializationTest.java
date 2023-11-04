@@ -18,8 +18,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
@@ -36,7 +37,7 @@ import org.junit.jupiter.api.Test;
 
 class SerializationTest {
 
-  private final CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
+  private final CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
 
   /**
    * 测试序列化的为JSON时字段的顺序。需要保证按照字母顺序进行输出，否则计算签名时会出现问题。
@@ -92,8 +93,8 @@ class SerializationTest {
 
   @Test
   void testEnvironment() throws IOException {
-    DefaultCarbonMapperFactory prodFactory = new DefaultCarbonMapperFactory(true);
-    DefaultCarbonMapperFactory devFactory = new DefaultCarbonMapperFactory(false);
+    CarbonMapperFactory prodFactory = new CarbonJacksonMapperFactory(true);
+    CarbonMapperFactory devFactory = new CarbonJacksonMapperFactory(false);
     CarbonMapper prodMapper = prodFactory.create();
     CarbonMapper devMapper = devFactory.create();
 

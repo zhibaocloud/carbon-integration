@@ -13,19 +13,17 @@
 
 package com.zhibaocloud.carbon.intg.server.starter;
 
-import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageListener;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageProcessor;
-import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 /**
  * 服务端，支持数据推送
@@ -44,12 +42,6 @@ public class CarbonServerConfiguration {
     return new CryptoFactory();
   }
 
-  @Bean
-  public DefaultCarbonMapperFactory mapperFactory(Environment environment) {
-    String[] profiles = environment.getActiveProfiles();
-    boolean isProd = Arrays.asList(profiles).contains("production");
-    return new DefaultCarbonMapperFactory(isProd);
-  }
 
   /**
    * 将解析后的数据发送给 MessageListener 并触发实际的业务逻辑
@@ -63,7 +55,7 @@ public class CarbonServerConfiguration {
   @ConditionalOnBean(CarbonMessageListener.class)
   public CarbonMessageProcessor messageProcessor(
       CarbonMessageListener listener,
-      DefaultCarbonMapperFactory mf,
+      CarbonMapperFactory mf,
       CryptoFactory cf
   ) {
     CarbonOption option = new CarbonOption();

@@ -88,6 +88,8 @@
     <module>carbon-server-spring-boot-starter</module>
     <module>carbon-server-demo</module>
     <module>carbon-coverage</module>
+    <module>starters/runtimes/carbon-jackson-sdk</module>
+    <module>starters/runtimes/carbon-jackson-spring-boot-starter</module>
   </modules>
 
   <build>
@@ -276,6 +278,16 @@
       <dependency>
         <groupId>com.zhibaocloud</groupId>
         <artifactId>carbon-server-sdk</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud.carbon</groupId>
+        <artifactId>carbon-jackson-sdk</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud.carbon</groupId>
+        <artifactId>carbon-jackson-spring-boot-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

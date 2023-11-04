@@ -15,15 +15,14 @@ package com.zhibaocloud.carbon.intg.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonAgent;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.model.CarbonBeneficiary;
 import com.zhibaocloud.carbon.intg.model.CarbonInsured;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
-import com.zhibaocloud.carbon.intg.model.EnumUtils;
 import com.zhibaocloud.carbon.intg.types.CarbonBnfGrade;
 import com.zhibaocloud.carbon.intg.types.CarbonBnfType;
 import com.zhibaocloud.carbon.intg.types.CarbonDegreeType;
@@ -48,18 +47,8 @@ import org.junit.jupiter.api.Test;
 
 class DataModelTest {
 
-  private final CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
+  private final CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
 
-  @Test
-  void testEnumTools() {
-    CarbonGenderType gender = EnumUtils.fromValue(CarbonGenderType.class, "1");
-    assertThat(gender).isEqualTo(CarbonGenderType.MALE);
-    CarbonGenderType unknown = EnumUtils.fromValue(CarbonGenderType.class, "99");
-    assertThat(unknown).isNull();
-
-    CarbonNationType nation = EnumUtils.fromValue(CarbonNationType.class, "CHN");
-    assertThat(nation).isEqualTo(CarbonNationType.CHN);
-  }
 
   private CarbonApplicant createAppnt() {
     CarbonApplicant appnt = new CarbonApplicant();

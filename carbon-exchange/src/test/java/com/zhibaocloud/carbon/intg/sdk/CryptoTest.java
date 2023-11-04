@@ -15,23 +15,11 @@ package com.zhibaocloud.carbon.intg.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.CarbonMessageType;
-import com.zhibaocloud.carbon.intg.CarbonOption;
-import com.zhibaocloud.carbon.intg.CarbonResponse;
-import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
-import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
-import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.intg.crypto.HashAlg;
 import com.zhibaocloud.carbon.intg.crypto.SymmetricCrypto;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
-import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
-import java.io.IOException;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class CryptoTest {
@@ -74,32 +62,5 @@ class CryptoTest {
       System.out.println(alg.getAlg() + ": " + hash);
       assertThat(hash).isNotNull();
     }
-  }
-
-  @Test
-  void testChannel() throws IOException {
-    CryptoConfiguration config = new CryptoConfiguration();
-    config.setSecret("g9wuZX5rQKqin9qA");
-    config.setIv("dyRnJ6bVxWTdHd64");
-    Crypto crypto = factory.create(config);
-    CarbonOption option = new CarbonOption();
-    CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
-    CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
-
-    CarbonPolicy originPolicy = JMockData.mock(CarbonPolicy.class);
-    CarbonEncryptedRequest req = channel.encodeRequest(CarbonMessageType.UNDERWRITE, originPolicy);
-    CarbonPolicy decryptedPolicy = channel.decodeRequest(req, CarbonPolicy.class);
-
-    // 因为 LocalDateTime 带有毫秒，但是在序列化的时候只携带了秒。序列化后会有精度损失
-    String originPolicyJson = mapper.writeValueAsString(originPolicy);
-    String decryptedPolicyJson = mapper.writeValueAsString(decryptedPolicy);
-    assertThat(decryptedPolicyJson).isEqualTo(originPolicyJson);
-
-    CarbonResponse originResponse = JMockData.mock(CarbonResponse.class);
-    CarbonEncryptedResponse res = channel.encodeResponse(UUID.randomUUID(), originResponse);
-    CarbonResponse decryptedResponse = channel.decodeResponse(res, CarbonResponse.class);
-    String originResponseJson = mapper.writeValueAsString(originResponse);
-    String decryptedResponseJson = mapper.writeValueAsString(decryptedResponse);
-    assertThat(decryptedResponseJson).isEqualTo(originResponseJson);
   }
 }
