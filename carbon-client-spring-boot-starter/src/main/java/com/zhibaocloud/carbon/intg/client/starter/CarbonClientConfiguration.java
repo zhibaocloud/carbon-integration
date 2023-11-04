@@ -14,7 +14,8 @@
 package com.zhibaocloud.carbon.intg.client.starter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.CarbonClient;
 import com.zhibaocloud.carbon.intg.client.CarbonClientFactory;
@@ -56,19 +57,19 @@ public class CarbonClientConfiguration {
   }
 
   @Bean
-  public CarbonMapperFactory mapperFactory(Environment environment) {
+  public DefaultCarbonMapperFactory mapperFactory(Environment environment) {
     String[] profiles = environment.getActiveProfiles();
     boolean isProd = Arrays.asList(profiles).contains("production");
-    return new CarbonMapperFactory(isProd);
+    return new DefaultCarbonMapperFactory(isProd);
   }
 
   @Bean
   public CarbonClientFactory clientFactory(
       CloseableHttpClient httpClient,
       CryptoFactory crypto,
-      CarbonMapperFactory factory
+      DefaultCarbonMapperFactory factory
   ) {
-    ObjectMapper mapper = factory.create();
+    CarbonMapper mapper = factory.create();
     return new CarbonClientFactory(httpClient, mapper, crypto);
   }
 

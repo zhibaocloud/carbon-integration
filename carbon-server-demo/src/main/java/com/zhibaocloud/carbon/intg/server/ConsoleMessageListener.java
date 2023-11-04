@@ -13,9 +13,8 @@
 
 package com.zhibaocloud.carbon.intg.server;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -35,11 +34,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsoleMessageListener implements CarbonMessageListener {
 
-  private final ObjectMapper mapper;
+  private final CarbonMapper mapper;
 
-  public ConsoleMessageListener(CarbonMapperFactory factory) {
-    this.mapper = factory.create().copy();
-    this.mapper.enable(SerializationFeature.INDENT_OUTPUT);
+  public ConsoleMessageListener(DefaultCarbonMapperFactory factory) {
+//    this.mapper = factory.create().copy();
+//    this.mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    this.mapper = factory.create();
   }
 
   /**

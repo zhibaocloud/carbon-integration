@@ -18,7 +18,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
@@ -44,8 +45,8 @@ public class MockHttpConfiguration {
     option.setEndpoint(config.getEndpoint());
     option.setCrypto(config.getCrypto());
 
-    CarbonMapperFactory mapperFactory = new CarbonMapperFactory(false);
-    ObjectMapper mapper = mapperFactory.create();
+    DefaultCarbonMapperFactory mapperFactory = new DefaultCarbonMapperFactory(false);
+    CarbonMapper mapper = mapperFactory.create();
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());

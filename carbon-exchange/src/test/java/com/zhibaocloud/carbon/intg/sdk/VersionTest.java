@@ -16,21 +16,21 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
+import java.io.IOException;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class VersionTest {
 
-  private final CarbonMapperFactory factory = new CarbonMapperFactory(false);
+  private final DefaultCarbonMapperFactory factory = new DefaultCarbonMapperFactory(false);
 
   @Test
-  void testVersionMatch() throws JsonProcessingException {
-    ObjectMapper mapper = factory.create();
+  void testVersionMatch() throws IOException {
+    CarbonMapper mapper = factory.create();
     UUID requestId = UUID.fromString("4d1ec672-f1ed-4988-99d7-3228b4ebfeaa");
     CarbonEncryptedRequest request = new CarbonEncryptedRequest();
     request.setRequestId(requestId);

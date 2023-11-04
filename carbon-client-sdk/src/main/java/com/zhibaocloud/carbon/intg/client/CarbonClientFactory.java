@@ -13,11 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 
@@ -38,7 +38,7 @@ public class CarbonClientFactory {
    * 序列化规则，有可能序列化的方式和应用程序默认的不一致，可以单独进行定义
    * TODO: 根据是否需要脱敏，使用不同的 mapper
    */
-  private final ObjectMapper mapper;
+  private final CarbonMapper mapper;
 
   /**
    * 加解密算法工具

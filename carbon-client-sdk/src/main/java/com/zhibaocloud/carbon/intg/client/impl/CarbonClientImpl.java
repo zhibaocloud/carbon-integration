@@ -13,7 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.client.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.CarbonMessageException;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
@@ -23,6 +22,7 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -47,14 +47,14 @@ public class CarbonClientImpl implements CarbonClient {
 
   private final CarbonOption option;
 
-  private final ObjectMapper mapper;
+  private final CarbonMapper mapper;
 
   private final CloseableHttpClient client;
 
   private final CarbonDataChannel channel;
 
   public CarbonClientImpl(
-      ObjectMapper mapper,
+      CarbonMapper mapper,
       CloseableHttpClient client,
       Crypto crypto,
       CarbonOption option

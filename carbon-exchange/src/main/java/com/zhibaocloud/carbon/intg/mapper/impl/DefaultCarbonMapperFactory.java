@@ -11,7 +11,7 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.intg;
+package com.zhibaocloud.carbon.intg.mapper.impl;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
@@ -28,6 +28,8 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -40,7 +42,7 @@ import lombok.RequiredArgsConstructor;
  * @author jun
  */
 @RequiredArgsConstructor
-public class CarbonMapperFactory {
+public class DefaultCarbonMapperFactory implements CarbonMapperFactory {
 
   private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
   private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
@@ -48,8 +50,8 @@ public class CarbonMapperFactory {
 
   private final boolean isProd;
 
-  public ObjectMapper create() {
-    return JsonMapper.builder()
+  public CarbonMapper create() {
+    ObjectMapper om = JsonMapper.builder()
         .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)
         .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
         // 开发、测试环境则进行报错。识别未知字段，可以及时发现问题
@@ -69,5 +71,6 @@ public class CarbonMapperFactory {
         )
         .setSerializationInclusion(Include.NON_NULL)
         .setSerializationInclusion(Include.NON_EMPTY);
+    return new CarbonJacksonMapper(om);
   }
 }

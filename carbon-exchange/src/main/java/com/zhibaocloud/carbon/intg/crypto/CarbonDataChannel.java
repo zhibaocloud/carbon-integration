@@ -13,10 +13,10 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.SignatureMissMatchException;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -29,7 +29,7 @@ import lombok.SneakyThrows;
 @RequiredArgsConstructor
 public class CarbonDataChannel {
 
-  private final ObjectMapper mapper;
+  private final CarbonMapper mapper;
 
   private final Crypto crypto;
 

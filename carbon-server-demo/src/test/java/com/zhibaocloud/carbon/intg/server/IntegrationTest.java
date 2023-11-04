@@ -17,9 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -28,6 +26,8 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -63,7 +63,7 @@ class IntegrationTest {
   }
 
   private void runDataSync(CarbonMessageType type, Object request) throws Exception {
-    ObjectMapper mapper = new CarbonMapperFactory(false).create();
+    CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
     Crypto crypto = new CryptoFactory().create(config.getCrypto());
 
     CarbonOption option = new CarbonOption();

@@ -20,7 +20,8 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
@@ -44,7 +45,7 @@ import org.mockito.Mockito;
 
 class ClientSdkTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
+  private final CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
 
   private CloseableHttpClient mockHttpClient(String payload, int statusCode) throws IOException {
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);

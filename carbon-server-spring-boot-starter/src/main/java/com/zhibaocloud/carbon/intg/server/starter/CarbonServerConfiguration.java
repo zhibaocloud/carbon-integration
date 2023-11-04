@@ -13,7 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.server.starter;
 
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
@@ -45,10 +45,10 @@ public class CarbonServerConfiguration {
   }
 
   @Bean
-  public CarbonMapperFactory mapperFactory(Environment environment) {
+  public DefaultCarbonMapperFactory mapperFactory(Environment environment) {
     String[] profiles = environment.getActiveProfiles();
     boolean isProd = Arrays.asList(profiles).contains("production");
-    return new CarbonMapperFactory(isProd);
+    return new DefaultCarbonMapperFactory(isProd);
   }
 
   /**
@@ -63,7 +63,7 @@ public class CarbonServerConfiguration {
   @ConditionalOnBean(CarbonMessageListener.class)
   public CarbonMessageProcessor messageProcessor(
       CarbonMessageListener listener,
-      CarbonMapperFactory mf,
+      DefaultCarbonMapperFactory mf,
       CryptoFactory cf
   ) {
     CarbonOption option = new CarbonOption();

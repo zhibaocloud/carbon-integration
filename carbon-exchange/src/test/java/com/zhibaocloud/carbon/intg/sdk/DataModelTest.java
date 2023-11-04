@@ -16,7 +16,8 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.mapper.impl.DefaultCarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonAgent;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.model.CarbonBeneficiary;
@@ -48,7 +49,7 @@ import org.junit.jupiter.api.Test;
 
 class DataModelTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
+  private final CarbonMapper mapper = new DefaultCarbonMapperFactory(false).create();
 
   @Test
   void testEnumTools() {
