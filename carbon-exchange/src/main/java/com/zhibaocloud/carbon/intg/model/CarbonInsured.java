@@ -34,6 +34,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 被保人信息
+ *  TODO: 将脱敏的实现抽取到mapper实现中
  *
  * @author jun
  */
