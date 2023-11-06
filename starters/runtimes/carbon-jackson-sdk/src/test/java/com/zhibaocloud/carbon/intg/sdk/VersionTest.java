@@ -15,9 +15,12 @@ package com.zhibaocloud.carbon.intg.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
+import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
 import java.io.IOException;
@@ -43,5 +46,19 @@ class VersionTest {
     CarbonVersion current = CarbonVersion.CURRENT;
     CarbonEncryptedRequest restored = mapper.readValue(content, CarbonEncryptedRequest.class);
     assertThat(restored.getVersion()).isEqualTo(current);
+  }
+
+  @Test
+  void testVersionSerialization() throws IOException {
+    ObjectMapper om = new ObjectMapper();
+    om.setSerializationInclusion(Include.NON_NULL);
+
+    CarbonEncryptedResponse response = new CarbonEncryptedResponse();
+    String serializedResponse = om.writeValueAsString(response);
+
+    CarbonMapper mapper = factory.create();
+    String mapperResponseJson = mapper.writeValueAsString(response);
+
+    assertThat(mapperResponseJson).isEqualTo(serializedResponse);
   }
 }
