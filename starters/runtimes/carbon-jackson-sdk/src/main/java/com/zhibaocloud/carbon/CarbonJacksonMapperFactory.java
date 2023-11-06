@@ -32,6 +32,7 @@ import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
 import com.zhibaocloud.carbon.modules.CarbonInsuredPeriodModule;
 import com.zhibaocloud.carbon.modules.CarbonPaymentPeriodModule;
+import com.zhibaocloud.carbon.modules.CarbonVersionModule;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -72,7 +73,7 @@ public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
                 .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATETIME_PTN)),
 
             new CarbonInsuredPeriodModule(),
-//            new CarbonVersionModule(),
+            new CarbonVersionModule(),
             new CarbonPaymentPeriodModule()
         )
         .setSerializationInclusion(Include.NON_NULL)
