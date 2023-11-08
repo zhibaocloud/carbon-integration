@@ -16,10 +16,11 @@ public class CarbonObjectDesensitizeSerializer extends StdSerializer<Object> {
 
     private final CarbonDesensitization<Object> desensitization;
 
-    protected CarbonObjectDesensitizeSerializer(CarbonDesensitization<Object> desensitization) {
+    public CarbonObjectDesensitizeSerializer(CarbonDesensitization<Object> desensitization) {
         super(Object.class);
         this.desensitization = desensitization;
     }
+
 
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
@@ -30,7 +31,8 @@ public class CarbonObjectDesensitizeSerializer extends StdSerializer<Object> {
             } catch (Exception e) {
                 gen.writeObject(value);
             }
+        } else {
+            gen.writeObject(value);
         }
-        gen.writeObject(value);
     }
 }
