@@ -1,7 +1,7 @@
 package com.zhibaocloud.carbon.intg.desensitization.annotations;
 
 
-import com.zhibaocloud.carbon.intg.desensitization.EmailDesensitization;
+import com.zhibaocloud.carbon.intg.desensitization.CarbonPhoneDesensitization;
 
 import java.lang.annotation.*;
 
@@ -10,7 +10,7 @@ import java.lang.annotation.*;
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Desensitize(using = EmailDesensitization.class)
+@CarbonDesensitize(using = CarbonPhoneDesensitization.class)
 @Documented
-public @interface EmailDesensitize {
+public @interface CarbonPhoneDesensitize {
 }

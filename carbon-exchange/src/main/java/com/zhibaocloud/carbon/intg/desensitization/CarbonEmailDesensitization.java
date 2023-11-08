@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * @author yangtuo
  */
-public class EmailDesensitization implements StringDesensitization {
+public class CarbonEmailDesensitization implements CarbonStringDesensitization {
 
     /**
      * 邮箱正则(半匹配)

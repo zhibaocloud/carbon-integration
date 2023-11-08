@@ -1,7 +1,7 @@
 package com.zhibaocloud.carbon.intg.desensitization.annotations;
 
 
-import com.zhibaocloud.carbon.intg.desensitization.IDCardDesensitization;
+import com.zhibaocloud.carbon.intg.desensitization.CarbonSimpleStringDesensitization;
 
 import java.lang.annotation.*;
 
@@ -10,7 +10,7 @@ import java.lang.annotation.*;
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Desensitize(using = IDCardDesensitization.class)
+@CarbonDesensitize(using = CarbonSimpleStringDesensitization.class)
 @Documented
-public @interface IDCardDesensitize {
+public @interface CarbonStringDesensitize {
 }

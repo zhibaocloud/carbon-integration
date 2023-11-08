@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * @author yangtuo
  */
-public class PhoneDesensitization implements StringDesensitization {
+public class CarbonPhoneDesensitization implements CarbonStringDesensitization {
 
     /**
      * 手机号正则

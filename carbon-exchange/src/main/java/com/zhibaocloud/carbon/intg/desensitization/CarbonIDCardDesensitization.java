@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * @author yangtuo
  */
-public class IDCardDesensitization implements StringDesensitization {
+public class CarbonIDCardDesensitization implements CarbonStringDesensitization {
 
 
     /**

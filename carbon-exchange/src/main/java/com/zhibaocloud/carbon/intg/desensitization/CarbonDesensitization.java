@@ -3,7 +3,7 @@ package com.zhibaocloud.carbon.intg.desensitization;
 /**
  * @author yangtuo
  */
-public interface Desensitization<T> {
+public interface CarbonDesensitization<T> {
 
     /**
      * 脱敏
