@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
+
 import java.io.IOException;
 
 /**
@@ -15,34 +16,34 @@ import java.io.IOException;
  */
 public class CarbonInsuredPeriodModule extends SimpleModule {
 
-  {
-    addSerializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodSerializer());
-    addDeserializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodDeserializer());
-  }
-
-  static class CarbonInsuredPeriodSerializer extends StdSerializer<CarbonInsuredPeriod> {
-
-    protected CarbonInsuredPeriodSerializer() {
-      super(CarbonInsuredPeriod.class);
+    {
+        addSerializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodSerializer());
+        addDeserializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodDeserializer());
     }
 
-    @Override
-    public void serialize(CarbonInsuredPeriod value, JsonGenerator gen, SerializerProvider provider)
-        throws IOException {
-      gen.writeString(value.toString());
-    }
-  }
+    static class CarbonInsuredPeriodSerializer extends StdSerializer<CarbonInsuredPeriod> {
 
-  static class CarbonInsuredPeriodDeserializer extends StdDeserializer<CarbonInsuredPeriod> {
+        protected CarbonInsuredPeriodSerializer() {
+            super(CarbonInsuredPeriod.class);
+        }
 
-    protected CarbonInsuredPeriodDeserializer() {
-      super(CarbonInsuredPeriod.class);
+        @Override
+        public void serialize(CarbonInsuredPeriod value, JsonGenerator gen, SerializerProvider provider)
+                throws IOException {
+            gen.writeString(value.toString());
+        }
     }
 
-    @Override
-    public CarbonInsuredPeriod deserialize(JsonParser p, DeserializationContext ctxt)
-        throws IOException {
-      return new CarbonInsuredPeriod(p.getValueAsString());
+    static class CarbonInsuredPeriodDeserializer extends StdDeserializer<CarbonInsuredPeriod> {
+
+        protected CarbonInsuredPeriodDeserializer() {
+            super(CarbonInsuredPeriod.class);
+        }
+
+        @Override
+        public CarbonInsuredPeriod deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException {
+            return new CarbonInsuredPeriod(p.getValueAsString());
+        }
     }
-  }
 }
