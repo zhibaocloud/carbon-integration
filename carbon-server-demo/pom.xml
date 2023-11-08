@@ -53,7 +53,7 @@
       <artifactId>carbon-server-sdk</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.zhibaocloud.carbon</groupId>
+      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-jackson-spring-boot-starter</artifactId>
     </dependency>
     <dependency>

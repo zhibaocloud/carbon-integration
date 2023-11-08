@@ -1,7 +1,5 @@
 package com.zhibaocloud.carbon.intg.desensitization;
 
-import com.github.Symbol;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

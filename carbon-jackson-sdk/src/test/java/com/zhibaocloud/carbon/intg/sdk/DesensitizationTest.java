@@ -1,13 +1,12 @@
 package com.zhibaocloud.carbon.intg.sdk;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
 import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author yangtuo
