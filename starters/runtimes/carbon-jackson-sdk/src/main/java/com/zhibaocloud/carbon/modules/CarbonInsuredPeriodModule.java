@@ -16,34 +16,34 @@ import java.io.IOException;
  */
 public class CarbonInsuredPeriodModule extends SimpleModule {
 
-    {
-        addSerializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodSerializer());
-        addDeserializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodDeserializer());
+  {
+    addSerializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodSerializer());
+    addDeserializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodDeserializer());
+  }
+
+  static class CarbonInsuredPeriodSerializer extends StdSerializer<CarbonInsuredPeriod> {
+
+    protected CarbonInsuredPeriodSerializer() {
+      super(CarbonInsuredPeriod.class);
     }
 
-    static class CarbonInsuredPeriodSerializer extends StdSerializer<CarbonInsuredPeriod> {
+    @Override
+    public void serialize(CarbonInsuredPeriod value, JsonGenerator gen, SerializerProvider provider)
+        throws IOException {
+      gen.writeString(value.toString());
+    }
+  }
 
-        protected CarbonInsuredPeriodSerializer() {
-            super(CarbonInsuredPeriod.class);
-        }
+  static class CarbonInsuredPeriodDeserializer extends StdDeserializer<CarbonInsuredPeriod> {
 
-        @Override
-        public void serialize(CarbonInsuredPeriod value, JsonGenerator gen, SerializerProvider provider)
-                throws IOException {
-            gen.writeString(value.toString());
-        }
+    protected CarbonInsuredPeriodDeserializer() {
+      super(CarbonInsuredPeriod.class);
     }
 
-    static class CarbonInsuredPeriodDeserializer extends StdDeserializer<CarbonInsuredPeriod> {
-
-        protected CarbonInsuredPeriodDeserializer() {
-            super(CarbonInsuredPeriod.class);
-        }
-
-        @Override
-        public CarbonInsuredPeriod deserialize(JsonParser p, DeserializationContext ctxt)
-                throws IOException {
-            return new CarbonInsuredPeriod(p.getValueAsString());
-        }
+    @Override
+    public CarbonInsuredPeriod deserialize(JsonParser p, DeserializationContext ctxt)
+        throws IOException {
+      return new CarbonInsuredPeriod(p.getValueAsString());
     }
+  }
 }

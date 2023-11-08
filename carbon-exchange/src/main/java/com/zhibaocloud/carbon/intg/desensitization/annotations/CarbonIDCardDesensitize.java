@@ -13,4 +13,5 @@ import java.lang.annotation.*;
 @CarbonDesensitize(using = CarbonIDCardDesensitization.class)
 @Documented
 public @interface CarbonIDCardDesensitize {
+
 }

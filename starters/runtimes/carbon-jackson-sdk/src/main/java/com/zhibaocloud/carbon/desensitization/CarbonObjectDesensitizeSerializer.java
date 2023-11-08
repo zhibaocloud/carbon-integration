@@ -14,25 +14,25 @@ import java.io.IOException;
 @Getter
 public class CarbonObjectDesensitizeSerializer extends StdSerializer<Object> {
 
-    private final CarbonDesensitization<Object> desensitization;
+  private final CarbonDesensitization<Object> desensitization;
 
-    public CarbonObjectDesensitizeSerializer(CarbonDesensitization<Object> desensitization) {
-        super(Object.class);
-        this.desensitization = desensitization;
+  public CarbonObjectDesensitizeSerializer(CarbonDesensitization<Object> desensitization) {
+    super(Object.class);
+    this.desensitization = desensitization;
+  }
+
+
+  @Override
+  public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    CarbonDesensitization<Object> objectDesensitization = getDesensitization();
+    if (objectDesensitization != null) {
+      try {
+        gen.writeObject(objectDesensitization.desensitize(value));
+      } catch (Exception e) {
+        gen.writeObject(value);
+      }
+    } else {
+      gen.writeObject(value);
     }
-
-
-    @Override
-    public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        CarbonDesensitization<Object> objectDesensitization = getDesensitization();
-        if (objectDesensitization != null) {
-            try {
-                gen.writeObject(objectDesensitization.desensitize(value));
-            } catch (Exception e) {
-                gen.writeObject(value);
-            }
-        } else {
-            gen.writeObject(value);
-        }
-    }
+  }
 }

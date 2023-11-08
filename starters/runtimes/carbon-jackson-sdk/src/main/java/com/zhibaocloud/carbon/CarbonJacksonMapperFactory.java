@@ -49,38 +49,38 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 @RequiredArgsConstructor
 public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
 
-    private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
-    private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter DATETIME_PTN = ofPattern("yyyy-MM-dd HH:mm:ss");
+  private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
+  private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
+  private static final DateTimeFormatter DATETIME_PTN = ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private final boolean isProd;
+  private final boolean isProd;
 
-    public CarbonMapper create() {
-        ObjectMapper om = JsonMapper.builder()
-                .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)
-                .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
-                // 开发、测试环境则进行报错。识别未知字段，可以及时发现问题
-                // 生产环境，则忽略未知字段
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, !isProd)
-                .build()
-                .registerModules(
-                        new JavaTimeModule()
-                                .addSerializer(LocalDate.class, new LocalDateSerializer(DATE_PTN))
-                                .addDeserializer(LocalDate.class, new LocalDateDeserializer(DATE_PTN))
+  public CarbonMapper create() {
+    ObjectMapper om = JsonMapper.builder()
+        .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)
+        .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
+        // 开发、测试环境则进行报错。识别未知字段，可以及时发现问题
+        // 生产环境，则忽略未知字段
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, !isProd)
+        .build()
+        .registerModules(
+            new JavaTimeModule()
+                .addSerializer(LocalDate.class, new LocalDateSerializer(DATE_PTN))
+                .addDeserializer(LocalDate.class, new LocalDateDeserializer(DATE_PTN))
 
-                                .addSerializer(LocalTime.class, new LocalTimeSerializer(TIME_PTN))
-                                .addDeserializer(LocalTime.class, new LocalTimeDeserializer(TIME_PTN))
+                .addSerializer(LocalTime.class, new LocalTimeSerializer(TIME_PTN))
+                .addDeserializer(LocalTime.class, new LocalTimeDeserializer(TIME_PTN))
 
-                                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DATETIME_PTN))
-                                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATETIME_PTN)),
+                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DATETIME_PTN))
+                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATETIME_PTN)),
 
-                        new CarbonInsuredPeriodModule(),
-                        new CarbonVersionModule(),
-                        new CarbonPaymentPeriodModule(),
-                        new CarbonDesensitizationModule()
-                )
-                .setSerializationInclusion(Include.NON_NULL)
-                .setSerializationInclusion(Include.NON_EMPTY);
-        return new CarbonJacksonMapper(om);
-    }
+            new CarbonInsuredPeriodModule(),
+            new CarbonVersionModule(),
+            new CarbonPaymentPeriodModule(),
+            new CarbonDesensitizationModule()
+        )
+        .setSerializationInclusion(Include.NON_NULL)
+        .setSerializationInclusion(Include.NON_EMPTY);
+    return new CarbonJacksonMapper(om);
+  }
 }

@@ -12,5 +12,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface CarbonDesensitize {
-    Class<? extends CarbonDesensitization<?>> using();
+
+  Class<? extends CarbonDesensitization<?>> using();
 }

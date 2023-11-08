@@ -8,7 +8,7 @@ import com.zhibaocloud.carbon.desensitization.CarbonDesensitizationSerializerMod
  */
 public class CarbonDesensitizationModule extends SimpleModule {
 
-    {
-        setSerializerModifier(new CarbonDesensitizationSerializerModifier());
-    }
+  {
+    setSerializerModifier(new CarbonDesensitizationSerializerModifier());
+  }
 }

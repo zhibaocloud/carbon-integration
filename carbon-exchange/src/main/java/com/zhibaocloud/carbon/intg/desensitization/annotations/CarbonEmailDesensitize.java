@@ -13,4 +13,5 @@ import java.lang.annotation.*;
 @CarbonDesensitize(using = CarbonEmailDesensitization.class)
 @Documented
 public @interface CarbonEmailDesensitize {
+
 }
