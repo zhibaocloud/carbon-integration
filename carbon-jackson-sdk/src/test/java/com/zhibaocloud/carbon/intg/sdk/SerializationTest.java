@@ -18,9 +18,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
+import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 
 class SerializationTest {
 
-  private final CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
+  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
 
   /**
    * 测试序列化的为JSON时字段的顺序。需要保证按照字母顺序进行输出，否则计算签名时会出现问题。
@@ -48,13 +48,13 @@ class SerializationTest {
     source.put("b", "b");
     source.put("a", "a");
 
-    String json = mapper.writeValueAsString(source);
+    String json = mapper.serialize(source);
     assertThat(json).isEqualTo("{\"a\":\"a\",\"b\":\"b\"}");
 
     Map<String, Object> nested = new HashMap<>();
     nested.put("c", source);
     nested.put("d", source);
-    String nestedJson = mapper.writeValueAsString(nested);
+    String nestedJson = mapper.serialize(nested);
     assertThat(nestedJson).isEqualTo(
         "{\"c\":{\"a\":\"a\",\"b\":\"b\"},\"d\":{\"a\":\"a\",\"b\":\"b\"}}");
   }
@@ -68,7 +68,7 @@ class SerializationTest {
     source.put("date", date);
     source.put("datetime", datetime);
     source.put("time", time);
-    String json = mapper.writeValueAsString(source);
+    String json = mapper.serialize(source);
     assertThat(json).isEqualTo(
         "{\"date\":\"2023-03-29\",\"datetime\":\"2023-03-29 00:01:01\",\"time\":\"23:59:59\"}");
   }
@@ -87,21 +87,21 @@ class SerializationTest {
     assertThat(originValue).isEqualTo(
         "{\"zero\":0,\"emptyValue\":\"\",\"emptyMap\":{},\"emptyArray\":[],\"nullValue\":null}");
 
-    String json = mapper.writeValueAsString(source);
+    String json = mapper.serialize(source);
     assertThat(json).isEqualTo("{\"zero\":0}");
   }
 
   @Test
   void testEnvironment() throws IOException {
-    CarbonMapperFactory prodFactory = new CarbonJacksonMapperFactory(true);
-    CarbonMapperFactory devFactory = new CarbonJacksonMapperFactory(false);
-    CarbonMapper prodMapper = prodFactory.create();
-    CarbonMapper devMapper = devFactory.create();
+    CarbonSerializerFactory prodFactory = new CarbonJacksonSerializerFactory(true);
+    CarbonSerializerFactory devFactory = new CarbonJacksonSerializerFactory(false);
+    CarbonSerializer prodMapper = prodFactory.create();
+    CarbonSerializer devMapper = devFactory.create();
 
-    CarbonPolicy prodPolicy = prodMapper.readValue("{\"a\":1}", CarbonPolicy.class);
+    CarbonPolicy prodPolicy = prodMapper.deserialize("{\"a\":1}", CarbonPolicy.class);
     assertThat(prodPolicy).isNotNull();
 
-    assertThatThrownBy(() -> devMapper.readValue("{\"a\":1}", CarbonPolicy.class))
+    assertThatThrownBy(() -> devMapper.deserialize("{\"a\":1}", CarbonPolicy.class))
         .isInstanceOf(UnrecognizedPropertyException.class);
   }
 
@@ -128,9 +128,9 @@ class SerializationTest {
     CarbonRisk source = new CarbonRisk();
     source.setInsuredPeriod(ip);
 
-    String json = mapper.writeValueAsString(source);
+    String json = mapper.serialize(source);
     assertThat(json).isEqualTo("{\"insuredPeriod\":\"10Y\"}");
-    CarbonInsuredPeriod restored = mapper.readValue(json, CarbonRisk.class).getInsuredPeriod();
+    CarbonInsuredPeriod restored = mapper.deserialize(json, CarbonRisk.class).getInsuredPeriod();
     assertThat(ip).isEqualTo(restored);
     assertThat(restored.getValue()).isEqualTo(10);
   }
@@ -147,9 +147,9 @@ class SerializationTest {
 
     CarbonRisk risk = new CarbonRisk();
     risk.setPaymentPeriod(period);
-    String json = mapper.writeValueAsString(risk);
+    String json = mapper.serialize(risk);
     assertThat(json).isEqualTo("{\"paymentPeriod\":\"1Y\"}");
-    CarbonPaymentPeriod restored = mapper.readValue(json, CarbonRisk.class).getPaymentPeriod();
+    CarbonPaymentPeriod restored = mapper.deserialize(json, CarbonRisk.class).getPaymentPeriod();
     assertThat(period).isEqualTo(restored);
 
     CarbonPaymentPeriod single = CarbonPaymentPeriod.SINGLE;
@@ -168,8 +168,8 @@ class SerializationTest {
     CarbonPolicy policy = new CarbonPolicy();
     policy.setPayTime(timestamp);
 
-    String json = mapper.writeValueAsString(policy);
-    CarbonPolicy restored = mapper.readValue(json, CarbonPolicy.class);
+    String json = mapper.serialize(policy);
+    CarbonPolicy restored = mapper.deserialize(json, CarbonPolicy.class);
     LocalDateTime restoredTime = restored.getPayTime();
 
     assertThat(restoredTime)

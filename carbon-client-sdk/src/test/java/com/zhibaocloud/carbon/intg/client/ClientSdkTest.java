@@ -19,7 +19,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
+import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
@@ -27,7 +27,7 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -68,7 +68,7 @@ class ClientSdkTest {
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
 
-    CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonResponse message = new CarbonResponse();
@@ -76,7 +76,7 @@ class ClientSdkTest {
     message.setMessage("OK");
 
     CarbonEncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
-    String payload = mapper.writeValueAsString(encryptedResponse);
+    String payload = mapper.serialize(encryptedResponse);
 
     CloseableHttpClient httpClient = mockHttpClient(payload, 200);
     CarbonClient client = new CarbonClientImpl(mapper, httpClient, crypto, option);

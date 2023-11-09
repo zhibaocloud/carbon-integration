@@ -16,7 +16,7 @@ package com.zhibaocloud.carbon.intg.server.starter;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageListener;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageProcessor;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +55,7 @@ public class CarbonServerConfiguration {
   @ConditionalOnBean(CarbonMessageListener.class)
   public CarbonMessageProcessor messageProcessor(
       CarbonMessageListener listener,
-      CarbonMapperFactory mf,
+      CarbonSerializerFactory mf,
       CryptoFactory cf
   ) {
     CarbonOption option = new CarbonOption();

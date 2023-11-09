@@ -17,34 +17,34 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
+import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import java.io.IOException;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class VersionTest {
 
-  private final CarbonMapperFactory factory = new CarbonJacksonMapperFactory(false);
+  private final CarbonSerializerFactory factory = new CarbonJacksonSerializerFactory(false);
 
   @Test
   void testVersionMatch() throws IOException {
-    CarbonMapper mapper = factory.create();
+    CarbonSerializer mapper = factory.create();
     UUID requestId = UUID.fromString("4d1ec672-f1ed-4988-99d7-3228b4ebfeaa");
     CarbonEncryptedRequest request = new CarbonEncryptedRequest();
     request.setRequestId(requestId);
 
-    String content = mapper.writeValueAsString(request);
+    String content = mapper.serialize(request);
 
     assertThat(content).isEqualTo(
         "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.2.1\"}");
 
     CarbonVersion current = CarbonVersion.CURRENT;
-    CarbonEncryptedRequest restored = mapper.readValue(content, CarbonEncryptedRequest.class);
+    CarbonEncryptedRequest restored = mapper.deserialize(content, CarbonEncryptedRequest.class);
     assertThat(restored.getVersion()).isEqualTo(current);
   }
 
@@ -56,8 +56,8 @@ class VersionTest {
     CarbonEncryptedResponse response = new CarbonEncryptedResponse();
     String serializedResponse = om.writeValueAsString(response);
 
-    CarbonMapper mapper = factory.create();
-    String mapperResponseJson = mapper.writeValueAsString(response);
+    CarbonSerializer mapper = factory.create();
+    String mapperResponseJson = mapper.serialize(response);
 
     assertThat(mapperResponseJson).isEqualTo(serializedResponse);
   }

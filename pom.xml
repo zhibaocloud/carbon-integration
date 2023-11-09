@@ -89,7 +89,7 @@
     <module>carbon-server-demo</module>
     <module>carbon-coverage</module>
     <module>carbon-jackson-sdk</module>
-    <module>carbon-jackson-spring-boot-starter</module>
+    <module>carbon-serializer-spring-boot-starter</module>
   </modules>
 
   <build>
@@ -287,7 +287,7 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud</groupId>
-        <artifactId>carbon-jackson-spring-boot-starter</artifactId>
+        <artifactId>carbon-serializer-spring-boot-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

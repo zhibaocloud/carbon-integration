@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.zhibaocloud.carbon.CarbonJacksonAutoConfiguration
+  com.zhibaocloud.carbon.CarbonSerializerAutoConfiguration

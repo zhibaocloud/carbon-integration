@@ -13,6 +13,8 @@
 
 package com.zhibaocloud.carbon;
 
+import static java.time.format.DateTimeFormatter.ofPattern;
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -26,20 +28,17 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.modules.CarbonDesensitizationModule;
 import com.zhibaocloud.carbon.modules.CarbonInsuredPeriodModule;
 import com.zhibaocloud.carbon.modules.CarbonPaymentPeriodModule;
 import com.zhibaocloud.carbon.modules.CarbonVersionModule;
-import lombok.RequiredArgsConstructor;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
-import static java.time.format.DateTimeFormatter.ofPattern;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 与服务端通信的时的序列化规则
@@ -47,7 +46,7 @@ import static java.time.format.DateTimeFormatter.ofPattern;
  * @author jun
  */
 @RequiredArgsConstructor
-public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
+public class CarbonJacksonSerializerFactory implements CarbonSerializerFactory {
 
   private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
   private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
@@ -55,7 +54,7 @@ public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
 
   private final boolean isProd;
 
-  public CarbonMapper create() {
+  public CarbonSerializer create() {
     ObjectMapper om = JsonMapper.builder()
         .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)
         .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
@@ -81,6 +80,6 @@ public class CarbonJacksonMapperFactory implements CarbonMapperFactory {
         )
         .setSerializationInclusion(Include.NON_NULL)
         .setSerializationInclusion(Include.NON_EMPTY);
-    return new CarbonJacksonMapper(om);
+    return new CarbonJacksonSerializer(om);
   }
 }

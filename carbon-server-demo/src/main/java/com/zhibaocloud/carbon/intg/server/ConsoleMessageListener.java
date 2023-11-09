@@ -13,8 +13,8 @@
 
 package com.zhibaocloud.carbon.intg.server;
 
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -34,9 +34,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsoleMessageListener implements CarbonMessageListener {
 
-  private final CarbonMapper mapper;
+  private final CarbonSerializer mapper;
 
-  public ConsoleMessageListener(CarbonMapperFactory factory) {
+  public ConsoleMessageListener(CarbonSerializerFactory factory) {
 //    this.mapper = factory.create().copy();
 //    this.mapper.enable(SerializationFeature.INDENT_OUTPUT);
     this.mapper = factory.create();
@@ -51,7 +51,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
    */
   @Override
   public void on(CarbonPolicy event, CarbonMessageMeta meta) throws IOException {
-    String json = mapper.writeValueAsString(event);
+    String json = mapper.serialize(event);
     log.info("received policy: {}", json);
   }
 
@@ -64,7 +64,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
    */
   @Override
   public void on(CarbonReceipt event, CarbonMessageMeta meta) throws IOException {
-    String json = mapper.writeValueAsString(event);
+    String json = mapper.serialize(event);
     log.info("received receipt: {}", json);
   }
 
@@ -77,7 +77,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
    */
   @Override
   public void on(CarbonRtnCall event, CarbonMessageMeta meta) throws IOException {
-    String json = mapper.writeValueAsString(event);
+    String json = mapper.serialize(event);
     log.info("received return call: {}", json);
   }
 
@@ -90,7 +90,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
    */
   @Override
   public void on(CarbonStatusChanged event, CarbonMessageMeta meta) throws IOException {
-    String json = mapper.writeValueAsString(event);
+    String json = mapper.serialize(event);
     log.info("status changed: {}", json);
   }
 }

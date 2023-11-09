@@ -10,7 +10,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-jackson-spring-boot-starter</artifactId>
+  <artifactId>carbon-serializer-spring-boot-starter</artifactId>
 
   <dependencies>
     <dependency>

@@ -15,8 +15,8 @@ package com.zhibaocloud.carbon.intg.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonAgent;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.model.CarbonBeneficiary;
@@ -47,7 +47,7 @@ import org.junit.jupiter.api.Test;
 
 class DataModelTest {
 
-  private final CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
+  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
 
 
   private CarbonApplicant createAppnt() {
@@ -179,8 +179,8 @@ class DataModelTest {
   @Test
   void testPolicyModel() throws IOException {
     CarbonPolicy policy = this.createPolicy();
-    String json = mapper.writeValueAsString(policy);
-    CarbonPolicy restored = mapper.readValue(json, CarbonPolicy.class);
+    String json = mapper.serialize(policy);
+    CarbonPolicy restored = mapper.deserialize(json, CarbonPolicy.class);
     assertThat(restored).isEqualTo(policy);
     assertThat(restored).hasSameHashCodeAs(policy);
 

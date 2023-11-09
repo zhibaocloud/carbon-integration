@@ -16,7 +16,7 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.CarbonJacksonMapperFactory;
+import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -26,7 +26,7 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.mapper.CarbonMapper;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import java.io.IOException;
 import java.util.UUID;
@@ -44,7 +44,7 @@ class CryptoTest {
     config.setIv("dyRnJ6bVxWTdHd64");
     Crypto crypto = factory.create(config);
     CarbonOption option = new CarbonOption();
-    CarbonMapper mapper = new CarbonJacksonMapperFactory(false).create();
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonPolicy originPolicy = JMockData.mock(CarbonPolicy.class);
@@ -52,15 +52,15 @@ class CryptoTest {
     CarbonPolicy decryptedPolicy = channel.decodeRequest(req, CarbonPolicy.class);
 
     // 因为 LocalDateTime 带有毫秒，但是在序列化的时候只携带了秒。序列化后会有精度损失
-    String originPolicyJson = mapper.writeValueAsString(originPolicy);
-    String decryptedPolicyJson = mapper.writeValueAsString(decryptedPolicy);
+    String originPolicyJson = mapper.serialize(originPolicy);
+    String decryptedPolicyJson = mapper.serialize(decryptedPolicy);
     assertThat(decryptedPolicyJson).isEqualTo(originPolicyJson);
 
     CarbonResponse originResponse = JMockData.mock(CarbonResponse.class);
     CarbonEncryptedResponse res = channel.encodeResponse(UUID.randomUUID(), originResponse);
     CarbonResponse decryptedResponse = channel.decodeResponse(res, CarbonResponse.class);
-    String originResponseJson = mapper.writeValueAsString(originResponse);
-    String decryptedResponseJson = mapper.writeValueAsString(decryptedResponse);
+    String originResponseJson = mapper.serialize(originResponse);
+    String decryptedResponseJson = mapper.serialize(decryptedResponse);
     assertThat(decryptedResponseJson).isEqualTo(originResponseJson);
   }
 }
