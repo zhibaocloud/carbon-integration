@@ -17,7 +17,6 @@ import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.CarbonClient;
 import com.zhibaocloud.carbon.intg.client.CarbonClientFactory;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -58,10 +57,9 @@ public class CarbonClientConfiguration {
   public CarbonClientFactory clientFactory(
       CloseableHttpClient httpClient,
       CryptoFactory crypto,
-      CarbonSerializerFactory factory
+      CarbonSerializerFactory sf
   ) {
-    CarbonSerializer mapper = factory.create();
-    return new CarbonClientFactory(httpClient, mapper, crypto);
+    return new CarbonClientFactory(httpClient, sf, crypto);
   }
 
   @Bean
@@ -71,6 +69,7 @@ public class CarbonClientConfiguration {
     option.setEndpoint(config.getEndpoint());
     option.setTenant(config.getTenant());
     option.setCrypto(config.getCrypto());
+    option.setSerializer(config.getSerializer());
     return factory.create(option);
   }
 }

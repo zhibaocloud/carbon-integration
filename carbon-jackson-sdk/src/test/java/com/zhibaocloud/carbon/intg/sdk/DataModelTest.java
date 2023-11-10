@@ -16,13 +16,14 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonAgent;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.model.CarbonBeneficiary;
 import com.zhibaocloud.carbon.intg.model.CarbonInsured;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import com.zhibaocloud.carbon.intg.types.CarbonBnfGrade;
 import com.zhibaocloud.carbon.intg.types.CarbonBnfType;
 import com.zhibaocloud.carbon.intg.types.CarbonDegreeType;
@@ -47,7 +48,8 @@ import org.junit.jupiter.api.Test;
 
 class DataModelTest {
 
-  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
+  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory()
+      .create(new SerializerConfiguration());
 
 
   private CarbonApplicant createAppnt() {

@@ -23,17 +23,18 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class VersionTest {
 
-  private final CarbonSerializerFactory factory = new CarbonJacksonSerializerFactory(false);
+  private final CarbonSerializerFactory factory = new CarbonJacksonSerializerFactory();
 
   @Test
   void testVersionMatch() throws IOException {
-    CarbonSerializer mapper = factory.create();
+    CarbonSerializer mapper = factory.create(new SerializerConfiguration());
     UUID requestId = UUID.fromString("4d1ec672-f1ed-4988-99d7-3228b4ebfeaa");
     CarbonEncryptedRequest request = new CarbonEncryptedRequest();
     request.setRequestId(requestId);
@@ -56,7 +57,7 @@ class VersionTest {
     CarbonEncryptedResponse response = new CarbonEncryptedResponse();
     String serializedResponse = om.writeValueAsString(response);
 
-    CarbonSerializer mapper = factory.create();
+    CarbonSerializer mapper = factory.create(new SerializerConfiguration());
     String mapperResponseJson = mapper.serialize(response);
 
     assertThat(mapperResponseJson).isEqualTo(serializedResponse);

@@ -29,7 +29,7 @@ import lombok.SneakyThrows;
 @RequiredArgsConstructor
 public class CarbonDataChannel {
 
-  private final CarbonSerializer mapper;
+  private final CarbonSerializer serializer;
 
   private final Crypto crypto;
 
@@ -44,7 +44,7 @@ public class CarbonDataChannel {
    */
   @SneakyThrows
   public CarbonEncryptedRequest encodeRequest(CarbonMessageType type, Object request) {
-    String payload = mapper.serialize(request);
+    String payload = serializer.serialize(request);
     CarbonEncryptedRequest message = new CarbonEncryptedRequest();
     message.setType(type);
     message.setTenant(option.getTenant());
@@ -63,7 +63,7 @@ public class CarbonDataChannel {
    */
   @SneakyThrows
   public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response) {
-    String payload = mapper.serialize(response);
+    String payload = serializer.serialize(response);
     CarbonEncryptedResponse message = new CarbonEncryptedResponse();
     message.setRequestId(requestId);
     message.setTenant(option.getTenant());
@@ -97,7 +97,7 @@ public class CarbonDataChannel {
   public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) {
     String payload = crypto.decrypt(request.getPayload());
     verify(payload, request.getSign());
-    return mapper.deserialize(payload, clz);
+    return serializer.deserialize(payload, clz);
   }
 
   /**
@@ -112,6 +112,6 @@ public class CarbonDataChannel {
   public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) {
     String payload = crypto.decrypt(response.getPayload());
     verify(payload, response.getSign());
-    return mapper.deserialize(payload, clz);
+    return serializer.deserialize(payload, clz);
   }
 }

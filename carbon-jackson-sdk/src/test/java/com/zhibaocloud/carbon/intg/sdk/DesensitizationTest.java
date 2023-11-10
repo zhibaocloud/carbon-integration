@@ -3,8 +3,9 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,13 @@ import org.junit.jupiter.api.Test;
 
 class DesensitizationTest {
 
-  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
+  private final CarbonSerializer mapper;
+
+  {
+    SerializerConfiguration config = new SerializerConfiguration();
+    config.setDesensitization(true);
+    mapper = new CarbonJacksonSerializerFactory().create(config);
+  }
 
   @Test
   void testDesensitization() throws IOException {

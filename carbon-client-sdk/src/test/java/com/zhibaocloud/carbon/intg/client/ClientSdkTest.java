@@ -27,11 +27,12 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.util.UUID;
@@ -68,7 +69,7 @@ class ClientSdkTest {
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
 
-    CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializerConfiguration());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonResponse message = new CarbonResponse();

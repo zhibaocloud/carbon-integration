@@ -32,6 +32,7 @@ import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import com.zhibaocloud.carbon.intg.server.starter.CarbonServerProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ class IntegrationTest {
   }
 
   private void runDataSync(CarbonMessageType type, Object request) throws Exception {
-    CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializerConfiguration());
     Crypto crypto = new CryptoFactory().create(config.getCrypto());
 
     CarbonOption option = new CarbonOption();

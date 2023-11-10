@@ -27,6 +27,7 @@ import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import java.util.UUID;
 import org.apache.http.StatusLine;
@@ -45,8 +46,8 @@ public class MockHttpConfiguration {
     option.setEndpoint(config.getEndpoint());
     option.setCrypto(config.getCrypto());
 
-    CarbonSerializerFactory mapperFactory = new CarbonJacksonSerializerFactory(false);
-    CarbonSerializer mapper = mapperFactory.create();
+    CarbonSerializerFactory mapperFactory = new CarbonJacksonSerializerFactory();
+    CarbonSerializer mapper = mapperFactory.create(new SerializerConfiguration());
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());

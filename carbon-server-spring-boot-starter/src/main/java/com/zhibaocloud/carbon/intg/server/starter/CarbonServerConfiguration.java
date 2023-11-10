@@ -55,13 +55,13 @@ public class CarbonServerConfiguration {
   @ConditionalOnBean(CarbonMessageListener.class)
   public CarbonMessageProcessor messageProcessor(
       CarbonMessageListener listener,
-      CarbonSerializerFactory mf,
+      CarbonSerializerFactory sf,
       CryptoFactory cf
   ) {
     CarbonOption option = new CarbonOption();
     option.setCrypto(config.getCrypto());
     CarbonDataChannel channel = new CarbonDataChannel(
-        mf.create(),
+        sf.create(config.getSerializer()),
         cf.create(config.getCrypto()),
         option
     );

@@ -19,10 +19,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriodUnit;
 import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
@@ -37,7 +38,8 @@ import org.junit.jupiter.api.Test;
 
 class SerializationTest {
 
-  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
+  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory()
+      .create(new SerializerConfiguration());
 
   /**
    * 测试序列化的为JSON时字段的顺序。需要保证按照字母顺序进行输出，否则计算签名时会出现问题。
@@ -93,10 +95,12 @@ class SerializationTest {
 
   @Test
   void testEnvironment() throws IOException {
-    CarbonSerializerFactory prodFactory = new CarbonJacksonSerializerFactory(true);
-    CarbonSerializerFactory devFactory = new CarbonJacksonSerializerFactory(false);
-    CarbonSerializer prodMapper = prodFactory.create();
-    CarbonSerializer devMapper = devFactory.create();
+    CarbonSerializerFactory prodFactory = new CarbonJacksonSerializerFactory();
+    CarbonSerializerFactory devFactory = new CarbonJacksonSerializerFactory();
+    SerializerConfiguration prodConfig = new SerializerConfiguration();
+    prodConfig.setIgnoreUnknownProperties(false);
+    CarbonSerializer prodMapper = prodFactory.create(prodConfig);
+    CarbonSerializer devMapper = devFactory.create(new SerializerConfiguration());
 
     CarbonPolicy prodPolicy = prodMapper.deserialize("{\"a\":1}", CarbonPolicy.class);
     assertThat(prodPolicy).isNotNull();

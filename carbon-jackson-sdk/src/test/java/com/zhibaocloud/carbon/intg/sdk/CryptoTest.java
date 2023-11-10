@@ -26,8 +26,9 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class CryptoTest {
     config.setIv("dyRnJ6bVxWTdHd64");
     Crypto crypto = factory.create(config);
     CarbonOption option = new CarbonOption();
-    CarbonSerializer mapper = new CarbonJacksonSerializerFactory(false).create();
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializerConfiguration());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonPolicy originPolicy = JMockData.mock(CarbonPolicy.class);
