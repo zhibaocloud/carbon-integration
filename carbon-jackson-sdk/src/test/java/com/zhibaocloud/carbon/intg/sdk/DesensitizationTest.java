@@ -30,11 +30,11 @@ class DesensitizationTest {
     appnt.setMobile("13800138000");
     appnt.setIdNo("110101199001011234");
     appnt.setEmail("zhangsan@mail.com");
+    appnt.setRgtAddress("四川省成都市");
 
     String content = mapper.serialize(appnt);
     assertThat(content).isEqualTo(
-        "{\"email\":\"********@mail.com\",\"idNo\":\"1101**************1234\",\"mobile\":\"138****8000\"," +
-            "\"name\":\"张三\"}"
+        "{\"email\":\"********@mail.com\",\"idNo\":\"1101**************1234\",\"mobile\":\"138****8000\",\"name\":\"张三\",\"rgtAddress\":\"******\"}"
     );
   }
 }
