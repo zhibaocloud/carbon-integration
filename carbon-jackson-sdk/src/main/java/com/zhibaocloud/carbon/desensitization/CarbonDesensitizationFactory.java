@@ -17,10 +17,6 @@ public class CarbonDesensitizationFactory {
 
   @SuppressWarnings("all")
   public static CarbonDesensitization<?> getDesensitization(Class<? extends CarbonDesensitization<?>> clazz) {
-    if (clazz.isInterface()) {
-      throw new UnsupportedOperationException(
-          "desensitization is interface, what is expected is an implementation class !");
-    }
     return map.computeIfAbsent(clazz, k -> {
       try {
         return (CarbonDesensitization<?>) clazz.newInstance();
