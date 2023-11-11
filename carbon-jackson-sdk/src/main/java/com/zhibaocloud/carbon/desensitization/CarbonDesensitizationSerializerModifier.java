@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import com.zhibaocloud.carbon.intg.desensitization.CarbonDesensitization;
-import com.zhibaocloud.carbon.intg.desensitization.annotations.*;
-
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonDesensitize;
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,36 +14,28 @@ import java.util.List;
  */
 public class CarbonDesensitizationSerializerModifier extends BeanSerializerModifier {
 
-
-  private final List<Class<? extends Annotation>> types = Arrays.asList(
-      CarbonIDCardDesensitize.class,
-      CarbonEmailDesensitize.class,
-      CarbonStringDesensitize.class,
-      CarbonPhoneDesensitize.class
-  );
-
   @Override
   @SuppressWarnings("unchecked")
   public List<BeanPropertyWriter> changeProperties(SerializationConfig config, BeanDescription beanDesc,
       List<BeanPropertyWriter> beanProperties) {
     for (BeanPropertyWriter beanProperty : beanProperties) {
-      CarbonDesensitize annotation = getDesensitizationAnnotation(beanProperty);
-      if (annotation != null) {
+      CarbonDesensitize desensitizeAnnotation = findDesensitizeAnnotation(beanProperty);
+      if (desensitizeAnnotation != null) {
         CarbonDesensitization<Object> desensitization = (CarbonDesensitization<Object>) CarbonDesensitizationFactory.getDesensitization(
-            annotation.using());
+            desensitizeAnnotation.using());
         beanProperty.assignSerializer(new CarbonObjectDesensitizeSerializer(desensitization));
       }
     }
     return beanProperties;
   }
 
-  private CarbonDesensitize getDesensitizationAnnotation(BeanPropertyWriter beanProperty) {
-    for (Class<? extends Annotation> type : types) {
-      Annotation annotation = beanProperty.getAnnotation(type);
-      if (annotation != null) {
+  private CarbonDesensitize findDesensitizeAnnotation(BeanPropertyWriter beanProperty) {
+    for (Annotation annotation : beanProperty.getMember().getAllAnnotations().annotations()) {
+      if (annotation.annotationType().isAnnotationPresent(CarbonDesensitize.class)) {
         return annotation.annotationType().getAnnotation(CarbonDesensitize.class);
       }
     }
     return null;
   }
 }
+
