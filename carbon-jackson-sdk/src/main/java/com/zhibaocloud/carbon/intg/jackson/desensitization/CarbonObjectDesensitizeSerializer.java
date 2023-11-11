@@ -24,10 +24,6 @@ public class CarbonObjectDesensitizeSerializer extends StdSerializer<Object> {
   @Override
   public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
     CarbonDesensitization<Object> objectDesensitization = getDesensitization();
-    try {
-      gen.writeObject(objectDesensitization.desensitize(value));
-    } catch (Exception e) {
-      gen.writeObject(value);
-    }
+    gen.writeObject(objectDesensitization.desensitize(value));
   }
 }

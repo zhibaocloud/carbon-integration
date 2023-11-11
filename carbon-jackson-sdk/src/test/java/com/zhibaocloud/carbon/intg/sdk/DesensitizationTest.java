@@ -42,12 +42,12 @@ class DesensitizationTest {
   }
 
   @Test
-  void testSerializationThrowsException() throws IOException {
+  void testSerializationThrowsException() {
     Agent agent = new Agent();
     agent.setName("张三");
 
-    String content = mapper.serialize(agent);
-    assertThat(content).isEqualTo("{\"name\":\"张三\"}");
+    assertThatThrownBy(() -> mapper.serialize(agent)).hasMessageContaining("not supported yet");
+
   }
 
   @Test
