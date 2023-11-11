@@ -1,4 +1,4 @@
-package com.zhibaocloud.carbon.modules;
+package com.zhibaocloud.carbon.intg.jackson.modules;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

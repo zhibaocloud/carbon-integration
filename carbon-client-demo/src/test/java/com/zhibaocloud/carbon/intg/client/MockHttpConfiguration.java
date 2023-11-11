@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;

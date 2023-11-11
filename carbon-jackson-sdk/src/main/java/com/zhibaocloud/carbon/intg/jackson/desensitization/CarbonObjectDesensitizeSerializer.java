@@ -1,4 +1,4 @@
-package com.zhibaocloud.carbon.desensitization;
+package com.zhibaocloud.carbon.intg.jackson.desensitization;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;

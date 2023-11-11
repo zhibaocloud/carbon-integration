@@ -1,4 +1,4 @@
-package com.zhibaocloud.carbon;
+package com.zhibaocloud.carbon.intg.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;

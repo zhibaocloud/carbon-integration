@@ -16,7 +16,7 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;

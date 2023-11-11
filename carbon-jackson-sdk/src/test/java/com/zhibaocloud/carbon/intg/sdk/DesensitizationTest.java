@@ -3,7 +3,7 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.sdk.TestDesensitizationModel.Agent;
 import com.zhibaocloud.carbon.intg.sdk.TestDesensitizationModel.Customer;

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;

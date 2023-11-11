@@ -15,7 +15,7 @@ package com.zhibaocloud.carbon.intg.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.zhibaocloud.carbon.CarbonJacksonSerializerFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonAgent;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.model.CarbonBeneficiary;

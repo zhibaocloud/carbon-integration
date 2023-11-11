@@ -11,7 +11,7 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon;
+package com.zhibaocloud.carbon.intg.jackson;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
@@ -31,10 +31,10 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
-import com.zhibaocloud.carbon.modules.CarbonDesensitizationModule;
-import com.zhibaocloud.carbon.modules.CarbonInsuredPeriodModule;
-import com.zhibaocloud.carbon.modules.CarbonPaymentPeriodModule;
-import com.zhibaocloud.carbon.modules.CarbonVersionModule;
+import com.zhibaocloud.carbon.intg.jackson.modules.CarbonDesensitizationModule;
+import com.zhibaocloud.carbon.intg.jackson.modules.CarbonInsuredPeriodModule;
+import com.zhibaocloud.carbon.intg.jackson.modules.CarbonPaymentPeriodModule;
+import com.zhibaocloud.carbon.intg.jackson.modules.CarbonVersionModule;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
