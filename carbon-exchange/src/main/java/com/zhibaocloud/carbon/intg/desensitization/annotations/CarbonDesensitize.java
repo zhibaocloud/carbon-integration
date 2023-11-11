@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 /**
  * @author yangtuo
  */
-@Target({ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface CarbonDesensitize {
