@@ -19,7 +19,7 @@ public class CarbonDesensitizationFactory {
   public static CarbonDesensitization<?> getDesensitization(Class<? extends CarbonDesensitization<?>> clazz) {
     return map.computeIfAbsent(clazz, k -> {
       try {
-        return (CarbonDesensitization<?>) clazz.newInstance();
+        return (CarbonDesensitization<?>) k.newInstance();
       } catch (InstantiationException | IllegalAccessException e) {
         throw new UnsupportedOperationException(e.getMessage(), e);
       }
