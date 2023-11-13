@@ -49,4 +49,11 @@ public class CarbonEncryptedResponse {
    * 加密报文信息
    */
   private String payload;
+
+  /**
+   * 使用getter将version.toString()作为版本号序列化结果
+   */
+  public String getVersion() {
+    return version.toString();
+  }
 }

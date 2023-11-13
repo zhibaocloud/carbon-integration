@@ -31,8 +31,7 @@ mvn spring-boot:run -pl carbon-client-demo
 
 ### 数据推送方
 
-使用 `carbon-client-sdk` 项目中的 `CarbonClient` 类进行数据推送。如推送方使用的是 spring-boot
-构建，可以引入 `carbon-client-spring-boot-starter` 简化配置。
+使用 `carbon-client-sdk` 项目中的 `CarbonClient` 类进行数据推送。
 
 ```xml
 <dependencies>
@@ -41,10 +40,61 @@ mvn spring-boot:run -pl carbon-client-demo
       <artifactId>carbon-client-sdk</artifactId>
       <version>1.2.1</version>
    </dependency>
+
+   <!-- 如使用 jackson，需要引入以下依赖 -->
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-serialization-jackson</artifactId>
+      <version>1.2.1</version>
+   </dependency>
+
+   <!-- 如使用 gson，需要引入以下依赖 -->
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-serialization-gson</artifactId>
+      <version>1.2.1</version>
+   </dependency>
+   
+   <!-- 如使用 fastjson，需要引入以下依赖 -->
+   <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-serialization-fastjson2</artifactId>
+      <version>1.2.1</version>
+   </dependency>
+</dependencies>
+```
+
+如推送方使用的是 spring-boot构建，可以引入 `carbon-client-spring-boot-starter` 简化配置。
+在 Starter 启动的时候会扫描，使用兼容的 JSON library 作为序列化工具。
+
+```xml
+<dependencies>
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-client-spring-boot-starter</artifactId>
       <version>1.2.1</version>
+   </dependency>
+
+   <!-- 如使用 jackson，需要引入以下依赖 -->
+   <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+   </dependency>
+   <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+   </dependency>
+
+   <!-- 如使用 gson，需要引入以下依赖 -->
+   <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+   </dependency>
+
+   <!-- 如使用 fastjson，需要引入以下依赖 -->
+   <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
    </dependency>
 </dependencies>
 ```
@@ -97,12 +147,9 @@ mvn spring-boot:run -pl carbon-client-demo
    > * 信息摘要: SHA-256, SHA-512, SHA3-256, SHA3-512, MD5, SM3
    > * （暂未实现）非对称加密: RSA, SM2
 
-4. 是否支持使用 fastjson 进行数据序列化
-   > 暂无此计划
-
-5. 是否支持 Jakarta EE
+4. 是否支持 Jakarta EE
    > 当前项目中未引入任何 javax 包，理论上是可以在 Jakarta 环境中运行
 
-6. 是否支持非 Java 语言，如 PHP
+5. 是否支持非 Java 语言，如 PHP
    > 暂无此计划。但是可以参考 `carbon-exchange` 项目中的数据格式定义，自行实现
 

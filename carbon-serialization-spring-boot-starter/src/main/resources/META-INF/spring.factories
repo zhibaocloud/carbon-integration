@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.zhibaocloud.carbon.intg.serializer.starter.CarbonJacksonSerializerAutoConfiguration,\
+  com.zhibaocloud.carbon.intg.serializer.starter.CarbonGsonSerializerAutoConfiguration,\
+  com.zhibaocloud.carbon.intg.serializer.starter.CarbonFastjsonSerializerAutoConfiguration

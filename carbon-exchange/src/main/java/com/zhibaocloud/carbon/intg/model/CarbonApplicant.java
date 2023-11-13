@@ -13,10 +13,10 @@
 
 package com.zhibaocloud.carbon.intg.model;
 
-import com.github.annotation.EmailDesensitize;
-import com.github.annotation.IDCardDesensitize;
-import com.github.annotation.PhoneDesensitize;
-import com.github.annotation.StringDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonEmailDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonIDCardDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonPhoneDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonStringDesensitize;
 import com.zhibaocloud.carbon.intg.types.CarbonDegreeType;
 import com.zhibaocloud.carbon.intg.types.CarbonGenderType;
 import com.zhibaocloud.carbon.intg.types.CarbonIdType;
@@ -68,7 +68,7 @@ public class CarbonApplicant {
   /**
    * 投保人证件号码
    */
-  @IDCardDesensitize
+  @CarbonIDCardDesensitize
   @Schema(title = "投保人证件号码", requiredMode = RequiredMode.REQUIRED)
   private String idNo;
 
@@ -87,14 +87,14 @@ public class CarbonApplicant {
   /**
    * 投保人手机号码
    */
-  @PhoneDesensitize
+  @CarbonPhoneDesensitize
   @Schema(title = "投保人手机号码")
   private String mobile;
 
   /**
    * 投保人电子邮箱
    */
-  @EmailDesensitize
+  @CarbonEmailDesensitize
   @Schema(title = "投保人电子邮箱")
   private String email;
 
@@ -131,14 +131,14 @@ public class CarbonApplicant {
   /**
    * 投保人户籍注册地址
    */
-  @StringDesensitize
+  @CarbonStringDesensitize
   @Schema(title = "投保人户籍注册地址")
   private String rgtAddress;
 
   /**
    * 投保人联系地址
    */
-  @StringDesensitize
+  @CarbonStringDesensitize
   @Schema(title = "投保人联系地址")
   private String postalAddress;
 

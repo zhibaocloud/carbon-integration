@@ -19,12 +19,13 @@ import com.zhibaocloud.carbon.intg.types.CarbonPayType;
 import com.zhibaocloud.carbon.intg.types.CarbonPolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 推送/接收承保保单数据模型

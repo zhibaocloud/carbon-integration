@@ -13,24 +13,18 @@
 
 package com.zhibaocloud.carbon.intg.model;
 
-import com.github.annotation.EmailDesensitize;
-import com.github.annotation.IDCardDesensitize;
-import com.github.annotation.PhoneDesensitize;
-import com.github.annotation.StringDesensitize;
-import com.zhibaocloud.carbon.intg.types.CarbonDegreeType;
-import com.zhibaocloud.carbon.intg.types.CarbonGenderType;
-import com.zhibaocloud.carbon.intg.types.CarbonIdType;
-import com.zhibaocloud.carbon.intg.types.CarbonMarriageType;
-import com.zhibaocloud.carbon.intg.types.CarbonNationType;
-import com.zhibaocloud.carbon.intg.types.CarbonNationalityType;
-import com.zhibaocloud.carbon.intg.types.CarbonRelationType;
-import com.zhibaocloud.carbon.intg.types.CarbonSocialSecurityFlag;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonEmailDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonIDCardDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonPhoneDesensitize;
+import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonStringDesensitize;
+import com.zhibaocloud.carbon.intg.types.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * 被保人信息
@@ -88,7 +82,7 @@ public class CarbonInsured {
   /**
    * 被保人证件号码
    */
-  @IDCardDesensitize
+  @CarbonIDCardDesensitize
   @Schema(title = "被保人证件号码")
   private String idNo;
 
@@ -110,7 +104,7 @@ public class CarbonInsured {
   /**
    * 被保人手机号码
    */
-  @PhoneDesensitize
+  @CarbonPhoneDesensitize
   @Schema(title = "被保人手机号码")
   private String mobile;
 
@@ -118,7 +112,7 @@ public class CarbonInsured {
   /**
    * 被保人电子邮箱
    */
-  @EmailDesensitize
+  @CarbonEmailDesensitize
   @Schema(title = "被保人电子邮箱")
   private String email;
 
@@ -161,7 +155,7 @@ public class CarbonInsured {
   /**
    * 被保人户籍注册地址
    */
-  @StringDesensitize
+  @CarbonStringDesensitize
   @Schema(title = "被保人户籍注册地址")
   private String rgtAddress;
 
@@ -169,7 +163,7 @@ public class CarbonInsured {
   /**
    * 被保人联系地址
    */
-  @StringDesensitize
+  @CarbonStringDesensitize
   @Schema(title = "被保人联系地址")
   private String postalAddress;
 

@@ -13,7 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.client.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.CarbonMessageException;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
@@ -23,6 +22,7 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
@@ -47,14 +47,14 @@ public class CarbonClientImpl implements CarbonClient {
 
   private final CarbonOption option;
 
-  private final ObjectMapper mapper;
+  private final CarbonSerializer mapper;
 
   private final CloseableHttpClient client;
 
   private final CarbonDataChannel channel;
 
   public CarbonClientImpl(
-      ObjectMapper mapper,
+      CarbonSerializer mapper,
       CloseableHttpClient client,
       Crypto crypto,
       CarbonOption option
@@ -67,14 +67,14 @@ public class CarbonClientImpl implements CarbonClient {
 
   private void send(CarbonMessageType type, Object request) throws IOException {
     if (log.isDebugEnabled()) {
-      log.debug("request: {}", mapper.writeValueAsString(request));
+      log.debug("request: {}", mapper.serialize(request));
     }
 
     CarbonEncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
 
     URI target = option.getEndpoint();
     HttpPost post = new HttpPost(target);
-    String body = mapper.writeValueAsString(encryptedRequest);
+    String body = mapper.serialize(encryptedRequest);
 
     post.setHeader("Content-Type", "application/json;charset=utf-8");
     post.setEntity(new StringEntity(body, "UTF-8"));
@@ -85,11 +85,11 @@ public class CarbonClientImpl implements CarbonClient {
 
       int statusCode = sl.getStatusCode();
       if (statusCode >= 200 && statusCode < 300) {
-        CarbonEncryptedResponse result = mapper.readValue(encryptedResponse,
+        CarbonEncryptedResponse result = mapper.deserialize(encryptedResponse,
             CarbonEncryptedResponse.class);
         CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
         if (log.isDebugEnabled()) {
-          log.debug("response: {}", mapper.writeValueAsString(res));
+          log.debug("response: {}", mapper.serialize(res));
         }
         if (!res.isSuccess()) {
           throw new CarbonMessageException(res.getMessage());

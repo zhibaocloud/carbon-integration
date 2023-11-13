@@ -18,9 +18,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.fastjson.CarbonFastjsonSerializerFactory;
+import com.zhibaocloud.carbon.intg.gson.CarbonGsonSerializerFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
@@ -32,19 +33,23 @@ import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.util.UUID;
+import java.util.stream.Stream;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 
 class ClientSdkTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
 
   private CloseableHttpClient mockHttpClient(String payload, int statusCode) throws IOException {
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
@@ -57,8 +62,18 @@ class ClientSdkTest {
     return httpClient;
   }
 
-  @Test
-  void testMessageSend() throws Exception {
+  private static Stream<CarbonSerializerFactory> providerSerializer() {
+    return Stream.of(
+        new CarbonJacksonSerializerFactory(),
+        new CarbonFastjsonSerializerFactory(),
+        new CarbonGsonSerializerFactory()
+    );
+  }
+
+
+  @ParameterizedTest
+  @MethodSource("providerSerializer")
+  void testMessageSend(CarbonSerializerFactory sf) throws Exception {
     CarbonOption option = new CarbonOption();
     option.setEndpoint(new URI("http://localhost:8080"));
     option.getCrypto().setSecret("wD2Neym2V3ZfpWzR");
@@ -67,22 +82,24 @@ class ClientSdkTest {
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
-    CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
+
+    SerializationConfiguration config = new SerializationConfiguration();
+    CarbonSerializer serializer = sf.create(config);
+    CarbonDataChannel channel = new CarbonDataChannel(serializer, crypto, option);
 
     CarbonResponse message = new CarbonResponse();
     message.setSuccess(true);
     message.setMessage("OK");
 
     CarbonEncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
-    String payload = mapper.writeValueAsString(encryptedResponse);
+    String payload = serializer.serialize(encryptedResponse);
 
     CloseableHttpClient httpClient = mockHttpClient(payload, 200);
-    CarbonClient client = new CarbonClientImpl(mapper, httpClient, crypto, option);
+    CarbonClient client = new CarbonClientImpl(serializer, httpClient, crypto, option);
     client.publish(JMockData.mock(CarbonPolicy.class));
     client.publish(JMockData.mock(CarbonReceipt.class));
     client.publish(JMockData.mock(CarbonRtnCall.class));
     client.publish(JMockData.mock(CarbonStatusChanged.class));
-
     Mockito.verify(httpClient, times(4)).execute(any());
   }
 }

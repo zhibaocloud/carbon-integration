@@ -15,6 +15,7 @@ package com.zhibaocloud.carbon.intg.server.starter;
 
 
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,4 +36,9 @@ public class CarbonServerProperties {
    * 加解密配置信息
    */
   private CryptoConfiguration crypto = new CryptoConfiguration();
+
+  /**
+   * 序列化配置信息
+   */
+  private SerializationConfiguration serializer = new SerializationConfiguration();
 }
