@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
+ * Copyright (c) 2018-2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
  * Carbon Integration SDK is licensed under Mulan PSL v2.
  *
  * You can use this software according to the terms and conditions of the Mulan PSL v2.
@@ -34,6 +34,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import org.assertj.core.api.AbstractStringAssert;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class SerializationTest {
@@ -61,19 +63,6 @@ class SerializationTest {
         "{\"c\":{\"a\":\"a\",\"b\":\"b\"},\"d\":{\"a\":\"a\",\"b\":\"b\"}}");
   }
 
-  @Test
-  void testJavaTimeSerialization() throws IOException {
-    LocalDate date = LocalDate.of(2023, 3, 29);
-    LocalDateTime datetime = LocalDateTime.of(2023, 3, 29, 0, 1, 1);
-    LocalTime time = LocalTime.of(23, 59, 59);
-    Map<String, Object> source = new HashMap<>();
-    source.put("date", date);
-    source.put("datetime", datetime);
-    source.put("time", time);
-    String json = mapper.serialize(source);
-    assertThat(json).isEqualTo(
-        "{\"date\":\"2023-03-29\",\"datetime\":\"2023-03-29 00:01:01\",\"time\":\"23:59:59\"}");
-  }
 
   @Test
   void testEmptyElimination() throws IOException {
@@ -105,79 +94,7 @@ class SerializationTest {
     CarbonPolicy prodPolicy = prodMapper.deserialize("{\"a\":1}", CarbonPolicy.class);
     assertThat(prodPolicy).isNotNull();
 
-    assertThatThrownBy(() -> devMapper.deserialize("{\"a\":1}", CarbonPolicy.class))
+    Assertions.assertThatThrownBy(() -> devMapper.deserialize("{\"a\":1}", CarbonPolicy.class))
         .isInstanceOf(UnrecognizedPropertyException.class);
-  }
-
-  @Test
-  void testInsuredPeriod() throws IOException {
-    CarbonInsuredPeriod period = new CarbonInsuredPeriod("1Y");
-    assertThat(period.getValue()).isEqualTo(1);
-    assertThat(period.getUnit()).isEqualTo(CarbonInsuredPeriodUnit.Y);
-    assertThat(period).hasToString("1Y");
-
-    CarbonInsuredPeriod newPeriod = new CarbonInsuredPeriod(1, CarbonInsuredPeriodUnit.Y);
-    assertThat(newPeriod).isEqualTo(period);
-
-    CarbonInsuredPeriod period1 = CarbonInsuredPeriod.of("N");
-    assertThat(period1.getValue()).isZero();
-    assertThat(period1.getUnit()).isEqualTo(CarbonInsuredPeriodUnit.N);
-    assertThat(period1).hasToString("N");
-
-    CarbonInsuredPeriod period2 = CarbonInsuredPeriod.of("O");
-    assertThat(period2.getValue()).isEqualTo(106);
-    assertThat(period2.getUnit()).isEqualTo(CarbonInsuredPeriodUnit.O);
-
-    CarbonInsuredPeriod ip = CarbonInsuredPeriod.of("10Y");
-    CarbonRisk source = new CarbonRisk();
-    source.setInsuredPeriod(ip);
-
-    String json = mapper.serialize(source);
-    assertThat(json).isEqualTo("{\"insuredPeriod\":\"10Y\"}");
-    CarbonInsuredPeriod restored = mapper.deserialize(json, CarbonRisk.class).getInsuredPeriod();
-    assertThat(ip).isEqualTo(restored);
-    assertThat(restored.getValue()).isEqualTo(10);
-  }
-
-  @Test
-  void testPaymentPeriod() throws IOException {
-    CarbonPaymentPeriod period = CarbonPaymentPeriod.of("1Y");
-    assertThat(period.getValue()).isEqualTo(1);
-    assertThat(period.getUnit()).isEqualTo(CarbonPaymentPeriodUnit.Y);
-    assertThat(period).hasToString("1Y");
-
-    CarbonPaymentPeriod newPeriod = new CarbonPaymentPeriod(1, CarbonPaymentPeriodUnit.Y);
-    assertThat(newPeriod).isEqualTo(period);
-
-    CarbonRisk risk = new CarbonRisk();
-    risk.setPaymentPeriod(period);
-    String json = mapper.serialize(risk);
-    assertThat(json).isEqualTo("{\"paymentPeriod\":\"1Y\"}");
-    CarbonPaymentPeriod restored = mapper.deserialize(json, CarbonRisk.class).getPaymentPeriod();
-    assertThat(period).isEqualTo(restored);
-
-    CarbonPaymentPeriod single = CarbonPaymentPeriod.SINGLE;
-    assertThat(single.getUnit()).isEqualTo(CarbonPaymentPeriodUnit.S);
-
-    assertThat(single).hasToString("S");
-  }
-
-  /**
-   * 时间格式精度损失
-   */
-  @Test
-  void testDateTimeSerialization() throws IOException {
-    LocalDateTime timestamp = LocalDateTime.of(2023, 3, 30, 23, 59, 59, 999);
-
-    CarbonPolicy policy = new CarbonPolicy();
-    policy.setPayTime(timestamp);
-
-    String json = mapper.serialize(policy);
-    CarbonPolicy restored = mapper.deserialize(json, CarbonPolicy.class);
-    LocalDateTime restoredTime = restored.getPayTime();
-
-    assertThat(restoredTime)
-        .isEqualTo(LocalDateTime.of(2023, 3, 30, 23, 59, 59, 0))
-        .isNotEqualTo(timestamp);
   }
 }

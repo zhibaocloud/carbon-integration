@@ -74,7 +74,7 @@
     <project.build.java.source>${java.version}</project.build.java.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring-boot.version>2.7.16</spring-boot.version>
+    <spring-boot.version>2.7.17</spring-boot.version>
     <springdoc.version>1.6.15</springdoc.version>
     <swagger.version>2.2.8</swagger.version>
   </properties>
