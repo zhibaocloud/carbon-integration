@@ -16,15 +16,19 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <scope>provided</scope>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-exchange</artifactId>
     </dependency>
 
     <!-- jackson -->

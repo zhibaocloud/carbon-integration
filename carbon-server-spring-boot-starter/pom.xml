@@ -43,6 +43,10 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-exchange</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-serialization-spring-boot-starter</artifactId>
     </dependency>
   </dependencies>
