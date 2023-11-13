@@ -15,6 +15,7 @@ package com.zhibaocloud.carbon.intg.serializer.starter;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.fastjson.CarbonFastjsonSerializerFactory;
 import com.zhibaocloud.carbon.intg.gson.CarbonGsonSerializerFactory;
 import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
@@ -33,6 +34,8 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -133,5 +136,27 @@ class CarbonSerializationTest {
     String json = mapper.serialize(source);
     assertThat(json).isEqualTo(
         "{\"date\":\"2023-03-29\",\"datetime\":\"2023-03-29 00:01:01\",\"time\":\"23:59:59\"}");
+  }
+
+  @Getter
+  @Setter
+  static class Policy {
+
+    private CarbonVersion version;
+
+    private CarbonInsuredPeriod insuredPeriod;
+
+    private CarbonPaymentPeriod paymentPeriod;
+  }
+
+  @ParameterizedTest
+  @MethodSource("createMapper")
+  void nullSaveTest(CarbonSerializer mapper) throws IOException {
+    String out = mapper.serialize(new Policy());
+    assertThat(out).isEqualTo("{}");
+    Policy policy = mapper.deserialize("{}", Policy.class);
+    assertThat(policy.version).isNull();
+    assertThat(policy.insuredPeriod).isNull();
+    assertThat(policy.paymentPeriod).isNull();
   }
 }
