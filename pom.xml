@@ -83,6 +83,7 @@
     <module>carbon-exchange</module>
     <module>carbon-client-sdk</module>
     <module>carbon-client-spring-boot-starter</module>
+    <module>carbon-client-quarkus-extension</module>
     <module>carbon-client-demo</module>
     <module>carbon-server-sdk</module>
     <module>carbon-server-spring-boot-starter</module>
@@ -315,6 +316,11 @@
       <dependency>
         <groupId>com.zhibaocloud</groupId>
         <artifactId>carbon-client-spring-boot-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud</groupId>
+        <artifactId>carbon-client-quarkus-extension</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
