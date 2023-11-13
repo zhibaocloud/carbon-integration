@@ -14,6 +14,7 @@
 package com.zhibaocloud.carbon.intg;
 
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,13 +39,12 @@ public class CarbonOption {
   private String tenant;
 
   /**
-   * 是否对数据进行脱敏处理
-   * TODO: 根据配置获取不同的 ObjectMapper
-   */
-  private Boolean desensitize;
-
-  /**
    * 对称加密配置
    */
   private CryptoConfiguration crypto = new CryptoConfiguration();
+
+  /**
+   * 序列化配置
+   */
+  private SerializerConfiguration serializer = new SerializerConfiguration();
 }

@@ -16,34 +16,10 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
-import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class VersionTest {
-
-  private final CarbonMapperFactory factory = new CarbonMapperFactory(false);
-
-  @Test
-  void testVersionMatch() throws JsonProcessingException {
-    ObjectMapper mapper = factory.create();
-    UUID requestId = UUID.fromString("4d1ec672-f1ed-4988-99d7-3228b4ebfeaa");
-    CarbonEncryptedRequest request = new CarbonEncryptedRequest();
-    request.setRequestId(requestId);
-
-    String content = mapper.writeValueAsString(request);
-
-    assertThat(content).isEqualTo(
-        "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.2.1\"}");
-
-    CarbonVersion current = CarbonVersion.CURRENT;
-    CarbonEncryptedRequest restored = mapper.readValue(content, CarbonEncryptedRequest.class);
-    assertThat(restored.getVersion()).isEqualTo(current);
-  }
 
   @Test
   void testCompatible() {

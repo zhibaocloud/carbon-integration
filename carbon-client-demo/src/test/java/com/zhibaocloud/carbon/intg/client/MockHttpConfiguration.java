@@ -17,8 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
@@ -26,6 +25,9 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import java.util.UUID;
 import org.apache.http.StatusLine;
@@ -44,8 +46,8 @@ public class MockHttpConfiguration {
     option.setEndpoint(config.getEndpoint());
     option.setCrypto(config.getCrypto());
 
-    CarbonMapperFactory mapperFactory = new CarbonMapperFactory(false);
-    ObjectMapper mapper = mapperFactory.create();
+    CarbonSerializerFactory mapperFactory = new CarbonJacksonSerializerFactory();
+    CarbonSerializer mapper = mapperFactory.create(new SerializerConfiguration());
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
@@ -56,7 +58,7 @@ public class MockHttpConfiguration {
     message.setMessage("OK");
 
     CarbonEncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
-    String payload = mapper.writeValueAsString(encryptedResponse);
+    String payload = mapper.serialize(encryptedResponse);
 
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
     CloseableHttpResponse response = mock(CloseableHttpResponse.class);

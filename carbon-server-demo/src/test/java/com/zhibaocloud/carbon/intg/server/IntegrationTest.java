@@ -17,9 +17,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -28,10 +27,12 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import com.zhibaocloud.carbon.intg.server.starter.CarbonServerProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ class IntegrationTest {
   }
 
   private void runDataSync(CarbonMessageType type, Object request) throws Exception {
-    ObjectMapper mapper = new CarbonMapperFactory(false).create();
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializerConfiguration());
     Crypto crypto = new CryptoFactory().create(config.getCrypto());
 
     CarbonOption option = new CarbonOption();
@@ -71,7 +72,7 @@ class IntegrationTest {
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonEncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
-    String payload = mapper.writeValueAsString(encryptedRequest);
+    String payload = mapper.serialize(encryptedRequest);
 
     MvcResult result = mvc.perform(post("/v2/callbacks/a/fd3c35de-ca5f-4442-87aa-17edc67f93d0")
             .content(payload)
@@ -79,7 +80,7 @@ class IntegrationTest {
         .andExpect(status().isOk())
         .andReturn();
     String responseBody = result.getResponse().getContentAsString();
-    CarbonEncryptedResponse wrapper = mapper.readValue(responseBody, CarbonEncryptedResponse.class);
+    CarbonEncryptedResponse wrapper = mapper.deserialize(responseBody, CarbonEncryptedResponse.class);
     CarbonResponse response = channel.decodeResponse(wrapper, CarbonResponse.class);
     assertThat(response.isSuccess()).isTrue();
   }

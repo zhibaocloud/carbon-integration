@@ -1,4 +1,4 @@
-server.port: 9090
+server.port: 8080
 
 spring:
   application.name: carbon-mock-server
@@ -27,3 +27,6 @@ carbon.server:
     secret: 4XgD98eGyMDejLvA
     iv: ER2gveZeqYYfj6j8
     salt: LXqF4UX4CiAa9mpm
+  serializer:
+    desensitization: false
+    ignore-unknown-properties: false

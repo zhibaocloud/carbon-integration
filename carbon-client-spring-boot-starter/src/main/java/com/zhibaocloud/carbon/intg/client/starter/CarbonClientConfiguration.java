@@ -13,13 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.client.starter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.CarbonClient;
 import com.zhibaocloud.carbon.intg.client.CarbonClientFactory;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import java.util.Arrays;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -29,7 +27,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 /**
  * 用于配置与智保云数据平台通信的客户端
@@ -55,21 +52,14 @@ public class CarbonClientConfiguration {
     return new CryptoFactory();
   }
 
-  @Bean
-  public CarbonMapperFactory mapperFactory(Environment environment) {
-    String[] profiles = environment.getActiveProfiles();
-    boolean isProd = Arrays.asList(profiles).contains("production");
-    return new CarbonMapperFactory(isProd);
-  }
 
   @Bean
   public CarbonClientFactory clientFactory(
       CloseableHttpClient httpClient,
       CryptoFactory crypto,
-      CarbonMapperFactory factory
+      CarbonSerializerFactory sf
   ) {
-    ObjectMapper mapper = factory.create();
-    return new CarbonClientFactory(httpClient, mapper, crypto);
+    return new CarbonClientFactory(httpClient, sf, crypto);
   }
 
   @Bean
@@ -79,6 +69,7 @@ public class CarbonClientConfiguration {
     option.setEndpoint(config.getEndpoint());
     option.setTenant(config.getTenant());
     option.setCrypto(config.getCrypto());
+    option.setSerializer(config.getSerializer());
     return factory.create(option);
   }
 }

@@ -13,8 +13,6 @@
 
 package com.zhibaocloud.carbon.intg;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 
 /**
@@ -44,7 +42,6 @@ public class CarbonVersion {
   private CarbonVersion() {
   }
 
-  @JsonCreator
   public CarbonVersion(String version) {
     String[] parts = version.split("\\.");
     if (parts.length != 3) {
@@ -64,7 +61,7 @@ public class CarbonVersion {
     return minor >= version.minor;
   }
 
-  @JsonValue
+
   @Override
   public String toString() {
     return major + "." + minor + "." + patch;

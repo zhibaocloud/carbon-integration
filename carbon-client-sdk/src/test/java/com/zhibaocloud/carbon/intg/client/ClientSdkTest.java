@@ -18,9 +18,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.CarbonMapperFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
@@ -32,6 +31,8 @@ import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.util.UUID;
@@ -44,7 +45,6 @@ import org.mockito.Mockito;
 
 class ClientSdkTest {
 
-  private final ObjectMapper mapper = new CarbonMapperFactory(false).create();
 
   private CloseableHttpClient mockHttpClient(String payload, int statusCode) throws IOException {
     CloseableHttpClient httpClient = mock(CloseableHttpClient.class);
@@ -57,6 +57,7 @@ class ClientSdkTest {
     return httpClient;
   }
 
+
   @Test
   void testMessageSend() throws Exception {
     CarbonOption option = new CarbonOption();
@@ -67,6 +68,8 @@ class ClientSdkTest {
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());
+
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializerConfiguration());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonResponse message = new CarbonResponse();
@@ -74,7 +77,7 @@ class ClientSdkTest {
     message.setMessage("OK");
 
     CarbonEncryptedResponse encryptedResponse = channel.encodeResponse(UUID.randomUUID(), message);
-    String payload = mapper.writeValueAsString(encryptedResponse);
+    String payload = mapper.serialize(encryptedResponse);
 
     CloseableHttpClient httpClient = mockHttpClient(payload, 200);
     CarbonClient client = new CarbonClientImpl(mapper, httpClient, crypto, option);

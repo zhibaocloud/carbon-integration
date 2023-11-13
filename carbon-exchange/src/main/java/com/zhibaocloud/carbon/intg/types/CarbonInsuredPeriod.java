@@ -13,8 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -81,7 +79,6 @@ public class CarbonInsuredPeriod {
    *
    * @param period 保险期间格式化字符串
    */
-  @JsonCreator
   public CarbonInsuredPeriod(String period) {
     if ("N".equals(period)) {
       this.unit = CarbonInsuredPeriodUnit.N;
@@ -109,7 +106,6 @@ public class CarbonInsuredPeriod {
    *
    * @return 序列化结果
    */
-  @JsonValue
   @Override
   public String toString() {
     if (unit == CarbonInsuredPeriodUnit.N || unit == CarbonInsuredPeriodUnit.O) {
