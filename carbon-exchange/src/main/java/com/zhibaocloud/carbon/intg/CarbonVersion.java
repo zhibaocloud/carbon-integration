@@ -33,11 +33,11 @@ public class CarbonVersion {
   /**
    * 新功能版本，兼容MAJOR
    */
-  private int minor = 2;
+  private int minor = 3;
   /**
    * 问题修正版本
    */
-  private int patch = 1;
+  private int patch = 0;
 
   private CarbonVersion() {
   }

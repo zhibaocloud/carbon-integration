@@ -38,28 +38,28 @@ mvn spring-boot:run -pl carbon-client-demo
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-client-sdk</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
 
    <!-- 如使用 jackson，需要引入以下依赖 -->
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-serialization-jackson</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
 
    <!-- 如使用 gson，需要引入以下依赖 -->
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-serialization-gson</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
    
    <!-- 如使用 fastjson，需要引入以下依赖 -->
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-serialization-fastjson2</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
 </dependencies>
 ```
@@ -72,7 +72,7 @@ mvn spring-boot:run -pl carbon-client-demo
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-client-spring-boot-starter</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
 
    <!-- 如使用 jackson，需要引入以下依赖 -->
@@ -111,12 +111,12 @@ mvn spring-boot:run -pl carbon-client-demo
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-server-sdk</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-server-spring-boot-starter</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.0</version>
    </dependency>
 </dependencies>
 ```
