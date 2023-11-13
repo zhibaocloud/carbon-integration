@@ -15,17 +15,16 @@ package com.zhibaocloud.carbon.intg.fastjson;
 
 import com.alibaba.fastjson2.JSON;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
-import java.io.IOException;
 
 public class CarbonFastjsonSerializer implements CarbonSerializer {
 
   @Override
-  public String serialize(Object value) throws IOException {
+  public String serialize(Object value) {
     return JSON.toJSONString(value);
   }
 
   @Override
-  public <T> T deserialize(String payload, Class<T> clz) throws IOException {
+  public <T> T deserialize(String payload, Class<T> clz) {
     return JSON.parseObject(payload, clz);
   }
 }

@@ -19,10 +19,10 @@ import java.io.IOException;
 public class CarbonJacksonModule extends SimpleModule {
 
   {
-    addSerializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodSerializer());
-    addDeserializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodDeserializer());
     addSerializer(CarbonVersion.class, new CarbonVersionSerializer());
     addDeserializer(CarbonVersion.class, new CarbonVersionDeserializer());
+    addSerializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodSerializer());
+    addDeserializer(CarbonInsuredPeriod.class, new CarbonInsuredPeriodDeserializer());
     addSerializer(CarbonPaymentPeriod.class, new CarbonPaymentPeriodSerializer());
     addDeserializer(CarbonPaymentPeriod.class, new CarbonPaymentPeriodDeserializer());
   }

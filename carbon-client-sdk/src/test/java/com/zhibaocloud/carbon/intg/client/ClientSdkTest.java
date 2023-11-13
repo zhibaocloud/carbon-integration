@@ -65,7 +65,7 @@ class ClientSdkTest {
   private static Stream<CarbonSerializerFactory> providerSerializer() {
     return Stream.of(
         new CarbonJacksonSerializerFactory(),
-//        new CarbonFastjsonSerializerFactory(),
+        new CarbonFastjsonSerializerFactory(),
         new CarbonGsonSerializerFactory()
     );
   }
