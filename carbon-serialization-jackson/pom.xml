@@ -48,6 +48,7 @@
     <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-exchange</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

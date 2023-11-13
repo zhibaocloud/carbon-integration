@@ -46,18 +46,6 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-exchange</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-server-sdk</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-serialization-spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-server-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
@@ -83,4 +71,46 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <!-- 使用 Jackson 作为序列化工具 -->
+  <profiles>
+    <profile>
+      <id>jackson</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.fasterxml.jackson.datatype</groupId>
+          <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- 使用 fastjson2 作为序列化工具 -->
+    <profile>
+      <id>fastjson2</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.alibaba.fastjson2</groupId>
+          <artifactId>fastjson2</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- 使用 gson 作为序列化工具 -->
+    <profile>
+      <id>gson</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

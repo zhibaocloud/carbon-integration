@@ -47,7 +47,7 @@ public class CarbonServerConfiguration {
    * 将解析后的数据发送给 MessageListener 并触发实际的业务逻辑
    *
    * @param listener 当收到数据后回调 listener 的 on 方法，需要应用程序开发方实现该接口
-   * @param mf       ObjectMapper 针对不同的环境，确定不同的反序列化策略
+   * @param sf       针对不同的环境，确定不同的反序列化策略
    * @param cf       获取加解密算法
    * @return 注入到 controller 层，处理收到的数据
    */
