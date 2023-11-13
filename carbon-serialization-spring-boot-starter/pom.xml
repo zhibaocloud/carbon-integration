@@ -10,29 +10,20 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-jackson-serialization</artifactId>
-  <description>使用 Jackson 实现数据的序列化、反序列化</description>
+  <artifactId>carbon-serialization-spring-boot-starter</artifactId>
+  <name>Carbon Serialization Spring Boot Starter</name>
+  <description>通过检测当前环境支持的 JSON lib 来实现序列化、反序列化功能</description>
 
   <dependencies>
     <dependency>
-      <groupId>com.github.jsonzou</groupId>
-      <artifactId>jmockdata</artifactId>
-      <scope>test</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
     </dependency>
+
+    <!-- jackson -->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <scope>provided</scope>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-serialization-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -44,9 +35,27 @@
       <artifactId>jackson-datatype-jsr310</artifactId>
       <scope>provided</scope>
     </dependency>
+
+    <!-- fastjson -->
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-exchange</artifactId>
+      <artifactId>carbon-serialization-fastjson2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- gson -->
+    <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-serialization-gson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

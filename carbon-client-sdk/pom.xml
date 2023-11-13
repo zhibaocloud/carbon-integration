@@ -66,7 +66,7 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-jackson-serialization</artifactId>
+      <artifactId>carbon-serialization-jackson</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -81,7 +81,7 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-fastjson2-serialization</artifactId>
+      <artifactId>carbon-serialization-fastjson2</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -91,7 +91,7 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-gson-serialization</artifactId>
+      <artifactId>carbon-serialization-gson</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

@@ -10,7 +10,8 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-gson-serialization</artifactId>
+  <artifactId>carbon-serialization-gson</artifactId>
+  <name>Carbon Serialization (Gson)</name>
   <description>使用 GSON 实现数据的序列化、反序列化</description>
 
   <dependencies>
