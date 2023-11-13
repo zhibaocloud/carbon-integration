@@ -79,7 +79,7 @@ public class CarbonJacksonSerializerFactory implements CarbonSerializerFactory {
         .setSerializationInclusion(Include.NON_NULL)
         .setSerializationInclusion(Include.NON_EMPTY);
 
-    if (config.getDesensitization()) {
+    if (Boolean.TRUE.equals(config.getDesensitization())) {
       om.registerModule(new CarbonDesensitizationModule());
     }
 

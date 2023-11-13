@@ -78,7 +78,7 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-jackson-sdk</artifactId>
+      <artifactId>carbon-jackson-serialization</artifactId>
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>

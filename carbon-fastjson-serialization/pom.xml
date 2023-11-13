@@ -10,7 +10,8 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-jackson-sdk</artifactId>
+  <artifactId>carbon-fastjson-serialization</artifactId>
+  <description>使用 Fastjson 实现数据的序列化、反序列化</description>
 
   <dependencies>
     <dependency>
@@ -34,18 +35,13 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-exchange</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

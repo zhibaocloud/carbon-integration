@@ -87,9 +87,11 @@
     <module>carbon-server-sdk</module>
     <module>carbon-server-spring-boot-starter</module>
     <module>carbon-server-demo</module>
-    <module>carbon-coverage</module>
-    <module>carbon-jackson-sdk</module>
+    <module>carbon-jackson-serialization</module>
+    <module>carbon-fastjson-serialization</module>
+    <module>carbon-gson-serialization</module>
     <module>carbon-serializer-spring-boot-starter</module>
+    <module>carbon-coverage</module>
   </modules>
 
   <build>
@@ -266,6 +268,16 @@
         <version>1.0</version>
       </dependency>
       <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2</artifactId>
+        <version>2.0.42</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+      </dependency>
+      <dependency>
         <groupId>com.zhibaocloud</groupId>
         <artifactId>carbon-exchange</artifactId>
         <version>${project.version}</version>
@@ -282,7 +294,17 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud</groupId>
-        <artifactId>carbon-jackson-sdk</artifactId>
+        <artifactId>carbon-jackson-serialization</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud</groupId>
+        <artifactId>carbon-fastjson-serialization</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud</groupId>
+        <artifactId>carbon-gson-serialization</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

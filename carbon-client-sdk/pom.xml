@@ -66,18 +66,18 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-jackson-sdk</artifactId>
-      <scope>test</scope>
+      <artifactId>carbon-jackson-serialization</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <scope>test</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
-      <scope>test</scope>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
