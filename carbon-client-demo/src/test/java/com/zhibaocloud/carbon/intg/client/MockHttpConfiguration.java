@@ -17,7 +17,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
@@ -34,6 +33,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
@@ -41,13 +41,15 @@ import org.springframework.context.annotation.Bean;
 public class MockHttpConfiguration {
 
   @Bean
-  public CloseableHttpClient httpClient(CarbonClientProperties config) throws IOException {
+  public CloseableHttpClient httpClient(
+      CarbonClientProperties config,
+      @Qualifier("carbon-jackson-serialization") CarbonSerializerFactory sf
+  ) throws IOException {
     CarbonOption option = new CarbonOption();
     option.setEndpoint(config.getEndpoint());
     option.setCrypto(config.getCrypto());
 
-    CarbonSerializerFactory mapperFactory = new CarbonJacksonSerializerFactory();
-    CarbonSerializer mapper = mapperFactory.create(new SerializerConfiguration());
+    CarbonSerializer mapper = sf.create(new SerializerConfiguration());
 
     CryptoFactory factory = new CryptoFactory();
     Crypto crypto = factory.create(option.getCrypto());

@@ -15,6 +15,7 @@ package com.zhibaocloud.carbon.intg.client;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.util.MockUtil;

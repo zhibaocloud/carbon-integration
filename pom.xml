@@ -88,7 +88,7 @@
     <module>carbon-server-spring-boot-starter</module>
     <module>carbon-server-demo</module>
     <module>carbon-jackson-serialization</module>
-    <module>carbon-fastjson-serialization</module>
+    <module>carbon-fastjson2-serialization</module>
     <module>carbon-gson-serialization</module>
     <module>carbon-serializer-spring-boot-starter</module>
     <module>carbon-coverage</module>
@@ -299,7 +299,7 @@
       </dependency>
       <dependency>
         <groupId>com.zhibaocloud</groupId>
-        <artifactId>carbon-fastjson-serialization</artifactId>
+        <artifactId>carbon-fastjson2-serialization</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

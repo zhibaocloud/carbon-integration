@@ -10,7 +10,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>carbon-fastjson-serialization</artifactId>
+  <artifactId>carbon-fastjson2-serialization</artifactId>
   <description>使用 Fastjson 实现数据的序列化、反序列化</description>
 
   <dependencies>

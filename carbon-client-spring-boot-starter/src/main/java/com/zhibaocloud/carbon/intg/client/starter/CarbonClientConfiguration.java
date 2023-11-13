@@ -62,7 +62,7 @@ public class CarbonClientConfiguration {
     return new CarbonClientFactory(httpClient, sf, crypto);
   }
 
-  @Bean
+  @Bean("carbon-client")
   @ConditionalOnProperty(prefix = "carbon.client", name = "enabled", havingValue = "true")
   public CarbonClient create(CarbonClientFactory factory) {
     CarbonOption option = new CarbonOption();

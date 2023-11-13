@@ -27,11 +27,16 @@
       <artifactId>jackson-databind</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
     <!-- fastjson -->
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-fastjson-serialization</artifactId>
+      <artifactId>carbon-fastjson2-serialization</artifactId>
     </dependency>
     <dependency>
       <groupId>com.alibaba.fastjson2</groupId>
