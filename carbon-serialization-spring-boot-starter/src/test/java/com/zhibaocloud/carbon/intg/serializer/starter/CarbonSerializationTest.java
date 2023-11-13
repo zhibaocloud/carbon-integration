@@ -22,7 +22,7 @@ import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriodUnit;
 import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
@@ -47,7 +47,7 @@ class CarbonSerializationTest {
         new CarbonJacksonSerializerFactory(),
         new CarbonFastjsonSerializerFactory(),
         new CarbonGsonSerializerFactory()
-    ).map(factory -> factory.create(new SerializerConfiguration()));
+    ).map(factory -> factory.create(new SerializationConfiguration()));
   }
 
   @ParameterizedTest

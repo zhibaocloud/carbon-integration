@@ -30,7 +30,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.jackson.modules.CarbonDesensitizationModule;
 import com.zhibaocloud.carbon.intg.jackson.modules.CarbonJacksonModule;
 import java.time.LocalDate;
@@ -71,7 +71,7 @@ public class CarbonJacksonSerializerFactory implements CarbonSerializerFactory {
       .setSerializationInclusion(Include.NON_NULL)
       .setSerializationInclusion(Include.NON_EMPTY);
 
-  public CarbonSerializer create(SerializerConfiguration config) {
+  public CarbonSerializer create(SerializationConfiguration config) {
     ObjectMapper om = origin.copy();
 
     // 开发、测试环境则进行报错。识别未知字段，可以及时发现问题

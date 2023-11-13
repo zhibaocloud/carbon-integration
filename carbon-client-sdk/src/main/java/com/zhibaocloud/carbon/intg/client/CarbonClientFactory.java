@@ -53,7 +53,7 @@ public class CarbonClientFactory {
    */
   public CarbonClient create(CarbonOption option) {
     Crypto crypto = cf.create(option.getCrypto());
-    CarbonSerializer serializer = sf.create(option.getSerializer());
+    CarbonSerializer serializer = sf.create(option.getSerialization());
     return new CarbonClientImpl(serializer, client, crypto, option);
   }
 }

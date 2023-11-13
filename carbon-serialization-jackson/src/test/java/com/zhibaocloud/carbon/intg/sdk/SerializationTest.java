@@ -20,28 +20,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
-import com.zhibaocloud.carbon.intg.model.CarbonRisk;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
-import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
-import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriodUnit;
-import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
-import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriodUnit;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
-import org.assertj.core.api.AbstractStringAssert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class SerializationTest {
 
   private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory()
-      .create(new SerializerConfiguration());
+      .create(new SerializationConfiguration());
 
   /**
    * 测试序列化的为JSON时字段的顺序。需要保证按照字母顺序进行输出，否则计算签名时会出现问题。
@@ -86,10 +77,10 @@ class SerializationTest {
   void testEnvironment() throws IOException {
     CarbonSerializerFactory prodFactory = new CarbonJacksonSerializerFactory();
     CarbonSerializerFactory devFactory = new CarbonJacksonSerializerFactory();
-    SerializerConfiguration prodConfig = new SerializerConfiguration();
+    SerializationConfiguration prodConfig = new SerializationConfiguration();
     prodConfig.setIgnoreUnknownProperties(false);
     CarbonSerializer prodMapper = prodFactory.create(prodConfig);
-    CarbonSerializer devMapper = devFactory.create(new SerializerConfiguration());
+    CarbonSerializer devMapper = devFactory.create(new SerializationConfiguration());
 
     CarbonPolicy prodPolicy = prodMapper.deserialize("{\"a\":1}", CarbonPolicy.class);
     assertThat(prodPolicy).isNotNull();

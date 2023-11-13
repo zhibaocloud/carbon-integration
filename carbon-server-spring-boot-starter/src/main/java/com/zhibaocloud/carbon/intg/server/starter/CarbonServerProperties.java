@@ -15,7 +15,7 @@ package com.zhibaocloud.carbon.intg.server.starter;
 
 
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,5 +40,5 @@ public class CarbonServerProperties {
   /**
    * 序列化配置信息
    */
-  private SerializerConfiguration serializer = new SerializerConfiguration();
+  private SerializationConfiguration serializer = new SerializationConfiguration();
 }

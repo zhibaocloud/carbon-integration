@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class SerializerConfiguration {
+public class SerializationConfiguration {
 
   /**
    * 是否脱敏

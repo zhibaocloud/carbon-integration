@@ -69,7 +69,7 @@ public class CarbonClientConfiguration {
     option.setEndpoint(config.getEndpoint());
     option.setTenant(config.getTenant());
     option.setCrypto(config.getCrypto());
-    option.setSerializer(config.getSerializer());
+    option.setSerialization(config.getSerialization());
     return factory.create(option);
   }
 }

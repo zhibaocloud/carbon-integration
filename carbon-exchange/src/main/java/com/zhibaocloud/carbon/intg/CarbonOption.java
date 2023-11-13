@@ -14,7 +14,7 @@
 package com.zhibaocloud.carbon.intg;
 
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,5 +46,5 @@ public class CarbonOption {
   /**
    * 序列化配置
    */
-  private SerializerConfiguration serializer = new SerializerConfiguration();
+  private SerializationConfiguration serialization = new SerializationConfiguration();
 }

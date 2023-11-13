@@ -7,6 +7,6 @@ carbon.client:
     secret: 4XgD98eGyMDejLvA
     iv: ER2gveZeqYYfj6j8
     salt: LXqF4UX4CiAa9mpm
-  serializer:
+  serialization:
     desensitization: false
     ignore-unknown-properties: false

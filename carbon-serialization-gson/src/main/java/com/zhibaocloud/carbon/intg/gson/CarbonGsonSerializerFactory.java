@@ -24,7 +24,7 @@ import com.google.gson.stream.JsonWriter;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
 import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
 import java.io.IOException;
@@ -182,7 +182,7 @@ public class CarbonGsonSerializerFactory implements CarbonSerializerFactory {
   }
 
   @Override
-  public CarbonSerializer create(SerializerConfiguration config) {
+  public CarbonSerializer create(SerializationConfiguration config) {
     return new CarbonGsonSerializer(gson);
   }
 }

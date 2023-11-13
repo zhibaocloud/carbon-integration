@@ -19,7 +19,7 @@ import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageListener;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageMeta;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
   private final CarbonSerializer serializer;
 
   public ConsoleMessageListener(CarbonSerializerFactory factory) {
-    this.serializer = factory.create(new SerializerConfiguration());
+    this.serializer = factory.create(new SerializationConfiguration());
   }
 
   /**

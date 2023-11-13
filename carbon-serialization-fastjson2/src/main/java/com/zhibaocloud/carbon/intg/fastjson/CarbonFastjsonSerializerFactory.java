@@ -13,7 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.fastjson;
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONFactory;
 import com.alibaba.fastjson2.modules.ObjectReaderModule;
 import com.alibaba.fastjson2.modules.ObjectWriterModule;
@@ -26,11 +25,10 @@ import com.alibaba.fastjson2.writer.ObjectWriters;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
 import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
 import java.lang.reflect.Type;
-import java.util.function.Function;
 
 public class CarbonFastjsonSerializerFactory implements CarbonSerializerFactory {
 
@@ -73,7 +71,7 @@ public class CarbonFastjsonSerializerFactory implements CarbonSerializerFactory 
   }
 
   @Override
-  public CarbonSerializer create(SerializerConfiguration config) {
+  public CarbonSerializer create(SerializationConfiguration config) {
     return new CarbonFastjsonSerializer();
   }
 }

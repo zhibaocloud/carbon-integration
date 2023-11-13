@@ -8,7 +8,7 @@ import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.sdk.TestDesensitizationModel.Agent;
 import com.zhibaocloud.carbon.intg.sdk.TestDesensitizationModel.Customer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
-import com.zhibaocloud.carbon.intg.serializer.SerializerConfiguration;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class DesensitizationTest {
   private final CarbonSerializer mapper;
 
   {
-    SerializerConfiguration config = new SerializerConfiguration();
+    SerializationConfiguration config = new SerializationConfiguration();
     config.setDesensitization(true);
     mapper = new CarbonJacksonSerializerFactory().create(config);
   }

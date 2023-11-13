@@ -5,5 +5,5 @@ package com.zhibaocloud.carbon.intg.serializer;
  */
 public interface CarbonSerializerFactory {
 
-  CarbonSerializer create(SerializerConfiguration config);
+  CarbonSerializer create(SerializationConfiguration config);
 }
