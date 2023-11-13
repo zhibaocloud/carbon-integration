@@ -17,20 +17,20 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.io.IOException;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class CarbonGsonSerializer implements CarbonSerializer {
 
-  private final Gson gson = new GsonBuilder()
-      .setDateFormat("yyyy-MM-dd HH:mm:ss")
-      .create();
+  private final Gson gson;
 
   @Override
-  public String serialize(Object value) throws IOException {
+  public String serialize(Object value) {
     return gson.toJson(value);
   }
 
   @Override
-  public <T> T deserialize(String payload, Class<T> clz) throws IOException {
+  public <T> T deserialize(String payload, Class<T> clz) {
     return gson.fromJson(payload, clz);
   }
 }

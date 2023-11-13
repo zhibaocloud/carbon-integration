@@ -16,6 +16,7 @@ package com.zhibaocloud.carbon.intg.serializer.starter;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.zhibaocloud.carbon.intg.fastjson.CarbonFastjsonSerializerFactory;
+import com.zhibaocloud.carbon.intg.gson.CarbonGsonSerializerFactory;
 import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonRisk;
@@ -38,15 +39,16 @@ import org.junit.jupiter.params.provider.MethodSource;
 class CarbonSerializationTest {
 
 
-  private static Stream<CarbonSerializer> createFactories() {
+  private static Stream<CarbonSerializer> createMapper() {
     return Stream.of(
         new CarbonJacksonSerializerFactory(),
-        new CarbonFastjsonSerializerFactory()
+        new CarbonFastjsonSerializerFactory(),
+        new CarbonGsonSerializerFactory()
     ).map(factory -> factory.create(new SerializerConfiguration()));
   }
 
   @ParameterizedTest
-  @MethodSource("createFactories")
+  @MethodSource("createMapper")
   void testInsuredPeriod(CarbonSerializer mapper) throws IOException {
     CarbonInsuredPeriod period = new CarbonInsuredPeriod("1Y");
     assertThat(period.getValue()).isEqualTo(1);
@@ -78,7 +80,7 @@ class CarbonSerializationTest {
 
 
   @ParameterizedTest
-  @MethodSource("createFactories")
+  @MethodSource("createMapper")
   void testPaymentPeriod(CarbonSerializer mapper) throws IOException {
     CarbonPaymentPeriod period = CarbonPaymentPeriod.of("1Y");
     assertThat(period.getValue()).isEqualTo(1);
@@ -102,7 +104,7 @@ class CarbonSerializationTest {
   }
 
   @ParameterizedTest
-  @MethodSource("createFactories")
+  @MethodSource("createMapper")
   void testDateTimeSerialization(CarbonSerializer mapper) throws IOException {
     LocalDateTime timestamp = LocalDateTime.of(2023, 3, 30, 23, 59, 59, 999);
 
@@ -119,7 +121,7 @@ class CarbonSerializationTest {
   }
 
   @ParameterizedTest
-  @MethodSource("createFactories")
+  @MethodSource("createMapper")
   void testJavaTimeSerialization(CarbonSerializer mapper) throws IOException {
     LocalDate date = LocalDate.of(2023, 3, 29);
     LocalDateTime datetime = LocalDateTime.of(2023, 3, 29, 0, 1, 1);
