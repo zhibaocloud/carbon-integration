@@ -92,6 +92,7 @@
     <module>carbon-serialization-gson</module>
     <module>carbon-serialization-spring-boot-starter</module>
     <module>carbon-coverage</module>
+    <module>carbon-rest-template-client-sdk</module>
   </modules>
 
   <build>
