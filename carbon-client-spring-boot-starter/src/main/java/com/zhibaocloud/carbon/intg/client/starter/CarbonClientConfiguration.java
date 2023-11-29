@@ -18,7 +18,6 @@ import com.zhibaocloud.carbon.intg.client.CarbonClient;
 import com.zhibaocloud.carbon.intg.client.CarbonClientFactory;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -34,11 +33,14 @@ import org.springframework.context.annotation.Configuration;
  * @author jun
  */
 @Configuration
-@RequiredArgsConstructor
 @EnableConfigurationProperties(CarbonClientProperties.class)
 public class CarbonClientConfiguration {
 
   private final CarbonClientProperties config;
+
+  public CarbonClientConfiguration(CarbonClientProperties config) {
+    this.config = config;
+  }
 
   @Bean
   @ConditionalOnClass(CloseableHttpClient.class)

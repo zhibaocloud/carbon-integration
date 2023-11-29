@@ -18,7 +18,6 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jun
  */
 @RestController
-@RequiredArgsConstructor
 @Tag(name = "数据推送接口")
 public class DataReceiverController {
 
   private final CarbonMessageProcessor processor;
+
+  public DataReceiverController(CarbonMessageProcessor processor) {
+    this.processor = processor;
+  }
 
   /**
    * 由接入方实现该接口，并将该接口地址告知智保云，用于接收保险公司推送的保单数据

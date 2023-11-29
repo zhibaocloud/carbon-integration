@@ -15,16 +15,13 @@ package com.zhibaocloud.carbon.intg.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 
 /**
  * 代理人信息
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
 @Schema(title = "代理人信息")
 public class CarbonAgent {
 
@@ -51,4 +48,62 @@ public class CarbonAgent {
    */
   @Schema(title = "代理人执业证号")
   private String busiDevCertifNo;
+
+  public CarbonAgent() {
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public String getExtCode() {
+    return extCode;
+  }
+
+  public void setExtCode(String extCode) {
+    this.extCode = extCode;
+  }
+
+  public String getBusiDevCertifNo() {
+    return busiDevCertifNo;
+  }
+
+  public void setBusiDevCertifNo(String busiDevCertifNo) {
+    this.busiDevCertifNo = busiDevCertifNo;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonAgent that = (CarbonAgent) o;
+    return Objects.equals(name, that.name) && Objects.equals(code, that.code) && Objects.equals(extCode, that.extCode) && Objects.equals(busiDevCertifNo, that.busiDevCertifNo);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, code, extCode, busiDevCertifNo);
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonAgent{" +
+            "name='" + name + '\'' +
+            ", code='" + code + '\'' +
+            ", extCode='" + extCode + '\'' +
+            ", busiDevCertifNo='" + busiDevCertifNo + '\'' +
+            '}';
+  }
 }

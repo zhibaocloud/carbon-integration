@@ -18,7 +18,6 @@ import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.SignatureMissMatchException;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
 /**
@@ -26,7 +25,6 @@ import lombok.SneakyThrows;
  *
  * @author jun
  */
-@RequiredArgsConstructor
 public class CarbonDataChannel {
 
   private final CarbonSerializer serializer;
@@ -34,6 +32,12 @@ public class CarbonDataChannel {
   private final Crypto crypto;
 
   private final CarbonOption option;
+
+  public CarbonDataChannel(CarbonSerializer serializer, Crypto crypto, CarbonOption option) {
+    this.serializer = serializer;
+    this.crypto = crypto;
+    this.option = option;
+  }
 
   /**
    * 封装链路请求。HTTP 是作为传输层使用

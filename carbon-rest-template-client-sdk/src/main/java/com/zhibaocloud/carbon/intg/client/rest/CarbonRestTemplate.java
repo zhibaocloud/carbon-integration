@@ -15,7 +15,6 @@ import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.io.IOException;
 import java.net.URI;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -26,13 +25,19 @@ import org.springframework.web.client.RestTemplate;
  * @author yangtuo
  */
 @Slf4j
-@RequiredArgsConstructor
 public class CarbonRestTemplate implements CarbonClient {
 
   private final CarbonOption option;
   private final CarbonSerializer serializer;
   private final RestTemplate restTemplate;
   private final CarbonDataChannel channel;
+
+  public CarbonRestTemplate(CarbonOption option, CarbonSerializer serializer, RestTemplate restTemplate, CarbonDataChannel channel) {
+    this.option = option;
+    this.serializer = serializer;
+    this.restTemplate = restTemplate;
+    this.channel = channel;
+  }
 
   private void send(CarbonMessageType type, Object request) throws IOException {
     if (log.isDebugEnabled()) {

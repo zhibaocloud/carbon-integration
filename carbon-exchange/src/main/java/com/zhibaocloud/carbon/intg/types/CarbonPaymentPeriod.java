@@ -12,10 +12,7 @@
  */
 
 package com.zhibaocloud.carbon.intg.types;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 
 /**
  * <table border="1">
@@ -50,9 +47,6 @@ import lombok.NoArgsConstructor;
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CarbonPaymentPeriod {
 
   /**
@@ -61,6 +55,43 @@ public class CarbonPaymentPeriod {
   public static final CarbonPaymentPeriod SINGLE = new CarbonPaymentPeriod("S");
   private int value = 0;
   private CarbonPaymentPeriodUnit unit;
+
+  public int getValue() {
+    return value;
+  }
+
+  public void setValue(int value) {
+    this.value = value;
+  }
+
+  public CarbonPaymentPeriodUnit getUnit() {
+    return unit;
+  }
+
+  public void setUnit(CarbonPaymentPeriodUnit unit) {
+    this.unit = unit;
+  }
+
+  public CarbonPaymentPeriod(int value, CarbonPaymentPeriodUnit unit) {
+    this.value = value;
+    this.unit = unit;
+  }
+
+  public CarbonPaymentPeriod() {
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonPaymentPeriod that = (CarbonPaymentPeriod) o;
+    return value == that.value && unit == that.unit;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value, unit);
+  }
 
   /**
    * 创建交费期间

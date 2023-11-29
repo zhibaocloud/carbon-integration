@@ -22,16 +22,19 @@ import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequiredArgsConstructor
 public class CarbonMessageProcessor {
 
   private final CarbonDataChannel channel;
 
   private final CarbonMessageListener listener;
+
+  public CarbonMessageProcessor(CarbonDataChannel channel, CarbonMessageListener listener) {
+    this.channel = channel;
+    this.listener = listener;
+  }
 
   public CarbonEncryptedResponse process(CarbonEncryptedRequest request) {
     try {

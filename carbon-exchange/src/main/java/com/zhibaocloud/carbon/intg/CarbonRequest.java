@@ -13,8 +13,6 @@
 
 package com.zhibaocloud.carbon.intg;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /**
  * 请求报文
@@ -22,8 +20,6 @@ import lombok.Getter;
  * @param <T> 推送的数据内容
  * @author jun
  */
-@Getter
-@AllArgsConstructor
 public class CarbonRequest<T> {
 
   /**
@@ -33,4 +29,16 @@ public class CarbonRequest<T> {
 
   private T data;
 
+  public String getType() {
+    return type;
+  }
+
+  public T getData() {
+    return data;
+  }
+
+  public CarbonRequest(String type, T data) {
+    this.type = type;
+    this.data = data;
+  }
 }

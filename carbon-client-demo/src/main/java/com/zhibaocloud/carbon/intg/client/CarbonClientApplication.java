@@ -22,7 +22,6 @@ import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,7 +35,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @SpringBootApplication
-@RequiredArgsConstructor
 public class CarbonClientApplication implements ApplicationRunner {
 
   private final CarbonClient client;
@@ -44,6 +42,12 @@ public class CarbonClientApplication implements ApplicationRunner {
   private final CarbonClientFactory factory;
 
   private final CarbonClientProperties config;
+
+  public CarbonClientApplication(CarbonClient client, CarbonClientFactory factory, CarbonClientProperties config) {
+    this.client = client;
+    this.factory = factory;
+    this.config = config;
+  }
 
   public static void main(String[] args) {
     SpringApplication.run(CarbonClientApplication.class, args);

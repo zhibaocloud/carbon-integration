@@ -14,15 +14,15 @@
 package com.zhibaocloud.carbon.intg.crypto;
 
 import com.zhibaocloud.carbon.intg.CarbonVersion;
+
+import java.util.Objects;
 import java.util.UUID;
-import lombok.Data;
 
 /**
  * 加密后的报文响应
  *
  * @author jun
  */
-@Data
 public class CarbonEncryptedResponse {
 
   /**
@@ -55,5 +55,69 @@ public class CarbonEncryptedResponse {
    */
   public String getVersion() {
     return version.toString();
+  }
+
+  public void setVersion(CarbonVersion version) {
+    this.version = version;
+  }
+
+  public UUID getRequestId() {
+    return requestId;
+  }
+
+  public void setRequestId(UUID requestId) {
+    this.requestId = requestId;
+  }
+
+  public String getSign() {
+    return sign;
+  }
+
+  public void setSign(String sign) {
+    this.sign = sign;
+  }
+
+  public String getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(String tenant) {
+    this.tenant = tenant;
+  }
+
+  public String getPayload() {
+    return payload;
+  }
+
+
+  public CarbonEncryptedResponse() {
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonEncryptedResponse that = (CarbonEncryptedResponse) o;
+    return Objects.equals(version, that.version) && Objects.equals(requestId, that.requestId) && Objects.equals(sign, that.sign) && Objects.equals(tenant, that.tenant) && Objects.equals(payload, that.payload);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(version, requestId, sign, tenant, payload);
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonEncryptedResponse{" +
+            "version=" + version +
+            ", requestId=" + requestId +
+            ", sign='" + sign + '\'' +
+            ", tenant='" + tenant + '\'' +
+            ", payload='" + payload + '\'' +
+            '}';
+  }
+
+  public void setPayload(String payload) {
+    this.payload = payload;
   }
 }

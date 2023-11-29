@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 交费间隔、交费频率
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonPayIntv implements EncodedValue {
 
   /**
@@ -63,4 +58,17 @@ public enum CarbonPayIntv implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonPayIntv(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

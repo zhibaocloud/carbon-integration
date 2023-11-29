@@ -20,19 +20,16 @@ import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonStringDesen
 import com.zhibaocloud.carbon.intg.types.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * 被保人信息
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
 @Schema(title = "被保人信息")
 public class CarbonInsured {
 
@@ -194,4 +191,224 @@ public class CarbonInsured {
    */
   @Schema(title = "被保人是否有社保")
   private CarbonSocialSecurityFlag socialSecurityFlag;
+
+  public CarbonInsured() {
+  }
+
+  public String getInsuredNo() {
+    return insuredNo;
+  }
+
+  public void setInsuredNo(String insuredNo) {
+    this.insuredNo = insuredNo;
+  }
+
+  public CarbonRelationType getRelationToApplicant() {
+    return relationToApplicant;
+  }
+
+  public void setRelationToApplicant(CarbonRelationType relationToApplicant) {
+    this.relationToApplicant = relationToApplicant;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public CarbonGenderType getGender() {
+    return gender;
+  }
+
+  public void setGender(CarbonGenderType gender) {
+    this.gender = gender;
+  }
+
+  public LocalDate getBirthdate() {
+    return birthdate;
+  }
+
+  public void setBirthdate(LocalDate birthdate) {
+    this.birthdate = birthdate;
+  }
+
+  public CarbonIdType getIdType() {
+    return idType;
+  }
+
+  public void setIdType(CarbonIdType idType) {
+    this.idType = idType;
+  }
+
+  public String getIdNo() {
+    return idNo;
+  }
+
+  public void setIdNo(String idNo) {
+    this.idNo = idNo;
+  }
+
+  public LocalDate getIdValidStart() {
+    return idValidStart;
+  }
+
+  public void setIdValidStart(LocalDate idValidStart) {
+    this.idValidStart = idValidStart;
+  }
+
+  public LocalDate getIdValidEnd() {
+    return idValidEnd;
+  }
+
+  public void setIdValidEnd(LocalDate idValidEnd) {
+    this.idValidEnd = idValidEnd;
+  }
+
+  public String getMobile() {
+    return mobile;
+  }
+
+  public void setMobile(String mobile) {
+    this.mobile = mobile;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public CarbonDegreeType getDegree() {
+    return degree;
+  }
+
+  public void setDegree(CarbonDegreeType degree) {
+    this.degree = degree;
+  }
+
+  public CarbonMarriageType getMarriage() {
+    return marriage;
+  }
+
+  public void setMarriage(CarbonMarriageType marriage) {
+    this.marriage = marriage;
+  }
+
+  public String getOccupationType() {
+    return occupationType;
+  }
+
+  public void setOccupationType(String occupationType) {
+    this.occupationType = occupationType;
+  }
+
+  public String getOccupationCode() {
+    return occupationCode;
+  }
+
+  public void setOccupationCode(String occupationCode) {
+    this.occupationCode = occupationCode;
+  }
+
+  public String getOccupationName() {
+    return occupationName;
+  }
+
+  public void setOccupationName(String occupationName) {
+    this.occupationName = occupationName;
+  }
+
+  public String getRgtAddress() {
+    return rgtAddress;
+  }
+
+  public void setRgtAddress(String rgtAddress) {
+    this.rgtAddress = rgtAddress;
+  }
+
+  public String getPostalAddress() {
+    return postalAddress;
+  }
+
+  public void setPostalAddress(String postalAddress) {
+    this.postalAddress = postalAddress;
+  }
+
+  public BigDecimal getIncome() {
+    return income;
+  }
+
+  public void setIncome(BigDecimal income) {
+    this.income = income;
+  }
+
+  public CarbonNationType getNation() {
+    return nation;
+  }
+
+  public void setNation(CarbonNationType nation) {
+    this.nation = nation;
+  }
+
+  public CarbonNationalityType getNationality() {
+    return nationality;
+  }
+
+  public void setNationality(CarbonNationalityType nationality) {
+    this.nationality = nationality;
+  }
+
+  public CarbonSocialSecurityFlag getSocialSecurityFlag() {
+    return socialSecurityFlag;
+  }
+
+  public void setSocialSecurityFlag(CarbonSocialSecurityFlag socialSecurityFlag) {
+    this.socialSecurityFlag = socialSecurityFlag;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonInsured that = (CarbonInsured) o;
+    return Objects.equals(insuredNo, that.insuredNo) && relationToApplicant == that.relationToApplicant && Objects.equals(name, that.name) && gender == that.gender && Objects.equals(birthdate, that.birthdate) && idType == that.idType && Objects.equals(idNo, that.idNo) && Objects.equals(idValidStart, that.idValidStart) && Objects.equals(idValidEnd, that.idValidEnd) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && degree == that.degree && marriage == that.marriage && Objects.equals(occupationType, that.occupationType) && Objects.equals(occupationCode, that.occupationCode) && Objects.equals(occupationName, that.occupationName) && Objects.equals(rgtAddress, that.rgtAddress) && Objects.equals(postalAddress, that.postalAddress) && Objects.equals(income, that.income) && nation == that.nation && nationality == that.nationality && socialSecurityFlag == that.socialSecurityFlag;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(insuredNo, relationToApplicant, name, gender, birthdate, idType, idNo, idValidStart, idValidEnd, mobile, email, degree, marriage, occupationType, occupationCode, occupationName, rgtAddress, postalAddress, income, nation, nationality, socialSecurityFlag);
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonInsured{" +
+            "insuredNo='" + insuredNo + '\'' +
+            ", relationToApplicant=" + relationToApplicant +
+            ", name='" + name + '\'' +
+            ", gender=" + gender +
+            ", birthdate=" + birthdate +
+            ", idType=" + idType +
+            ", idNo='" + idNo + '\'' +
+            ", idValidStart=" + idValidStart +
+            ", idValidEnd=" + idValidEnd +
+            ", mobile='" + mobile + '\'' +
+            ", email='" + email + '\'' +
+            ", degree=" + degree +
+            ", marriage=" + marriage +
+            ", occupationType='" + occupationType + '\'' +
+            ", occupationCode='" + occupationCode + '\'' +
+            ", occupationName='" + occupationName + '\'' +
+            ", rgtAddress='" + rgtAddress + '\'' +
+            ", postalAddress='" + postalAddress + '\'' +
+            ", income=" + income +
+            ", nation=" + nation +
+            ", nationality=" + nationality +
+            ", socialSecurityFlag=" + socialSecurityFlag +
+            '}';
+  }
 }

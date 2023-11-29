@@ -13,7 +13,8 @@
 
 package com.zhibaocloud.carbon.intg;
 
-import lombok.Data;
+
+import java.util.Objects;
 
 /**
  * SDK版本，用于区分服务器端、客户端是否使用兼容版本SDK 使用 semver 的方式判断是否兼容
@@ -22,7 +23,6 @@ import lombok.Data;
  *
  * @author jun
  */
-@Data
 public class CarbonVersion {
 
   public static final CarbonVersion CURRENT = new CarbonVersion();
@@ -39,8 +39,34 @@ public class CarbonVersion {
    */
   private int patch = 0;
 
+  public int getMajor() {
+    return major;
+  }
+
+  public void setMajor(int major) {
+    this.major = major;
+  }
+
+  public int getMinor() {
+    return minor;
+  }
+
+  public void setMinor(int minor) {
+    this.minor = minor;
+  }
+
+  public int getPatch() {
+    return patch;
+  }
+
+  public void setPatch(int patch) {
+    this.patch = patch;
+  }
+
   private CarbonVersion() {
   }
+
+
 
   public CarbonVersion(String version) {
     String[] parts = version.split("\\.");
@@ -65,5 +91,18 @@ public class CarbonVersion {
   @Override
   public String toString() {
     return major + "." + minor + "." + patch;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonVersion that = (CarbonVersion) o;
+    return major == that.major && minor == that.minor && patch == that.patch;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(major, minor, patch);
   }
 }

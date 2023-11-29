@@ -17,16 +17,13 @@ import com.zhibaocloud.carbon.intg.types.CarbonCompanyType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 
 /**
  * 推送/接收回访数据模型
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
 @Schema(title = "回访数据")
 public class CarbonRtnCall implements CarbonIdentifier {
 
@@ -78,4 +75,89 @@ public class CarbonRtnCall implements CarbonIdentifier {
    */
   @Schema(title = "回访失败原因", description = "只有在有回访成功标识为false时才会使用次字段")
   private String rtnCallFailedReason;
+
+  public CarbonRtnCall() {
+  }
+
+  public CarbonCompanyType getCompany() {
+    return company;
+  }
+
+  public void setCompany(CarbonCompanyType company) {
+    this.company = company;
+  }
+
+  public String getPolicyNo() {
+    return policyNo;
+  }
+
+  public void setPolicyNo(String policyNo) {
+    this.policyNo = policyNo;
+  }
+
+  public String getProposalNo() {
+    return proposalNo;
+  }
+
+  public void setProposalNo(String proposalNo) {
+    this.proposalNo = proposalNo;
+  }
+
+  public String getPrtNo() {
+    return prtNo;
+  }
+
+  public void setPrtNo(String prtNo) {
+    this.prtNo = prtNo;
+  }
+
+  public LocalDateTime getRtnCallTime() {
+    return rtnCallTime;
+  }
+
+  public void setRtnCallTime(LocalDateTime rtnCallTime) {
+    this.rtnCallTime = rtnCallTime;
+  }
+
+  public Boolean getRtnCallSuccess() {
+    return rtnCallSuccess;
+  }
+
+  public void setRtnCallSuccess(Boolean rtnCallSuccess) {
+    this.rtnCallSuccess = rtnCallSuccess;
+  }
+
+  public String getRtnCallFailedReason() {
+    return rtnCallFailedReason;
+  }
+
+  public void setRtnCallFailedReason(String rtnCallFailedReason) {
+    this.rtnCallFailedReason = rtnCallFailedReason;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonRtnCall that = (CarbonRtnCall) o;
+    return company == that.company && Objects.equals(policyNo, that.policyNo) && Objects.equals(proposalNo, that.proposalNo) && Objects.equals(prtNo, that.prtNo) && Objects.equals(rtnCallTime, that.rtnCallTime) && Objects.equals(rtnCallSuccess, that.rtnCallSuccess) && Objects.equals(rtnCallFailedReason, that.rtnCallFailedReason);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(company, policyNo, proposalNo, prtNo, rtnCallTime, rtnCallSuccess, rtnCallFailedReason);
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonRtnCall{" +
+            "company=" + company +
+            ", policyNo='" + policyNo + '\'' +
+            ", proposalNo='" + proposalNo + '\'' +
+            ", prtNo='" + prtNo + '\'' +
+            ", rtnCallTime=" + rtnCallTime +
+            ", rtnCallSuccess=" + rtnCallSuccess +
+            ", rtnCallFailedReason='" + rtnCallFailedReason + '\'' +
+            '}';
+  }
 }

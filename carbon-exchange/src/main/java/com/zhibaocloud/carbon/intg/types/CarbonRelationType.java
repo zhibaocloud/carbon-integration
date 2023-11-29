@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 人员关系: 保单各人员之间的关系 包括投保人与被保人，被保人与受益人等关系
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonRelationType implements EncodedValue {
 
   /**
@@ -91,4 +87,17 @@ public enum CarbonRelationType implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonRelationType(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 支付方式
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonPayType implements EncodedValue {
 
   /**
@@ -103,4 +99,17 @@ public enum CarbonPayType implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonPayType(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

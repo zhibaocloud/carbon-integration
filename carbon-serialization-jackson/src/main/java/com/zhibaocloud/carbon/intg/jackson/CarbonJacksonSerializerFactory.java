@@ -37,19 +37,21 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 与服务端通信的时的序列化规则
  *
  * @author jun
  */
-@RequiredArgsConstructor
 public class CarbonJacksonSerializerFactory implements CarbonSerializerFactory {
 
   private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
   private static final DateTimeFormatter DATE_PTN = ofPattern("yyyy-MM-dd");
   private static final DateTimeFormatter DATETIME_PTN = ofPattern("yyyy-MM-dd HH:mm:ss");
+
+  public CarbonJacksonSerializerFactory() {
+  }
+
 
   private static final ObjectMapper origin = JsonMapper.builder()
       .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)

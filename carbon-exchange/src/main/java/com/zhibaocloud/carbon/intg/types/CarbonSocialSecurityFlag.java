@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 是否有社保标记
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonSocialSecurityFlag implements EncodedValue {
 
   /**
@@ -44,4 +40,17 @@ public enum CarbonSocialSecurityFlag implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonSocialSecurityFlag(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

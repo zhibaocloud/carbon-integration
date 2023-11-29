@@ -16,14 +16,8 @@ package com.zhibaocloud.carbon.intg.client.starter;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.net.URI;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ConfigurationProperties(prefix = "carbon.client")
 public class CarbonClientProperties {
 
@@ -51,4 +45,47 @@ public class CarbonClientProperties {
    * 序列化配置信息
    */
   private SerializationConfiguration serialization = new SerializationConfiguration();
+
+  public CarbonClientProperties() {
+  }
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(Boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public URI getEndpoint() {
+    return endpoint;
+  }
+
+  public void setEndpoint(URI endpoint) {
+    this.endpoint = endpoint;
+  }
+
+  public String getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(String tenant) {
+    this.tenant = tenant;
+  }
+
+  public CryptoConfiguration getCrypto() {
+    return crypto;
+  }
+
+  public void setCrypto(CryptoConfiguration crypto) {
+    this.crypto = crypto;
+  }
+
+  public SerializationConfiguration getSerialization() {
+    return serialization;
+  }
+
+  public void setSerialization(SerializationConfiguration serialization) {
+    this.serialization = serialization;
+  }
 }

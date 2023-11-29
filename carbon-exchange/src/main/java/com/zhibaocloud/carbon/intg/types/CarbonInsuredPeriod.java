@@ -13,9 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 
 /**
  * <table border="1">
@@ -58,9 +56,6 @@ import lombok.NoArgsConstructor;
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CarbonInsuredPeriod {
 
   /**
@@ -73,6 +68,43 @@ public class CarbonInsuredPeriod {
   public static final CarbonInsuredPeriod NONE = new CarbonInsuredPeriod("N");
   private int value = 0;
   private CarbonInsuredPeriodUnit unit = CarbonInsuredPeriodUnit.Y;
+
+  public int getValue() {
+    return value;
+  }
+
+  public void setValue(int value) {
+    this.value = value;
+  }
+
+  public CarbonInsuredPeriodUnit getUnit() {
+    return unit;
+  }
+
+  public void setUnit(CarbonInsuredPeriodUnit unit) {
+    this.unit = unit;
+  }
+
+  public CarbonInsuredPeriod() {
+  }
+
+  public CarbonInsuredPeriod(int value, CarbonInsuredPeriodUnit unit) {
+    this.value = value;
+    this.unit = unit;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CarbonInsuredPeriod that = (CarbonInsuredPeriod) o;
+    return value == that.value && unit == that.unit;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value, unit);
+  }
 
   /**
    * 创建保险期间

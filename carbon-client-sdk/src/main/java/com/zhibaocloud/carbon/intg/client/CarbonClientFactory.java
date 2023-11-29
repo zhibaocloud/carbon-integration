@@ -19,7 +19,6 @@ import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
-import lombok.RequiredArgsConstructor;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
@@ -27,7 +26,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
  *
  * @author jun
  */
-@RequiredArgsConstructor
 public class CarbonClientFactory {
 
   /**
@@ -44,6 +42,12 @@ public class CarbonClientFactory {
    * 加解密算法工具
    */
   private final CryptoFactory cf;
+
+  public CarbonClientFactory(CloseableHttpClient client, CarbonSerializerFactory sf, CryptoFactory cf) {
+    this.client = client;
+    this.sf = sf;
+    this.cf = cf;
+  }
 
   /**
    * 为每一个中介公司推送创建一个客户端。其他配置为系统级配置，可以进行复用
