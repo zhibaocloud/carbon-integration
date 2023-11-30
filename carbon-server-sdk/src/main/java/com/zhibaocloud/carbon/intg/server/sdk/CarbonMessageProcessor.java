@@ -21,11 +21,13 @@ import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class CarbonMessageProcessor {
+
+  private static final Logger logger = LoggerFactory.getLogger(CarbonMessageProcessor.class);
 
   private final CarbonDataChannel channel;
 
@@ -44,7 +46,7 @@ public class CarbonMessageProcessor {
           new CarbonResponse(true, "OK")
       );
     } catch (Exception e) {
-      log.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       return channel.encodeResponse(
           request.getRequestId(),
           new CarbonResponse(false, e.getMessage())

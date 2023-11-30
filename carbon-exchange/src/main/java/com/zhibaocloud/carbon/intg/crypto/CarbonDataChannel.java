@@ -18,7 +18,6 @@ import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.SignatureMissMatchException;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.util.UUID;
-import lombok.SneakyThrows;
 
 /**
  * 信道加密
@@ -46,16 +45,19 @@ public class CarbonDataChannel {
    * @param request 报文详情
    * @return 在链路上传输报文
    */
-  @SneakyThrows
   public CarbonEncryptedRequest encodeRequest(CarbonMessageType type, Object request) {
-    String payload = serializer.serialize(request);
-    CarbonEncryptedRequest message = new CarbonEncryptedRequest();
-    message.setType(type);
-    message.setTenant(option.getTenant());
-    message.setRequestId(UUID.randomUUID());
-    message.setSign(crypto.digest(payload));
-    message.setPayload(crypto.encrypt(payload));
-    return message;
+    try {
+      String payload = serializer.serialize(request);
+      CarbonEncryptedRequest message = new CarbonEncryptedRequest();
+      message.setType(type);
+      message.setTenant(option.getTenant());
+      message.setRequestId(UUID.randomUUID());
+      message.setSign(crypto.digest(payload));
+      message.setPayload(crypto.encrypt(payload));
+      return message;
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -65,15 +67,18 @@ public class CarbonDataChannel {
    * @param response  相应内容
    * @return 在链路上传输报文
    */
-  @SneakyThrows
   public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response) {
-    String payload = serializer.serialize(response);
-    CarbonEncryptedResponse message = new CarbonEncryptedResponse();
-    message.setRequestId(requestId);
-    message.setTenant(option.getTenant());
-    message.setSign(crypto.digest(payload));
-    message.setPayload(crypto.encrypt(payload));
-    return message;
+    try {
+      String payload = serializer.serialize(response);
+      CarbonEncryptedResponse message = new CarbonEncryptedResponse();
+      message.setRequestId(requestId);
+      message.setTenant(option.getTenant());
+      message.setSign(crypto.digest(payload));
+      message.setPayload(crypto.encrypt(payload));
+      return message;
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -97,11 +102,14 @@ public class CarbonDataChannel {
    * @param <T>     数据类型
    * @return 解析后的数据
    */
-  @SneakyThrows
   public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) {
-    String payload = crypto.decrypt(request.getPayload());
-    verify(payload, request.getSign());
-    return serializer.deserialize(payload, clz);
+    try {
+      String payload = crypto.decrypt(request.getPayload());
+      verify(payload, request.getSign());
+      return serializer.deserialize(payload, clz);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -112,10 +120,13 @@ public class CarbonDataChannel {
    * @param <T>      数据类型
    * @return 解析后的数据
    */
-  @SneakyThrows
   public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) {
-    String payload = crypto.decrypt(response.getPayload());
-    verify(payload, response.getSign());
-    return serializer.deserialize(payload, clz);
+    try {
+      String payload = crypto.decrypt(response.getPayload());
+      verify(payload, response.getSign());
+      return serializer.deserialize(payload, clz);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 }

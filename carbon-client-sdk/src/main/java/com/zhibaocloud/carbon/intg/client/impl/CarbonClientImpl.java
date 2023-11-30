@@ -29,21 +29,24 @@ import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.io.IOException;
 import java.net.URI;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 使用 Apache HttpClient 实现的智保云数据平台客户端
  *
  * @author jun
  */
-@Slf4j
 public class CarbonClientImpl implements CarbonClient {
+
+  private static final Logger logger = LoggerFactory.getLogger(CarbonClientImpl.class);
+
 
   private final CarbonOption option;
 
@@ -66,8 +69,8 @@ public class CarbonClientImpl implements CarbonClient {
   }
 
   private void send(CarbonMessageType type, Object request) throws IOException {
-    if (log.isDebugEnabled()) {
-      log.debug("request: {}", mapper.serialize(request));
+    if (logger.isDebugEnabled()) {
+      logger.debug("request: {}", mapper.serialize(request));
     }
 
     CarbonEncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
@@ -88,14 +91,14 @@ public class CarbonClientImpl implements CarbonClient {
         CarbonEncryptedResponse result = mapper.deserialize(encryptedResponse,
             CarbonEncryptedResponse.class);
         CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
-        if (log.isDebugEnabled()) {
-          log.debug("response: {}", mapper.serialize(res));
+        if (logger.isDebugEnabled()) {
+          logger.debug("response: {}", mapper.serialize(res));
         }
         if (!res.isSuccess()) {
           throw new CarbonMessageException(res.getMessage());
         }
       } else {
-        log.error("request failed: {}, response: {}", sl, encryptedResponse);
+        logger.error("request failed: {}, response: {}", sl, encryptedResponse);
         throw new IOException("request failed: " + sl);
       }
     }

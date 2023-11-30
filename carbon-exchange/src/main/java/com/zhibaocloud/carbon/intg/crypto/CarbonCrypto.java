@@ -18,7 +18,6 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import lombok.SneakyThrows;
 
 /**
  * 加解密套件
@@ -47,27 +46,30 @@ class CarbonCrypto implements Crypto {
    */
   private final String salt;
 
-  @SneakyThrows
   CarbonCrypto(CryptoConfiguration config) {
-    byte[] secret = config.getSecret().getBytes();
-    SymmetricCrypto symAlg = config.getSymmetricAlg();
-    SecretKeySpec keySpec = new SecretKeySpec(secret, symAlg.getAlgorithm());
+    try {
+      byte[] secret = config.getSecret().getBytes();
+      SymmetricCrypto symAlg = config.getSymmetricAlg();
+      SecretKeySpec keySpec = new SecretKeySpec(secret, symAlg.getAlgorithm());
 
-    encryptCipher = Cipher.getInstance(symAlg.getTransformation());
-    decryptCipher = Cipher.getInstance(symAlg.getTransformation());
+      encryptCipher = Cipher.getInstance(symAlg.getTransformation());
+      decryptCipher = Cipher.getInstance(symAlg.getTransformation());
 
-    if (symAlg.isIvRequired()) {
-      String iv = config.getIv();
-      IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes());
-      encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
-      decryptCipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-    } else {
-      encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec);
-      decryptCipher.init(Cipher.DECRYPT_MODE, keySpec);
+      if (symAlg.isIvRequired()) {
+        String iv = config.getIv();
+        IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes());
+        encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
+        decryptCipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+      } else {
+        encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec);
+        decryptCipher.init(Cipher.DECRYPT_MODE, keySpec);
+      }
+
+      digester = MessageDigest.getInstance(config.getDigestAlg().getAlg());
+      salt = config.getSalt();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
-
-    digester = MessageDigest.getInstance(config.getDigestAlg().getAlg());
-    salt = config.getSalt();
   }
 
   /**
@@ -76,12 +78,15 @@ class CarbonCrypto implements Crypto {
    * @param plain 明文
    * @return 密文
    */
-  @SneakyThrows
   @Override
   public String encrypt(String plain) {
-    byte[] raw = plain.getBytes();
-    byte[] cipher = encryptCipher.doFinal(raw);
-    return Base64.getEncoder().encodeToString(cipher);
+    try {
+      byte[] raw = plain.getBytes();
+      byte[] cipher = encryptCipher.doFinal(raw);
+      return Base64.getEncoder().encodeToString(cipher);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -90,11 +95,14 @@ class CarbonCrypto implements Crypto {
    * @param cipher 密文
    * @return 明文
    */
-  @SneakyThrows
   @Override
   public String decrypt(String cipher) {
-    byte[] raw = Base64.getDecoder().decode(cipher);
-    return new String(decryptCipher.doFinal(raw));
+    try {
+      byte[] raw = Base64.getDecoder().decode(cipher);
+      return new String(decryptCipher.doFinal(raw));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
