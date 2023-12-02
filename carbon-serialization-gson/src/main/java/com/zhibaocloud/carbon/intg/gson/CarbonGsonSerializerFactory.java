@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
+import com.zhibaocloud.carbon.intg.gson.desensitization.CarbonDesensitizingSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
@@ -42,6 +43,7 @@ public class CarbonGsonSerializerFactory implements CarbonSerializerFactory {
       .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
       .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter().nullSafe())
       .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter().nullSafe())
+      .registerTypeAdapter(Object.class, new CarbonDesensitizingSerializer())
       .create();
 
 
