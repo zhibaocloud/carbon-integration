@@ -61,6 +61,7 @@ public class CarbonFastjsonSerializerFactory implements CarbonSerializerFactory 
       return null;
     }
   }
+
   static {
     // TODO: 考虑创建单独的 fastjson 对象，避免和用户的 fastjson 配置冲突
     ObjectReaderProvider reader = JSONFactory.getDefaultObjectReaderProvider();
