@@ -65,16 +65,4 @@ public class CarbonResponse {
             '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonResponse that = (CarbonResponse) o;
-    return success == that.success && Objects.equals(message, that.message);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(success, message);
-  }
 }

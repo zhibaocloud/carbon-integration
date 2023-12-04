@@ -31,6 +31,7 @@ import java.util.Objects;
  *
  * @author jun
  */
+
 @Schema(title = "承保保单数据模型")
 public class CarbonPolicy implements CarbonIdentifier {
 
@@ -578,19 +579,6 @@ public class CarbonPolicy implements CarbonIdentifier {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonPolicy that = (CarbonPolicy) o;
-    return company == that.company && Objects.equals(policyNo, that.policyNo) && Objects.equals(proposalNo, that.proposalNo) && Objects.equals(prtNo, that.prtNo) && Objects.equals(orderNo, that.orderNo) && Objects.equals(extOrderNo, that.extOrderNo) && Objects.equals(previousPolicyNo, that.previousPolicyNo) && Objects.equals(previousProposalNo, that.previousProposalNo) && Objects.equals(manageCom, that.manageCom) && Objects.equals(manageComName, that.manageComName) && Objects.equals(agentCom, that.agentCom) && Objects.equals(agentComName, that.agentComName) && Objects.equals(productNo, that.productNo) && Objects.equals(productName, that.productName) && Objects.equals(premium, that.premium) && Objects.equals(amount, that.amount) && Objects.equals(ePolicyUrl, that.ePolicyUrl) && payIntv == that.payIntv && payType == that.payType && Objects.equals(applyTime, that.applyTime) && Objects.equals(payTime, that.payTime) && Objects.equals(signTime, that.signTime) && Objects.equals(effectiveTime, that.effectiveTime) && Objects.equals(expirationTime, that.expirationTime) && Objects.equals(receiptSignTime, that.receiptSignTime) && Objects.equals(receiptEnteredTime, that.receiptEnteredTime) && Objects.equals(rtnCallTime, that.rtnCallTime) && Objects.equals(rtnCallSuccess, that.rtnCallSuccess) && Objects.equals(rtnCallFailedReason, that.rtnCallFailedReason) && status == that.status && Objects.equals(ext, that.ext) && Objects.equals(agent, that.agent) && Objects.equals(applicant, that.applicant) && Objects.equals(insureds, that.insureds) && Objects.equals(bnfs, that.bnfs) && Objects.equals(risks, that.risks);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(company, policyNo, proposalNo, prtNo, orderNo, extOrderNo, previousPolicyNo, previousProposalNo, manageCom, manageComName, agentCom, agentComName, productNo, productName, premium, amount, ePolicyUrl, payIntv, payType, applyTime, payTime, signTime, effectiveTime, expirationTime, receiptSignTime, receiptEnteredTime, rtnCallTime, rtnCallSuccess, rtnCallFailedReason, status, ext, agent, applicant, insureds, bnfs, risks);
-  }
-
-  @Override
   public String toString() {
     return "CarbonPolicy{" +
             "company=" + company +
@@ -631,4 +619,5 @@ public class CarbonPolicy implements CarbonIdentifier {
             ", risks=" + risks +
             '}';
   }
+
 }

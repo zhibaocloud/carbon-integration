@@ -143,20 +143,6 @@ public class CarbonStatusChanged implements CarbonIdentifier {
   public void setTerminationReason(CarbonTerminationReason terminationReason) {
     this.terminationReason = terminationReason;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonStatusChanged that = (CarbonStatusChanged) o;
-    return company == that.company && Objects.equals(policyNo, that.policyNo) && Objects.equals(proposalNo, that.proposalNo) && status == that.status && Objects.equals(suspendTime, that.suspendTime) && Objects.equals(recoverTime, that.recoverTime) && Objects.equals(terminationTime, that.terminationTime) && terminationReason == that.terminationReason;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(company, policyNo, proposalNo, status, suspendTime, recoverTime, terminationTime, terminationReason);
-  }
-
   @Override
   public String toString() {
     return "CarbonStatusChanged{" +

@@ -13,6 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
+import com.zhibaocloud.carbon.intg.CarbonException;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.SignatureMissMatchException;
@@ -56,7 +57,7 @@ public class CarbonDataChannel {
       message.setPayload(crypto.encrypt(payload));
       return message;
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 
@@ -77,7 +78,7 @@ public class CarbonDataChannel {
       message.setPayload(crypto.encrypt(payload));
       return message;
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 
@@ -108,7 +109,7 @@ public class CarbonDataChannel {
       verify(payload, request.getSign());
       return serializer.deserialize(payload, clz);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 
@@ -126,7 +127,7 @@ public class CarbonDataChannel {
       verify(payload, response.getSign());
       return serializer.deserialize(payload, clz);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 }

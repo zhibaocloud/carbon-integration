@@ -107,28 +107,4 @@ public class CarbonEncryptedRequest {
     this.type = type;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonEncryptedRequest that = (CarbonEncryptedRequest) o;
-    return Objects.equals(version, that.version) && Objects.equals(requestId, that.requestId) && Objects.equals(sign, that.sign) && Objects.equals(tenant, that.tenant) && Objects.equals(payload, that.payload) && type == that.type;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(version, requestId, sign, tenant, payload, type);
-  }
-
-  @Override
-  public String toString() {
-    return "CarbonEncryptedRequest{" +
-            "version=" + version +
-            ", requestId=" + requestId +
-            ", sign='" + sign + '\'' +
-            ", tenant='" + tenant + '\'' +
-            ", payload='" + payload + '\'' +
-            ", type=" + type +
-            '}';
-  }
 }

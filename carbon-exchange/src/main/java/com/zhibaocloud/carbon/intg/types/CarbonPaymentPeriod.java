@@ -79,20 +79,6 @@ public class CarbonPaymentPeriod {
 
   public CarbonPaymentPeriod() {
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonPaymentPeriod that = (CarbonPaymentPeriod) o;
-    return value == that.value && unit == that.unit;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(value, unit);
-  }
-
   /**
    * 创建交费期间
    *

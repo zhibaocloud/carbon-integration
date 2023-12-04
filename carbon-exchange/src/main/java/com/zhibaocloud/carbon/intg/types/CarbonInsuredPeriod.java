@@ -93,19 +93,6 @@ public class CarbonInsuredPeriod {
     this.unit = unit;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonInsuredPeriod that = (CarbonInsuredPeriod) o;
-    return value == that.value && unit == that.unit;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(value, unit);
-  }
-
   /**
    * 创建保险期间
    *

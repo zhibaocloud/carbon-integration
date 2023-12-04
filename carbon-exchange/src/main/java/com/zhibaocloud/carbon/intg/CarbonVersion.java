@@ -92,17 +92,4 @@ public class CarbonVersion {
   public String toString() {
     return major + "." + minor + "." + patch;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonVersion that = (CarbonVersion) o;
-    return major == that.major && minor == that.minor && patch == that.patch;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(major, minor, patch);
-  }
 }

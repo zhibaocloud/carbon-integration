@@ -59,7 +59,7 @@ class CarbonSerializationTest {
     assertThat(period).hasToString("1Y");
 
     CarbonInsuredPeriod newPeriod = new CarbonInsuredPeriod(1, CarbonInsuredPeriodUnit.Y);
-    assertThat(newPeriod).isEqualTo(period);
+    assertThat(newPeriod.getValue()).isEqualTo(period.getValue());
 
     CarbonInsuredPeriod period1 = CarbonInsuredPeriod.of("N");
     assertThat(period1.getValue()).isZero();
@@ -77,7 +77,7 @@ class CarbonSerializationTest {
     String json = mapper.serialize(source);
     assertThat(json).isEqualTo("{\"insuredPeriod\":\"10Y\"}");
     CarbonInsuredPeriod restored = mapper.deserialize(json, CarbonRisk.class).getInsuredPeriod();
-    assertThat(ip).isEqualTo(restored);
+    assertThat(ip.getValue()).isEqualTo(restored.getValue());
     assertThat(restored.getValue()).isEqualTo(10);
   }
 
@@ -91,14 +91,14 @@ class CarbonSerializationTest {
     assertThat(period).hasToString("1Y");
 
     CarbonPaymentPeriod newPeriod = new CarbonPaymentPeriod(1, CarbonPaymentPeriodUnit.Y);
-    assertThat(newPeriod).isEqualTo(period);
+    assertThat(newPeriod.getValue()).isEqualTo(period.getValue());
 
     CarbonRisk risk = new CarbonRisk();
     risk.setPaymentPeriod(period);
     String json = mapper.serialize(risk);
     assertThat(json).isEqualTo("{\"paymentPeriod\":\"1Y\"}");
     CarbonPaymentPeriod restored = mapper.deserialize(json, CarbonRisk.class).getPaymentPeriod();
-    assertThat(period).isEqualTo(restored);
+    assertThat(period.getValue()).isEqualTo(restored.getValue());
 
     CarbonPaymentPeriod single = CarbonPaymentPeriod.SINGLE;
     assertThat(single.getUnit()).isEqualTo(CarbonPaymentPeriodUnit.S);

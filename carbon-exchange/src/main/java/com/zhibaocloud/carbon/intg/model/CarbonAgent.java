@@ -85,19 +85,6 @@ public class CarbonAgent {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonAgent that = (CarbonAgent) o;
-    return Objects.equals(name, that.name) && Objects.equals(code, that.code) && Objects.equals(extCode, that.extCode) && Objects.equals(busiDevCertifNo, that.busiDevCertifNo);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, code, extCode, busiDevCertifNo);
-  }
-
-  @Override
   public String toString() {
     return "CarbonAgent{" +
             "name='" + name + '\'' +

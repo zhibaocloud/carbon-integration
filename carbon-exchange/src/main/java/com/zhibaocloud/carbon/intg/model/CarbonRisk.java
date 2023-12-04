@@ -245,19 +245,6 @@ public class CarbonRisk {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonRisk that = (CarbonRisk) o;
-    return Objects.equals(insuredNo, that.insuredNo) && flag == that.flag && Objects.equals(riskCode, that.riskCode) && Objects.equals(riskName, that.riskName) && Objects.equals(planCode, that.planCode) && Objects.equals(planName, that.planName) && Objects.equals(premium, that.premium) && Objects.equals(amount, that.amount) && Objects.equals(payTime, that.payTime) && Objects.equals(payToTime, that.payToTime) && Objects.equals(effectiveTime, that.effectiveTime) && Objects.equals(expirationTime, that.expirationTime) && status == that.status && Objects.equals(insuredPeriod, that.insuredPeriod) && Objects.equals(paymentPeriod, that.paymentPeriod);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(insuredNo, flag, riskCode, riskName, planCode, planName, premium, amount, payTime, payToTime, effectiveTime, expirationTime, status, insuredPeriod, paymentPeriod);
-  }
-
-  @Override
   public String toString() {
     return "CarbonRisk{" +
             "insuredNo='" + insuredNo + '\'' +

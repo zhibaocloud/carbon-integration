@@ -93,30 +93,6 @@ public class CarbonEncryptedResponse {
   public CarbonEncryptedResponse() {
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonEncryptedResponse that = (CarbonEncryptedResponse) o;
-    return Objects.equals(version, that.version) && Objects.equals(requestId, that.requestId) && Objects.equals(sign, that.sign) && Objects.equals(tenant, that.tenant) && Objects.equals(payload, that.payload);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(version, requestId, sign, tenant, payload);
-  }
-
-  @Override
-  public String toString() {
-    return "CarbonEncryptedResponse{" +
-            "version=" + version +
-            ", requestId=" + requestId +
-            ", sign='" + sign + '\'' +
-            ", tenant='" + tenant + '\'' +
-            ", payload='" + payload + '\'' +
-            '}';
-  }
-
   public void setPayload(String payload) {
     this.payload = payload;
   }

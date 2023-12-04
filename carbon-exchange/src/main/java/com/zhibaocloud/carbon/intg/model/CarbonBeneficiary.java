@@ -390,19 +390,6 @@ public class CarbonBeneficiary {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonBeneficiary that = (CarbonBeneficiary) o;
-    return Objects.equals(insuredNo, that.insuredNo) && relationToInsured == that.relationToInsured && bnfType == that.bnfType && bnfGrade == that.bnfGrade && Objects.equals(bnfRatio, that.bnfRatio) && Objects.equals(name, that.name) && gender == that.gender && Objects.equals(birthdate, that.birthdate) && idType == that.idType && Objects.equals(idNo, that.idNo) && Objects.equals(idValidStart, that.idValidStart) && Objects.equals(idValidEnd, that.idValidEnd) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && degree == that.degree && marriage == that.marriage && Objects.equals(occupationType, that.occupationType) && Objects.equals(occupationCode, that.occupationCode) && Objects.equals(occupationName, that.occupationName) && Objects.equals(rgtAddress, that.rgtAddress) && Objects.equals(postalAddress, that.postalAddress) && Objects.equals(income, that.income) && nation == that.nation && nationality == that.nationality && socialSecurityFlag == that.socialSecurityFlag;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(insuredNo, relationToInsured, bnfType, bnfGrade, bnfRatio, name, gender, birthdate, idType, idNo, idValidStart, idValidEnd, mobile, email, degree, marriage, occupationType, occupationCode, occupationName, rgtAddress, postalAddress, income, nation, nationality, socialSecurityFlag);
-  }
-
-  @Override
   public String toString() {
     return "CarbonBeneficiary{" +
             "insuredNo='" + insuredNo + '\'' +

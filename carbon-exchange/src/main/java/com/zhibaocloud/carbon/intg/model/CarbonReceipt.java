@@ -115,19 +115,6 @@ public class CarbonReceipt implements CarbonIdentifier {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonReceipt that = (CarbonReceipt) o;
-    return company == that.company && Objects.equals(policyNo, that.policyNo) && Objects.equals(proposalNo, that.proposalNo) && Objects.equals(prtNo, that.prtNo) && Objects.equals(receiptSignTime, that.receiptSignTime) && Objects.equals(receiptEnteredTime, that.receiptEnteredTime);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(company, policyNo, proposalNo, prtNo, receiptSignTime, receiptEnteredTime);
-  }
-
-  @Override
   public String toString() {
     return "CarbonReceipt{" +
             "company=" + company +
@@ -138,4 +125,5 @@ public class CarbonReceipt implements CarbonIdentifier {
             ", receiptEnteredTime=" + receiptEnteredTime +
             '}';
   }
+
 }

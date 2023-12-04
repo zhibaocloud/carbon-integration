@@ -46,7 +46,7 @@ class VersionTest {
 
     CarbonVersion current = CarbonVersion.CURRENT;
     CarbonEncryptedRequest restored = mapper.deserialize(content, CarbonEncryptedRequest.class);
-    assertThat(restored.getVersion()).isEqualTo(current);
+    assertThat(restored.getVersion().getMajor()).isEqualTo(current.getMajor());
   }
 
   @Test

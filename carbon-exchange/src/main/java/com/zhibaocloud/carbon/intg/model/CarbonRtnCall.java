@@ -134,20 +134,6 @@ public class CarbonRtnCall implements CarbonIdentifier {
   public void setRtnCallFailedReason(String rtnCallFailedReason) {
     this.rtnCallFailedReason = rtnCallFailedReason;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CarbonRtnCall that = (CarbonRtnCall) o;
-    return company == that.company && Objects.equals(policyNo, that.policyNo) && Objects.equals(proposalNo, that.proposalNo) && Objects.equals(prtNo, that.prtNo) && Objects.equals(rtnCallTime, that.rtnCallTime) && Objects.equals(rtnCallSuccess, that.rtnCallSuccess) && Objects.equals(rtnCallFailedReason, that.rtnCallFailedReason);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(company, policyNo, proposalNo, prtNo, rtnCallTime, rtnCallSuccess, rtnCallFailedReason);
-  }
-
   @Override
   public String toString() {
     return "CarbonRtnCall{" +

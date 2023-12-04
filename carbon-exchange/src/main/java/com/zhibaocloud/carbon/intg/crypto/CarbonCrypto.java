@@ -13,6 +13,8 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
+import com.zhibaocloud.carbon.intg.CarbonException;
+
 import java.security.MessageDigest;
 import java.util.Base64;
 import javax.crypto.Cipher;
@@ -68,7 +70,7 @@ class CarbonCrypto implements Crypto {
       digester = MessageDigest.getInstance(config.getDigestAlg().getAlg());
       salt = config.getSalt();
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 
@@ -85,7 +87,7 @@ class CarbonCrypto implements Crypto {
       byte[] cipher = encryptCipher.doFinal(raw);
       return Base64.getEncoder().encodeToString(cipher);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 
@@ -101,7 +103,7 @@ class CarbonCrypto implements Crypto {
       byte[] raw = Base64.getDecoder().decode(cipher);
       return new String(decryptCipher.doFinal(raw));
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new CarbonException(e);
     }
   }
 
