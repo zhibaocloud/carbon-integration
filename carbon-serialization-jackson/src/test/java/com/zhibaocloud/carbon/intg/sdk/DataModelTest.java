@@ -183,9 +183,12 @@ class DataModelTest {
     CarbonPolicy policy = this.createPolicy();
     String json = mapper.serialize(policy);
     CarbonPolicy restored = mapper.deserialize(json, CarbonPolicy.class);
-    assertThat(restored.getRisks().get(0).getRiskCode()).isEqualTo(restored.getRisks().get(0).getRiskCode());
-    assertThat(restored.getRisks().get(0).getRiskCode().hashCode()).hasSameHashCodeAs(restored.getRisks().get(0).getRiskCode().hashCode());
+    assertThat(restored.getRisks().get(0).getRiskCode()).isEqualTo(
+        restored.getRisks().get(0).getRiskCode());
+    assertThat(restored.getRisks().get(0).getRiskCode().hashCode()).hasSameHashCodeAs(
+        restored.getRisks().get(0).getRiskCode().hashCode());
 
     System.out.println(json);
+    System.out.println(policy);
   }
 }

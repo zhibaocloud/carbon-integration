@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
-
 import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
 import java.io.IOException;
 
@@ -47,7 +46,8 @@ public class CarbonJacksonModule extends SimpleModule {
     }
 
     @Override
-    public void serialize(CarbonVersion value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+    public void serialize(CarbonVersion value, JsonGenerator gen, SerializerProvider provider)
+        throws IOException {
       gen.writeString(value.toString());
     }
   }
@@ -77,7 +77,6 @@ public class CarbonJacksonModule extends SimpleModule {
       return new CarbonInsuredPeriod(p.getValueAsString());
     }
   }
-
 
 
   static class CarbonPaymentPeriodDeserializer extends StdDeserializer<CarbonPaymentPeriod> {

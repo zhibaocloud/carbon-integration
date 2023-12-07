@@ -17,7 +17,6 @@ import com.zhibaocloud.carbon.intg.types.CarbonCompanyType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 推送/接收回访数据模型
@@ -134,16 +133,17 @@ public class CarbonRtnCall implements CarbonIdentifier {
   public void setRtnCallFailedReason(String rtnCallFailedReason) {
     this.rtnCallFailedReason = rtnCallFailedReason;
   }
+
   @Override
   public String toString() {
     return "CarbonRtnCall{" +
-            "company=" + company +
-            ", policyNo='" + policyNo + '\'' +
-            ", proposalNo='" + proposalNo + '\'' +
-            ", prtNo='" + prtNo + '\'' +
-            ", rtnCallTime=" + rtnCallTime +
-            ", rtnCallSuccess=" + rtnCallSuccess +
-            ", rtnCallFailedReason='" + rtnCallFailedReason + '\'' +
-            '}';
+        "company=" + company +
+        ", policyNo='" + policyNo + '\'' +
+        ", proposalNo='" + proposalNo + '\'' +
+        ", prtNo='" + prtNo + '\'' +
+        ", rtnCallTime=" + rtnCallTime +
+        ", rtnCallSuccess=" + rtnCallSuccess +
+        ", rtnCallFailedReason='" + rtnCallFailedReason + '\'' +
+        '}';
   }
 }

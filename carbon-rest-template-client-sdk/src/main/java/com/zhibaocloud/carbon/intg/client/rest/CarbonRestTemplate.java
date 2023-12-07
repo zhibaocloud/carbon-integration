@@ -26,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
  * @author yangtuo
  */
 public class CarbonRestTemplate implements CarbonClient {
+
   private static final Logger logger = LoggerFactory.getLogger(CarbonRestTemplate.class);
 
   private final CarbonOption option;
@@ -33,12 +34,14 @@ public class CarbonRestTemplate implements CarbonClient {
   private final RestTemplate restTemplate;
   private final CarbonDataChannel channel;
 
-  public CarbonRestTemplate(CarbonOption option, CarbonSerializer serializer, RestTemplate restTemplate, CarbonDataChannel channel) {
+  public CarbonRestTemplate(CarbonOption option, CarbonSerializer serializer,
+      RestTemplate restTemplate, CarbonDataChannel channel) {
     this.option = option;
     this.serializer = serializer;
     this.restTemplate = restTemplate;
     this.channel = channel;
   }
+
   private void send(CarbonMessageType type, Object request) throws IOException {
     if (logger.isDebugEnabled()) {
       logger.debug("request: {}", serializer.serialize(request));
@@ -65,7 +68,8 @@ public class CarbonRestTemplate implements CarbonClient {
         throw new CarbonMessageException(res.getMessage());
       }
     } else {
-      logger.error("request failed: {}, response: {}", encryptedResponse.getStatusCode(), encryptedResponse);
+      logger.error("request failed: {}, response: {}", encryptedResponse.getStatusCode(),
+          encryptedResponse);
       throw new IOException("request failed: " + encryptedResponse.getStatusCode());
     }
   }

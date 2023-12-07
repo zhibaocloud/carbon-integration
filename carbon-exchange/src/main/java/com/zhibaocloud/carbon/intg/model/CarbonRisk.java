@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 险种信息
@@ -247,21 +246,21 @@ public class CarbonRisk {
   @Override
   public String toString() {
     return "CarbonRisk{" +
-            "insuredNo='" + insuredNo + '\'' +
-            ", flag=" + flag +
-            ", riskCode='" + riskCode + '\'' +
-            ", riskName='" + riskName + '\'' +
-            ", planCode='" + planCode + '\'' +
-            ", planName='" + planName + '\'' +
-            ", premium=" + premium +
-            ", amount=" + amount +
-            ", payTime=" + payTime +
-            ", payToTime=" + payToTime +
-            ", effectiveTime=" + effectiveTime +
-            ", expirationTime=" + expirationTime +
-            ", status=" + status +
-            ", insuredPeriod=" + insuredPeriod +
-            ", paymentPeriod=" + paymentPeriod +
-            '}';
+        "insuredNo='" + insuredNo + '\'' +
+        ", flag=" + flag +
+        ", riskCode='" + riskCode + '\'' +
+        ", riskName='" + riskName + '\'' +
+        ", planCode='" + planCode + '\'' +
+        ", planName='" + planName + '\'' +
+        ", premium=" + premium +
+        ", amount=" + amount +
+        ", payTime=" + payTime +
+        ", payToTime=" + payToTime +
+        ", effectiveTime=" + effectiveTime +
+        ", expirationTime=" + expirationTime +
+        ", status=" + status +
+        ", insuredPeriod=" + insuredPeriod +
+        ", paymentPeriod=" + paymentPeriod +
+        '}';
   }
 }

@@ -19,7 +19,6 @@ import com.zhibaocloud.carbon.intg.types.CarbonTerminationReason;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 推送/接收保单状态变化数据模型
@@ -143,17 +142,18 @@ public class CarbonStatusChanged implements CarbonIdentifier {
   public void setTerminationReason(CarbonTerminationReason terminationReason) {
     this.terminationReason = terminationReason;
   }
+
   @Override
   public String toString() {
     return "CarbonStatusChanged{" +
-            "company=" + company +
-            ", policyNo='" + policyNo + '\'' +
-            ", proposalNo='" + proposalNo + '\'' +
-            ", status=" + status +
-            ", suspendTime=" + suspendTime +
-            ", recoverTime=" + recoverTime +
-            ", terminationTime=" + terminationTime +
-            ", terminationReason=" + terminationReason +
-            '}';
+        "company=" + company +
+        ", policyNo='" + policyNo + '\'' +
+        ", proposalNo='" + proposalNo + '\'' +
+        ", status=" + status +
+        ", suspendTime=" + suspendTime +
+        ", recoverTime=" + recoverTime +
+        ", terminationTime=" + terminationTime +
+        ", terminationReason=" + terminationReason +
+        '}';
   }
 }

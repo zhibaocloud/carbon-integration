@@ -131,12 +131,6 @@
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring-boot.version}</version>
           <configuration>
-            <excludes>
-              <exclude>
-                <artifactId>lombok</artifactId>
-                <groupId>org.projectlombok</groupId>
-              </exclude>
-            </excludes>
             <layers>
               <enabled>true</enabled>
             </layers>

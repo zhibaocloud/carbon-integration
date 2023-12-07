@@ -13,8 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import java.util.Objects;
-
 /**
  * <table border="1">
  *   <caption>保险期间</caption>

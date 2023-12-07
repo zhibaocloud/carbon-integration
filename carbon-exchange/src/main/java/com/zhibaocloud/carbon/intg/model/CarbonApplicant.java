@@ -28,7 +28,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * 投保人信息
@@ -329,26 +328,26 @@ public class CarbonApplicant {
   @Override
   public String toString() {
     return "CarbonApplicant{" +
-            "name='" + name + '\'' +
-            ", gender=" + gender +
-            ", birthdate=" + birthdate +
-            ", idType=" + idType +
-            ", idNo='" + idNo + '\'' +
-            ", idValidStart=" + idValidStart +
-            ", idValidEnd=" + idValidEnd +
-            ", mobile='" + mobile + '\'' +
-            ", email='" + email + '\'' +
-            ", degree=" + degree +
-            ", marriage=" + marriage +
-            ", occupationType='" + occupationType + '\'' +
-            ", occupationCode='" + occupationCode + '\'' +
-            ", occupationName='" + occupationName + '\'' +
-            ", rgtAddress='" + rgtAddress + '\'' +
-            ", postalAddress='" + postalAddress + '\'' +
-            ", income=" + income +
-            ", nation=" + nation +
-            ", nationality=" + nationality +
-            ", socialSecurityFlag=" + socialSecurityFlag +
-            '}';
+        "name='" + name + '\'' +
+        ", gender=" + gender +
+        ", birthdate=" + birthdate +
+        ", idType=" + idType +
+        ", idNo='" + idNo + '\'' +
+        ", idValidStart=" + idValidStart +
+        ", idValidEnd=" + idValidEnd +
+        ", mobile='" + mobile + '\'' +
+        ", email='" + email + '\'' +
+        ", degree=" + degree +
+        ", marriage=" + marriage +
+        ", occupationType='" + occupationType + '\'' +
+        ", occupationCode='" + occupationCode + '\'' +
+        ", occupationName='" + occupationName + '\'' +
+        ", rgtAddress='" + rgtAddress + '\'' +
+        ", postalAddress='" + postalAddress + '\'' +
+        ", income=" + income +
+        ", nation=" + nation +
+        ", nationality=" + nationality +
+        ", socialSecurityFlag=" + socialSecurityFlag +
+        '}';
   }
 }

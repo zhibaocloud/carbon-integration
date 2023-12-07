@@ -43,7 +43,8 @@ public class CarbonClientFactory {
    */
   private final CryptoFactory cf;
 
-  public CarbonClientFactory(CloseableHttpClient client, CarbonSerializerFactory sf, CryptoFactory cf) {
+  public CarbonClientFactory(CloseableHttpClient client, CarbonSerializerFactory sf,
+      CryptoFactory cf) {
     this.client = client;
     this.sf = sf;
     this.cf = cf;

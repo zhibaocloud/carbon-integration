@@ -43,7 +43,8 @@ public class CarbonClientApplication implements ApplicationRunner {
 
   private final CarbonClientProperties config;
 
-  public CarbonClientApplication(CarbonClient client, CarbonClientFactory factory, CarbonClientProperties config) {
+  public CarbonClientApplication(CarbonClient client, CarbonClientFactory factory,
+      CarbonClientProperties config) {
     this.client = client;
     this.factory = factory;
     this.config = config;

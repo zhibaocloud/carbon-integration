@@ -17,10 +17,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;

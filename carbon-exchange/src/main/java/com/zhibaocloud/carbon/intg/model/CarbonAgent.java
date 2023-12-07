@@ -15,7 +15,6 @@ package com.zhibaocloud.carbon.intg.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import java.util.Objects;
 
 /**
  * 代理人信息
@@ -87,10 +86,10 @@ public class CarbonAgent {
   @Override
   public String toString() {
     return "CarbonAgent{" +
-            "name='" + name + '\'' +
-            ", code='" + code + '\'' +
-            ", extCode='" + extCode + '\'' +
-            ", busiDevCertifNo='" + busiDevCertifNo + '\'' +
-            '}';
+        "name='" + name + '\'' +
+        ", code='" + code + '\'' +
+        ", extCode='" + extCode + '\'' +
+        ", busiDevCertifNo='" + busiDevCertifNo + '\'' +
+        '}';
   }
 }

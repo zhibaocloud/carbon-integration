@@ -19,12 +19,10 @@ import com.zhibaocloud.carbon.intg.types.CarbonPayType;
 import com.zhibaocloud.carbon.intg.types.CarbonPolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 推送/接收承保保单数据模型
@@ -581,43 +579,43 @@ public class CarbonPolicy implements CarbonIdentifier {
   @Override
   public String toString() {
     return "CarbonPolicy{" +
-            "company=" + company +
-            ", policyNo='" + policyNo + '\'' +
-            ", proposalNo='" + proposalNo + '\'' +
-            ", prtNo='" + prtNo + '\'' +
-            ", orderNo='" + orderNo + '\'' +
-            ", extOrderNo='" + extOrderNo + '\'' +
-            ", previousPolicyNo='" + previousPolicyNo + '\'' +
-            ", previousProposalNo='" + previousProposalNo + '\'' +
-            ", manageCom='" + manageCom + '\'' +
-            ", manageComName='" + manageComName + '\'' +
-            ", agentCom='" + agentCom + '\'' +
-            ", agentComName='" + agentComName + '\'' +
-            ", productNo='" + productNo + '\'' +
-            ", productName='" + productName + '\'' +
-            ", premium=" + premium +
-            ", amount=" + amount +
-            ", ePolicyUrl='" + ePolicyUrl + '\'' +
-            ", payIntv=" + payIntv +
-            ", payType=" + payType +
-            ", applyTime=" + applyTime +
-            ", payTime=" + payTime +
-            ", signTime=" + signTime +
-            ", effectiveTime=" + effectiveTime +
-            ", expirationTime=" + expirationTime +
-            ", receiptSignTime=" + receiptSignTime +
-            ", receiptEnteredTime=" + receiptEnteredTime +
-            ", rtnCallTime=" + rtnCallTime +
-            ", rtnCallSuccess=" + rtnCallSuccess +
-            ", rtnCallFailedReason='" + rtnCallFailedReason + '\'' +
-            ", status=" + status +
-            ", ext=" + ext +
-            ", agent=" + agent +
-            ", applicant=" + applicant +
-            ", insureds=" + insureds +
-            ", bnfs=" + bnfs +
-            ", risks=" + risks +
-            '}';
+        "company=" + company +
+        ", policyNo='" + policyNo + '\'' +
+        ", proposalNo='" + proposalNo + '\'' +
+        ", prtNo='" + prtNo + '\'' +
+        ", orderNo='" + orderNo + '\'' +
+        ", extOrderNo='" + extOrderNo + '\'' +
+        ", previousPolicyNo='" + previousPolicyNo + '\'' +
+        ", previousProposalNo='" + previousProposalNo + '\'' +
+        ", manageCom='" + manageCom + '\'' +
+        ", manageComName='" + manageComName + '\'' +
+        ", agentCom='" + agentCom + '\'' +
+        ", agentComName='" + agentComName + '\'' +
+        ", productNo='" + productNo + '\'' +
+        ", productName='" + productName + '\'' +
+        ", premium=" + premium +
+        ", amount=" + amount +
+        ", ePolicyUrl='" + ePolicyUrl + '\'' +
+        ", payIntv=" + payIntv +
+        ", payType=" + payType +
+        ", applyTime=" + applyTime +
+        ", payTime=" + payTime +
+        ", signTime=" + signTime +
+        ", effectiveTime=" + effectiveTime +
+        ", expirationTime=" + expirationTime +
+        ", receiptSignTime=" + receiptSignTime +
+        ", receiptEnteredTime=" + receiptEnteredTime +
+        ", rtnCallTime=" + rtnCallTime +
+        ", rtnCallSuccess=" + rtnCallSuccess +
+        ", rtnCallFailedReason='" + rtnCallFailedReason + '\'' +
+        ", status=" + status +
+        ", ext=" + ext +
+        ", agent=" + agent +
+        ", applicant=" + applicant +
+        ", insureds=" + insureds +
+        ", bnfs=" + bnfs +
+        ", risks=" + risks +
+        '}';
   }
 
 }

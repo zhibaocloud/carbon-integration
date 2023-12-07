@@ -14,9 +14,7 @@
 package com.zhibaocloud.carbon.intg.gson;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
-import java.io.IOException;
 
 public class CarbonGsonSerializer implements CarbonSerializer {
 

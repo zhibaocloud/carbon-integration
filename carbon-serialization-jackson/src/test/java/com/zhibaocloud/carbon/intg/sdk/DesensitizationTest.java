@@ -55,6 +55,7 @@ class DesensitizationTest {
     Customer customer = new Customer();
     customer.setName("张三");
 
-    assertThatThrownBy(() -> mapper.serialize(customer)).isInstanceOf(UnsupportedOperationException.class);
+    assertThatThrownBy(() -> mapper.serialize(customer)).isInstanceOf(
+        UnsupportedOperationException.class);
   }
 }

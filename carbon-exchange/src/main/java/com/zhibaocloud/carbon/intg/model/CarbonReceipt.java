@@ -17,7 +17,6 @@ import com.zhibaocloud.carbon.intg.types.CarbonCompanyType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 推送/接收回执数据模型
@@ -117,13 +116,13 @@ public class CarbonReceipt implements CarbonIdentifier {
   @Override
   public String toString() {
     return "CarbonReceipt{" +
-            "company=" + company +
-            ", policyNo='" + policyNo + '\'' +
-            ", proposalNo='" + proposalNo + '\'' +
-            ", prtNo='" + prtNo + '\'' +
-            ", receiptSignTime=" + receiptSignTime +
-            ", receiptEnteredTime=" + receiptEnteredTime +
-            '}';
+        "company=" + company +
+        ", policyNo='" + policyNo + '\'' +
+        ", proposalNo='" + proposalNo + '\'' +
+        ", prtNo='" + prtNo + '\'' +
+        ", receiptSignTime=" + receiptSignTime +
+        ", receiptEnteredTime=" + receiptEnteredTime +
+        '}';
   }
 
 }

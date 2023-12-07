@@ -14,8 +14,6 @@
 package com.zhibaocloud.carbon.intg;
 
 
-import java.util.Objects;
-
 /**
  * 响应报文
  *
@@ -60,9 +58,9 @@ public class CarbonResponse {
   @Override
   public String toString() {
     return "CarbonResponse{" +
-            "success=" + success +
-            ", message='" + message + '\'' +
-            '}';
+        "success=" + success +
+        ", message='" + message + '\'' +
+        '}';
   }
 
 }

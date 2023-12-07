@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -27,11 +26,12 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.model.CarbonReceipt;
 import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.server.starter.CarbonServerProperties;
 import org.junit.jupiter.api.Test;
@@ -64,7 +64,8 @@ class IntegrationTest {
   }
 
   private void runDataSync(CarbonMessageType type, Object request) throws Exception {
-    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializationConfiguration());
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(
+        new SerializationConfiguration());
     Crypto crypto = new CryptoFactory().create(config.getCrypto());
 
     CarbonOption option = new CarbonOption();
@@ -80,7 +81,8 @@ class IntegrationTest {
         .andExpect(status().isOk())
         .andReturn();
     String responseBody = result.getResponse().getContentAsString();
-    CarbonEncryptedResponse wrapper = mapper.deserialize(responseBody, CarbonEncryptedResponse.class);
+    CarbonEncryptedResponse wrapper = mapper.deserialize(responseBody,
+        CarbonEncryptedResponse.class);
     CarbonResponse response = channel.decodeResponse(wrapper, CarbonResponse.class);
     assertThat(response.isSuccess()).isTrue();
   }

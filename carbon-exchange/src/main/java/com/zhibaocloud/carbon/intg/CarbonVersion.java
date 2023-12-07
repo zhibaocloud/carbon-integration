@@ -14,8 +14,6 @@
 package com.zhibaocloud.carbon.intg;
 
 
-import java.util.Objects;
-
 /**
  * SDK版本，用于区分服务器端、客户端是否使用兼容版本SDK 使用 semver 的方式判断是否兼容
  * <p>
@@ -65,7 +63,6 @@ public class CarbonVersion {
 
   private CarbonVersion() {
   }
-
 
 
   public CarbonVersion(String version) {

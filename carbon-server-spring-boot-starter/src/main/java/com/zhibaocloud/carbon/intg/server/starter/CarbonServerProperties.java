@@ -64,7 +64,8 @@ public class CarbonServerProperties {
   public CarbonServerProperties() {
   }
 
-  public CarbonServerProperties(Boolean enabled, CryptoConfiguration crypto, SerializationConfiguration serializer) {
+  public CarbonServerProperties(Boolean enabled, CryptoConfiguration crypto,
+      SerializationConfiguration serializer) {
     this.enabled = enabled;
     this.crypto = crypto;
     this.serializer = serializer;

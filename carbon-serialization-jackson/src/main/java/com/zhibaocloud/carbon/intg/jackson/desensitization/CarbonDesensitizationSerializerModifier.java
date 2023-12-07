@@ -16,7 +16,8 @@ public class CarbonDesensitizationSerializerModifier extends BeanSerializerModif
 
   @Override
   @SuppressWarnings("unchecked")
-  public List<BeanPropertyWriter> changeProperties(SerializationConfig config, BeanDescription beanDesc,
+  public List<BeanPropertyWriter> changeProperties(SerializationConfig config,
+      BeanDescription beanDesc,
       List<BeanPropertyWriter> beanProperties) {
     for (BeanPropertyWriter beanProperty : beanProperties) {
       CarbonDesensitize desensitizeAnnotation = findDesensitizeAnnotation(beanProperty);

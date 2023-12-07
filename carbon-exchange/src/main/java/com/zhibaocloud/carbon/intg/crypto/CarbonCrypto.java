@@ -14,7 +14,6 @@
 package com.zhibaocloud.carbon.intg.crypto;
 
 import com.zhibaocloud.carbon.intg.CarbonException;
-
 import java.security.MessageDigest;
 import java.util.Base64;
 import javax.crypto.Cipher;

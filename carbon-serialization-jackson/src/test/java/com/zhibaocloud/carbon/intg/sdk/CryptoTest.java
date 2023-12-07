@@ -16,7 +16,6 @@ package com.zhibaocloud.carbon.intg.sdk;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.github.jsonzou.jmockdata.JMockData;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -26,6 +25,7 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
+import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
@@ -45,7 +45,8 @@ class CryptoTest {
     config.setIv("dyRnJ6bVxWTdHd64");
     Crypto crypto = factory.create(config);
     CarbonOption option = new CarbonOption();
-    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(new SerializationConfiguration());
+    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(
+        new SerializationConfiguration());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
     CarbonPolicy originPolicy = JMockData.mock(CarbonPolicy.class);

@@ -16,13 +16,20 @@ package com.zhibaocloud.carbon.intg.model;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonIDCardDesensitize;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonPhoneDesensitize;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonStringDesensitize;
-import com.zhibaocloud.carbon.intg.types.*;
+import com.zhibaocloud.carbon.intg.types.CarbonBnfGrade;
+import com.zhibaocloud.carbon.intg.types.CarbonBnfType;
+import com.zhibaocloud.carbon.intg.types.CarbonDegreeType;
+import com.zhibaocloud.carbon.intg.types.CarbonGenderType;
+import com.zhibaocloud.carbon.intg.types.CarbonIdType;
+import com.zhibaocloud.carbon.intg.types.CarbonMarriageType;
+import com.zhibaocloud.carbon.intg.types.CarbonNationType;
+import com.zhibaocloud.carbon.intg.types.CarbonNationalityType;
+import com.zhibaocloud.carbon.intg.types.CarbonRelationType;
+import com.zhibaocloud.carbon.intg.types.CarbonSocialSecurityFlag;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * 受益人信息
@@ -392,31 +399,31 @@ public class CarbonBeneficiary {
   @Override
   public String toString() {
     return "CarbonBeneficiary{" +
-            "insuredNo='" + insuredNo + '\'' +
-            ", relationToInsured=" + relationToInsured +
-            ", bnfType=" + bnfType +
-            ", bnfGrade=" + bnfGrade +
-            ", bnfRatio=" + bnfRatio +
-            ", name='" + name + '\'' +
-            ", gender=" + gender +
-            ", birthdate=" + birthdate +
-            ", idType=" + idType +
-            ", idNo='" + idNo + '\'' +
-            ", idValidStart=" + idValidStart +
-            ", idValidEnd=" + idValidEnd +
-            ", mobile='" + mobile + '\'' +
-            ", email='" + email + '\'' +
-            ", degree=" + degree +
-            ", marriage=" + marriage +
-            ", occupationType='" + occupationType + '\'' +
-            ", occupationCode='" + occupationCode + '\'' +
-            ", occupationName='" + occupationName + '\'' +
-            ", rgtAddress='" + rgtAddress + '\'' +
-            ", postalAddress='" + postalAddress + '\'' +
-            ", income=" + income +
-            ", nation=" + nation +
-            ", nationality=" + nationality +
-            ", socialSecurityFlag=" + socialSecurityFlag +
-            '}';
+        "insuredNo='" + insuredNo + '\'' +
+        ", relationToInsured=" + relationToInsured +
+        ", bnfType=" + bnfType +
+        ", bnfGrade=" + bnfGrade +
+        ", bnfRatio=" + bnfRatio +
+        ", name='" + name + '\'' +
+        ", gender=" + gender +
+        ", birthdate=" + birthdate +
+        ", idType=" + idType +
+        ", idNo='" + idNo + '\'' +
+        ", idValidStart=" + idValidStart +
+        ", idValidEnd=" + idValidEnd +
+        ", mobile='" + mobile + '\'' +
+        ", email='" + email + '\'' +
+        ", degree=" + degree +
+        ", marriage=" + marriage +
+        ", occupationType='" + occupationType + '\'' +
+        ", occupationCode='" + occupationCode + '\'' +
+        ", occupationName='" + occupationName + '\'' +
+        ", rgtAddress='" + rgtAddress + '\'' +
+        ", postalAddress='" + postalAddress + '\'' +
+        ", income=" + income +
+        ", nation=" + nation +
+        ", nationality=" + nationality +
+        ", socialSecurityFlag=" + socialSecurityFlag +
+        '}';
   }
 }

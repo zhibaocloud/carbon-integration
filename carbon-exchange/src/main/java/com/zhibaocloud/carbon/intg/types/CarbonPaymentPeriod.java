@@ -12,7 +12,6 @@
  */
 
 package com.zhibaocloud.carbon.intg.types;
-import java.util.Objects;
 
 /**
  * <table border="1">
@@ -79,6 +78,7 @@ public class CarbonPaymentPeriod {
 
   public CarbonPaymentPeriod() {
   }
+
   /**
    * 创建交费期间
    *
