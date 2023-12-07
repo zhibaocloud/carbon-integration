@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 证件类型
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonIdType implements EncodedValue {
   /**
    * 居民身份证
@@ -234,4 +229,17 @@ public enum CarbonIdType implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonIdType(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

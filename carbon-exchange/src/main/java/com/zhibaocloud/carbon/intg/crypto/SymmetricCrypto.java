@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 对称加密套件
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum SymmetricCrypto {
 
   /**
@@ -57,5 +52,23 @@ public enum SymmetricCrypto {
 
   public String getTransformation() {
     return algorithm + "/" + mode + "/" + padding;
+  }
+
+  public String getAlgorithm() {
+    return algorithm;
+  }
+
+  public String getMode() {
+    return mode;
+  }
+
+  public String getPadding() {
+    return padding;
+  }
+
+  SymmetricCrypto(String algorithm, String mode, String padding) {
+    this.algorithm = algorithm;
+    this.mode = mode;
+    this.padding = padding;
   }
 }

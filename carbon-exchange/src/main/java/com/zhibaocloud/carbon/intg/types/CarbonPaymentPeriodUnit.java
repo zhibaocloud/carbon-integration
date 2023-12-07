@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 交费期间单位
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonPaymentPeriodUnit {
 
   /**
@@ -47,4 +43,12 @@ public enum CarbonPaymentPeriodUnit {
   S("趸交");
 
   private final String description;
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonPaymentPeriodUnit(String description) {
+    this.description = description;
+  }
 }

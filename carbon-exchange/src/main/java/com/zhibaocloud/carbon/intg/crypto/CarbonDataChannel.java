@@ -13,20 +13,19 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
+import com.zhibaocloud.carbon.intg.CarbonException;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.SignatureMissMatchException;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import java.io.IOException;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 
 /**
  * 信道加密
  *
  * @author jun
  */
-@RequiredArgsConstructor
 public class CarbonDataChannel {
 
   private final CarbonSerializer serializer;
@@ -35,6 +34,12 @@ public class CarbonDataChannel {
 
   private final CarbonOption option;
 
+  public CarbonDataChannel(CarbonSerializer serializer, Crypto crypto, CarbonOption option) {
+    this.serializer = serializer;
+    this.crypto = crypto;
+    this.option = option;
+  }
+
   /**
    * 封装链路请求。HTTP 是作为传输层使用
    *
@@ -42,16 +47,19 @@ public class CarbonDataChannel {
    * @param request 报文详情
    * @return 在链路上传输报文
    */
-  @SneakyThrows
   public CarbonEncryptedRequest encodeRequest(CarbonMessageType type, Object request) {
-    String payload = serializer.serialize(request);
-    CarbonEncryptedRequest message = new CarbonEncryptedRequest();
-    message.setType(type);
-    message.setTenant(option.getTenant());
-    message.setRequestId(UUID.randomUUID());
-    message.setSign(crypto.digest(payload));
-    message.setPayload(crypto.encrypt(payload));
-    return message;
+    try {
+      String payload = serializer.serialize(request);
+      CarbonEncryptedRequest message = new CarbonEncryptedRequest();
+      message.setType(type);
+      message.setTenant(option.getTenant());
+      message.setRequestId(UUID.randomUUID());
+      message.setSign(crypto.digest(payload));
+      message.setPayload(crypto.encrypt(payload));
+      return message;
+    } catch (Exception e) {
+      throw new CarbonException(e);
+    }
   }
 
   /**
@@ -61,8 +69,8 @@ public class CarbonDataChannel {
    * @param response  相应内容
    * @return 在链路上传输报文
    */
-  @SneakyThrows
-  public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response) {
+  public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response)
+      throws IOException {
     String payload = serializer.serialize(response);
     CarbonEncryptedResponse message = new CarbonEncryptedResponse();
     message.setRequestId(requestId);
@@ -93,8 +101,7 @@ public class CarbonDataChannel {
    * @param <T>     数据类型
    * @return 解析后的数据
    */
-  @SneakyThrows
-  public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) {
+  public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) throws IOException {
     String payload = crypto.decrypt(request.getPayload());
     verify(payload, request.getSign());
     return serializer.deserialize(payload, clz);
@@ -108,8 +115,7 @@ public class CarbonDataChannel {
    * @param <T>      数据类型
    * @return 解析后的数据
    */
-  @SneakyThrows
-  public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) {
+  public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) throws IOException {
     String payload = crypto.decrypt(response.getPayload());
     verify(payload, response.getSign());
     return serializer.deserialize(payload, clz);

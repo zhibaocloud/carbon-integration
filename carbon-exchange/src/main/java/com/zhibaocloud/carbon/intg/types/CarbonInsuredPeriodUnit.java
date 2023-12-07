@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 保险期间单位
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonInsuredPeriodUnit {
 
   /**
@@ -58,4 +53,12 @@ public enum CarbonInsuredPeriodUnit {
    * 码表文字描述
    */
   private final String description;
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonInsuredPeriodUnit(String description) {
+    this.description = description;
+  }
 }

@@ -14,16 +14,12 @@
 package com.zhibaocloud.carbon.intg;
 
 import com.zhibaocloud.carbon.intg.types.EncodedValue;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 数据推送类型
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonMessageType implements EncodedValue {
 
   /**
@@ -49,4 +45,17 @@ public enum CarbonMessageType implements EncodedValue {
   private final String value;
 
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonMessageType(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

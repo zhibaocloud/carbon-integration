@@ -13,7 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.client;
 
-import com.github.jsonzou.jmockdata.JMockData;
+import com.zhibacloud.carbon.mock.CarbonDataMock;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
@@ -22,7 +22,6 @@ import com.zhibaocloud.carbon.intg.model.CarbonRtnCall;
 import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import java.io.IOException;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,7 +35,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @SpringBootApplication
-@RequiredArgsConstructor
 public class CarbonClientApplication implements ApplicationRunner {
 
   private final CarbonClient client;
@@ -44,6 +42,13 @@ public class CarbonClientApplication implements ApplicationRunner {
   private final CarbonClientFactory factory;
 
   private final CarbonClientProperties config;
+
+  public CarbonClientApplication(CarbonClient client, CarbonClientFactory factory,
+      CarbonClientProperties config) {
+    this.client = client;
+    this.factory = factory;
+    this.config = config;
+  }
 
   public static void main(String[] args) {
     SpringApplication.run(CarbonClientApplication.class, args);
@@ -53,10 +58,10 @@ public class CarbonClientApplication implements ApplicationRunner {
    * 单用户模式，根据配置文件创建 SDK 对象
    */
   private void runClient() throws IOException {
-    client.publish(JMockData.mock(CarbonPolicy.class));
-    client.publish(JMockData.mock(CarbonReceipt.class));
-    client.publish(JMockData.mock(CarbonRtnCall.class));
-    client.publish(JMockData.mock(CarbonStatusChanged.class));
+    client.publish(CarbonDataMock.mock(CarbonPolicy.class));
+    client.publish(CarbonDataMock.mock(CarbonReceipt.class));
+    client.publish(CarbonDataMock.mock(CarbonRtnCall.class));
+    client.publish(CarbonDataMock.mock(CarbonStatusChanged.class));
   }
 
   /**
@@ -72,10 +77,10 @@ public class CarbonClientApplication implements ApplicationRunner {
     // 根据租户配置返回不同的 CarbonClient。 可配置内容包括: 是否脱敏，加解密方式，密钥等
     CarbonClient c = factory.create(option);
 
-    c.publish(JMockData.mock(CarbonPolicy.class));
-    c.publish(JMockData.mock(CarbonReceipt.class));
-    c.publish(JMockData.mock(CarbonRtnCall.class));
-    c.publish(JMockData.mock(CarbonStatusChanged.class));
+    c.publish(CarbonDataMock.mock(CarbonPolicy.class));
+    c.publish(CarbonDataMock.mock(CarbonReceipt.class));
+    c.publish(CarbonDataMock.mock(CarbonRtnCall.class));
+    c.publish(CarbonDataMock.mock(CarbonStatusChanged.class));
   }
 
   @Override

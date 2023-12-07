@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 主附险性质代码
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonMainRiskFlag implements EncodedValue {
 
   /**
@@ -49,4 +44,17 @@ public enum CarbonMainRiskFlag implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonMainRiskFlag(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

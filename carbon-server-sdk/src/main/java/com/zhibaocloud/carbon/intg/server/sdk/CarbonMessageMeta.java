@@ -15,30 +15,44 @@ package com.zhibaocloud.carbon.intg.server.sdk;
 
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /**
  * 元数据信息，用于标记数据的来源，接收方(租户)等
  *
  * @author jun
  */
-@Getter
-@AllArgsConstructor
 public class CarbonMessageMeta {
 
   /**
    * 请求 ID，可用于重试去重
    */
-  private UUID requestId;
+  private final UUID requestId;
 
   /**
    * 消息类型
    */
-  private CarbonMessageType type;
+  private final CarbonMessageType type;
 
   /**
    * 租户标识
    */
-  private String tenant;
+  private final String tenant;
+
+  public UUID getRequestId() {
+    return requestId;
+  }
+
+  public CarbonMessageType getType() {
+    return type;
+  }
+
+  public String getTenant() {
+    return tenant;
+  }
+
+  public CarbonMessageMeta(UUID requestId, CarbonMessageType type, String tenant) {
+    this.requestId = requestId;
+    this.type = type;
+    this.tenant = tenant;
+  }
 }

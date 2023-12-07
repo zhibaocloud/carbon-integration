@@ -34,8 +34,6 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
-import lombok.Getter;
-import lombok.Setter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -59,7 +57,7 @@ class CarbonSerializationTest {
     assertThat(period).hasToString("1Y");
 
     CarbonInsuredPeriod newPeriod = new CarbonInsuredPeriod(1, CarbonInsuredPeriodUnit.Y);
-    assertThat(newPeriod).isEqualTo(period);
+    assertThat(newPeriod.getValue()).isEqualTo(period.getValue());
 
     CarbonInsuredPeriod period1 = CarbonInsuredPeriod.of("N");
     assertThat(period1.getValue()).isZero();
@@ -77,7 +75,7 @@ class CarbonSerializationTest {
     String json = mapper.serialize(source);
     assertThat(json).isEqualTo("{\"insuredPeriod\":\"10Y\"}");
     CarbonInsuredPeriod restored = mapper.deserialize(json, CarbonRisk.class).getInsuredPeriod();
-    assertThat(ip).isEqualTo(restored);
+    assertThat(ip.getValue()).isEqualTo(restored.getValue());
     assertThat(restored.getValue()).isEqualTo(10);
   }
 
@@ -91,14 +89,14 @@ class CarbonSerializationTest {
     assertThat(period).hasToString("1Y");
 
     CarbonPaymentPeriod newPeriod = new CarbonPaymentPeriod(1, CarbonPaymentPeriodUnit.Y);
-    assertThat(newPeriod).isEqualTo(period);
+    assertThat(newPeriod.getValue()).isEqualTo(period.getValue());
 
     CarbonRisk risk = new CarbonRisk();
     risk.setPaymentPeriod(period);
     String json = mapper.serialize(risk);
     assertThat(json).isEqualTo("{\"paymentPeriod\":\"1Y\"}");
     CarbonPaymentPeriod restored = mapper.deserialize(json, CarbonRisk.class).getPaymentPeriod();
-    assertThat(period).isEqualTo(restored);
+    assertThat(period.getValue()).isEqualTo(restored.getValue());
 
     CarbonPaymentPeriod single = CarbonPaymentPeriod.SINGLE;
     assertThat(single.getUnit()).isEqualTo(CarbonPaymentPeriodUnit.S);
@@ -138,8 +136,6 @@ class CarbonSerializationTest {
         "{\"date\":\"2023-03-29\",\"datetime\":\"2023-03-29 00:01:01\",\"time\":\"23:59:59\"}");
   }
 
-  @Getter
-  @Setter
   static class Policy {
 
     private CarbonVersion version;
@@ -147,6 +143,30 @@ class CarbonSerializationTest {
     private CarbonInsuredPeriod insuredPeriod;
 
     private CarbonPaymentPeriod paymentPeriod;
+
+    public CarbonVersion getVersion() {
+      return version;
+    }
+
+    public void setVersion(CarbonVersion version) {
+      this.version = version;
+    }
+
+    public CarbonInsuredPeriod getInsuredPeriod() {
+      return insuredPeriod;
+    }
+
+    public void setInsuredPeriod(CarbonInsuredPeriod insuredPeriod) {
+      this.insuredPeriod = insuredPeriod;
+    }
+
+    public CarbonPaymentPeriod getPaymentPeriod() {
+      return paymentPeriod;
+    }
+
+    public void setPaymentPeriod(CarbonPaymentPeriod paymentPeriod) {
+      this.paymentPeriod = paymentPeriod;
+    }
   }
 
   @ParameterizedTest

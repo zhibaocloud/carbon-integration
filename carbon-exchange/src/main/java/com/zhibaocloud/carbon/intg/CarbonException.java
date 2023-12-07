@@ -28,4 +28,8 @@ public class CarbonException extends RuntimeException {
   public CarbonException(String message) {
     super(message);
   }
+
+  public CarbonException(Throwable cause) {
+    super(cause);
+  }
 }

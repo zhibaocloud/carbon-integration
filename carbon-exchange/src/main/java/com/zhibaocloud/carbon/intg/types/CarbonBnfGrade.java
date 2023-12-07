@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 受益人顺位
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonBnfGrade implements EncodedValue {
   /**
    * 第一受益人
@@ -60,4 +55,16 @@ public enum CarbonBnfGrade implements EncodedValue {
    */
   private final String description;
 
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonBnfGrade(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

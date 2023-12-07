@@ -15,14 +15,12 @@ package com.zhibaocloud.carbon.intg.crypto;
 
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import java.util.UUID;
-import lombok.Data;
 
 /**
  * 加密后的报文响应
  *
  * @author jun
  */
-@Data
 public class CarbonEncryptedResponse {
 
   /**
@@ -55,5 +53,45 @@ public class CarbonEncryptedResponse {
    */
   public String getVersion() {
     return version.toString();
+  }
+
+  public void setVersion(CarbonVersion version) {
+    this.version = version;
+  }
+
+  public UUID getRequestId() {
+    return requestId;
+  }
+
+  public void setRequestId(UUID requestId) {
+    this.requestId = requestId;
+  }
+
+  public String getSign() {
+    return sign;
+  }
+
+  public void setSign(String sign) {
+    this.sign = sign;
+  }
+
+  public String getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(String tenant) {
+    this.tenant = tenant;
+  }
+
+  public String getPayload() {
+    return payload;
+  }
+
+
+  public CarbonEncryptedResponse() {
+  }
+
+  public void setPayload(String payload) {
+    this.payload = payload;
   }
 }

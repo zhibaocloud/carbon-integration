@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 数据摘要，用于校验数据完整性
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum HashAlg {
 
   /**
@@ -56,4 +51,12 @@ public enum HashAlg {
   SHA3_512("SHA3-512");
 
   private final String alg;
+
+  public String getAlg() {
+    return alg;
+  }
+
+  HashAlg(String alg) {
+    this.alg = alg;
+  }
 }

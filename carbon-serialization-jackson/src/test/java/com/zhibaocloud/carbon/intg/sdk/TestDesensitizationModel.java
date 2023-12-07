@@ -6,20 +6,25 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author yangtuo
  */
 public class TestDesensitizationModel {
 
-  @Getter
-  @Setter
+
   static class Customer {
 
     @InterfaceDesensitize
-    String name;
+    private String name;
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
   }
 
   @Target(ElementType.FIELD)
@@ -29,12 +34,18 @@ public class TestDesensitizationModel {
 
   }
 
-  @Getter
-  @Setter
   static class Agent {
 
     @CustomDesensitize
-    String name;
+    private String name;
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
   }
 
   @Target(ElementType.FIELD)

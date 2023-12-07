@@ -16,16 +16,12 @@ package com.zhibaocloud.carbon.intg;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.net.URI;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 用于指定和智保云数据平台的连接参数
  *
  * @author jun
  */
-@Getter
-@Setter
 public class CarbonOption {
 
   /**
@@ -47,4 +43,36 @@ public class CarbonOption {
    * 序列化配置
    */
   private SerializationConfiguration serialization = new SerializationConfiguration();
+
+  public URI getEndpoint() {
+    return endpoint;
+  }
+
+  public void setEndpoint(URI endpoint) {
+    this.endpoint = endpoint;
+  }
+
+  public String getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(String tenant) {
+    this.tenant = tenant;
+  }
+
+  public CryptoConfiguration getCrypto() {
+    return crypto;
+  }
+
+  public void setCrypto(CryptoConfiguration crypto) {
+    this.crypto = crypto;
+  }
+
+  public SerializationConfiguration getSerialization() {
+    return serialization;
+  }
+
+  public void setSerialization(SerializationConfiguration serialization) {
+    this.serialization = serialization;
+  }
 }

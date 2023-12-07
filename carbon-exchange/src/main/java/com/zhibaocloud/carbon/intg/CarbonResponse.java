@@ -13,18 +13,12 @@
 
 package com.zhibaocloud.carbon.intg;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 响应报文
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CarbonResponse {
 
   /**
@@ -36,5 +30,37 @@ public class CarbonResponse {
    * 失败原因
    */
   private String message;
+
+  public boolean isSuccess() {
+    return success;
+  }
+
+  public void setSuccess(boolean success) {
+    this.success = success;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public CarbonResponse() {
+  }
+
+  public CarbonResponse(boolean success, String message) {
+    this.success = success;
+    this.message = message;
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonResponse{" +
+        "success=" + success +
+        ", message='" + message + '\'' +
+        '}';
+  }
 
 }

@@ -19,16 +19,12 @@ import com.zhibaocloud.carbon.intg.types.CarbonTerminationReason;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.time.LocalDateTime;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 推送/接收保单状态变化数据模型
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
 @Schema(title = "保单状态变化")
 public class CarbonStatusChanged implements CarbonIdentifier {
 
@@ -79,4 +75,85 @@ public class CarbonStatusChanged implements CarbonIdentifier {
    */
   @Schema(title = "保单终止原因")
   private CarbonTerminationReason terminationReason;
+
+  public CarbonStatusChanged() {
+  }
+
+  public CarbonCompanyType getCompany() {
+    return company;
+  }
+
+  public void setCompany(CarbonCompanyType company) {
+    this.company = company;
+  }
+
+  public String getPolicyNo() {
+    return policyNo;
+  }
+
+  public void setPolicyNo(String policyNo) {
+    this.policyNo = policyNo;
+  }
+
+  public String getProposalNo() {
+    return proposalNo;
+  }
+
+  public void setProposalNo(String proposalNo) {
+    this.proposalNo = proposalNo;
+  }
+
+  public CarbonPolicyStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(CarbonPolicyStatus status) {
+    this.status = status;
+  }
+
+  public LocalDateTime getSuspendTime() {
+    return suspendTime;
+  }
+
+  public void setSuspendTime(LocalDateTime suspendTime) {
+    this.suspendTime = suspendTime;
+  }
+
+  public LocalDateTime getRecoverTime() {
+    return recoverTime;
+  }
+
+  public void setRecoverTime(LocalDateTime recoverTime) {
+    this.recoverTime = recoverTime;
+  }
+
+  public LocalDateTime getTerminationTime() {
+    return terminationTime;
+  }
+
+  public void setTerminationTime(LocalDateTime terminationTime) {
+    this.terminationTime = terminationTime;
+  }
+
+  public CarbonTerminationReason getTerminationReason() {
+    return terminationReason;
+  }
+
+  public void setTerminationReason(CarbonTerminationReason terminationReason) {
+    this.terminationReason = terminationReason;
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonStatusChanged{" +
+        "company=" + company +
+        ", policyNo='" + policyNo + '\'' +
+        ", proposalNo='" + proposalNo + '\'' +
+        ", status=" + status +
+        ", suspendTime=" + suspendTime +
+        ", recoverTime=" + recoverTime +
+        ", terminationTime=" + terminationTime +
+        ", terminationReason=" + terminationReason +
+        '}';
+  }
 }

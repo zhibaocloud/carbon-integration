@@ -21,16 +21,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 险种信息
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
 @Schema(title = "承保险种信息")
 public class CarbonRisk {
 
@@ -123,4 +119,148 @@ public class CarbonRisk {
    */
   @Schema(title = "交费期间")
   private CarbonPaymentPeriod paymentPeriod;
+
+  public CarbonRisk() {
+  }
+
+  public String getInsuredNo() {
+    return insuredNo;
+  }
+
+  public void setInsuredNo(String insuredNo) {
+    this.insuredNo = insuredNo;
+  }
+
+  public CarbonMainRiskFlag getFlag() {
+    return flag;
+  }
+
+  public void setFlag(CarbonMainRiskFlag flag) {
+    this.flag = flag;
+  }
+
+  public String getRiskCode() {
+    return riskCode;
+  }
+
+  public void setRiskCode(String riskCode) {
+    this.riskCode = riskCode;
+  }
+
+  public String getRiskName() {
+    return riskName;
+  }
+
+  public void setRiskName(String riskName) {
+    this.riskName = riskName;
+  }
+
+  public String getPlanCode() {
+    return planCode;
+  }
+
+  public void setPlanCode(String planCode) {
+    this.planCode = planCode;
+  }
+
+  public String getPlanName() {
+    return planName;
+  }
+
+  public void setPlanName(String planName) {
+    this.planName = planName;
+  }
+
+  public BigDecimal getPremium() {
+    return premium;
+  }
+
+  public void setPremium(BigDecimal premium) {
+    this.premium = premium;
+  }
+
+  public BigDecimal getAmount() {
+    return amount;
+  }
+
+  public void setAmount(BigDecimal amount) {
+    this.amount = amount;
+  }
+
+  public LocalDateTime getPayTime() {
+    return payTime;
+  }
+
+  public void setPayTime(LocalDateTime payTime) {
+    this.payTime = payTime;
+  }
+
+  public LocalDateTime getPayToTime() {
+    return payToTime;
+  }
+
+  public void setPayToTime(LocalDateTime payToTime) {
+    this.payToTime = payToTime;
+  }
+
+  public LocalDateTime getEffectiveTime() {
+    return effectiveTime;
+  }
+
+  public void setEffectiveTime(LocalDateTime effectiveTime) {
+    this.effectiveTime = effectiveTime;
+  }
+
+  public LocalDateTime getExpirationTime() {
+    return expirationTime;
+  }
+
+  public void setExpirationTime(LocalDateTime expirationTime) {
+    this.expirationTime = expirationTime;
+  }
+
+  public CarbonPolicyStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(CarbonPolicyStatus status) {
+    this.status = status;
+  }
+
+  public CarbonInsuredPeriod getInsuredPeriod() {
+    return insuredPeriod;
+  }
+
+  public void setInsuredPeriod(CarbonInsuredPeriod insuredPeriod) {
+    this.insuredPeriod = insuredPeriod;
+  }
+
+  public CarbonPaymentPeriod getPaymentPeriod() {
+    return paymentPeriod;
+  }
+
+  public void setPaymentPeriod(CarbonPaymentPeriod paymentPeriod) {
+    this.paymentPeriod = paymentPeriod;
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonRisk{" +
+        "insuredNo='" + insuredNo + '\'' +
+        ", flag=" + flag +
+        ", riskCode='" + riskCode + '\'' +
+        ", riskName='" + riskName + '\'' +
+        ", planCode='" + planCode + '\'' +
+        ", planName='" + planName + '\'' +
+        ", premium=" + premium +
+        ", amount=" + amount +
+        ", payTime=" + payTime +
+        ", payToTime=" + payToTime +
+        ", effectiveTime=" + effectiveTime +
+        ", expirationTime=" + expirationTime +
+        ", status=" + status +
+        ", insuredPeriod=" + insuredPeriod +
+        ", paymentPeriod=" + paymentPeriod +
+        '}';
+  }
 }

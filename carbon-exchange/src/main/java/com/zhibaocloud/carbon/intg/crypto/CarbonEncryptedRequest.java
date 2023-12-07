@@ -16,14 +16,12 @@ package com.zhibaocloud.carbon.intg.crypto;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import java.util.UUID;
-import lombok.Data;
 
 /**
  * 加密后的报文请求
  *
  * @author jun
  */
-@Data
 public class CarbonEncryptedRequest {
 
   /**
@@ -55,4 +53,56 @@ public class CarbonEncryptedRequest {
    * 加密数据类型，用于反序列化时识别数据类型
    */
   private CarbonMessageType type;
+
+  public CarbonEncryptedRequest() {
+  }
+
+  public CarbonVersion getVersion() {
+    return version;
+  }
+
+  public void setVersion(CarbonVersion version) {
+    this.version = version;
+  }
+
+  public UUID getRequestId() {
+    return requestId;
+  }
+
+  public void setRequestId(UUID requestId) {
+    this.requestId = requestId;
+  }
+
+  public String getSign() {
+    return sign;
+  }
+
+  public void setSign(String sign) {
+    this.sign = sign;
+  }
+
+  public String getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(String tenant) {
+    this.tenant = tenant;
+  }
+
+  public String getPayload() {
+    return payload;
+  }
+
+  public void setPayload(String payload) {
+    this.payload = payload;
+  }
+
+  public CarbonMessageType getType() {
+    return type;
+  }
+
+  public void setType(CarbonMessageType type) {
+    this.type = type;
+  }
+
 }

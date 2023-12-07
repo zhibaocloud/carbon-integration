@@ -13,7 +13,6 @@
 
 package com.zhibaocloud.carbon.intg;
 
-import lombok.Data;
 
 /**
  * SDK版本，用于区分服务器端、客户端是否使用兼容版本SDK 使用 semver 的方式判断是否兼容
@@ -22,7 +21,6 @@ import lombok.Data;
  *
  * @author jun
  */
-@Data
 public class CarbonVersion {
 
   public static final CarbonVersion CURRENT = new CarbonVersion();
@@ -39,8 +37,21 @@ public class CarbonVersion {
    */
   private int patch = 0;
 
+  public int getMajor() {
+    return major;
+  }
+
+  public int getMinor() {
+    return minor;
+  }
+
+  public int getPatch() {
+    return patch;
+  }
+
   private CarbonVersion() {
   }
+
 
   public CarbonVersion(String version) {
     String[] parts = version.split("\\.");

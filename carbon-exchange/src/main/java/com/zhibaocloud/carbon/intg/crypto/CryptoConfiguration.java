@@ -13,9 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.crypto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * 使用 AES 加密时使用 AES 支持的key长度可以是 128, 192, 256 等 但是在jdk1.8中如需支持 128 位以上的加密需要安装
  * <a href="https://www.baeldung.com/jce-enable-unlimited-strength">JCE Unlimited Strength
@@ -23,8 +20,6 @@ import lombok.Setter;
  *
  * @author jun
  */
-@Getter
-@Setter
 public class CryptoConfiguration {
 
   /**
@@ -51,4 +46,44 @@ public class CryptoConfiguration {
    * 摘要时使用的加盐，避免相同数据的签名摘要相同，避免Hash碰撞
    */
   private String salt;
+
+  public SymmetricCrypto getSymmetricAlg() {
+    return symmetricAlg;
+  }
+
+  public void setSymmetricAlg(SymmetricCrypto symmetricAlg) {
+    this.symmetricAlg = symmetricAlg;
+  }
+
+  public String getSecret() {
+    return secret;
+  }
+
+  public void setSecret(String secret) {
+    this.secret = secret;
+  }
+
+  public String getIv() {
+    return iv;
+  }
+
+  public void setIv(String iv) {
+    this.iv = iv;
+  }
+
+  public HashAlg getDigestAlg() {
+    return digestAlg;
+  }
+
+  public void setDigestAlg(HashAlg digestAlg) {
+    this.digestAlg = digestAlg;
+  }
+
+  public String getSalt() {
+    return salt;
+  }
+
+  public void setSalt(String salt) {
+    this.salt = salt;
+  }
 }

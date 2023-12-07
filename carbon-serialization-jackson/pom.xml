@@ -16,6 +16,10 @@
 
   <dependencies>
     <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-mock</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
       <scope>test</scope>
@@ -29,11 +33,6 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

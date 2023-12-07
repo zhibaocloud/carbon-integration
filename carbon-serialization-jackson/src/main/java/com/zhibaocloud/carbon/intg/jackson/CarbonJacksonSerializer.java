@@ -3,15 +3,17 @@ package com.zhibaocloud.carbon.intg.jackson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.io.IOException;
-import lombok.RequiredArgsConstructor;
 
 /**
  * @author yangtuo
  */
-@RequiredArgsConstructor
 public class CarbonJacksonSerializer implements CarbonSerializer {
 
   private final ObjectMapper om;
+
+  public CarbonJacksonSerializer(ObjectMapper om) {
+    this.om = om;
+  }
 
   @Override
   public String serialize(Object value) throws IOException {

@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 民族代码
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonNationalityType implements EncodedValue {
 
   /**
@@ -319,4 +315,17 @@ public enum CarbonNationalityType implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonNationalityType(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

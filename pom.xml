@@ -68,7 +68,6 @@
     <jackson.version>2.13.5</jackson.version>
     <java.version>8</java.version>
     <junit.version>4.13.2</junit.version>
-    <lombok.version>1.18.26</lombok.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.java.source>${java.version}</project.build.java.source>
@@ -81,6 +80,7 @@
 
   <modules>
     <module>carbon-exchange</module>
+    <module>carbon-mock</module>
     <module>carbon-client-sdk</module>
     <module>carbon-client-spring-boot-starter</module>
     <module>carbon-client-demo</module>
@@ -132,12 +132,6 @@
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring-boot.version}</version>
           <configuration>
-            <excludes>
-              <exclude>
-                <artifactId>lombok</artifactId>
-                <groupId>org.projectlombok</groupId>
-              </exclude>
-            </excludes>
             <layers>
               <enabled>true</enabled>
             </layers>
@@ -239,11 +233,6 @@
         <version>${swagger.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
         <version>${httpclient.version}</version>
@@ -281,6 +270,11 @@
       <dependency>
         <groupId>com.zhibaocloud</groupId>
         <artifactId>carbon-exchange</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zhibaocloud</groupId>
+        <artifactId>carbon-mock</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

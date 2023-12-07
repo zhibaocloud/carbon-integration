@@ -13,10 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * <table border="1">
  *   <caption>保险期间</caption>
@@ -58,9 +54,6 @@ import lombok.NoArgsConstructor;
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CarbonInsuredPeriod {
 
   /**
@@ -73,6 +66,19 @@ public class CarbonInsuredPeriod {
   public static final CarbonInsuredPeriod NONE = new CarbonInsuredPeriod("N");
   private int value = 0;
   private CarbonInsuredPeriodUnit unit = CarbonInsuredPeriodUnit.Y;
+
+  public int getValue() {
+    return value;
+  }
+
+  public CarbonInsuredPeriodUnit getUnit() {
+    return unit;
+  }
+
+  public CarbonInsuredPeriod(int value, CarbonInsuredPeriodUnit unit) {
+    this.value = value;
+    this.unit = unit;
+  }
 
   /**
    * 创建保险期间

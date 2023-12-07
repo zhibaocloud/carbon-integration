@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 保单/险种状态
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonPolicyStatus implements EncodedValue {
 
   /**
@@ -55,4 +51,17 @@ public enum CarbonPolicyStatus implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonPolicyStatus(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

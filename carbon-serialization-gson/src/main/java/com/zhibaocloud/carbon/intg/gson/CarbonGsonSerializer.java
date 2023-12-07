@@ -14,15 +14,20 @@
 package com.zhibaocloud.carbon.intg.gson;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
-import java.io.IOException;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+/**
+ * 使用 Gson 实现序列化、发序列化
+ *
+ * @author jun
+ */
 public class CarbonGsonSerializer implements CarbonSerializer {
 
   private final Gson gson;
+
+  public CarbonGsonSerializer(Gson gson) {
+    this.gson = gson;
+  }
 
   @Override
   public String serialize(Object value) {

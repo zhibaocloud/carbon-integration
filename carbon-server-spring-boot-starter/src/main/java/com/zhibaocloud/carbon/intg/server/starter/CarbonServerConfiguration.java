@@ -19,7 +19,6 @@ import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageListener;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageProcessor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -31,11 +30,14 @@ import org.springframework.context.annotation.Configuration;
  * @author jun
  */
 @Configuration
-@RequiredArgsConstructor
 @EnableConfigurationProperties(CarbonServerProperties.class)
 public class CarbonServerConfiguration {
 
   private final CarbonServerProperties config;
+
+  public CarbonServerConfiguration(CarbonServerProperties config) {
+    this.config = config;
+  }
 
   @Bean
   public CryptoFactory cryptoFactory() {

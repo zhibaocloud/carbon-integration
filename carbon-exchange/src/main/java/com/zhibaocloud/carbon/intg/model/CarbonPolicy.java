@@ -19,9 +19,6 @@ import com.zhibaocloud.carbon.intg.types.CarbonPayType;
 import com.zhibaocloud.carbon.intg.types.CarbonPolicyStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +29,7 @@ import java.util.Map;
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
+
 @Schema(title = "承保保单数据模型")
 public class CarbonPolicy implements CarbonIdentifier {
 
@@ -288,4 +284,338 @@ public class CarbonPolicy implements CarbonIdentifier {
    */
   @Schema(title = "险种信息", requiredMode = RequiredMode.REQUIRED)
   private List<CarbonRisk> risks;
+
+  public CarbonPolicy() {
+  }
+
+  public CarbonCompanyType getCompany() {
+    return company;
+  }
+
+  public void setCompany(CarbonCompanyType company) {
+    this.company = company;
+  }
+
+  public String getPolicyNo() {
+    return policyNo;
+  }
+
+  public void setPolicyNo(String policyNo) {
+    this.policyNo = policyNo;
+  }
+
+  public String getProposalNo() {
+    return proposalNo;
+  }
+
+  public void setProposalNo(String proposalNo) {
+    this.proposalNo = proposalNo;
+  }
+
+  public String getPrtNo() {
+    return prtNo;
+  }
+
+  public void setPrtNo(String prtNo) {
+    this.prtNo = prtNo;
+  }
+
+  public String getOrderNo() {
+    return orderNo;
+  }
+
+  public void setOrderNo(String orderNo) {
+    this.orderNo = orderNo;
+  }
+
+  public String getExtOrderNo() {
+    return extOrderNo;
+  }
+
+  public void setExtOrderNo(String extOrderNo) {
+    this.extOrderNo = extOrderNo;
+  }
+
+  public String getPreviousPolicyNo() {
+    return previousPolicyNo;
+  }
+
+  public void setPreviousPolicyNo(String previousPolicyNo) {
+    this.previousPolicyNo = previousPolicyNo;
+  }
+
+  public String getPreviousProposalNo() {
+    return previousProposalNo;
+  }
+
+  public void setPreviousProposalNo(String previousProposalNo) {
+    this.previousProposalNo = previousProposalNo;
+  }
+
+  public String getManageCom() {
+    return manageCom;
+  }
+
+  public void setManageCom(String manageCom) {
+    this.manageCom = manageCom;
+  }
+
+  public String getManageComName() {
+    return manageComName;
+  }
+
+  public void setManageComName(String manageComName) {
+    this.manageComName = manageComName;
+  }
+
+  public String getAgentCom() {
+    return agentCom;
+  }
+
+  public void setAgentCom(String agentCom) {
+    this.agentCom = agentCom;
+  }
+
+  public String getAgentComName() {
+    return agentComName;
+  }
+
+  public void setAgentComName(String agentComName) {
+    this.agentComName = agentComName;
+  }
+
+  public String getProductNo() {
+    return productNo;
+  }
+
+  public void setProductNo(String productNo) {
+    this.productNo = productNo;
+  }
+
+  public String getProductName() {
+    return productName;
+  }
+
+  public void setProductName(String productName) {
+    this.productName = productName;
+  }
+
+  public BigDecimal getPremium() {
+    return premium;
+  }
+
+  public void setPremium(BigDecimal premium) {
+    this.premium = premium;
+  }
+
+  public BigDecimal getAmount() {
+    return amount;
+  }
+
+  public void setAmount(BigDecimal amount) {
+    this.amount = amount;
+  }
+
+  public String getEPolicyUrl() {
+    return ePolicyUrl;
+  }
+
+  public void setEPolicyUrl(String ePolicyUrl) {
+    this.ePolicyUrl = ePolicyUrl;
+  }
+
+  public CarbonPayIntv getPayIntv() {
+    return payIntv;
+  }
+
+  public void setPayIntv(CarbonPayIntv payIntv) {
+    this.payIntv = payIntv;
+  }
+
+  public CarbonPayType getPayType() {
+    return payType;
+  }
+
+  public void setPayType(CarbonPayType payType) {
+    this.payType = payType;
+  }
+
+  public LocalDateTime getApplyTime() {
+    return applyTime;
+  }
+
+  public void setApplyTime(LocalDateTime applyTime) {
+    this.applyTime = applyTime;
+  }
+
+  public LocalDateTime getPayTime() {
+    return payTime;
+  }
+
+  public void setPayTime(LocalDateTime payTime) {
+    this.payTime = payTime;
+  }
+
+  public LocalDateTime getSignTime() {
+    return signTime;
+  }
+
+  public void setSignTime(LocalDateTime signTime) {
+    this.signTime = signTime;
+  }
+
+  public LocalDateTime getEffectiveTime() {
+    return effectiveTime;
+  }
+
+  public void setEffectiveTime(LocalDateTime effectiveTime) {
+    this.effectiveTime = effectiveTime;
+  }
+
+  public LocalDateTime getExpirationTime() {
+    return expirationTime;
+  }
+
+  public void setExpirationTime(LocalDateTime expirationTime) {
+    this.expirationTime = expirationTime;
+  }
+
+  public LocalDateTime getReceiptSignTime() {
+    return receiptSignTime;
+  }
+
+  public void setReceiptSignTime(LocalDateTime receiptSignTime) {
+    this.receiptSignTime = receiptSignTime;
+  }
+
+  public LocalDateTime getReceiptEnteredTime() {
+    return receiptEnteredTime;
+  }
+
+  public void setReceiptEnteredTime(LocalDateTime receiptEnteredTime) {
+    this.receiptEnteredTime = receiptEnteredTime;
+  }
+
+  public LocalDateTime getRtnCallTime() {
+    return rtnCallTime;
+  }
+
+  public void setRtnCallTime(LocalDateTime rtnCallTime) {
+    this.rtnCallTime = rtnCallTime;
+  }
+
+  public Boolean getRtnCallSuccess() {
+    return rtnCallSuccess;
+  }
+
+  public void setRtnCallSuccess(Boolean rtnCallSuccess) {
+    this.rtnCallSuccess = rtnCallSuccess;
+  }
+
+  public String getRtnCallFailedReason() {
+    return rtnCallFailedReason;
+  }
+
+  public void setRtnCallFailedReason(String rtnCallFailedReason) {
+    this.rtnCallFailedReason = rtnCallFailedReason;
+  }
+
+  public CarbonPolicyStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(CarbonPolicyStatus status) {
+    this.status = status;
+  }
+
+  public Map<String, String> getExt() {
+    return ext;
+  }
+
+  public void setExt(Map<String, String> ext) {
+    this.ext = ext;
+  }
+
+  public CarbonAgent getAgent() {
+    return agent;
+  }
+
+  public void setAgent(CarbonAgent agent) {
+    this.agent = agent;
+  }
+
+  public CarbonApplicant getApplicant() {
+    return applicant;
+  }
+
+  public void setApplicant(CarbonApplicant applicant) {
+    this.applicant = applicant;
+  }
+
+  public List<CarbonInsured> getInsureds() {
+    return insureds;
+  }
+
+  public void setInsureds(List<CarbonInsured> insureds) {
+    this.insureds = insureds;
+  }
+
+  public List<CarbonBeneficiary> getBnfs() {
+    return bnfs;
+  }
+
+  public void setBnfs(List<CarbonBeneficiary> bnfs) {
+    this.bnfs = bnfs;
+  }
+
+  public List<CarbonRisk> getRisks() {
+    return risks;
+  }
+
+  public void setRisks(List<CarbonRisk> risks) {
+    this.risks = risks;
+  }
+
+  @Override
+  public String toString() {
+    return "CarbonPolicy{" +
+        "company=" + company +
+        ", policyNo='" + policyNo + '\'' +
+        ", proposalNo='" + proposalNo + '\'' +
+        ", prtNo='" + prtNo + '\'' +
+        ", orderNo='" + orderNo + '\'' +
+        ", extOrderNo='" + extOrderNo + '\'' +
+        ", previousPolicyNo='" + previousPolicyNo + '\'' +
+        ", previousProposalNo='" + previousProposalNo + '\'' +
+        ", manageCom='" + manageCom + '\'' +
+        ", manageComName='" + manageComName + '\'' +
+        ", agentCom='" + agentCom + '\'' +
+        ", agentComName='" + agentComName + '\'' +
+        ", productNo='" + productNo + '\'' +
+        ", productName='" + productName + '\'' +
+        ", premium=" + premium +
+        ", amount=" + amount +
+        ", ePolicyUrl='" + ePolicyUrl + '\'' +
+        ", payIntv=" + payIntv +
+        ", payType=" + payType +
+        ", applyTime=" + applyTime +
+        ", payTime=" + payTime +
+        ", signTime=" + signTime +
+        ", effectiveTime=" + effectiveTime +
+        ", expirationTime=" + expirationTime +
+        ", receiptSignTime=" + receiptSignTime +
+        ", receiptEnteredTime=" + receiptEnteredTime +
+        ", rtnCallTime=" + rtnCallTime +
+        ", rtnCallSuccess=" + rtnCallSuccess +
+        ", rtnCallFailedReason='" + rtnCallFailedReason + '\'' +
+        ", status=" + status +
+        ", ext=" + ext +
+        ", agent=" + agent +
+        ", applicant=" + applicant +
+        ", insureds=" + insureds +
+        ", bnfs=" + bnfs +
+        ", risks=" + risks +
+        '}';
+  }
+
 }

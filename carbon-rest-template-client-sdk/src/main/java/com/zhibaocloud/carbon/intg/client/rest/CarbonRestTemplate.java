@@ -15,8 +15,8 @@ import com.zhibaocloud.carbon.intg.model.CarbonStatusChanged;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import java.io.IOException;
 import java.net.URI;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -25,18 +25,26 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @author yangtuo
  */
-@Slf4j
-@RequiredArgsConstructor
 public class CarbonRestTemplate implements CarbonClient {
+
+  private static final Logger logger = LoggerFactory.getLogger(CarbonRestTemplate.class);
 
   private final CarbonOption option;
   private final CarbonSerializer serializer;
   private final RestTemplate restTemplate;
   private final CarbonDataChannel channel;
 
+  public CarbonRestTemplate(CarbonOption option, CarbonSerializer serializer,
+      RestTemplate restTemplate, CarbonDataChannel channel) {
+    this.option = option;
+    this.serializer = serializer;
+    this.restTemplate = restTemplate;
+    this.channel = channel;
+  }
+
   private void send(CarbonMessageType type, Object request) throws IOException {
-    if (log.isDebugEnabled()) {
-      log.debug("request: {}", serializer.serialize(request));
+    if (logger.isDebugEnabled()) {
+      logger.debug("request: {}", serializer.serialize(request));
     }
 
     CarbonEncryptedRequest encryptedRequest = channel.encodeRequest(type, request);
@@ -53,14 +61,15 @@ public class CarbonRestTemplate implements CarbonClient {
       CarbonEncryptedResponse result = serializer.deserialize(encryptedResponse.getBody(),
           CarbonEncryptedResponse.class);
       CarbonResponse res = channel.decodeResponse(result, CarbonResponse.class);
-      if (log.isDebugEnabled()) {
-        log.debug("response: {}", serializer.serialize(res));
+      if (logger.isDebugEnabled()) {
+        logger.debug("response: {}", serializer.serialize(res));
       }
       if (!res.isSuccess()) {
         throw new CarbonMessageException(res.getMessage());
       }
     } else {
-      log.error("request failed: {}, response: {}", encryptedResponse.getStatusCode(), encryptedResponse);
+      logger.error("request failed: {}, response: {}", encryptedResponse.getStatusCode(),
+          encryptedResponse);
       throw new IOException("request failed: " + encryptedResponse.getStatusCode());
     }
   }

@@ -13,10 +13,6 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * <table border="1">
  *   <caption>交费期间</caption>
@@ -50,9 +46,6 @@ import lombok.NoArgsConstructor;
  *
  * @author jun
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CarbonPaymentPeriod {
 
   /**
@@ -61,6 +54,19 @@ public class CarbonPaymentPeriod {
   public static final CarbonPaymentPeriod SINGLE = new CarbonPaymentPeriod("S");
   private int value = 0;
   private CarbonPaymentPeriodUnit unit;
+
+  public int getValue() {
+    return value;
+  }
+
+  public CarbonPaymentPeriodUnit getUnit() {
+    return unit;
+  }
+
+  public CarbonPaymentPeriod(int value, CarbonPaymentPeriodUnit unit) {
+    this.value = value;
+    this.unit = unit;
+  }
 
   /**
    * 创建交费期间

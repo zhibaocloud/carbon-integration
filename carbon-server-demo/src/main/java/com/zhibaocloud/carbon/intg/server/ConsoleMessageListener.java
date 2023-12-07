@@ -23,7 +23,8 @@ import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageListener;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageMeta;
 import java.io.IOException;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,9 +32,11 @@ import org.springframework.stereotype.Component;
  *
  * @author jun
  */
-@Slf4j
 @Component
 public class ConsoleMessageListener implements CarbonMessageListener {
+
+  private static final Logger logger = LoggerFactory.getLogger(ConsoleMessageListener.class);
+
 
   private final CarbonSerializer serializer;
 
@@ -51,7 +54,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
   @Override
   public void on(CarbonPolicy event, CarbonMessageMeta meta) throws IOException {
     String json = serializer.serialize(event);
-    log.info("received policy: {}", json);
+    logger.info("received policy: {}", json);
   }
 
   /**
@@ -64,7 +67,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
   @Override
   public void on(CarbonReceipt event, CarbonMessageMeta meta) throws IOException {
     String json = serializer.serialize(event);
-    log.info("received receipt: {}", json);
+    logger.info("received receipt: {}", json);
   }
 
   /**
@@ -77,7 +80,7 @@ public class ConsoleMessageListener implements CarbonMessageListener {
   @Override
   public void on(CarbonRtnCall event, CarbonMessageMeta meta) throws IOException {
     String json = serializer.serialize(event);
-    log.info("received return call: {}", json);
+    logger.info("received return call: {}", json);
   }
 
   /**
@@ -90,6 +93,6 @@ public class ConsoleMessageListener implements CarbonMessageListener {
   @Override
   public void on(CarbonStatusChanged event, CarbonMessageMeta meta) throws IOException {
     String json = serializer.serialize(event);
-    log.info("status changed: {}", json);
+    logger.info("status changed: {}", json);
   }
 }

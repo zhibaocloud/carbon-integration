@@ -13,16 +13,12 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 保单终止原因
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonTerminationReason implements EncodedValue {
 
   /**
@@ -71,4 +67,17 @@ public enum CarbonTerminationReason implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonTerminationReason(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }

@@ -13,16 +13,11 @@
 
 package com.zhibaocloud.carbon.intg.types;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 性别代码
  *
  * @author jun
  */
-@Getter
-@RequiredArgsConstructor
 public enum CarbonGenderType implements EncodedValue {
 
   /**
@@ -44,4 +39,17 @@ public enum CarbonGenderType implements EncodedValue {
    * 码表文字描述
    */
   private final String description;
+
+  public String getValue() {
+    return value;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  CarbonGenderType(String value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 }
