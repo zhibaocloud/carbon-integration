@@ -13,6 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.server.sdk;
 
+import com.zhibaocloud.carbon.intg.CarbonException;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
@@ -25,6 +26,11 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 用于接收从公网推送的业务数据
+ *
+ * @author jun
+ */
 public class CarbonMessageProcessor {
 
   private static final Logger logger = LoggerFactory.getLogger(CarbonMessageProcessor.class);
@@ -38,7 +44,7 @@ public class CarbonMessageProcessor {
     this.listener = listener;
   }
 
-  public CarbonEncryptedResponse process(CarbonEncryptedRequest request) {
+  public CarbonEncryptedResponse process(CarbonEncryptedRequest request) throws IOException {
     try {
       handle(request);
       return channel.encodeResponse(
@@ -77,6 +83,8 @@ public class CarbonMessageProcessor {
         CarbonStatusChanged status = channel.decodeRequest(request, CarbonStatusChanged.class);
         listener.on(status, meta);
         break;
+      default:
+        throw new CarbonException("Unsupported message type: " + request.getType());
     }
   }
 }

@@ -18,6 +18,7 @@ import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.SignatureMissMatchException;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -68,18 +69,15 @@ public class CarbonDataChannel {
    * @param response  相应内容
    * @return 在链路上传输报文
    */
-  public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response) {
-    try {
-      String payload = serializer.serialize(response);
-      CarbonEncryptedResponse message = new CarbonEncryptedResponse();
-      message.setRequestId(requestId);
-      message.setTenant(option.getTenant());
-      message.setSign(crypto.digest(payload));
-      message.setPayload(crypto.encrypt(payload));
-      return message;
-    } catch (Exception e) {
-      throw new CarbonException(e);
-    }
+  public CarbonEncryptedResponse encodeResponse(UUID requestId, Object response)
+      throws IOException {
+    String payload = serializer.serialize(response);
+    CarbonEncryptedResponse message = new CarbonEncryptedResponse();
+    message.setRequestId(requestId);
+    message.setTenant(option.getTenant());
+    message.setSign(crypto.digest(payload));
+    message.setPayload(crypto.encrypt(payload));
+    return message;
   }
 
   /**
@@ -103,14 +101,10 @@ public class CarbonDataChannel {
    * @param <T>     数据类型
    * @return 解析后的数据
    */
-  public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) {
-    try {
-      String payload = crypto.decrypt(request.getPayload());
-      verify(payload, request.getSign());
-      return serializer.deserialize(payload, clz);
-    } catch (Exception e) {
-      throw new CarbonException(e);
-    }
+  public <T> T decodeRequest(CarbonEncryptedRequest request, Class<T> clz) throws IOException {
+    String payload = crypto.decrypt(request.getPayload());
+    verify(payload, request.getSign());
+    return serializer.deserialize(payload, clz);
   }
 
   /**
@@ -121,13 +115,9 @@ public class CarbonDataChannel {
    * @param <T>      数据类型
    * @return 解析后的数据
    */
-  public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) {
-    try {
-      String payload = crypto.decrypt(response.getPayload());
-      verify(payload, response.getSign());
-      return serializer.deserialize(payload, clz);
-    } catch (Exception e) {
-      throw new CarbonException(e);
-    }
+  public <T> T decodeResponse(CarbonEncryptedResponse response, Class<T> clz) throws IOException {
+    String payload = crypto.decrypt(response.getPayload());
+    verify(payload, response.getSign());
+    return serializer.deserialize(payload, clz);
   }
 }

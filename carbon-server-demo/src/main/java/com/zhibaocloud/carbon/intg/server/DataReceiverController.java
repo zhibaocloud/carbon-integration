@@ -18,6 +18,7 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.server.sdk.CarbonMessageProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,7 @@ public class DataReceiverController {
   @Operation(operationId = "receive", summary = "保单数据同步", description = "用于接收保险公司向中介公司推送的保单数据")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<CarbonEncryptedResponse> onCallback(
-      @RequestBody CarbonEncryptedRequest request) {
+      @RequestBody CarbonEncryptedRequest request) throws IOException {
     CarbonEncryptedResponse response = processor.process(request);
     return ResponseEntity.ok(response);
   }

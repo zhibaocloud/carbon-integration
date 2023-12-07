@@ -59,24 +59,13 @@ public class CarbonPaymentPeriod {
     return value;
   }
 
-  public void setValue(int value) {
-    this.value = value;
-  }
-
   public CarbonPaymentPeriodUnit getUnit() {
     return unit;
-  }
-
-  public void setUnit(CarbonPaymentPeriodUnit unit) {
-    this.unit = unit;
   }
 
   public CarbonPaymentPeriod(int value, CarbonPaymentPeriodUnit unit) {
     this.value = value;
     this.unit = unit;
-  }
-
-  public CarbonPaymentPeriod() {
   }
 
   /**

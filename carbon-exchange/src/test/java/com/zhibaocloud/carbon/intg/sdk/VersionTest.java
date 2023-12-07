@@ -39,5 +39,9 @@ class VersionTest {
     assertThat(oldPatchVersion.isCompatible(newPatchVersion)).isTrue();
 
     assertThatThrownBy(() -> new CarbonVersion("0.1")).isInstanceOf(IllegalArgumentException.class);
+
+    assertThat(newPatchVersion.getMajor()).isEqualTo(0);
+    assertThat(newPatchVersion.getMinor()).isEqualTo(1);
+    assertThat(newPatchVersion.getPatch()).isEqualTo(1);
   }
 }

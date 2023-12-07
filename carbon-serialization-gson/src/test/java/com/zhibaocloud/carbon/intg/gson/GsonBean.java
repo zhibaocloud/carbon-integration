@@ -13,29 +13,39 @@
 
 package com.zhibaocloud.carbon.intg.gson;
 
-import com.google.gson.Gson;
-import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-/**
- * 使用 Gson 实现序列化、发序列化
- *
- * @author jun
- */
-public class CarbonGsonSerializer implements CarbonSerializer {
+public class GsonBean {
 
-  private final Gson gson;
+  private LocalDate date;
 
-  public CarbonGsonSerializer(Gson gson) {
-    this.gson = gson;
+  private LocalDateTime datetime;
+
+  private LocalTime time;
+
+  public LocalDate getDate() {
+    return date;
   }
 
-  @Override
-  public String serialize(Object value) {
-    return gson.toJson(value);
+  public void setDate(LocalDate date) {
+    this.date = date;
   }
 
-  @Override
-  public <T> T deserialize(String payload, Class<T> clz) {
-    return gson.fromJson(payload, clz);
+  public LocalDateTime getDatetime() {
+    return datetime;
+  }
+
+  public void setDatetime(LocalDateTime datetime) {
+    this.datetime = datetime;
+  }
+
+  public LocalTime getTime() {
+    return time;
+  }
+
+  public void setTime(LocalTime time) {
+    this.time = time;
   }
 }

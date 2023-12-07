@@ -71,19 +71,8 @@ public class CarbonInsuredPeriod {
     return value;
   }
 
-  public void setValue(int value) {
-    this.value = value;
-  }
-
   public CarbonInsuredPeriodUnit getUnit() {
     return unit;
-  }
-
-  public void setUnit(CarbonInsuredPeriodUnit unit) {
-    this.unit = unit;
-  }
-
-  public CarbonInsuredPeriod() {
   }
 
   public CarbonInsuredPeriod(int value, CarbonInsuredPeriodUnit unit) {
