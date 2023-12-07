@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!--
+  ~ Copyright (c) 2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
+  ~ Carbon Integration SDK is licensed under Mulan PSL v2.
+  ~
+  ~ You can use this software according to the terms and conditions of the Mulan PSL v2.
+  ~ You may obtain a copy of Mulan PSL v2 at: http://license.coscl.org.cn/MulanPSL2
+  ~
+  ~ THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+  ~ EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+  ~ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+  ~ See the Mulan PSL v2 for more details.
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -9,20 +22,19 @@
     <version>1.3.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-
-  <artifactId>carbon-serialization-jackson</artifactId>
-  <name>Carbon Serialization (Jackson)</name>
-  <description>使用 Jackson 实现数据的序列化、反序列化</description>
+  <artifactId>carbon-mock</artifactId>
+  <name>Carbon Mock</name>
+  <description>用于测试环境创建 mock 数据</description>
 
   <dependencies>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-mock</artifactId>
+      <artifactId>carbon-exchange</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -33,21 +45,6 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.zhibaocloud</groupId>
-      <artifactId>carbon-exchange</artifactId>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

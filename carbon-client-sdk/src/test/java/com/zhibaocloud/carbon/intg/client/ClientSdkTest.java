@@ -19,6 +19,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import com.github.jsonzou.jmockdata.JMockData;
+import com.github.jsonzou.jmockdata.MockConfig;
+import com.zhibacloud.carbon.mock.CarbonMockConfig;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.client.impl.CarbonClientImpl;
@@ -96,10 +98,12 @@ class ClientSdkTest {
 
     CloseableHttpClient httpClient = mockHttpClient(payload, 200);
     CarbonClient client = new CarbonClientImpl(serializer, httpClient, crypto, option);
-    client.publish(JMockData.mock(CarbonPolicy.class));
-    client.publish(JMockData.mock(CarbonReceipt.class));
-    client.publish(JMockData.mock(CarbonRtnCall.class));
-    client.publish(JMockData.mock(CarbonStatusChanged.class));
+
+    MockConfig mockConfig = CarbonMockConfig.getInstance();
+    client.publish(JMockData.mock(CarbonPolicy.class, mockConfig));
+    client.publish(JMockData.mock(CarbonReceipt.class, mockConfig));
+    client.publish(JMockData.mock(CarbonRtnCall.class, mockConfig));
+    client.publish(JMockData.mock(CarbonStatusChanged.class, mockConfig));
     Mockito.verify(httpClient, times(4)).execute(any());
   }
 }

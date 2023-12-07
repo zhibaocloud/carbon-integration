@@ -14,6 +14,8 @@
 package com.zhibaocloud.carbon.intg.client;
 
 import com.github.jsonzou.jmockdata.JMockData;
+import com.github.jsonzou.jmockdata.MockConfig;
+import com.zhibacloud.carbon.mock.CarbonMockConfig;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.client.starter.CarbonClientProperties;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
@@ -58,10 +60,11 @@ public class CarbonClientApplication implements ApplicationRunner {
    * 单用户模式，根据配置文件创建 SDK 对象
    */
   private void runClient() throws IOException {
-    client.publish(JMockData.mock(CarbonPolicy.class));
-    client.publish(JMockData.mock(CarbonReceipt.class));
-    client.publish(JMockData.mock(CarbonRtnCall.class));
-    client.publish(JMockData.mock(CarbonStatusChanged.class));
+    MockConfig config = CarbonMockConfig.getInstance();
+    client.publish(JMockData.mock(CarbonPolicy.class, config));
+    client.publish(JMockData.mock(CarbonReceipt.class, config));
+    client.publish(JMockData.mock(CarbonRtnCall.class, config));
+    client.publish(JMockData.mock(CarbonStatusChanged.class, config));
   }
 
   /**
@@ -77,10 +80,11 @@ public class CarbonClientApplication implements ApplicationRunner {
     // 根据租户配置返回不同的 CarbonClient。 可配置内容包括: 是否脱敏，加解密方式，密钥等
     CarbonClient c = factory.create(option);
 
-    c.publish(JMockData.mock(CarbonPolicy.class));
-    c.publish(JMockData.mock(CarbonReceipt.class));
-    c.publish(JMockData.mock(CarbonRtnCall.class));
-    c.publish(JMockData.mock(CarbonStatusChanged.class));
+    MockConfig mockConfig = CarbonMockConfig.getInstance();
+    c.publish(JMockData.mock(CarbonPolicy.class, mockConfig));
+    c.publish(JMockData.mock(CarbonReceipt.class, mockConfig));
+    c.publish(JMockData.mock(CarbonRtnCall.class, mockConfig));
+    c.publish(JMockData.mock(CarbonStatusChanged.class, mockConfig));
   }
 
   @Override

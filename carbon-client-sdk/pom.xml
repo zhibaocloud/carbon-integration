@@ -76,6 +76,11 @@
     </dependency>
     <dependency>
       <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-mock</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud</groupId>
       <artifactId>carbon-serialization-jackson</artifactId>
       <scope>test</scope>
     </dependency>

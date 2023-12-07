@@ -49,6 +49,10 @@
       <artifactId>jmockdata</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-mock</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-logging</artifactId>
     </dependency>
