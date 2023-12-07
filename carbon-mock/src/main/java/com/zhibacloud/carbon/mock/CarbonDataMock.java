@@ -13,27 +13,26 @@
 
 package com.zhibacloud.carbon.mock;
 
+import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
 import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
 
 /**
- * 获取 Mock 配置
+ * 创建mock数据
  *
  * @author jun
  */
-public class CarbonMockConfig {
+public class CarbonDataMock {
+  private static final MockConfig config = MockConfig.newInstance();
 
-  private static MockConfig CONFIG = MockConfig.newInstance();
-
-  private CarbonMockConfig() { }
 
   static {
-    CONFIG.registerMocker(new CarbonInsuredPeriodMocker(), CarbonInsuredPeriod.class);
-    CONFIG.registerMocker(new CarbonPaymentPeriodMocker(), CarbonPaymentPeriod.class);
+    config.registerMocker(new CarbonInsuredPeriodMocker(), CarbonInsuredPeriod.class);
+    config.registerMocker(new CarbonPaymentPeriodMocker(), CarbonPaymentPeriod.class);
   }
 
-  public static MockConfig getInstance() {
-    return CONFIG;
+  public static <T> T mock(Class<T> clazz) {
+    return JMockData.mock(clazz, config);
   }
 }

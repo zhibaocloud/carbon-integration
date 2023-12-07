@@ -15,9 +15,7 @@ package com.zhibaocloud.carbon.intg.sdk;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.MockConfig;
-import com.zhibacloud.carbon.mock.CarbonMockConfig;
+import com.zhibacloud.carbon.mock.CarbonDataMock;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -42,7 +40,6 @@ class CryptoTest {
 
   @Test
   void testChannel() throws IOException {
-    MockConfig mockConfig = CarbonMockConfig.getInstance();
 
     CryptoConfiguration config = new CryptoConfiguration();
     config.setSecret("g9wuZX5rQKqin9qA");
@@ -53,7 +50,7 @@ class CryptoTest {
         new SerializationConfiguration());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
-    CarbonPolicy originPolicy = JMockData.mock(CarbonPolicy.class, mockConfig);
+    CarbonPolicy originPolicy = CarbonDataMock.mock(CarbonPolicy.class);
     CarbonEncryptedRequest req = channel.encodeRequest(CarbonMessageType.UNDERWRITE, originPolicy);
     CarbonPolicy decryptedPolicy = channel.decodeRequest(req, CarbonPolicy.class);
 
@@ -62,7 +59,7 @@ class CryptoTest {
     String decryptedPolicyJson = mapper.serialize(decryptedPolicy);
     assertThat(decryptedPolicyJson).isEqualTo(originPolicyJson);
 
-    CarbonResponse originResponse = JMockData.mock(CarbonResponse.class, mockConfig);
+    CarbonResponse originResponse = CarbonDataMock.mock(CarbonResponse.class);
     CarbonEncryptedResponse res = channel.encodeResponse(UUID.randomUUID(), originResponse);
     CarbonResponse decryptedResponse = channel.decodeResponse(res, CarbonResponse.class);
     String originResponseJson = mapper.serialize(originResponse);

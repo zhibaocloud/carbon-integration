@@ -17,9 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.MockConfig;
-import com.zhibacloud.carbon.mock.CarbonMockConfig;
+import com.zhibacloud.carbon.mock.CarbonDataMock;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
@@ -59,11 +57,10 @@ class IntegrationTest {
 
   @Test
   void testSyncApi() throws Exception {
-    MockConfig mockConfig = CarbonMockConfig.getInstance();
-    runDataSync(CarbonMessageType.UNDERWRITE, JMockData.mock(CarbonPolicy.class, mockConfig));
-    runDataSync(CarbonMessageType.RECEIPT, JMockData.mock(CarbonReceipt.class, mockConfig));
-    runDataSync(CarbonMessageType.RTN_CALL, JMockData.mock(CarbonRtnCall.class, mockConfig));
-    runDataSync(CarbonMessageType.STATUS, JMockData.mock(CarbonStatusChanged.class, mockConfig));
+    runDataSync(CarbonMessageType.UNDERWRITE, CarbonDataMock.mock(CarbonPolicy.class));
+    runDataSync(CarbonMessageType.RECEIPT, CarbonDataMock.mock(CarbonReceipt.class));
+    runDataSync(CarbonMessageType.RTN_CALL, CarbonDataMock.mock(CarbonRtnCall.class));
+    runDataSync(CarbonMessageType.STATUS, CarbonDataMock.mock(CarbonStatusChanged.class));
   }
 
   private void runDataSync(CarbonMessageType type, Object request) throws Exception {

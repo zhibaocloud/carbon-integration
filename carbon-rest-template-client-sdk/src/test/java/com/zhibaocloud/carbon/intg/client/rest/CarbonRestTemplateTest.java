@@ -6,9 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.MockConfig;
-import com.zhibacloud.carbon.mock.CarbonMockConfig;
+import com.zhibacloud.carbon.mock.CarbonDataMock;
 import com.zhibaocloud.carbon.intg.CarbonOption;
 import com.zhibaocloud.carbon.intg.CarbonResponse;
 import com.zhibaocloud.carbon.intg.crypto.CarbonDataChannel;
@@ -83,11 +81,11 @@ class CarbonRestTemplateTest {
 
     RestTemplate restTemplate = mockRestTemplate(payload, HttpStatus.OK);
     CarbonRestTemplate client = new CarbonRestTemplate(option, serializer, restTemplate, channel);
-    MockConfig mockConfig = CarbonMockConfig.getInstance();
-    client.publish(JMockData.mock(CarbonPolicy.class, mockConfig));
-    client.publish(JMockData.mock(CarbonReceipt.class, mockConfig));
-    client.publish(JMockData.mock(CarbonRtnCall.class, mockConfig));
-    client.publish(JMockData.mock(CarbonStatusChanged.class, mockConfig));
+
+    client.publish(CarbonDataMock.mock(CarbonPolicy.class));
+    client.publish(CarbonDataMock.mock(CarbonReceipt.class));
+    client.publish(CarbonDataMock.mock(CarbonRtnCall.class));
+    client.publish(CarbonDataMock.mock(CarbonStatusChanged.class));
     Mockito.verify(restTemplate, times(4)).exchange(any(RequestEntity.class), eq(String.class));
   }
 
