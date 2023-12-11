@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018-2023. Chengdu WeiSiFan Technology Co., Ltd.
+  ~ Carbon Integration SDK is licensed under Mulan PSL v2.
+  ~
+  ~ You can use this software according to the terms and conditions of the Mulan PSL v2.
+  ~ You may obtain a copy of Mulan PSL v2 at: http://license.coscl.org.cn/MulanPSL2
+  ~
+  ~ THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+  ~ EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+  ~ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+  ~ See the Mulan PSL v2 for more details.
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zhibaocloud</groupId>
+    <artifactId>carbon-integration</artifactId>
+    <version>1.3.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>carbon-client-quarkus-extension</artifactId>
+  <name>Carbon Client SDK as Quarkus Extension</name>
+  <description>将SDK封装为 Quarkus Extension 供其他系统使用</description>
+
+  <properties>
+    <quarkus.version>2.16.12.Final</quarkus.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-client-sdk</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-exchange</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc-deployment</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5-internal</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>io.quarkus</groupId>
+              <artifactId>quarkus-extension-processor</artifactId>
+              <version>${quarkus.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
