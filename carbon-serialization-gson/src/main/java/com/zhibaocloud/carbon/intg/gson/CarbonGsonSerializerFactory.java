@@ -37,13 +37,14 @@ import java.time.format.DateTimeFormatter;
 public class CarbonGsonSerializerFactory implements CarbonSerializerFactory {
 
   private final Gson gson = new GsonBuilder()
-      .registerTypeAdapter(CarbonVersion.class, new CarbonVersionAdapter().nullSafe())
-      .registerTypeAdapter(CarbonInsuredPeriod.class, new CarbonInsuredPeriodAdapter().nullSafe())
-      .registerTypeAdapter(CarbonPaymentPeriod.class, new CarbonPaymentPeriodAdapter().nullSafe())
-      .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
-      .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter().nullSafe())
-      .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter().nullSafe())
-      .registerTypeAdapter(Object.class, new CarbonDesensitizingSerializer())
+//      .registerTypeAdapter(CarbonVersion.class, new CarbonVersionAdapter().nullSafe())
+//      .registerTypeAdapter(CarbonInsuredPeriod.class, new CarbonInsuredPeriodAdapter().nullSafe())
+//      .registerTypeAdapter(CarbonPaymentPeriod.class, new CarbonPaymentPeriodAdapter().nullSafe())
+//      .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+//      .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter().nullSafe())
+//      .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter().nullSafe())
+//      .registerTypeAdapter(Object.class, new CarbonDesensitizingSerializer())
+      .registerTypeAdapterFactory(new CarbonTypeAdapterFactory())
       .create();
 
 
