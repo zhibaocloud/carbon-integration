@@ -14,15 +14,13 @@
 package com.zhibaocloud.carbon.intg.gson;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
-
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
-import com.zhibaocloud.carbon.intg.gson.desensitization.CarbonDesensitizingSerializer;
+import com.zhibaocloud.carbon.intg.gson.desensitization.CarbonSensitiveDataAdapterFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
@@ -36,16 +34,13 @@ import java.time.format.DateTimeFormatter;
 
 public class CarbonGsonSerializerFactory implements CarbonSerializerFactory {
 
-  private final Gson gson = new GsonBuilder()
-//      .registerTypeAdapter(CarbonVersion.class, new CarbonVersionAdapter().nullSafe())
-//      .registerTypeAdapter(CarbonInsuredPeriod.class, new CarbonInsuredPeriodAdapter().nullSafe())
-//      .registerTypeAdapter(CarbonPaymentPeriod.class, new CarbonPaymentPeriodAdapter().nullSafe())
-//      .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
-//      .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter().nullSafe())
-//      .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter().nullSafe())
-//      .registerTypeAdapter(Object.class, new CarbonDesensitizingSerializer())
-      .registerTypeAdapterFactory(new CarbonTypeAdapterFactory())
-      .create();
+  private final GsonBuilder gsonBuilder = new GsonBuilder()
+      .registerTypeAdapter(CarbonVersion.class, new CarbonVersionAdapter().nullSafe())
+      .registerTypeAdapter(CarbonInsuredPeriod.class, new CarbonInsuredPeriodAdapter().nullSafe())
+      .registerTypeAdapter(CarbonPaymentPeriod.class, new CarbonPaymentPeriodAdapter().nullSafe())
+      .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+      .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter().nullSafe())
+      .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter().nullSafe());
 
 
   private static final DateTimeFormatter TIME_PTN = ofPattern("HH:mm:ss");
@@ -186,6 +181,9 @@ public class CarbonGsonSerializerFactory implements CarbonSerializerFactory {
 
   @Override
   public CarbonSerializer create(SerializationConfiguration config) {
-    return new CarbonGsonSerializer(gson);
+    if (Boolean.TRUE.equals(config.getDesensitization())) {
+      gsonBuilder.registerTypeAdapterFactory(new CarbonSensitiveDataAdapterFactory());
+    }
+    return new CarbonGsonSerializer(gsonBuilder.create());
   }
 }
