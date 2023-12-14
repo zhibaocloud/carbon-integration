@@ -13,6 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.model;
 
+import com.zhibaocloud.carbon.intg.desensitization.SensitiveData;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonIDCardDesensitize;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonPhoneDesensitize;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonStringDesensitize;
@@ -37,7 +38,7 @@ import java.time.LocalDate;
  * @author jun
  */
 @Schema(title = "受益人信息")
-public class CarbonBeneficiary {
+public class CarbonBeneficiary implements SensitiveData {
 
   /**
    * 被保人编号
