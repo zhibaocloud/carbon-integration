@@ -14,53 +14,16 @@
 package com.zhibaocloud.carbon.intg.fastjson;
 
 import com.alibaba.fastjson2.JSONFactory;
-import com.alibaba.fastjson2.modules.ObjectReaderModule;
-import com.alibaba.fastjson2.modules.ObjectWriterModule;
-import com.alibaba.fastjson2.reader.ObjectReader;
 import com.alibaba.fastjson2.reader.ObjectReaderProvider;
-import com.alibaba.fastjson2.reader.ObjectReaders;
-import com.alibaba.fastjson2.writer.ObjectWriter;
 import com.alibaba.fastjson2.writer.ObjectWriterProvider;
-import com.alibaba.fastjson2.writer.ObjectWriters;
-import com.zhibaocloud.carbon.intg.CarbonVersion;
+import com.zhibaocloud.carbon.intg.fastjson.modules.CarbonObjectReaderModule;
+import com.zhibaocloud.carbon.intg.fastjson.modules.CarbonObjectWriterModule;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
-import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
-import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
-import java.lang.reflect.Type;
 
 public class CarbonFastjsonSerializerFactory implements CarbonSerializerFactory {
 
-  static class CarbonObjectReaderModule implements ObjectReaderModule {
-
-    @Override
-    public ObjectReader<?> getObjectReader(Type type) {
-      if (type == CarbonVersion.class) {
-        return ObjectReaders.ofString(CarbonVersion::new);
-      } else if (type == CarbonInsuredPeriod.class) {
-        return ObjectReaders.ofString(CarbonInsuredPeriod::new);
-      } else if (type == CarbonPaymentPeriod.class) {
-        return ObjectReaders.ofString(CarbonPaymentPeriod::new);
-      }
-      return null;
-    }
-  }
-
-  static class CarbonObjectWriterModule implements ObjectWriterModule {
-
-    @Override
-    public ObjectWriter<?> getObjectWriter(Type objectType, Class objectClass) {
-      if (objectType == CarbonVersion.class) {
-        return ObjectWriters.ofToString(CarbonVersion::toString);
-      } else if (objectType == CarbonInsuredPeriod.class) {
-        return ObjectWriters.ofToString(CarbonInsuredPeriod::toString);
-      } else if (objectType == CarbonPaymentPeriod.class) {
-        return ObjectWriters.ofToString(CarbonPaymentPeriod::toString);
-      }
-      return null;
-    }
-  }
 
   static {
     // TODO: 考虑创建单独的 fastjson 对象，避免和用户的 fastjson 配置冲突
