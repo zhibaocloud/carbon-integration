@@ -13,7 +13,9 @@
 
 package com.zhibaocloud.carbon.intg.fastjson;
 
-import com.alibaba.fastjson2.JSONWriter.Feature;
+import com.alibaba.fastjson2.JSONReader.Feature;
+import com.zhibaocloud.carbon.intg.fastjson.CarbonFastjsonSerializer.Builder;
+import com.zhibaocloud.carbon.intg.fastjson.filters.IgnoreEmptyPropertyFilter;
 import com.zhibaocloud.carbon.intg.fastjson.modules.CarbonObjectReaderModule;
 import com.zhibaocloud.carbon.intg.fastjson.modules.CarbonObjectWriterModule;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
@@ -24,10 +26,15 @@ public class CarbonFastjsonSerializerFactory implements CarbonSerializerFactory 
 
   @Override
   public CarbonSerializer create(SerializationConfiguration config) {
-    return CarbonFastjsonSerializer.Builder.builder()
+    Builder builder = Builder.builder()
         .registry(new CarbonObjectWriterModule())
         .registry(new CarbonObjectReaderModule())
-        .config(Feature.NotWriteEmptyArray)
-        .build();
+        .addFilters(IgnoreEmptyPropertyFilter.INSTANCE);
+
+    if (Boolean.FALSE.equals(config.getIgnoreUnknownProperties())) {
+      builder.config(Feature.ErrorOnUnknownProperties);
+    }
+
+    return builder.build();
   }
 }

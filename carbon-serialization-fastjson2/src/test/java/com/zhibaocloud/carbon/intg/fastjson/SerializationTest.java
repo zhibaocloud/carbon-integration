@@ -14,12 +14,15 @@
 package com.zhibaocloud.carbon.intg.fastjson;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONException;
+import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
+import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class SerializationTest {
@@ -57,28 +60,26 @@ class SerializationTest {
     source.put("emptyMap", new HashMap<>());
     source.put("zero", 0);
 
-//    ObjectMapper m1 = new ObjectMapper();
-//    String originValue = m1.writeValueAsString(source);
-//    assertThat(originValue).isEqualTo(
-//        "{\"zero\":0,\"emptyValue\":\"\",\"emptyMap\":{},\"emptyArray\":[],\"nullValue\":null}");
-
     String json = serializer.serialize(source);
     assertThat(json).isEqualTo("{\"zero\":0}");
   }
 
-//  @Test
-//  void testEnvironment() throws IOException {
-//    CarbonSerializerFactory prodFactory = new CarbonJacksonSerializerFactory();
-//    CarbonSerializerFactory devFactory = new CarbonJacksonSerializerFactory();
-//    SerializationConfiguration prodConfig = new SerializationConfiguration();
-//    prodConfig.setIgnoreUnknownProperties(false);
-//    CarbonSerializer prodMapper = prodFactory.create(prodConfig);
-//    CarbonSerializer devMapper = devFactory.create(new SerializationConfiguration());
-//
-//    CarbonPolicy prodPolicy = prodMapper.deserialize("{\"a\":1}", CarbonPolicy.class);
-//    assertThat(prodPolicy).isNotNull();
-//
-//    Assertions.assertThatThrownBy(() -> devMapper.deserialize("{\"a\":1}", CarbonPolicy.class))
-//        .isInstanceOf(UnrecognizedPropertyException.class);
-//  }
+  @Test
+  void testEnvironment() throws IOException {
+    CarbonSerializerFactory prodFactory = new CarbonFastjsonSerializerFactory();
+    SerializationConfiguration prodConfig = new SerializationConfiguration();
+    CarbonSerializer prodSerializer = prodFactory.create(prodConfig);
+
+    CarbonSerializerFactory devFactory = new CarbonFastjsonSerializerFactory();
+    SerializationConfiguration devConfig = new SerializationConfiguration();
+    devConfig.setIgnoreUnknownProperties(false);
+    CarbonSerializer devSerializer = devFactory.create(devConfig);
+
+    CarbonPolicy prodPolicy = prodSerializer.deserialize("{\"a\":1}", CarbonPolicy.class);
+    assertThat(prodPolicy).isNotNull();
+
+    Assertions.assertThatThrownBy(() -> devSerializer.deserialize("{\"a\":1}", CarbonPolicy.class))
+        .isInstanceOf(JSONException.class);
+
+  }
 }
