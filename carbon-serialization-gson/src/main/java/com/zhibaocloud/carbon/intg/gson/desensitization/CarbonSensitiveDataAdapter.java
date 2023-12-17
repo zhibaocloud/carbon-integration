@@ -36,7 +36,7 @@ public class CarbonSensitiveDataAdapter extends TypeAdapter<SensitiveData> {
             continue;
           }
 
-          CarbonDesensitize annotation = findAnnotation(field);
+          CarbonDesensitize annotation = findDesensitizeAnnotation(field);
           if (annotation != null) {
             CarbonDesensitization<Object> desensitization = getDesensitization(annotation);
             fieldValue = desensitization.desensitize(fieldValue);
@@ -69,7 +69,7 @@ public class CarbonSensitiveDataAdapter extends TypeAdapter<SensitiveData> {
     return delegate.read(in);
   }
 
-  private CarbonDesensitize findAnnotation(Field field) {
+  private CarbonDesensitize findDesensitizeAnnotation(Field field) {
     for (Annotation annotation : field.getDeclaredAnnotations()) {
       if (annotation instanceof CarbonDesensitize) {
         return (CarbonDesensitize) annotation;
