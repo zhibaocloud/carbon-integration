@@ -1,12 +1,11 @@
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.jackson;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
-import com.zhibaocloud.carbon.intg.sdk.TestDesensitizationModel.Agent;
-import com.zhibaocloud.carbon.intg.sdk.TestDesensitizationModel.Customer;
+import com.zhibaocloud.carbon.intg.jackson.TestDesensitizationModel.Agent;
+import com.zhibaocloud.carbon.intg.jackson.TestDesensitizationModel.Customer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;

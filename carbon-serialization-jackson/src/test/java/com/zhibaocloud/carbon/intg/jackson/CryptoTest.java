@@ -11,7 +11,7 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.jackson;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -25,7 +25,6 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;

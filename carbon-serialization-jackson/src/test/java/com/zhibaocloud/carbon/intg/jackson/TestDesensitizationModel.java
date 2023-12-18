@@ -1,4 +1,4 @@
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.jackson;
 
 import com.zhibaocloud.carbon.intg.desensitization.CarbonStringDesensitization;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonDesensitize;

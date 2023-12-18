@@ -11,7 +11,7 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.jackson;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
