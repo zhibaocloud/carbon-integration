@@ -13,7 +13,7 @@
 
 package com.zhibaocloud.carbon.intg.model;
 
-import com.zhibaocloud.carbon.intg.desensitization.SensitiveData;
+import com.zhibaocloud.carbon.intg.desensitization.CarbonSensitiveData;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonEmailDesensitize;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonIDCardDesensitize;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonPhoneDesensitize;
@@ -29,7 +29,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import javax.script.ScriptEngine;
 
 /**
  * 投保人信息
@@ -37,7 +36,7 @@ import javax.script.ScriptEngine;
  * @author jun
  */
 @Schema(title = "投保人信息")
-public class CarbonApplicant implements SensitiveData {
+public class CarbonApplicant implements CarbonSensitiveData {
 
   /**
    * 投保人姓名

@@ -5,17 +5,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
-import com.zhibaocloud.carbon.intg.desensitization.SensitiveData;
-import com.zhibaocloud.carbon.intg.gson.adapters.ArrayAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.CarbonInsuredPeriodAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.CarbonPaymentPeriodAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.CarbonVersionAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.CollectionAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.LocalDateAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.LocalDateTimeAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.LocalTimeAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.MapAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.StringAdapter;
+import com.zhibaocloud.carbon.intg.desensitization.CarbonSensitiveData;
 import com.zhibaocloud.carbon.intg.gson.desensitization.CarbonSensitiveDataAdapter;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
@@ -70,8 +60,8 @@ public class CarbonAdapterFactory implements TypeAdapterFactory {
       return (TypeAdapter<T>) new LocalDateTimeAdapter().nullSafe();
     }
 
-    if (SensitiveData.class.isAssignableFrom(type.getRawType()) && config.getDesensitization()) {
-      TypeAdapter<SensitiveData> delegate = (TypeAdapter<SensitiveData>)
+    if (CarbonSensitiveData.class.isAssignableFrom(type.getRawType()) && config.getDesensitization()) {
+      TypeAdapter<CarbonSensitiveData> delegate = (TypeAdapter<CarbonSensitiveData>)
           gson.getDelegateAdapter(this, type);
       return (TypeAdapter<T>) new CarbonSensitiveDataAdapter(gson, delegate).nullSafe();
     }

@@ -1,11 +1,15 @@
 package com.zhibaocloud.carbon.intg.gson;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import com.zhibaocloud.carbon.intg.gson.TestDesensitizationModel.Agent;
+import com.zhibaocloud.carbon.intg.gson.TestDesensitizationModel.Customer;
 import com.zhibaocloud.carbon.intg.model.CarbonApplicant;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
+
 
 /**
  * @author yangtuo
@@ -20,8 +24,8 @@ public class GsonDesensitizationTest {
     serializer = new CarbonGsonSerializerFactory().create(config);
   }
 
-  // TODO
-//  @Test
+
+  @Test
   void testDesensitization() throws IOException {
     CarbonApplicant appnt = new CarbonApplicant();
     appnt.setName("张三");
@@ -34,6 +38,23 @@ public class GsonDesensitizationTest {
     assertThat(content).isEqualTo(
         "{\"email\":\"********@mail.com\",\"idNo\":\"1101**************1234\",\"mobile\":\"138****8000\",\"name\":\"张三\",\"rgtAddress\":\"******\"}"
     );
+  }
+
+  @Test
+  void testSerializationThrowsException() {
+    Agent agent = new Agent();
+    agent.setName("张三");
+
+    assertThatThrownBy(() -> serializer.serialize(agent)).hasMessageContaining("not supported yet");
+
+  }
+
+  @Test
+  void testDesensitizationWithInterface() {
+    Customer customer = new Customer();
+    customer.setName("张三");
+
+    assertThatThrownBy(() -> serializer.serialize(customer)).isInstanceOf(Exception.class);
   }
 
 }

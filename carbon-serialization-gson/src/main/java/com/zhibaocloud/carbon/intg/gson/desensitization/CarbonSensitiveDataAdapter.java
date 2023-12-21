@@ -6,51 +6,61 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.zhibaocloud.carbon.intg.desensitization.CarbonDesensitization;
-import com.zhibaocloud.carbon.intg.desensitization.SensitiveData;
+import com.zhibaocloud.carbon.intg.desensitization.CarbonSensitiveData;
 import com.zhibaocloud.carbon.intg.desensitization.annotations.CarbonDesensitize;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class CarbonSensitiveDataAdapter extends TypeAdapter<SensitiveData> {
+public class CarbonSensitiveDataAdapter extends TypeAdapter<CarbonSensitiveData> {
 
   private final Gson gson;
-  private final TypeAdapter<SensitiveData> delegate;
+  private final TypeAdapter<CarbonSensitiveData> delegate;
 
-  public CarbonSensitiveDataAdapter(Gson gson, TypeAdapter<SensitiveData> delegate) {
+  public CarbonSensitiveDataAdapter(Gson gson, TypeAdapter<CarbonSensitiveData> delegate) {
     this.gson = gson;
     this.delegate = delegate;
   }
 
   @Override
-  public void write(JsonWriter out, SensitiveData value) throws IOException {
+  public void write(JsonWriter out, CarbonSensitiveData value) throws IOException {
     if (value == null) {
       out.nullValue();
     } else {
       out.beginObject();
-      for (Field field : value.getClass().getDeclaredFields()) {
-        try {
+      Class<? extends CarbonSensitiveData> valueClass = value.getClass();
+      try {
+        PropertyDescriptor[] descriptors = getPropertyDescriptors(valueClass);
+        for (PropertyDescriptor descriptor : descriptors) {
+          Field field = valueClass.getDeclaredField(descriptor.getName());
           field.setAccessible(true);
           Object fieldValue = field.get(value);
           if (fieldValue == null) {
             continue;
           }
-
-          CarbonDesensitize annotation = findDesensitizeAnnotation(field);
-          if (annotation != null) {
-            CarbonDesensitization<Object> desensitization = getDesensitization(annotation);
+          CarbonDesensitize carbonDesensitize = findDesensitizeAnnotation(field);
+          if (carbonDesensitize != null) {
+            CarbonDesensitization<Object> desensitization = getDesensitization(carbonDesensitize);
             fieldValue = desensitization.desensitize(fieldValue);
           }
-
-          out.name(field.getName());
+          out.name(descriptor.getDisplayName());
           TypeAdapter<Object> fieldTypeAdapter = getFieldTypeAdapter(field);
           fieldTypeAdapter.write(out, fieldValue);
-        } catch (Exception e) {
-          out.nullValue();
         }
+      } catch (Exception e) {
+        throw new UnsupportedOperationException(e);
       }
       out.endObject();
     }
+  }
+
+
+  private PropertyDescriptor[] getPropertyDescriptors(Class<? extends CarbonSensitiveData> clazz)
+      throws IntrospectionException {
+    return Introspector.getBeanInfo(clazz, Object.class).getPropertyDescriptors();
   }
 
   @SuppressWarnings("unchecked")
@@ -65,7 +75,7 @@ public class CarbonSensitiveDataAdapter extends TypeAdapter<SensitiveData> {
   }
 
   @Override
-  public SensitiveData read(JsonReader in) throws IOException {
+  public CarbonSensitiveData read(JsonReader in) throws IOException {
     return delegate.read(in);
   }
 
@@ -80,4 +90,6 @@ public class CarbonSensitiveDataAdapter extends TypeAdapter<SensitiveData> {
     }
     return null;
   }
+
+
 }

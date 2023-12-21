@@ -8,6 +8,6 @@ import java.io.Serializable;
  *
  * @author yangtuo
  */
-public interface SensitiveData extends Serializable {
+public interface CarbonSensitiveData extends Serializable {
 
 }
