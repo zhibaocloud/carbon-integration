@@ -1,0 +1,103 @@
+package com.zhibaocloud.carbon.intg.gson.adapters;
+
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.zhibaocloud.carbon.intg.CarbonVersion;
+import com.zhibaocloud.carbon.intg.desensitization.SensitiveData;
+import com.zhibaocloud.carbon.intg.gson.adapters.ArrayAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.CarbonInsuredPeriodAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.CarbonPaymentPeriodAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.CarbonVersionAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.CollectionAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.LocalDateAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.LocalDateTimeAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.LocalTimeAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.MapAdapter;
+import com.zhibaocloud.carbon.intg.gson.adapters.StringAdapter;
+import com.zhibaocloud.carbon.intg.gson.desensitization.CarbonSensitiveDataAdapter;
+import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
+import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
+import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Collection;
+import java.util.Map;
+
+/**
+ * @author yangtuo
+ */
+public class CarbonAdapterFactory implements TypeAdapterFactory {
+
+  private final SerializationConfiguration config;
+
+  public CarbonAdapterFactory(SerializationConfiguration config) {
+    this.config = config;
+  }
+
+  @Override
+  public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+    return findDelegateAdapter(gson, type);
+  }
+
+
+  @SuppressWarnings("unchecked")
+  private <T> TypeAdapter<T> findDelegateAdapter(Gson gson, TypeToken<T> type) {
+
+    if (CarbonVersion.class == type.getRawType()) {
+      return (TypeAdapter<T>) new CarbonVersionAdapter().nullSafe();
+    }
+
+    if (CarbonInsuredPeriod.class == type.getRawType()) {
+      return (TypeAdapter<T>) new CarbonInsuredPeriodAdapter().nullSafe();
+    }
+
+    if (CarbonPaymentPeriod.class == type.getRawType()) {
+      return (TypeAdapter<T>) new CarbonPaymentPeriodAdapter().nullSafe();
+    }
+
+    if (LocalDate.class == type.getRawType()) {
+      return (TypeAdapter<T>) new LocalDateAdapter().nullSafe();
+    }
+
+    if (LocalTime.class == type.getRawType()) {
+      return (TypeAdapter<T>) new LocalTimeAdapter().nullSafe();
+    }
+
+    if (LocalDateTime.class == type.getRawType()) {
+      return (TypeAdapter<T>) new LocalDateTimeAdapter().nullSafe();
+    }
+
+    if (SensitiveData.class.isAssignableFrom(type.getRawType()) && config.getDesensitization()) {
+      TypeAdapter<SensitiveData> delegate = (TypeAdapter<SensitiveData>)
+          gson.getDelegateAdapter(this, type);
+      return (TypeAdapter<T>) new CarbonSensitiveDataAdapter(gson, delegate).nullSafe();
+    }
+
+    if (String.class == type.getRawType()) {
+      return (TypeAdapter<T>) new StringAdapter().nullSafe();
+    }
+
+    if (Map.class.isAssignableFrom(type.getRawType())) {
+      TypeAdapter<T> delegateAdapter = gson.getDelegateAdapter(this, type);
+      return (TypeAdapter<T>) new MapAdapter((TypeAdapter<Object>) delegateAdapter).nullSafe();
+    }
+
+    if (Object[].class.isAssignableFrom(type.getRawType())) {
+      TypeAdapter<T> delegateAdapter = gson.getDelegateAdapter(this, type);
+      return (TypeAdapter<T>) new ArrayAdapter((TypeAdapter<Object[]>) delegateAdapter).nullSafe();
+    }
+
+    if (Collection.class.isAssignableFrom(type.getRawType())) {
+      TypeAdapter<T> delegateAdapter = gson.getDelegateAdapter(this, type);
+      return (TypeAdapter<T>) new CollectionAdapter(
+          (TypeAdapter<Collection<Object>>) delegateAdapter).nullSafe();
+    }
+
+    return null;
+  }
+
+
+}

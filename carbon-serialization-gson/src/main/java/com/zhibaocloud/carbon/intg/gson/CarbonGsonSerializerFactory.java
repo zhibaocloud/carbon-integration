@@ -13,39 +13,20 @@
 
 package com.zhibaocloud.carbon.intg.gson;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.zhibaocloud.carbon.intg.CarbonVersion;
-import com.zhibaocloud.carbon.intg.gson.adapters.CarbonInsuredPeriodAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.CarbonPaymentPeriodAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.CarbonVersionAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.LocalDateAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.LocalDateTimeAdapter;
-import com.zhibaocloud.carbon.intg.gson.adapters.LocalTimeAdapter;
-import com.zhibaocloud.carbon.intg.gson.desensitization.CarbonSensitiveDataAdapterFactory;
+import com.zhibaocloud.carbon.intg.gson.adapters.CarbonAdapterFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
-import com.zhibaocloud.carbon.intg.types.CarbonInsuredPeriod;
-import com.zhibaocloud.carbon.intg.types.CarbonPaymentPeriod;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class CarbonGsonSerializerFactory implements CarbonSerializerFactory {
 
-  private final GsonBuilder gsonBuilder = new GsonBuilder()
-      .registerTypeAdapter(CarbonVersion.class, new CarbonVersionAdapter().nullSafe())
-      .registerTypeAdapter(CarbonInsuredPeriod.class, new CarbonInsuredPeriodAdapter().nullSafe())
-      .registerTypeAdapter(CarbonPaymentPeriod.class, new CarbonPaymentPeriodAdapter().nullSafe())
-      .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
-      .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter().nullSafe())
-      .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter().nullSafe());
-
   @Override
   public CarbonSerializer create(SerializationConfiguration config) {
-    if (Boolean.TRUE.equals(config.getDesensitization())) {
-      gsonBuilder.registerTypeAdapterFactory(new CarbonSensitiveDataAdapterFactory());
-    }
-    return new CarbonGsonSerializer(gsonBuilder.create());
+    Gson gson = new GsonBuilder()
+        .registerTypeAdapterFactory(new CarbonAdapterFactory(config))
+        .create();
+    return new CarbonGsonSerializer(gson);
   }
 }
