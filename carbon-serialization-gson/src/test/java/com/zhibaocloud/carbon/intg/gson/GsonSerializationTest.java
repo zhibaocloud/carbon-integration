@@ -22,6 +22,8 @@ import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,22 +42,24 @@ class GsonSerializationTest {
     bean.setDatetime(null);
     bean.setTime(null);
 
-    String output0 = serializer.serialize(bean);
-    assertThat(output0).isEqualTo("{}");
+    String nullObject = serializer.serialize(bean);
+    assertThat(nullObject).isEqualTo("{}");
 
-    LocalDate date = LocalDate.of(2023, 12, 31);
-    String json = "{\"date\":\"2023-12-31\"}";
+    bean.setDate(LocalDate.of(2023, 12, 31));
+    bean.setDatetime(LocalDateTime.of(2023, 12, 31, 23, 59, 59));
+    bean.setTime(LocalTime.of(23, 59, 59));
 
-    bean.setDate(date);
-
-    String output1 = serializer.serialize(bean);
-    assertThat(output1).isEqualTo(json);
+    String nonNullObject = serializer.serialize(bean);
+    assertThat(nonNullObject).isEqualTo(
+        "{\"date\":\"2023-12-31\",\"datetime\":\"2023-12-31 23:59:59\",\"time\":\"23:59:59\"}");
 
     GsonBean restored = serializer.deserialize("{}", GsonBean.class);
     assertThat(restored.getDate()).isNull();
 
-    restored = serializer.deserialize(json, GsonBean.class);
-    assertThat(restored.getDate()).isEqualTo(date);
+    restored = serializer.deserialize(nonNullObject, GsonBean.class);
+    assertThat(restored.getDate()).isEqualTo(bean.getDate());
+    assertThat(restored.getDatetime()).isEqualTo(bean.getDatetime());
+    assertThat(restored.getTime()).isEqualTo(bean.getTime());
   }
 
   @Test
