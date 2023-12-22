@@ -14,7 +14,6 @@
 package com.zhibaocloud.carbon.intg.jackson;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -79,7 +78,7 @@ public class CarbonJacksonSerializerFactory implements CarbonSerializerFactory {
     // 开发、测试环境则进行报错。识别未知字段，可以及时发现问题
     // 生产环境，则忽略未知字段
     om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-        config.getIgnoreUnknownProperties());
+        !config.getIgnoreUnknownProperties());
 
     if (Boolean.TRUE.equals(config.getDesensitization())) {
       om.registerModule(new CarbonDesensitizationModule());

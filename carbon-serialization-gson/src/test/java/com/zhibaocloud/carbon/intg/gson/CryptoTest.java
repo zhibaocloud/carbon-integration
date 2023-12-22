@@ -11,10 +11,9 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.gson;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 import com.zhibacloud.carbon.mock.CarbonDataMock;
 import com.zhibaocloud.carbon.intg.CarbonMessageType;
 import com.zhibaocloud.carbon.intg.CarbonOption;
@@ -25,7 +24,6 @@ import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
 import com.zhibaocloud.carbon.intg.crypto.Crypto;
 import com.zhibaocloud.carbon.intg.crypto.CryptoConfiguration;
 import com.zhibaocloud.carbon.intg.crypto.CryptoFactory;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
@@ -46,7 +44,7 @@ class CryptoTest {
     config.setIv("dyRnJ6bVxWTdHd64");
     Crypto crypto = factory.create(config);
     CarbonOption option = new CarbonOption();
-    CarbonSerializer mapper = new CarbonJacksonSerializerFactory().create(
+    CarbonSerializer mapper = new CarbonGsonSerializerFactory().create(
         new SerializationConfiguration());
     CarbonDataChannel channel = new CarbonDataChannel(mapper, crypto, option);
 
