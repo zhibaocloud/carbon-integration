@@ -17,7 +17,7 @@ public class MapAdapter extends TypeAdapter<Map<Object, Object>> {
 
   @Override
   public void write(JsonWriter out, Map<Object, Object> value) throws IOException {
-    if (value == null || value.isEmpty()) {
+    if (value.isEmpty()) {
       out.nullValue();
     } else {
       delegateAdapter.write(out, value);

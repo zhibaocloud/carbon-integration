@@ -15,7 +15,7 @@ public class ArrayAdapter extends TypeAdapter<Object[]> {
 
   @Override
   public void write(JsonWriter out, Object[] value) throws IOException {
-    if (value == null || value.length == 0) {
+    if (value.length == 0) {
       out.nullValue();
     } else {
       delegateAdapter.write(out, value);

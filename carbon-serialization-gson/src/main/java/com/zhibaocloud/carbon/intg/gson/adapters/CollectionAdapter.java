@@ -16,7 +16,7 @@ public class CollectionAdapter extends TypeAdapter<Collection<Object>> {
 
   @Override
   public void write(JsonWriter out, Collection<Object> value) throws IOException {
-    if (value == null || value.isEmpty()) {
+    if (value.isEmpty()) {
       out.nullValue();
     } else {
       delegateAdapter.write(out, value);

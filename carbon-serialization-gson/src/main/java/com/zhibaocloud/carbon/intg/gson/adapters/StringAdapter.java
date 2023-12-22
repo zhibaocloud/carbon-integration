@@ -9,7 +9,7 @@ public class StringAdapter extends TypeAdapter<String> {
 
   @Override
   public void write(JsonWriter out, String value) throws IOException {
-    if (value == null || value.isEmpty()) {
+    if (value.isEmpty()) {
       out.nullValue();
     } else {
       out.value(value);
