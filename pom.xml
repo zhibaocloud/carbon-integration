@@ -60,7 +60,7 @@
   </distributionManagement>
 
   <properties>
-    <bc.version>1.74</bc.version>
+    <bc.version>1.78</bc.version>
     <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
     <checkstyle.latest.version>9.2</checkstyle.latest.version>
     <commons-codec.version>1.15</commons-codec.version>
