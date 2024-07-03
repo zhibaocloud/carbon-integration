@@ -11,16 +11,11 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.gson;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhibaocloud.carbon.intg.CarbonVersion;
 import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedRequest;
-import com.zhibaocloud.carbon.intg.crypto.CarbonEncryptedResponse;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
 import com.zhibaocloud.carbon.intg.serializer.SerializationConfiguration;
@@ -30,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
 class VersionTest {
 
-  private final CarbonSerializerFactory factory = new CarbonJacksonSerializerFactory();
+  private final CarbonSerializerFactory factory = new CarbonGsonSerializerFactory();
 
   @Test
   void testVersionMatch() throws IOException {
@@ -42,24 +37,10 @@ class VersionTest {
     String content = mapper.serialize(request);
 
     assertThat(content).isEqualTo(
-        "{\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\",\"version\":\"1.3.0\"}");
+        "{\"version\":\"1.3.0\",\"requestId\":\"4d1ec672-f1ed-4988-99d7-3228b4ebfeaa\"}");
 
     CarbonVersion current = CarbonVersion.CURRENT;
     CarbonEncryptedRequest restored = mapper.deserialize(content, CarbonEncryptedRequest.class);
     assertThat(restored.getVersion().getMajor()).isEqualTo(current.getMajor());
-  }
-
-  @Test
-  void testVersionSerialization() throws IOException {
-    ObjectMapper om = new ObjectMapper();
-    om.setSerializationInclusion(Include.NON_NULL);
-
-    CarbonEncryptedResponse response = new CarbonEncryptedResponse();
-    String serializedResponse = om.writeValueAsString(response);
-
-    CarbonSerializer mapper = factory.create(new SerializationConfiguration());
-    String mapperResponseJson = mapper.serialize(response);
-
-    assertThat(mapperResponseJson).isEqualTo(serializedResponse);
   }
 }

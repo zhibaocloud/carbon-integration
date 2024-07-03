@@ -40,5 +40,10 @@
       <artifactId>gson</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.zhibaocloud</groupId>
+      <artifactId>carbon-mock</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>

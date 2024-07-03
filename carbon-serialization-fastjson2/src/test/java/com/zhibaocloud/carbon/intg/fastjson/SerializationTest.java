@@ -11,13 +11,10 @@
  * See the Mulan PSL v2 for more details.
  */
 
-package com.zhibaocloud.carbon.intg.sdk;
+package com.zhibaocloud.carbon.intg.fastjson;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.zhibaocloud.carbon.intg.jackson.CarbonJacksonSerializerFactory;
+import com.alibaba.fastjson2.JSONException;
 import com.zhibaocloud.carbon.intg.model.CarbonPolicy;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializer;
 import com.zhibaocloud.carbon.intg.serializer.CarbonSerializerFactory;
@@ -30,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class SerializationTest {
 
-  private final CarbonSerializer mapper = new CarbonJacksonSerializerFactory()
+  private final CarbonSerializer serializer = new CarbonFastjsonSerializerFactory()
       .create(new SerializationConfiguration());
 
   /**
@@ -42,13 +39,13 @@ class SerializationTest {
     source.put("b", "b");
     source.put("a", "a");
 
-    String json = mapper.serialize(source);
+    String json = serializer.serialize(source);
     assertThat(json).isEqualTo("{\"a\":\"a\",\"b\":\"b\"}");
 
     Map<String, Object> nested = new HashMap<>();
     nested.put("c", source);
     nested.put("d", source);
-    String nestedJson = mapper.serialize(nested);
+    String nestedJson = serializer.serialize(nested);
     assertThat(nestedJson).isEqualTo(
         "{\"c\":{\"a\":\"a\",\"b\":\"b\"},\"d\":{\"a\":\"a\",\"b\":\"b\"}}");
   }
@@ -63,28 +60,26 @@ class SerializationTest {
     source.put("emptyMap", new HashMap<>());
     source.put("zero", 0);
 
-    ObjectMapper m1 = new ObjectMapper();
-    String originValue = m1.writeValueAsString(source);
-    assertThat(originValue).isEqualTo(
-        "{\"zero\":0,\"emptyValue\":\"\",\"emptyMap\":{},\"emptyArray\":[],\"nullValue\":null}");
-
-    String json = mapper.serialize(source);
+    String json = serializer.serialize(source);
     assertThat(json).isEqualTo("{\"zero\":0}");
   }
 
   @Test
   void testEnvironment() throws IOException {
-    CarbonSerializerFactory prodFactory = new CarbonJacksonSerializerFactory();
-    CarbonSerializerFactory devFactory = new CarbonJacksonSerializerFactory();
+    CarbonSerializerFactory prodFactory = new CarbonFastjsonSerializerFactory();
     SerializationConfiguration prodConfig = new SerializationConfiguration();
-    prodConfig.setIgnoreUnknownProperties(false);
-    CarbonSerializer prodMapper = prodFactory.create(prodConfig);
-    CarbonSerializer devMapper = devFactory.create(new SerializationConfiguration());
+    CarbonSerializer prodSerializer = prodFactory.create(prodConfig);
 
-    CarbonPolicy prodPolicy = prodMapper.deserialize("{\"a\":1}", CarbonPolicy.class);
+    CarbonSerializerFactory devFactory = new CarbonFastjsonSerializerFactory();
+    SerializationConfiguration devConfig = new SerializationConfiguration();
+    devConfig.setIgnoreUnknownProperties(false);
+    CarbonSerializer devSerializer = devFactory.create(devConfig);
+
+    CarbonPolicy prodPolicy = prodSerializer.deserialize("{\"a\":1}", CarbonPolicy.class);
     assertThat(prodPolicy).isNotNull();
 
-    Assertions.assertThatThrownBy(() -> devMapper.deserialize("{\"a\":1}", CarbonPolicy.class))
-        .isInstanceOf(UnrecognizedPropertyException.class);
+    Assertions.assertThatThrownBy(() -> devSerializer.deserialize("{\"a\":1}", CarbonPolicy.class))
+        .isInstanceOf(JSONException.class);
+
   }
 }
