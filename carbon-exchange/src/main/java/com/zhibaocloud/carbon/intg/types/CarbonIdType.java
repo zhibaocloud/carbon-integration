@@ -20,6 +20,51 @@ package com.zhibaocloud.carbon.intg.types;
  */
 public enum CarbonIdType implements EncodedValue {
   /**
+   * 组织机构代码证
+   */
+  ORGANIZATION_CODE("01", "组织机构代码证"),
+
+  /**
+   * 税务登记证
+   */
+  AX_REGISTRATION_CERTIFICATE("02", "税务登记证"),
+
+  /**
+   * 营业执照
+   */
+  BIZ_LICENSE("03", "营业执照"),
+
+  /**
+   * 事业单位法人证书
+   */
+  PUBLIC_INSTITUTION_LEGAL_PERSON("04", "事业单位法人证书"),
+
+  /**
+   * 社会团体法人证书
+   */
+  SOCIAL_ORGANIZATION_LEGAL_PERSON("05", "社会团体法人证书"),
+
+  /**
+   * 民办非企业单位登记证书
+   */
+  PRIVATE_NON_ENTERPRISE_UNITS("06", "民办非企业单位登记证书"),
+
+  /**
+   * 基金会法人登记证书
+   */
+  ARTIFICIAL_PERSON_OF_FOUNDATION("07", "基金会法人登记证书"),
+
+  /**
+   * 工商注册号码
+   */
+  BUSINESS_REGISTRATION_NUMBER("08", "工商注册号码"),
+
+  /**
+   * 其他证件(非个人)
+   */
+  OTHER_NON_PERSONAL("09", "其他证件(非个人)"),
+
+  /**
    * 居民身份证
    */
   ID_CARD("111", "居民身份证"),
