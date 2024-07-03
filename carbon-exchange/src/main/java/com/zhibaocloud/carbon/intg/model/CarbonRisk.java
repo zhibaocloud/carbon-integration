@@ -120,6 +120,18 @@ public class CarbonRisk {
   @Schema(title = "交费期间")
   private CarbonPaymentPeriod paymentPeriod;
 
+  /**
+   * 健康加费
+   */
+  @Schema(title = "健康加费")
+  private BigDecimal healthPrem;
+
+  /**
+   * 职业加费
+   */
+  @Schema(title = "职业加费")
+  private BigDecimal occupPrem;
+
   public CarbonRisk() {
   }
 
@@ -243,6 +255,22 @@ public class CarbonRisk {
     this.paymentPeriod = paymentPeriod;
   }
 
+  public BigDecimal getHealthPrem() {
+    return healthPrem;
+  }
+
+  public void setHealthPrem(BigDecimal healthPrem) {
+    this.healthPrem = healthPrem;
+  }
+
+  public BigDecimal getOccupPrem() {
+    return occupPrem;
+  }
+
+  public void setOccupPrem(BigDecimal occupPrem) {
+    this.occupPrem = occupPrem;
+  }
+
   @Override
   public String toString() {
     return "CarbonRisk{" +
@@ -261,6 +289,8 @@ public class CarbonRisk {
         ", status=" + status +
         ", insuredPeriod=" + insuredPeriod +
         ", paymentPeriod=" + paymentPeriod +
+        ", healthPrem=" + healthPrem +
+        ", occupPrem=" + occupPrem +
         '}';
   }
 }
