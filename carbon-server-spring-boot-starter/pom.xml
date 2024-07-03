@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.zhibaocloud</groupId>
     <artifactId>carbon-integration</artifactId>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>carbon-server-spring-boot-starter</artifactId>

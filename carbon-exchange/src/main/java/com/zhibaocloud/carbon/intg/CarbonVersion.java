@@ -31,7 +31,7 @@ public class CarbonVersion {
   /**
    * 新功能版本，兼容MAJOR
    */
-  private int minor = 3;
+  private int minor = 4;
   /**
    * 问题修正版本
    */
